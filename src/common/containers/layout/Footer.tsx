@@ -39,45 +39,47 @@ function Footer() {
   };
 
   return isShow ? (
-    <footer className="relative flex w-full flex-col gap-10 bg-stone-900 px-6 py-6 md:px-20">
-      <div className="flex w-full flex-col gap-10 md:flex-row">
-        <div className="flex flex-col gap-4">
-          <Title text="서비스" />
-          <div className="flex flex-col gap-2">
-            <Text
-              text="의견 들려주기"
-              onClick={() => window.open('https://tally.so/r/wkl2B6')}
-            />
-            <Text
-              text="문제점 알려주기"
-              onClick={() => window.open('https://tally.so/r/wAzEeB')}
-            />
-            <Text
-              text="서비스 발전에 도움주기"
-              onClick={() => window.open('https://toss.me/linkloud')}
-            />
+    <footer className="flex w-full justify-center bg-stone-900">
+      <div className="flex w-full max-w-screen-xl flex-col gap-10 p-6">
+        <div className="flex w-full flex-col gap-10 md:flex-row">
+          <div className="flex flex-col gap-4">
+            <Title text="서비스" />
+            <div className="flex flex-col gap-2">
+              <Text
+                text="의견 들려주기"
+                onClick={() => window.open('https://tally.so/r/wkl2B6')}
+              />
+              <Text
+                text="문제점 알려주기"
+                onClick={() => window.open('https://tally.so/r/wAzEeB')}
+              />
+              <Text
+                text="서비스 발전에 도움주기"
+                onClick={() => window.open('https://toss.me/linkloud')}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Title text="문의" />
+            <div className="flex flex-col gap-2">
+              <Text
+                text="linkloud.official@gmail.com"
+                onClick={handleClickCopyEmail}
+              />
+            </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <Title text="문의" />
+        <div className="flex w-full flex-col gap-4">
+          <Title text="Linkloud" />
           <div className="flex flex-col gap-2">
-            <Text
-              text="linkloud.official@gmail.com"
-              onClick={handleClickCopyEmail}
-            />
+            <Text text="서비스 이용약관" onClick={준비중안내} />
+            <Text text="개인정보 처리방침" onClick={준비중안내} />
           </div>
         </div>
+        <p className="text-xs text-zinc-500">
+          copyright {new Date().getFullYear()}. Linkloud All rights reservesd.
+        </p>
       </div>
-      <div className="flex w-full flex-col gap-4">
-        <Title text="Linkloud" />
-        <div className="flex flex-col gap-2">
-          <Text text="서비스 이용약관" onClick={준비중안내} />
-          <Text text="개인정보 처리방침" onClick={준비중안내} />
-        </div>
-      </div>
-      <p className="text-sm text-zinc-500">
-        copyright 2023. Linkloud All rights reservesd.
-      </p>
     </footer>
   ) : null;
 }
@@ -91,7 +93,7 @@ const Title = ({ text }: { text: string }) => {
 const Text = ({ text, onClick }: { text: string; onClick?: () => void }) => {
   return (
     <p
-      className="cursor-pointer text-slate-500 hover:underline"
+      className="cursor-pointer text-sm text-slate-500 hover:underline"
       onClick={onClick}
     >
       {text}
