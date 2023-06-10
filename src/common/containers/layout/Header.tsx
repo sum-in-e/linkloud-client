@@ -18,15 +18,17 @@ function Header() {
     !pathname.includes('/mykloud') && !pathname.includes('/mypage'); // 마이클라우드, 마이페이지가 아닌 경우에만 헤더 노출
 
   return isShow ? (
-    <header className="flex h-24 w-full items-center justify-between bg-slate-100 px-6 py-6 md:px-20">
-      <picture>
-        <img
-          src="images/logo_v.png"
-          alt="linkloud_logo"
-          className="w-[120px] cursor-pointer "
-          onClick={handleClickLogo}
-        />
-      </picture>
+    <header className="flex h-24 w-full justify-center bg-slate-100">
+      <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-6">
+        <picture>
+          <img
+            src="images/logo_v.png"
+            alt="linkloud_logo"
+            className="w-[120px] cursor-pointer "
+            onClick={handleClickLogo}
+          />
+        </picture>
+      </div>
     </header>
   ) : null;
 }

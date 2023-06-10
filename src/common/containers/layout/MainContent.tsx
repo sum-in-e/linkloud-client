@@ -1,7 +1,7 @@
 function MainContent({ children }: { children: React.ReactNode }) {
   return (
-    <main className="h-96 min-h-[80vh] w-full px-6 py-6 md:px-20">
-      {children}{' '}
+    <main className="flex min-h-[70vh] w-full justify-center">
+      <div className="w-full max-w-screen-xl p-6">{children}</div>
     </main>
   );
 }
