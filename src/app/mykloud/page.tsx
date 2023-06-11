@@ -1,7 +1,9 @@
+import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+
 export const metadata = {
   // TODO: generateMatadata로 현재 카테고리 띄우기
   title: 'Linkloud | MyKloud',
-  description: '링크를 저장하고 필요할 때 다시 찾아볼 수 있는 클라우드',
+  description: LINKLOUD_SLOGAN,
 };
 
 export default function MyKloudPage() {

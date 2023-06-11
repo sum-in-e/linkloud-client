@@ -1,6 +1,8 @@
+import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+
 export const metadata = {
-  title: 'Linkloud | MyPage',
-  description: '링크를 저장하고 필요할 때 다시 찾아볼 수 있는 클라우드',
+  title: 'Linkloud | 마이페이지',
+  description: LINKLOUD_SLOGAN,
 };
 
 export default function MyPage() {
