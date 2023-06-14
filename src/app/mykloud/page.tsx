@@ -1,4 +1,4 @@
-import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 
 export const metadata = {
   // TODO: generateMatadata로 현재 카테고리 띄우기

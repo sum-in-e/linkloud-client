@@ -1,4 +1,5 @@
-import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
+import SignUp from '@/features/signup/containers';
 
 export const metadata = {
   title: 'Linkloud | 회원가입',
@@ -6,5 +7,5 @@ export const metadata = {
 };
 
 export default function SignUpPage() {
-  return <h1 className="md:text-2xl">회원가입</h1>;
+  return <SignUp />;
 }

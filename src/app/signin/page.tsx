@@ -1,4 +1,4 @@
-import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 
 export const metadata = {
   title: 'Linkloud | 로그인',

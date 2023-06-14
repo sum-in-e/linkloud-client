@@ -1,10 +1,10 @@
-import QueryProvider from '@/common/containers/QueryProvider';
 import './globals.css';
+import QueryProvider from '@/common/containers/QueryProvider';
 import Header from '@/common/containers/layout/Header';
 import MainContent from '@/common/containers/layout/MainContent';
 import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
-import { LINKLOUD_SLOGAN } from '@/common/constants/brand';
+import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 
 export const metadata = {
   title: 'Linkloud',
