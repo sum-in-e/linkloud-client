@@ -24,7 +24,7 @@ function Header() {
           <img
             src="images/logo_v.png"
             alt="linkloud_logo"
-            className="w-[120px] cursor-pointer "
+            className="w-[110px] cursor-pointer "
             onClick={handleClickLogo}
           />
         </picture>
