@@ -1,10 +1,10 @@
 'use client';
 
 import { IoIosArrowForward } from 'react-icons/io';
-import Checkbox from '@/features/signup/components/Checkbox';
+import Checkbox from '@/features/auth/signup/components/Checkbox';
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useFormsValidationState } from '@/features/signup/modules/stores/signupStore';
+import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 
 function TermsWithAgreeGroup() {
   const [allChecked, setAllChecked] = useState(false);

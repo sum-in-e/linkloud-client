@@ -2,7 +2,7 @@ import {
   ConfirmVerificationParams,
   ConfirmVerificationResponse,
   confirmVerificationCode,
-} from '@/features/signup/modules/apis/signup';
+} from '@/features/auth/signup/modules/apis/signup';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 

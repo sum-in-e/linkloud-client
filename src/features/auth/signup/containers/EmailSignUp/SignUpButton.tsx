@@ -1,13 +1,13 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import Loader from '@/features/signup/components/Loader';
-import SignUpCompleteModal from '@/features/signup/containers/EmailSignUp/SignUpCompleteModal';
-import { useEmailSignUpMutation } from '@/features/signup/modules/apiHooks/useEmailSignUpMutation';
+import Loader from '@/features/auth/signup/components/Loader';
+import SignUpCompleteModal from '@/features/auth/signup/containers/EmailSignUp/SignUpCompleteModal';
+import { useEmailSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useEmailSignUpMutation';
 import {
   useEmailState,
   useFormsValidationState,
   useNicknameState,
   usePasswordState,
-} from '@/features/signup/modules/stores/signupStore';
+} from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

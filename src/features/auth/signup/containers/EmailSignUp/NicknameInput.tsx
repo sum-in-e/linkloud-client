@@ -2,11 +2,11 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import _debounce from 'lodash/debounce';
 import { isValidNickname } from '@/common/modules/utils/validation';
-import InputContainer from '@/features/signup/components/InputContainer';
+import InputContainer from '@/features/auth/signup/components/InputContainer';
 import {
   useFormsValidationState,
   useNicknameState,
-} from '@/features/signup/modules/stores/signupStore';
+} from '@/features/auth/signup/modules/stores/signupStore';
 
 function NicknameInput() {
   const { nickname, setNickname } = useNicknameState();

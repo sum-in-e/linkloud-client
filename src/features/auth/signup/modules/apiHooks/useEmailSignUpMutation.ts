@@ -1,9 +1,9 @@
-import EmailSignUp from '@/features/signup/containers/EmailSignUp';
+import EmailSignUp from '@/features/auth/signup/containers/EmailSignUp';
 import {
   EmailSignUpBody,
   EmailSignUpResponse,
   emailSignUp,
-} from '@/features/signup/modules/apis/signup';
+} from '@/features/auth/signup/modules/apis/signup';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 

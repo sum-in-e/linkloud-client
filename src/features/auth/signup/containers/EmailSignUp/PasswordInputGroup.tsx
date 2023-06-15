@@ -1,10 +1,10 @@
 'use client';
 import { isValidPassword } from '@/common/modules/utils/validation';
-import InputContainer from '@/features/signup/components/InputContainer';
+import InputContainer from '@/features/auth/signup/components/InputContainer';
 import {
   useFormsValidationState,
   usePasswordState,
-} from '@/features/signup/modules/stores/signupStore';
+} from '@/features/auth/signup/modules/stores/signupStore';
 import { ChangeEvent, useState } from 'react';
 
 function PasswordInputGroup() {

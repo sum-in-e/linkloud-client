@@ -5,6 +5,6 @@ export const metadata = {
   description: LINKLOUD_SLOGAN,
 };
 
-export default function SignInPage() {
+export default function LoginPage() {
   return <h1 className="md:text-2xl">로그인</h1>;
 }

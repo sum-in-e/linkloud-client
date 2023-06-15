@@ -1,14 +1,14 @@
 'use client';
 import { isValidEmail } from '@/common/modules/utils/validation';
-import InputContainer from '@/features/signup/components/InputContainer';
-import Loader from '@/features/signup/components/Loader';
-import Timer from '@/features/signup/containers/EmailSignUp/ExpiredAtTimer';
-import { useConfirmVerificationCodeMutation } from '@/features/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
-import { useEmailVerificationCodeMutation } from '@/features/signup/modules/apiHooks/useEmailVerificationCodeMutation';
+import InputContainer from '@/features/auth/signup/components/InputContainer';
+import Loader from '@/features/auth/signup/components/Loader';
+import Timer from '@/features/auth/signup/containers/EmailSignUp/ExpiredAtTimer';
+import { useConfirmVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
+import { useEmailVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useEmailVerificationCodeMutation';
 import {
   useEmailState,
   useFormsValidationState,
-} from '@/features/signup/modules/stores/signupStore';
+} from '@/features/auth/signup/modules/stores/signupStore';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 function EmailInputGroup() {

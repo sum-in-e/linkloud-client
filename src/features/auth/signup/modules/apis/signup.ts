@@ -1,4 +1,5 @@
 import { instance } from '@/common/modules/apis/instance';
+import { SignUpMethod } from '@/features/auth/signup/modules/types/signupType';
 import queryString from 'querystring';
 
 export type PostEmailVerificationCodeParams = {
