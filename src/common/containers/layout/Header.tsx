@@ -22,7 +22,7 @@ function Header() {
       <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-6">
         <picture>
           <img
-            src="images/logo_v.png"
+            src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
             alt="linkloud_logo"
             className="w-[110px] cursor-pointer "
             onClick={handleClickLogo}

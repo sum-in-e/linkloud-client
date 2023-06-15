@@ -1,5 +1,5 @@
 import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
-import SignUp from '@/features/signup/containers';
+import SignUp from '@/features/auth/signup/containers';
 
 export const metadata = {
   title: 'Linkloud | 회원가입',
