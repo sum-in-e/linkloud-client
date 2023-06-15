@@ -105,7 +105,7 @@ function TermsWithAgreeGroup() {
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-[0.35rem]">
       <Checkbox
         value="all"
         label="전체 약관 동의"

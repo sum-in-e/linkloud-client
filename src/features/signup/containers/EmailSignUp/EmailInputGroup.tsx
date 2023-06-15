@@ -143,7 +143,7 @@ function EmailInputGroup() {
             value={email}
             onChange={handleChangeEmail}
             placeholder="id@example.com"
-            className={`w-3/5 rounded-l-2xl border-[1px] bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none ${
+            className={`w-3/5 rounded-l-2xl rounded-r-none border-[1px] bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none ${
               !isValidatedEmail && email.length > 0
                 ? 'border-red-500'
                 : 'border-stone-100'
@@ -179,7 +179,7 @@ function EmailInputGroup() {
               value={verificationCode}
               onChange={handleChangeVerificationCode}
               placeholder="인증번호를 입력해 주세요."
-              className={`w-full rounded-l-2xl bg-stone-100 py-3 pl-4  text-sm text-gray-800 placeholder-gray-500 outline-none ${
+              className={`w-full rounded-l-2xl rounded-r-none bg-stone-100 py-3 pl-4  text-sm text-gray-800 placeholder-gray-500 outline-none ${
                 isShowTimer ? 'pr-16' : 'pr-4'
               }`}
             />
