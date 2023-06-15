@@ -1,17 +1,38 @@
+'use client';
 import SignLayout from '@/features/auth/signup/components/SignLayout';
 import EmailSignUpForms from '@/features/auth/signup/containers/EmailSignUp';
 import KakaoButton from '@/features/auth/common/containers/KakaoButton';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import TopLogo from '@/features/auth/common/components/TopLogo';
 
 function SignUp() {
+  const toast = useToast();
+  const router = useRouter();
+  const params = useSearchParams();
+  const error = params.get('error');
+
+  useEffect(() => {
+    if (error) {
+      const title = `${error}`;
+
+      toast({
+        title,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        onCloseComplete: () => {
+          router.replace('/signup');
+        },
+      });
+    }
+  }, [error]);
+
   return (
     <SignLayout>
-      <section className="flex flex-col items-center justify-center gap-10">
-        <img src="images/logo_v.png" className="w-[120px]" />
-        <p className="text-sm text-slate-500">
-          링크를 관리하고 생산적인 일상을 함께해 보세요!
-        </p>
-      </section>
+      <TopLogo />
       <KakaoButton type="signup" />
       <hr className="w-full border-gray-300" />
       <EmailSignUpForms />

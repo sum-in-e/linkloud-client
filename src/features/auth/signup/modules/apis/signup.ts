@@ -1,5 +1,5 @@
 import { instance } from '@/common/modules/apis/instance';
-import { SignUpMethod } from '@/features/auth/signup/modules/types/signupType';
+import { SignUpMethodType } from '@/features/auth/signup/modules/types/signupType';
 import queryString from 'querystring';
 
 export type PostEmailVerificationCodeParams = {
@@ -60,3 +60,20 @@ export const emailSignUp = async (
 };
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+
+export type KakaoSignUpBody = {
+  sign: string;
+  name: string;
+};
+
+export type KakaoSignUpResponse = SuccessResponseType<{
+  email: string;
+  method: SignUpMethodType;
+}>;
+
+export const kakaoSignUp = async (
+  body: KakaoSignUpBody
+): Promise<KakaoSignUpResponse> => {
+  const { data } = await instance.post('/user/signup/kakao', body);
+  return data;
+};

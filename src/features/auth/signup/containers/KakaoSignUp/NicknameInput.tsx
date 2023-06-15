@@ -1,16 +1,16 @@
 'use client';
 import { isValidNickname } from '@/common/modules/utils/validation';
 import {
-  useFormsValidationState,
-  useNicknameState,
+  useKakaoFormsValidationState,
+  useKakaoNicknameState,
 } from '@/features/auth/signup/modules/stores/signupStore';
 import NicknameForm from '@/features/auth/common/containers/NicknameForm';
 
 function NicknameInput() {
-  const { nickname, setNickname } = useNicknameState();
+  const { nickname, setNickname } = useKakaoNicknameState();
 
   const { formsValidationState, setFormsValidationState } =
-    useFormsValidationState();
+    useKakaoFormsValidationState();
 
   const handleChangeNicknameValidationStatus = (newNickname: string) => {
     const isValid = isValidNickname(newNickname);
@@ -37,4 +37,3 @@ function NicknameInput() {
 }
 
 export default NicknameInput;
-

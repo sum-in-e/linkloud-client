@@ -1,48 +1,33 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import SignUpCompleteButton from '@/features/auth/common/components/SignUpCompleteButton';
 import SignUpCompleteModal from '@/features/auth/signup/containers/EmailSignUp/SignUpCompleteModal';
-import { useEmailSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useEmailSignUpMutation';
+import { useKakaoSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useKakaoSignUpMutation';
 import {
-  useEmailState,
-  useFormsValidationState,
-  useNicknameState,
-  usePasswordState,
+  useKakaoFormsValidationState,
+  useKakaoNicknameState,
 } from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
+import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-function SignUpButton() {
-  const { isOpen, onOpen } = useOpen();
+const SignUpButton = () => {
   const toast = useToast();
+  const params = useSearchParams();
+  const sign = params.get('sign');
+  const { isOpen, onOpen } = useOpen();
 
-  const { email } = useEmailState();
-  const { password } = usePasswordState();
-  const { nickname } = useNicknameState();
-
+  const { nickname: name } = useKakaoNicknameState();
   const {
-    formsValidationState: {
-      isVerifiedEmail,
-      isVerifiedNickname,
-      isVerifiedPassword,
-      isVerifiedTermsOfAgree,
-    },
-  } = useFormsValidationState();
+    formsValidationState: { isVerifiedNickname, isVerifiedTermsOfAgree },
+  } = useKakaoFormsValidationState();
 
-  const isActivateSignUp =
-    isVerifiedEmail &&
-    isVerifiedPassword &&
-    isVerifiedNickname &&
-    isVerifiedTermsOfAgree;
+  const isActivateSignUp = isVerifiedNickname && isVerifiedTermsOfAgree;
 
   const { mutate, isSuccess, isError, error, isLoading } =
-    useEmailSignUpMutation();
+    useKakaoSignUpMutation();
 
-  const handleClickSignUp = () => {
-    mutate({
-      email,
-      name: nickname,
-      password,
-    });
+  const handleClick = () => {
+    if (sign) mutate({ sign, name });
   };
 
   useEffect(() => {
@@ -69,13 +54,13 @@ function SignUpButton() {
   return (
     <>
       <SignUpCompleteButton
-        onClick={handleClickSignUp}
+        onClick={handleClick}
         isDisabled={!isActivateSignUp}
         isLoading={isLoading}
       />
       {isOpen && <SignUpCompleteModal />}
     </>
   );
-}
+};
 
 export default SignUpButton;

@@ -60,3 +60,37 @@ export const useFormsValidationState = create<FormsValidationStateType>(
       set({ formsValidationState: newState }),
   })
 );
+
+// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+// 카카오 회원가입용 닉네임 상태 관리
+interface KakaoNicknameStateType {
+  nickname: string;
+  setNickname: (newState: string) => void;
+}
+
+export const useKakaoNicknameState = create<NicknameStateType>((set) => ({
+  nickname: '',
+  setNickname: (newNickname) => set({ nickname: newNickname }),
+}));
+
+// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+// 카카오 회원가입용 가입을 위한 폼 유효성 검사 상태 관리
+interface PropertiesForKakaoSignup {
+  isVerifiedNickname: boolean;
+  isVerifiedTermsOfAgree: boolean;
+}
+
+interface KakaoFormsValidationStateType {
+  formsValidationState: PropertiesForKakaoSignup;
+  setFormsValidationState: (newState: PropertiesForKakaoSignup) => void;
+}
+
+export const useKakaoFormsValidationState =
+  create<KakaoFormsValidationStateType>((set) => ({
+    formsValidationState: {
+      isVerifiedNickname: false,
+      isVerifiedTermsOfAgree: false,
+    },
+    setFormsValidationState: (newState) =>
+      set({ formsValidationState: newState }),
+  }));

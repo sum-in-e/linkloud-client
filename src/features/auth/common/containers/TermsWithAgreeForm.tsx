@@ -1,18 +1,21 @@
 'use client';
 
+import { useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { IoIosArrowForward } from 'react-icons/io';
 import Checkbox from '@/features/auth/signup/components/Checkbox';
-import { useToast } from '@chakra-ui/react';
-import { useState } from 'react';
-import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 
-function TermsWithAgreeGroup() {
+/**
+ * @param  onChangeValidation(value:boolean) 👉 약관 동의 완료 여부를 변경하는 이벤트 함수
+ */
+function TermsWithAgreeForm({
+  onChangeValidation,
+}: {
+  onChangeValidation: (value: boolean) => void;
+}) {
   const [allChecked, setAllChecked] = useState(false);
   const [serviceChecked, setServiceChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
-
-  const { formsValidationState, setFormsValidationState } =
-    useFormsValidationState();
 
   const toast = useToast();
 
@@ -22,19 +25,13 @@ function TermsWithAgreeGroup() {
       setAllChecked(false);
       setServiceChecked(false);
       setPrivacyChecked(false);
-      setFormsValidationState({
-        ...formsValidationState,
-        isVerifiedTermsOfAgree: false,
-      });
+      onChangeValidation(false);
     } else {
       // 전체 약관 동의가 체크되어 있지 않으면 모두 체크
       setAllChecked(true);
       setServiceChecked(true);
       setPrivacyChecked(true);
-      setFormsValidationState({
-        ...formsValidationState,
-        isVerifiedTermsOfAgree: true,
-      });
+      onChangeValidation(true);
     }
   };
 
@@ -44,20 +41,14 @@ function TermsWithAgreeGroup() {
       setServiceChecked(false);
       if (allChecked) {
         setAllChecked(false);
-        setFormsValidationState({
-          ...formsValidationState,
-          isVerifiedTermsOfAgree: false,
-        });
+        onChangeValidation(false);
       }
     } else {
       // 서비스 이용약관 동의가 체크되어 있지 않으면 체크하고 개인정보 수집 및 이용 동의도 체크되어 있으면 전체 약관 동의도 체크
       setServiceChecked(true);
       if (privacyChecked) {
         setAllChecked(true);
-        setFormsValidationState({
-          ...formsValidationState,
-          isVerifiedTermsOfAgree: true,
-        });
+        onChangeValidation(true);
       }
     }
   };
@@ -68,20 +59,14 @@ function TermsWithAgreeGroup() {
       setPrivacyChecked(false);
       if (allChecked) {
         setAllChecked(false);
-        setFormsValidationState({
-          ...formsValidationState,
-          isVerifiedTermsOfAgree: false,
-        });
+        onChangeValidation(false);
       }
     } else {
       // 개인정보 수집 및 이용 동의가 체크되어 있지 않으면 체크하고 서비스 이용약관 동의도 체크되어 있으면 전체 약관 동의도 체크
       setPrivacyChecked(true);
       if (serviceChecked) {
         setAllChecked(true);
-        setFormsValidationState({
-          ...formsValidationState,
-          isVerifiedTermsOfAgree: true,
-        });
+        onChangeValidation(true);
       }
     }
   };
@@ -105,7 +90,7 @@ function TermsWithAgreeGroup() {
   };
 
   return (
-    <div className="flex flex-col gap-[0.35rem]">
+    <div className="flex w-full flex-col gap-[0.35rem]">
       <Checkbox
         value="all"
         label="전체 약관 동의"
@@ -134,7 +119,7 @@ function TermsWithAgreeGroup() {
   );
 }
 
-export default TermsWithAgreeGroup;
+export default TermsWithAgreeForm;
 
 const TermsButton = ({ onClick }: { onClick: () => void }) => {
   return (
