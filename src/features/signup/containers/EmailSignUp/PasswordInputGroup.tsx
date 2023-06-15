@@ -84,7 +84,7 @@ function PasswordInputGroup() {
               : isVerifiedPassword
               ? 'border-emerald-600'
               : 'border-stone-100'
-          } bg-stone-100 px-4 py-2 text-xs text-gray-800 placeholder-gray-500 outline-none`}
+          } bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none`}
         />
       </InputContainer>
       <InputContainer label="비밀번호 확인*">
@@ -100,7 +100,7 @@ function PasswordInputGroup() {
               : hasConfirmPassword && isMatch
               ? 'border-emerald-600'
               : 'border-stone-100'
-          } bg-stone-100 px-4 py-2 text-xs text-gray-800 placeholder-gray-500 outline-none`}
+          } bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none`}
         />
       </InputContainer>
     </div>

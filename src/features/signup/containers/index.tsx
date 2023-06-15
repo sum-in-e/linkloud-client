@@ -13,7 +13,7 @@ function SignUp() {
         </p>
       </section>
       <section className="w-full">
-        <button className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-[0.6rem]  hover:bg-[#ffe81a] focus:outline-none">
+        <button className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3  hover:bg-[#ffe81a] focus:outline-none">
           <RiKakaoTalkFill />
           <p className="text-sm font-bold text-black ">
             카카오로 바로 시작하기

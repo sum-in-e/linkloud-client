@@ -143,7 +143,7 @@ function EmailInputGroup() {
             value={email}
             onChange={handleChangeEmail}
             placeholder="id@example.com"
-            className={`w-3/5 rounded-l-2xl border-[1px] bg-stone-100 px-4 py-2 text-xs text-gray-800 placeholder-gray-500 outline-none ${
+            className={`w-3/5 rounded-l-2xl border-[1px] bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none ${
               !isValidatedEmail && email.length > 0
                 ? 'border-red-500'
                 : 'border-stone-100'
@@ -152,7 +152,7 @@ function EmailInputGroup() {
           <button
             onClick={handleClickSendVerificationCode}
             disabled={isVerified || !isValidatedEmail}
-            className="w-2/5 rounded-r-2xl bg-gray-700 px-4 py-2 text-xs font-bold uppercase text-gray-100 hover:bg-gray-600 disabled:bg-gray-400"
+            className="w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 disabled:bg-gray-400"
           >
             {isLoadingSendEmail ? (
               <Loader />
@@ -179,7 +179,7 @@ function EmailInputGroup() {
               value={verificationCode}
               onChange={handleChangeVerificationCode}
               placeholder="인증번호를 입력해 주세요."
-              className={`w-full rounded-l-2xl bg-stone-100 py-2 pl-4  text-xs text-gray-800 placeholder-gray-500 outline-none ${
+              className={`w-full rounded-l-2xl bg-stone-100 py-3 pl-4  text-sm text-gray-800 placeholder-gray-500 outline-none ${
                 isShowTimer ? 'pr-16' : 'pr-4'
               }`}
             />
@@ -190,7 +190,7 @@ function EmailInputGroup() {
           <button
             onClick={handleClickCofirmVerificationCode}
             disabled={isVerified || verificationCode.length < 6}
-            className={`w-2/5 rounded-r-2xl bg-gray-700 px-4 py-2 text-xs font-bold uppercase text-gray-100 hover:bg-gray-600 ${
+            className={`w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 ${
               isVerified
                 ? 'disabled:bg-emerald-600  disabled:hover:bg-emerald-600'
                 : 'disabled:bg-gray-400  disabled:hover:bg-gray-400'
