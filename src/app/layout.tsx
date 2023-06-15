@@ -9,6 +9,8 @@ import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 export const metadata = {
   title: 'Linkloud',
   description: LINKLOUD_SLOGAN,
+  viewport: 'width=device-width, initial-scale=1.0, user-scalable=no',
+  keywords: 'linkloud, link, manage links, save links',
 };
 
 export default function RootLayout({
