@@ -3,8 +3,8 @@ import { isValidEmail } from '@/common/modules/utils/validation';
 import InputContainer from '@/features/signup/components/InputContainer';
 import Loader from '@/features/signup/components/Loader';
 import Timer from '@/features/signup/containers/EmailSignUp/ExpiredAtTimer';
-import { confirmVerificationCodeMutation } from '@/features/signup/modules/apiHooks/confirmVerificationCodeMutation';
-import { emailVerificationCodeMutation } from '@/features/signup/modules/apiHooks/emailVerificationCodeMutation';
+import { useConfirmVerificationCodeMutation } from '@/features/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
+import { useEmailVerificationCodeMutation } from '@/features/signup/modules/apiHooks/useEmailVerificationCodeMutation';
 import {
   useEmailState,
   useFormsValidationState,
@@ -74,7 +74,7 @@ function EmailInputGroup() {
     isLoading: isLoadingSendEmail,
     reset: isResetSendEmail,
     error: sendEmailMutationError,
-  } = emailVerificationCodeMutation();
+  } = useEmailVerificationCodeMutation();
 
   const {
     mutate: confirmVerificationCodeMutate,
@@ -84,7 +84,7 @@ function EmailInputGroup() {
     isLoading: isLoadingConfirmVerificationCode,
     reset: isResetConfirmVerificationCode,
     error: confirmVerificationCodeMutationError,
-  } = confirmVerificationCodeMutation();
+  } = useConfirmVerificationCodeMutation();
 
   const handleClickSendVerificationCode = () => {
     sendEmailMutate({ email });

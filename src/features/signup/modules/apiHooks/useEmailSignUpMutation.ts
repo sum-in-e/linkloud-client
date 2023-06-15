@@ -7,7 +7,7 @@ import {
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const emailSignUpMutation = (): UseMutationResult<
+export const useEmailSignUpMutation = (): UseMutationResult<
   EmailSignUpResponse,
   AxiosError<ErrorResponseType>,
   EmailSignUpBody

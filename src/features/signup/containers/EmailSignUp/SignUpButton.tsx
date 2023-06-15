@@ -1,7 +1,7 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import Loader from '@/features/signup/components/Loader';
 import SignUpCompleteModal from '@/features/signup/containers/EmailSignUp/SignUpCompleteModal';
-import { emailSignUpMutation } from '@/features/signup/modules/apiHooks/emailSignUpMutation';
+import { useEmailSignUpMutation } from '@/features/signup/modules/apiHooks/useEmailSignUpMutation';
 import {
   useEmailState,
   useFormsValidationState,
@@ -37,7 +37,7 @@ function SignUpButton() {
     isVerifiedTermsOfAgree;
 
   const { mutate, isSuccess, isError, error, isLoading } =
-    emailSignUpMutation();
+    useEmailSignUpMutation();
 
   const handleClickSignUp = () => {
     mutate({

@@ -6,7 +6,7 @@ import {
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const confirmVerificationCodeMutation = (): UseMutationResult<
+export const useConfirmVerificationCodeMutation = (): UseMutationResult<
   ConfirmVerificationResponse,
   AxiosError<ErrorResponseType>,
   ConfirmVerificationParams
