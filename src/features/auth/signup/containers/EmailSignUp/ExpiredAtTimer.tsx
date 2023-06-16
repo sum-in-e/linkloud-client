@@ -40,7 +40,7 @@ const Timer = ({ expireTimestamp }: { expireTimestamp: string }) => {
   ).padStart(2, '0')}`;
 
   return (
-    <p className="absolute right-3 top-[25%] text-xs text-red-500">
+    <p className="absolute right-2 top-1/2 -translate-x-2 -translate-y-1/2 transform text-xs text-red-500">
       {timeLeft.expired ? '00:00' : time}
     </p>
   );
