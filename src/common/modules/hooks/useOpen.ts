@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useOpen() {
+export const useOpen = () => {
   const [isOpen, setOpen] = useState(false);
 
   const onOpen = () => setOpen(true);
@@ -8,4 +8,4 @@ export function useOpen() {
   const onToggle = () => setOpen((prev) => !prev);
 
   return { isOpen, onOpen, onClose, onToggle };
-}
+};

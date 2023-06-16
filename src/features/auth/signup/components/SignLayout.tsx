@@ -1,4 +1,4 @@
-function SignLayout({ children }: { children: React.ReactNode }) {
+const SignLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex w-full flex-col items-center">
       <div className="my-10 flex w-full max-w-[340px] flex-col items-center gap-5">
@@ -6,6 +6,6 @@ function SignLayout({ children }: { children: React.ReactNode }) {
       </div>
     </div>
   );
-}
+};
 
 export default SignLayout;

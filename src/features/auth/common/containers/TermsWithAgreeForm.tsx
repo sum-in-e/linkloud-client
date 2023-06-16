@@ -8,11 +8,11 @@ import Checkbox from '@/features/auth/signup/components/Checkbox';
 /**
  * @param  onChangeValidation(value:boolean) 👉 약관 동의 완료 여부를 변경하는 이벤트 함수
  */
-function TermsWithAgreeForm({
+const TermsWithAgreeForm = ({
   onChangeValidation,
 }: {
   onChangeValidation: (value: boolean) => void;
-}) {
+}) => {
   const [allChecked, setAllChecked] = useState(false);
   const [serviceChecked, setServiceChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
@@ -129,7 +129,7 @@ function TermsWithAgreeForm({
       </div>
     </div>
   );
-}
+};
 
 export default TermsWithAgreeForm;
 

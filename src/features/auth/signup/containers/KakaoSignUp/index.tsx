@@ -5,7 +5,7 @@ import KakaoSignUpTermsWithAgree from '@/features/auth/signup/containers/KakaoSi
 import NicknameInput from '@/features/auth/signup/containers/KakaoSignUp/NicknameInput';
 import SignUpButton from '@/features/auth/signup/containers/KakaoSignUp/SignUpButton';
 
-function KakaoSignUp() {
+const KakaoSignUp = () => {
   return (
     <SignLayout>
       <img
@@ -18,6 +18,6 @@ function KakaoSignUp() {
       <SignUpButton />
     </SignLayout>
   );
-}
+};
 
 export default KakaoSignUp;

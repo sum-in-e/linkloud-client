@@ -7,7 +7,7 @@ import {
 import NicknameForm from '@/features/auth/common/containers/NicknameForm';
 import { useEffect } from 'react';
 
-function NicknameInput() {
+const NicknameInput = () => {
   const { nickname, setNickname } = useNicknameState();
 
   const { formsValidationState, setFormsValidationState } =
@@ -41,6 +41,6 @@ function NicknameInput() {
       isVerified={formsValidationState.isVerifiedNickname}
     />
   );
-}
+};
 
 export default NicknameInput;

@@ -13,7 +13,7 @@ import {
 import { useToast } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
-function SignUpButton() {
+const SignUpButton = () => {
   const { isOpen, onOpen } = useOpen();
   const toast = useToast();
 
@@ -79,6 +79,6 @@ function SignUpButton() {
       {isOpen && <SignUpCompleteModal />}
     </>
   );
-}
+};
 
 export default SignUpButton;

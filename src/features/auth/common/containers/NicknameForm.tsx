@@ -8,7 +8,7 @@ interface Props {
   isVerified: boolean;
 }
 
-function NicknameForm({ value, onChange, isVerified }: Props) {
+const NicknameForm = ({ value, onChange, isVerified }: Props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newNickname = event.target.value;
     onChange(newNickname);
@@ -34,6 +34,6 @@ function NicknameForm({ value, onChange, isVerified }: Props) {
       />
     </InputContainer>
   );
-}
+};
 
 export default NicknameForm;

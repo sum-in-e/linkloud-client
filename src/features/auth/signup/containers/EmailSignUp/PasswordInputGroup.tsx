@@ -5,7 +5,7 @@ import { usePasswordState } from '@/features/auth/common/modules/stores/authStor
 import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-function PasswordInputGroup() {
+const PasswordInputGroup = () => {
   const { password, setPassword } = usePasswordState();
   const [isVerifiedPassword, setIsVerifiedPassword] = useState(false);
 
@@ -112,6 +112,6 @@ function PasswordInputGroup() {
       </InputContainer>
     </div>
   );
-}
+};
 
 export default PasswordInputGroup;

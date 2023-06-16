@@ -9,7 +9,7 @@ interface Props {
   onChange: () => void;
 }
 
-function Checkbox({ value, label, checked, onChange }: Props) {
+const Checkbox = ({ value, label, checked, onChange }: Props) => {
   return (
     <div className="flex items-center">
       <input
@@ -30,6 +30,6 @@ function Checkbox({ value, label, checked, onChange }: Props) {
       </label>
     </div>
   );
-}
+};
 
 export default Checkbox;

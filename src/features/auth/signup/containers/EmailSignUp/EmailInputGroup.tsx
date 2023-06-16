@@ -9,7 +9,7 @@ import { usePostEmailVerificationCodeMutation } from '@/features/auth/signup/mod
 import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-function EmailInputGroup() {
+const EmailInputGroup = () => {
   const [isSent, setIsSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
@@ -218,6 +218,6 @@ function EmailInputGroup() {
       </InputFormContainer>
     </div>
   );
-}
+};
 
 export default EmailInputGroup;

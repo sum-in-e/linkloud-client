@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import TopLogo from '@/features/auth/common/components/TopLogo';
 import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigationPrompt';
 
-function SignUp() {
+const SignUp = () => {
   const toast = useToast();
   const router = useRouter();
   const params = useSearchParams();
@@ -47,6 +47,6 @@ function SignUp() {
       <AuthNavigationPrompt type="signup" />
     </SignLayout>
   );
-}
+};
 
 export default SignUp;
