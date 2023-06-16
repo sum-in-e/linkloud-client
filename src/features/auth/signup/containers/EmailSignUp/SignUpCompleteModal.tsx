@@ -2,7 +2,7 @@ import { useOpen } from '@/common/modules/hooks/useOpen';
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import Link from 'next/link';
 
-function SignUpCompleteModal() {
+const SignUpCompleteModal = () => {
   const { onClose } = useOpen();
 
   return (
@@ -27,6 +27,6 @@ function SignUpCompleteModal() {
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default SignUpCompleteModal;

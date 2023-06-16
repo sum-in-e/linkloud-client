@@ -1,15 +1,16 @@
 'use client';
-import SignLayout from '@/features/auth/signup/components/SignLayout';
-import EmailSignUpForm from '@/features/auth/signup/containers/EmailSignUp';
-import KakaoButton from '@/features/auth/common/containers/KakaoButton';
-import Cookies from 'js-cookie';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useToast } from '@chakra-ui/react';
-import { useEffect } from 'react';
-import TopLogo from '@/features/auth/common/components/TopLogo';
-import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigationPrompt';
 
-const SignUp = () => {
+import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigationPrompt';
+import TopLogo from '@/features/auth/common/components/TopLogo';
+import KakaoButton from '@/features/auth/common/containers/KakaoButton';
+import EmailLogInForm from '@/features/auth/login/containers/EmailLogIn';
+import SignLayout from '@/features/auth/signup/components/SignLayout';
+import { useToast } from '@chakra-ui/react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+
+const LogIn = () => {
   const toast = useToast();
   const router = useRouter();
   const params = useSearchParams();
@@ -25,7 +26,7 @@ const SignUp = () => {
         duration: 3000,
         isClosable: true,
         onCloseComplete: () => {
-          router.replace('/signup');
+          router.replace('/login');
         },
       });
     }
@@ -41,12 +42,12 @@ const SignUp = () => {
   return (
     <SignLayout>
       <TopLogo />
-      <KakaoButton type="signup" />
+      <KakaoButton type="login" />
       <hr className="w-full border-gray-300" />
-      <EmailSignUpForm />
-      <AuthNavigationPrompt type="signup" />
+      <EmailLogInForm />
+      <AuthNavigationPrompt type="login" />
     </SignLayout>
   );
 };
 
-export default SignUp;
+export default LogIn;

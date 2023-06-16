@@ -3,7 +3,7 @@
 import { useToast } from '@chakra-ui/toast';
 import { usePathname } from 'next/navigation';
 
-function Footer() {
+const Footer = () => {
   const toast = useToast();
   const pathname = usePathname();
 
@@ -82,7 +82,7 @@ function Footer() {
       </div>
     </footer>
   ) : null;
-}
+};
 
 export default Footer;
 

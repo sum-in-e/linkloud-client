@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 
-function Header() {
+const Header = () => {
   // * 헤더도 디자인이 나와야 감이 잡히니까 정말 레이아웃만 잡아놓자.
 
   const router = useRouter();
@@ -31,6 +31,6 @@ function Header() {
       </div>
     </header>
   ) : null;
-}
+};
 
 export default Header;

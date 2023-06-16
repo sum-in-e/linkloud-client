@@ -2,12 +2,12 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { CacheProvider } from '@chakra-ui/next-js';
 
-function ChakraUiProvider({ children }: { children: React.ReactNode }) {
+const ChakraUiProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <CacheProvider>
       <ChakraProvider>{children}</ChakraProvider>
     </CacheProvider>
   );
-}
+};
 
 export default ChakraUiProvider;

@@ -1,6 +1,6 @@
 'use client';
 import { ChangeEvent } from 'react';
-import InputContainer from '@/features/auth/signup/components/InputContainer';
+import InputContainer from '@/features/auth/common/components/InputFormContainer';
 
 interface Props {
   value: string;
@@ -8,7 +8,7 @@ interface Props {
   isVerified: boolean;
 }
 
-function NicknameForm({ value, onChange, isVerified }: Props) {
+const NicknameForm = ({ value, onChange, isVerified }: Props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newNickname = event.target.value;
     onChange(newNickname);
@@ -34,6 +34,6 @@ function NicknameForm({ value, onChange, isVerified }: Props) {
       />
     </InputContainer>
   );
-}
+};
 
 export default NicknameForm;

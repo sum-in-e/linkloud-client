@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { IoIosArrowForward } from 'react-icons/io';
 import Checkbox from '@/features/auth/signup/components/Checkbox';
@@ -8,11 +8,11 @@ import Checkbox from '@/features/auth/signup/components/Checkbox';
 /**
  * @param  onChangeValidation(value:boolean) 👉 약관 동의 완료 여부를 변경하는 이벤트 함수
  */
-function TermsWithAgreeForm({
+const TermsWithAgreeForm = ({
   onChangeValidation,
 }: {
   onChangeValidation: (value: boolean) => void;
-}) {
+}) => {
   const [allChecked, setAllChecked] = useState(false);
   const [serviceChecked, setServiceChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
@@ -89,6 +89,18 @@ function TermsWithAgreeForm({
     });
   };
 
+  useEffect(() => {
+    if (allChecked) {
+      setAllChecked(false);
+    }
+    if (serviceChecked) {
+      setServiceChecked(false);
+    }
+    if (privacyChecked) {
+      setPrivacyChecked(false);
+    }
+  }, []);
+
   return (
     <div className="flex w-full flex-col gap-[0.35rem]">
       <Checkbox
@@ -117,7 +129,7 @@ function TermsWithAgreeForm({
       </div>
     </div>
   );
-}
+};
 
 export default TermsWithAgreeForm;
 

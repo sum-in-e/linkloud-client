@@ -3,7 +3,7 @@
 import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 import TermsWithAgreeForm from '@/features/auth/common/containers/TermsWithAgreeForm';
 
-function EmailSignUpTermsWithAgree() {
+const EmailSignUpTermsWithAgree = () => {
   const { formsValidationState, setFormsValidationState } =
     useFormsValidationState();
 
@@ -17,6 +17,6 @@ function EmailSignUpTermsWithAgree() {
   return (
     <TermsWithAgreeForm onChangeValidation={handleChangeValidationState} />
   );
-}
+};
 
 export default EmailSignUpTermsWithAgree;

@@ -1,4 +1,5 @@
 import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
+import LogIn from '@/features/auth/login/containers';
 
 export const metadata = {
   title: 'Linkloud | 로그인',
@@ -6,5 +7,5 @@ export const metadata = {
 };
 
 export default function LoginPage() {
-  return <h1 className="md:text-2xl">로그인</h1>;
+  return <LogIn />;
 }

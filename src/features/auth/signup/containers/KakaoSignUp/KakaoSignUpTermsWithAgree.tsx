@@ -3,7 +3,7 @@
 import TermsWithAgreeForm from '@/features/auth/common/containers/TermsWithAgreeForm';
 import { useKakaoFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 
-function KakaoSignUpTermsWithAgree() {
+const KakaoSignUpTermsWithAgree = () => {
   const { formsValidationState, setFormsValidationState } =
     useKakaoFormsValidationState();
 
@@ -17,6 +17,6 @@ function KakaoSignUpTermsWithAgree() {
   return (
     <TermsWithAgreeForm onChangeValidation={handleChangeValidationState} />
   );
-}
+};
 
 export default KakaoSignUpTermsWithAgree;

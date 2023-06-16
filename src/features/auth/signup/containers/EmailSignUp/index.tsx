@@ -6,7 +6,7 @@ import PasswordInputGroup from '@/features/auth/signup/containers/EmailSignUp/Pa
 import NicknameInput from '@/features/auth/signup/containers/EmailSignUp/NicknameInput';
 import SignUpButton from '@/features/auth/signup/containers/EmailSignUp/SignUpButton';
 
-function EmailSignUp() {
+const EmailSignUpForm = () => {
   return (
     <section className="flex w-full flex-col gap-6">
       <div className="flex w-full flex-col gap-4">
@@ -18,5 +18,5 @@ function EmailSignUp() {
       <SignUpButton />
     </section>
   );
-}
-export default EmailSignUp;
+};
+export default EmailSignUpForm;

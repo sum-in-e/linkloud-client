@@ -5,11 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
-export default function QueryProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const QueryProvider = ({ children }: { children: React.ReactNode }) => {
   const isDev = process.env.NEXT_PUBLIC_MODE === 'development';
 
   return (
@@ -18,4 +14,5 @@ export default function QueryProvider({
       {isDev && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
-}
+};
+export default QueryProvider;
