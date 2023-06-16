@@ -1,10 +1,10 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import SignUpCompleteButton from '@/features/auth/common/components/SignUpCompleteButton';
+import AuthCompleteButton from '@/features/auth/common/components/AuthCompleteButton';
 import SignUpCompleteModal from '@/features/auth/signup/containers/EmailSignUp/SignUpCompleteModal';
 import { useKakaoSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useKakaoSignUpMutation';
 import {
   useKakaoFormsValidationState,
-  useKakaoNicknameState,
+  useNicknameState,
 } from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
 import { useSearchParams } from 'next/navigation';
@@ -16,12 +16,12 @@ const SignUpButton = () => {
   const sign = params.get('sign');
   const { isOpen, onOpen } = useOpen();
 
-  const { nickname: name } = useKakaoNicknameState();
+  const { nickname: name } = useNicknameState();
   const {
     formsValidationState: { isVerifiedNickname, isVerifiedTermsOfAgree },
   } = useKakaoFormsValidationState();
 
-  const isActivateSignUp = isVerifiedNickname && isVerifiedTermsOfAgree;
+  const isActivateButton = isVerifiedNickname && isVerifiedTermsOfAgree;
 
   const { mutate, isSuccess, isError, error, isLoading } =
     useKakaoSignUpMutation();
@@ -53,10 +53,11 @@ const SignUpButton = () => {
 
   return (
     <>
-      <SignUpCompleteButton
+      <AuthCompleteButton
         onClick={handleClick}
-        isDisabled={!isActivateSignUp}
+        isDisabled={!isActivateButton}
         isLoading={isLoading}
+        type="signup"
       />
       {isOpen && <SignUpCompleteModal />}
     </>

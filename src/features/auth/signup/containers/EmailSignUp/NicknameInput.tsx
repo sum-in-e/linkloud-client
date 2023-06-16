@@ -5,6 +5,7 @@ import {
   useNicknameState,
 } from '@/features/auth/signup/modules/stores/signupStore';
 import NicknameForm from '@/features/auth/common/containers/NicknameForm';
+import { useEffect } from 'react';
 
 function NicknameInput() {
   const { nickname, setNickname } = useNicknameState();
@@ -27,6 +28,12 @@ function NicknameInput() {
     handleChangeNicknameValidationStatus(newNickname);
   };
 
+  useEffect(() => {
+    if (nickname.length > 0) {
+      setNickname('');
+    }
+  }, []);
+
   return (
     <NicknameForm
       value={nickname}
@@ -37,4 +44,3 @@ function NicknameInput() {
 }
 
 export default NicknameInput;
-

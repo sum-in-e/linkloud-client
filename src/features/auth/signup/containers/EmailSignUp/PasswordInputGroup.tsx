@@ -1,11 +1,9 @@
 'use client';
 import { isValidPassword } from '@/common/modules/utils/validation';
-import InputContainer from '@/features/auth/signup/components/InputContainer';
-import {
-  useFormsValidationState,
-  usePasswordState,
-} from '@/features/auth/signup/modules/stores/signupStore';
-import { ChangeEvent, useState } from 'react';
+import InputContainer from '@/features/auth/common/components/InputFormContainer';
+import { usePasswordState } from '@/features/auth/common/modules/stores/authStore';
+import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 function PasswordInputGroup() {
   const { password, setPassword } = usePasswordState();
@@ -68,6 +66,15 @@ function PasswordInputGroup() {
     setConfirmPassword(newConfirmPassword);
     handleMatchStatus(password, newConfirmPassword);
   };
+
+  useEffect(() => {
+    if (password.length > 0) {
+      setPassword('');
+    }
+    if (confirmPassword.length > 0) {
+      setConfirmPassword('');
+    }
+  }, []);
 
   return (
     <div className="flex w-full flex-col gap-4">

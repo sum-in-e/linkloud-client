@@ -1,9 +1,10 @@
 'use client';
 
+import { AuthMethodType } from '@/features/auth/common/modules/types/auth';
 import Link from 'next/link';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 
-function KakaoButton({ type }: { type: 'login' | 'signup' }) {
+function KakaoButton({ type }: { type: AuthMethodType }) {
   const text =
     type === 'login' ? '카카오로 계속하기' : '카카오로 바로 시작하기';
 

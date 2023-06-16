@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { IoIosArrowForward } from 'react-icons/io';
 import Checkbox from '@/features/auth/signup/components/Checkbox';
@@ -88,6 +88,18 @@ function TermsWithAgreeForm({
       isClosable: true,
     });
   };
+
+  useEffect(() => {
+    if (allChecked) {
+      setAllChecked(false);
+    }
+    if (serviceChecked) {
+      setServiceChecked(false);
+    }
+    if (privacyChecked) {
+      setPrivacyChecked(false);
+    }
+  }, []);
 
   return (
     <div className="flex w-full flex-col gap-[0.35rem]">

@@ -1,12 +1,14 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import SignUpCompleteButton from '@/features/auth/common/components/SignUpCompleteButton';
+import AuthUpCompleteButton from '@/features/auth/common/components/AuthCompleteButton';
+import {
+  useEmailState,
+  usePasswordState,
+} from '@/features/auth/common/modules/stores/authStore';
 import SignUpCompleteModal from '@/features/auth/signup/containers/EmailSignUp/SignUpCompleteModal';
 import { useEmailSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useEmailSignUpMutation';
 import {
-  useEmailState,
   useFormsValidationState,
   useNicknameState,
-  usePasswordState,
 } from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -28,7 +30,7 @@ function SignUpButton() {
     },
   } = useFormsValidationState();
 
-  const isActivateSignUp =
+  const isActivateButton =
     isVerifiedEmail &&
     isVerifiedPassword &&
     isVerifiedNickname &&
@@ -68,10 +70,11 @@ function SignUpButton() {
 
   return (
     <>
-      <SignUpCompleteButton
+      <AuthUpCompleteButton
         onClick={handleClickSignUp}
-        isDisabled={!isActivateSignUp}
+        isDisabled={!isActivateButton}
         isLoading={isLoading}
+        type="signup"
       />
       {isOpen && <SignUpCompleteModal />}
     </>

@@ -50,6 +50,7 @@ export type EmailSignUpBody = {
 
 export type EmailSignUpResponse = SuccessResponseType<{
   email: string;
+  method: SignUpMethodType;
 }>;
 
 export const emailSignUp = async (

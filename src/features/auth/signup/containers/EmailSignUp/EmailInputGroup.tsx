@@ -1,14 +1,12 @@
 'use client';
 import { isValidEmail } from '@/common/modules/utils/validation';
-import InputContainer from '@/features/auth/signup/components/InputContainer';
+import InputFormContainer from '@/features/auth/common/components/InputFormContainer';
+import { useEmailState } from '@/features/auth/common/modules/stores/authStore';
 import Loader from '@/features/auth/signup/components/Loader';
 import Timer from '@/features/auth/signup/containers/EmailSignUp/ExpiredAtTimer';
 import { useConfirmVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
-import { useEmailVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useEmailVerificationCodeMutation';
-import {
-  useEmailState,
-  useFormsValidationState,
-} from '@/features/auth/signup/modules/stores/signupStore';
+import { usePostEmailVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/usePostEmailVerificationCodeMutation';
+import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 function EmailInputGroup() {
@@ -74,7 +72,7 @@ function EmailInputGroup() {
     isLoading: isLoadingSendEmail,
     reset: isResetSendEmail,
     error: sendEmailMutationError,
-  } = useEmailVerificationCodeMutation();
+  } = usePostEmailVerificationCodeMutation();
 
   const {
     mutate: confirmVerificationCodeMutate,
@@ -131,11 +129,20 @@ function EmailInputGroup() {
     }
   }, [isSuccessConfirmVerificationCode]);
 
+  useEffect(() => {
+    if (email.length > 0) {
+      setEmail('');
+    }
+    if (verificationCode.length > 0) {
+      setVerificationCode('');
+    }
+  }, []);
+
   const isShowTimer = !isVerified && sendEmailData;
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <InputContainer label="이메일*">
+      <InputFormContainer label="이메일*">
         <div className="flex w-full">
           <input
             type="text"
@@ -166,8 +173,8 @@ function EmailInputGroup() {
         {isErrorSendEmailMutation && sendEmailError !== '' && (
           <p className="text-xs text-red-500">{sendEmailError}</p>
         )}
-      </InputContainer>
-      <InputContainer label="인증번호*">
+      </InputFormContainer>
+      <InputFormContainer label="인증번호*">
         <div className="flex w-full">
           <div
             className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-100`}
@@ -208,7 +215,7 @@ function EmailInputGroup() {
         {isErrorConfirmVerificationCode && verificationCodeError !== '' && (
           <p className="text-xs text-red-500">{verificationCodeError}</p>
         )}
-      </InputContainer>
+      </InputFormContainer>
     </div>
   );
 }

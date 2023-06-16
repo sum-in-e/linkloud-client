@@ -1,6 +1,6 @@
 'use client';
 import { ChangeEvent } from 'react';
-import InputContainer from '@/features/auth/signup/components/InputContainer';
+import InputContainer from '@/features/auth/common/components/InputFormContainer';
 
 interface Props {
   value: string;
