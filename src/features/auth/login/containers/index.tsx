@@ -4,7 +4,7 @@ import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigati
 import TopLogo from '@/features/auth/common/components/TopLogo';
 import KakaoButton from '@/features/auth/common/containers/KakaoButton';
 import EmailLogInForm from '@/features/auth/login/containers/EmailLogIn';
-import SignLayout from '@/features/auth/signup/components/SignLayout';
+import SignLayout from '@/features/auth/common/components/SignLayout';
 import { useToast } from '@chakra-ui/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';

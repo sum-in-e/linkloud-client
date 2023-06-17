@@ -2,7 +2,7 @@
 import { isValidEmail } from '@/common/modules/utils/validation';
 import InputFormContainer from '@/features/auth/common/components/InputFormContainer';
 import { useEmailState } from '@/features/auth/common/modules/stores/authStore';
-import Loader from '@/features/auth/signup/components/Loader';
+import Loader from '@/common/Loader';
 import Timer from '@/features/auth/signup/containers/EmailSignUp/ExpiredAtTimer';
 import { useConfirmVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
 import { usePostEmailVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/usePostEmailVerificationCodeMutation';

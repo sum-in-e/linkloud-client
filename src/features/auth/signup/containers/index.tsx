@@ -1,5 +1,5 @@
 'use client';
-import SignLayout from '@/features/auth/signup/components/SignLayout';
+import SignLayout from '@/features/auth/common/components/SignLayout';
 import EmailSignUpForm from '@/features/auth/signup/containers/EmailSignUp';
 import KakaoButton from '@/features/auth/common/containers/KakaoButton';
 import Cookies from 'js-cookie';
