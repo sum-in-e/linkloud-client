@@ -14,7 +14,7 @@ const AuthNavigationPrompt = ({ type }: Props) => {
   return (
     <section className="flex w-full justify-center gap-2">
       <p className="text-xs text-gray-500">{text}</p>
-      <Link href={href} className="text-xs font-bold">
+      <Link href={href} prefetch={false} className="text-xs font-bold">
         {linkText}
       </Link>
     </section>
