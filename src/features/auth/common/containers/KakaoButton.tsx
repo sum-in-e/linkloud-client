@@ -22,6 +22,7 @@ const KakaoButton = ({ type }: { type: AuthMethodType }) => {
     <section className="w-full">
       <Link
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/user/auth/kakao?${queryString}`}
+        prefetch={false}
       >
         <button className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3  hover:bg-[#ffe81a] focus:outline-none">
           <RiKakaoTalkFill />
