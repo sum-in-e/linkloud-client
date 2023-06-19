@@ -7,7 +7,7 @@ const Footer = () => {
   const toast = useToast();
   const pathname = usePathname();
 
-  const isShow = !pathname.includes('/mykloud'); // 마이클라우드 제외한 페이지 에서만 푸터 노출
+  const isShow = !pathname.includes('/my'); // 마이클라우드 제외한 페이지 에서만 푸터 노출
 
   const handleClickCopyEmail = async () => {
     try {

@@ -7,11 +7,13 @@ import {
   usePasswordState,
 } from '@/features/auth/common/modules/stores/authStore';
 import { useEmailLogInMutation } from '@/features/auth/login/modules/apiHooks/useEmailLogInMutation';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const LogInButton = () => {
   const toast = useToast();
   const router = useRouter();
+  const params = useSearchParams();
+  const returnUrl = params.get('return_to');
 
   const { email } = useEmailState();
   const { password } = usePasswordState();
@@ -29,8 +31,10 @@ const LogInButton = () => {
   };
 
   useEffect(() => {
+    const path = returnUrl || '/my/all';
+
     if (isSuccess) {
-      router.push('/mykloud');
+      router.push(path);
     }
   }, [isSuccess]);
 
