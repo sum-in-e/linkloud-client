@@ -31,13 +31,6 @@ const SignUp = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    const isLoggedIn = Cookies.get('client_in') === 'true';
-    if (isLoggedIn) {
-      router.push('/mykloud');
-    }
-  }, []);
-
   return (
     <SignLayout>
       <TopLogo />
