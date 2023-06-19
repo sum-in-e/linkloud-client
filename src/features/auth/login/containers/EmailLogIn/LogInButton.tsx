@@ -30,7 +30,7 @@ const LogInButton = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/mykloud');
+      router.push('/my');
     }
   }, [isSuccess]);
 

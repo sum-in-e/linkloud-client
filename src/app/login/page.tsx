@@ -12,7 +12,7 @@ export default async function LoginPage() {
   const isLogin = await getSessionWithJWT();
 
   if (isLogin) {
-    redirect('/mykloud');
+    redirect('/my');
   }
 
   return <LogIn />;
