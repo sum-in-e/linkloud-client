@@ -30,7 +30,7 @@ const LogInButton = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/my');
+      router.push('/my/all');
     }
   }, [isSuccess]);
 

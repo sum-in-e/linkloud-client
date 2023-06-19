@@ -12,7 +12,7 @@ export default async function LoginPage() {
   const isLogin = await getSessionWithJWT();
 
   if (isLogin) {
-    redirect('/my');
+    redirect('/my/all');
   }
 
   return <LogIn />;
