@@ -19,7 +19,7 @@ const SignUpCompleteModal = () => {
 
           <Link
             prefetch={false}
-            href="/my/all"
+            href="/kloud"
             className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-[0.6rem]  font-bold text-white hover:bg-primary-darker focus:outline-none"
           >
             시작하기

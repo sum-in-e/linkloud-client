@@ -12,7 +12,7 @@ export default async function HomePage() {
   const isLogin = await getSessionWithJwtInServer();
 
   if (isLogin) {
-    redirect('/my/all');
+    redirect('/kloud');
   }
 
   return (
@@ -22,7 +22,7 @@ export default async function HomePage() {
         <Link href="/login" prefetch={false}>
           로그인으로 이동
         </Link>
-        <Link href="/my/all" prefetch={false}>
+        <Link href="/kloud" prefetch={false}>
           마이클라우드로 이동
         </Link>
         <Link href="/setting" prefetch={false}>
