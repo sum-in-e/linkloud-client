@@ -28,7 +28,6 @@ instance.interceptors.response.use(
       });
 
       window.location.href = `/login?${queryString}`;
-      return Promise.reject(error);
     }
 
     sentryLogger(error);

@@ -10,9 +10,6 @@
   "rules": {
     "react-hooks/exhaustive-deps": "warn"
   },
-  "extends": [
-    "next/core-web-vitals",
-    "prettier" // eslint-config-prettier prettier와 중복된 eslint 규칙 제거
-  ],
+  "extends": ["next/core-web-vitals"],
   "ignorePatterns": ["node_modules/"] // eslint 미적용될 폴더나 파일 명시
 }
