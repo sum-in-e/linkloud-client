@@ -5,7 +5,6 @@ import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Linkloud | 회원가입',
-  description: LINKLOUD_SLOGAN,
 };
 
 export default async function SignUpPage() {
