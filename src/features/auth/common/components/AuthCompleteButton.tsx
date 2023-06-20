@@ -1,5 +1,5 @@
 import { AuthMethodType } from '@/features/auth/common/modules/types/auth';
-import Loader from '@/common/Loader';
+import Loader from '@/common/components/Loader';
 
 interface Props {
   onClick: () => void;
