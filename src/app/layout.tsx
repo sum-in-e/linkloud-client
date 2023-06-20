@@ -9,8 +9,25 @@ import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 export const metadata = {
   title: 'Linkloud',
   description: LINKLOUD_SLOGAN,
-  viewport: 'width=device-width, initial-scale=1.0, user-scalable=no',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   keywords: 'linkloud, link, manage links, save links',
+  openGraph: {
+    title: 'Linkloud',
+    description: LINKLOUD_SLOGAN,
+    url: 'https://linkloud.co.kr',
+    type: 'website',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
+        alt: 'Linkloud og image',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
