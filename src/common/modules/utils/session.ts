@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
-import { getSessionInSever } from '@/features/auth/common/modules/apis/session';
 
 /**
  * httponly 쿠키로 저장된 액세스토큰과 리프레시토큰을 검증하여 로그인 여부를 확인하는 함수입니다.
@@ -29,18 +28,5 @@ export const getSessionWithJwtInServer = async () => {
     }
   }
 
-  return false;
-};
-
-/**
- * 서버 컴포넌트에서 API 요청을 통해 로그인한 유저의 정보를 가져옵니다.
- * 유저 로그인 여부에 따라 페이지 레이어에서 로그인 페이지로 redirect할지, 페이지에 남아있을지를 결정하기 위한 메서드입니다.
- * (API 요청 시 httponly 쿠키에 접근하기 때문에 서버 컴포넌트에서만 사용 가능합니다.)
- */
-export const getSessionWithApiInServer = async () => {
-  try {
-    await getSessionInSever();
-    return true;
-  } catch (error) {}
   return false;
 };

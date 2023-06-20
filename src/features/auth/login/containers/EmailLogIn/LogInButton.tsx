@@ -31,9 +31,9 @@ const LogInButton = () => {
   };
 
   useEffect(() => {
-    const path = returnUrl || '/my/all';
-
     if (isSuccess) {
+      const path = returnUrl || '/kloud';
+
       router.push(path);
     }
   }, [isSuccess]);

@@ -4,8 +4,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/my',
-        destination: '/my/all',
+        source: '/kloud',
+        destination: '/kloud/all',
         permanent: true,
       },
     ];

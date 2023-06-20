@@ -33,12 +33,3 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-/**
- * 서버 컴포넌트에서 비동기 요청 시 사용하는 인스턴스
- * 서버 컴포넌트에서는 401 발생 시 인터셉터를 활용한 페이지 이동 처리가 불가하여 각 요청에 대해 page 레이어에서 개별로 페이지 이동 처리를 하도록 합니다.
- */
-export const instanceForServer = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  withCredentials: true,
-});

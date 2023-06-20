@@ -14,8 +14,7 @@ const Header = () => {
     router.push('/');
   };
 
-  const isShow =
-    !pathname.includes('/my') && !pathname.includes('/setting'); // 마이클라우드, 마이페이지가 아닌 경우에만 헤더 노출
+  const isShow = !pathname.includes('/kloud') && !pathname.includes('/setting'); // 마이클라우드, 마이페이지가 아닌 경우에만 헤더 노출
 
   return isShow ? (
     <header className="flex h-24 w-full justify-center bg-slate-100">
