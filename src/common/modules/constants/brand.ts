@@ -1,2 +1,1 @@
-export const LINKLOUD_SLOGAN =
-  '링크를 저장하고 필요할 때 다시 찾아볼 수 있는 클라우드';
+export const LINKLOUD_SLOGAN = '손쉽게 링크를 관리하고 생산적인 일상으로';
