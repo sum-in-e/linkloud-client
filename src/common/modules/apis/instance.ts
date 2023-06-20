@@ -1,4 +1,5 @@
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
+import { sentryLogger } from '@/common/modules/utils/sentry';
 import axios from 'axios';
 import * as querystring from 'querystring';
 
@@ -27,7 +28,10 @@ instance.interceptors.response.use(
       });
 
       window.location.href = `/login?${queryString}`;
+      return Promise.reject(error);
     }
+
+    sentryLogger(error);
 
     // 다른 에러들은 그대로 reject하기
     return Promise.reject(error);
