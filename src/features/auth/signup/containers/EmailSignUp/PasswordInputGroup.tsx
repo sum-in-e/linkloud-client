@@ -82,6 +82,7 @@ const PasswordInputGroup = () => {
         <input
           type="password"
           name="password"
+          autoComplete="new-password"
           placeholder="영어, 숫자, 특수문자를 모두 포함하는 8~15자"
           value={password}
           onChange={handleChangePassword}
@@ -98,6 +99,7 @@ const PasswordInputGroup = () => {
         <input
           type="password"
           name="confirm password"
+          autoComplete="new-password"
           placeholder="비밀번호를 한 번 더 입력해 주세요."
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
