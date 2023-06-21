@@ -158,8 +158,9 @@ const EmailInputGroup = () => {
           className="flex w-full"
         >
           <input
-            type="text"
+            type="email"
             name="email"
+            autoComplete="off"
             value={email}
             onChange={handleChangeEmail}
             placeholder="id@example.com"

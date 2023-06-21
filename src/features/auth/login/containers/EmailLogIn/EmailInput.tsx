@@ -24,6 +24,7 @@ const EmailInput = () => {
       <input
         type="email"
         name="email"
+        autoComplete="email"
         placeholder="이메일을 입력해 주세요."
         value={email}
         onChange={handleChange}

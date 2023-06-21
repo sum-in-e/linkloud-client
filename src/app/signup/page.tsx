@@ -1,4 +1,3 @@
-import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import SignUp from '@/features/auth/signup/containers';
 import { redirect } from 'next/navigation';

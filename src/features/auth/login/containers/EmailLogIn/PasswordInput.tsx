@@ -23,6 +23,7 @@ const PasswordInput = () => {
       <input
         type="password"
         name="password"
+        autoComplete="current-password"
         placeholder="비밀번호를 입력해 주세요."
         value={password}
         onChange={handleChange}

@@ -5,6 +5,7 @@ import MainContent from '@/common/containers/layout/MainContent';
 import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
 import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
+import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export const metadata = {
   title: 'Linkloud',
@@ -37,6 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <GoogleAnalytics />
       <body>
         <QueryProvider>
           <ChakraUiProvider>
