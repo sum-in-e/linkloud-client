@@ -4,10 +4,6 @@ import Script from 'next/script';
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
 const GoogleAnalytics = () => {
-  if (window !== undefined) {
-    return null;
-  }
-
   return (
     <>
       <Script
