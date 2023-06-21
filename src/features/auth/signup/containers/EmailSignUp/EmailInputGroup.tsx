@@ -7,7 +7,7 @@ import Timer from '@/features/auth/signup/containers/EmailSignUp/ExpiredAtTimer'
 import { useConfirmVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/useConfirmVerificationCodeMutation';
 import { usePostEmailVerificationCodeMutation } from '@/features/auth/signup/modules/apiHooks/usePostEmailVerificationCodeMutation';
 import { useFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 const EmailInputGroup = () => {
   const [isSent, setIsSent] = useState(false);
@@ -26,7 +26,6 @@ const EmailInputGroup = () => {
   const resetAll = () => {
     setIsSent(false);
     setIsVerified(false);
-    setIsValidatedEmail(false);
     setVerificationCode('');
     setFormsValidationState({
       ...formsValidationState,
@@ -84,33 +83,32 @@ const EmailInputGroup = () => {
     error: confirmVerificationCodeMutationError,
   } = useConfirmVerificationCodeMutation();
 
-  const handleClickSendVerificationCode = () => {
+  const handleSubmitSendVerificationCode = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
     sendEmailMutate({ email });
     if (verificationCodeError) {
       setVerificationCodeError('');
     }
   };
 
-  const handleClickCofirmVerificationCode = () => {
+  const handleSubmitCofirmVerificationCode = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
     confirmVerificationCodeMutate({ email, verificationCode });
   };
 
   useEffect(() => {
+    // * 이메일 전송 성공 시 동작
     if (isSuccessSendEmail) {
       setIsSent(true);
     }
   }, [isSuccessSendEmail]);
 
   useEffect(() => {
-    if (isErrorConfirmVerificationCode) {
-      const error = confirmVerificationCodeMutationError.response?.data;
-      const errorMessage = error?.message || '인증에 실패하였습니다.';
-
-      setVerificationCodeError(errorMessage);
-    }
-  }, [isErrorConfirmVerificationCode]);
-
-  useEffect(() => {
+    // * 이메일 전송 실패 시 동작
     if (isErrorSendEmailMutation) {
       const error = sendEmailMutationError.response?.data;
       const errorMessage = error?.message || '이메일 발송에 실패하였습니다.';
@@ -120,6 +118,7 @@ const EmailInputGroup = () => {
   }, [isErrorSendEmailMutation]);
 
   useEffect(() => {
+    // * 인증번호 확인 성공 시 동작
     if (isSuccessConfirmVerificationCode) {
       setIsVerified(true);
       setFormsValidationState({
@@ -130,6 +129,17 @@ const EmailInputGroup = () => {
   }, [isSuccessConfirmVerificationCode]);
 
   useEffect(() => {
+    // * 인증번호 확인 실패 시 동작
+    if (isErrorConfirmVerificationCode) {
+      const error = confirmVerificationCodeMutationError.response?.data;
+      const errorMessage = error?.message || '인증에 실패하였습니다.';
+
+      setVerificationCodeError(errorMessage);
+    }
+  }, [isErrorConfirmVerificationCode]);
+
+  useEffect(() => {
+    // * 초기 인풋에 값이 있는 경우 초기화
     if (email.length > 0) {
       setEmail('');
     }
@@ -143,7 +153,10 @@ const EmailInputGroup = () => {
   return (
     <div className="flex w-full flex-col gap-4">
       <InputFormContainer label="이메일*">
-        <div className="flex w-full">
+        <form
+          onSubmit={handleSubmitSendVerificationCode}
+          className="flex w-full"
+        >
           <input
             type="text"
             name="email"
@@ -157,7 +170,7 @@ const EmailInputGroup = () => {
             }`}
           />
           <button
-            onClick={handleClickSendVerificationCode}
+            type="submit"
             disabled={isVerified || !isValidatedEmail}
             className="w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 disabled:bg-gray-400"
           >
@@ -169,13 +182,16 @@ const EmailInputGroup = () => {
               '인증 번호 보내기'
             )}
           </button>
-        </div>
+        </form>
         {isErrorSendEmailMutation && sendEmailError !== '' && (
           <p className="text-xs text-red-500">{sendEmailError}</p>
         )}
       </InputFormContainer>
       <InputFormContainer label="인증번호*">
-        <div className="flex w-full">
+        <form
+          onSubmit={handleSubmitCofirmVerificationCode}
+          className="flex w-full"
+        >
           <div
             className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-100`}
           >
@@ -195,7 +211,7 @@ const EmailInputGroup = () => {
             )}
           </div>
           <button
-            onClick={handleClickCofirmVerificationCode}
+            type="submit"
             disabled={isVerified || verificationCode.length < 6}
             className={`w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 ${
               isVerified
@@ -211,7 +227,7 @@ const EmailInputGroup = () => {
               '인증 완료하기'
             )}
           </button>
-        </div>
+        </form>
         {isErrorConfirmVerificationCode && verificationCodeError !== '' && (
           <p className="text-xs text-red-500">{verificationCodeError}</p>
         )}
