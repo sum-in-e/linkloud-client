@@ -36,7 +36,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isProduction = process.env.MODE === 'production';
+  const isProduction = process.env.NEXT_PUBLIC_MODE === 'production';
 
   return (
     <html lang="ko">
