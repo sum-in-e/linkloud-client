@@ -36,9 +36,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isProduction = process.env.MODE === 'production';
+
   return (
     <html lang="ko">
-      <GoogleAnalytics />
+      {isProduction && <GoogleAnalytics />}
       <body>
         <QueryProvider>
           <ChakraUiProvider>
