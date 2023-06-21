@@ -1,21 +1,9 @@
 'use client';
-import { pageView } from '@/common/modules/utils/googleAnalytics';
-import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect } from 'react';
 
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
 const GoogleAnalytics = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (pathname) {
-      pageView(pathname);
-    }
-  }, [pathname, searchParams]);
-
   return (
     <>
       <Script
