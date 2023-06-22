@@ -30,6 +30,12 @@ instance.interceptors.response.use(
       window.location.href = `/login?${queryString}`;
     }
 
+    if (error.response.status === 500) {
+      alert(
+        '서버 오류로 인해 요청에 실패하였습니다. 잠시후 다시 시도해 주세요.\n문제가 지속적으로 발생할 경우 [마이페이지] 하단의 [문제점 알려주기]를 통해 문제가 발생한 상황을 제보해 주시면 빠르게 개선할 수 있도록 하겠습니다😃'
+      );
+    }
+
     sentryLogger(error);
 
     // 다른 에러들은 그대로 reject하기
