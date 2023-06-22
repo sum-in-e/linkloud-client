@@ -10,6 +10,8 @@ const KakaoSignUp = () => {
   return (
     <SignLayout>
       <Image
+        width={120}
+        height={40}
         alt="Linkloud Logo"
         src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
         className="w-[120px]"

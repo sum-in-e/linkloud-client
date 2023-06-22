@@ -2,6 +2,11 @@
 
 const { withSentryConfig } = require('@sentry/nextjs');
 
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NEXT_PUBLIC_MODE === 'development', // disable is help to disable PWA in deployment mode
+});
+
 const nextConfig = {
   async redirects() {
     return [
@@ -11,6 +16,16 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/dqcgvbbv7/image/upload/v1686554950/linkloud/**',
+      },
+    ],
   },
 };
 
@@ -24,4 +39,4 @@ const sentryConfig = {
   project: 'linkloud-client',
 };
 
-module.exports = withSentryConfig(nextConfig, sentryConfig);
+module.exports = withSentryConfig(withPWA(nextConfig), sentryConfig);

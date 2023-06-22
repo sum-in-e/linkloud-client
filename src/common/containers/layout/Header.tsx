@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
@@ -14,19 +15,19 @@ const Header = () => {
     router.push('/');
   };
 
-  const isShow = !pathname.includes('/kloud') && !pathname.includes('/setting'); // 마이클라우드, 마이페이지가 아닌 경우에만 헤더 노출
+  const isShow = !pathname.includes('/kloud') && !pathname.includes('/setting');
 
   return isShow ? (
     <header className="flex h-24 w-full justify-center bg-slate-100">
       <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-6">
-        <picture>
-          <img
-            src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
-            alt="linkloud_logo"
-            className="w-[110px] cursor-pointer "
-            onClick={handleClickLogo}
-          />
-        </picture>
+        <Image
+          width={120}
+          height={40}
+          alt="linkloud Logo"
+          src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
+          className="w-[110px] cursor-pointer "
+          onClick={handleClickLogo}
+        />
       </div>
     </header>
   ) : null;
