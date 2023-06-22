@@ -23,7 +23,7 @@ instance.interceptors.response.use(
     if (error.response.status === 401) {
       // 모달로 세션만료 알림 띄우기
       const queryString = querystring.stringify({
-        error: NEED_LOGIN,
+        error: encodeURIComponent(NEED_LOGIN),
         return_to: window.location.pathname,
       });
 
