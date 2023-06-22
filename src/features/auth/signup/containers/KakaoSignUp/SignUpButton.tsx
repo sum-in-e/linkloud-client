@@ -34,7 +34,7 @@ const SignUpButton = () => {
     if (isSuccess) {
       onOpen();
     }
-  }, [isSuccess]);
+  }, [isSuccess, onOpen]);
 
   useEffect(() => {
     if (isError) {
@@ -49,7 +49,7 @@ const SignUpButton = () => {
         isClosable: true,
       });
     }
-  }, [isError]);
+  }, [error, isError, toast]);
 
   return (
     <>

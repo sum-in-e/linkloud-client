@@ -32,14 +32,12 @@ const PasswordInputGroup = () => {
       !formsValidationState.isVerifiedPassword
     ) {
       setFormsValidationState({
-        ...formsValidationState,
         isVerifiedPassword: true,
       });
     }
 
     if (formsValidationState.isVerifiedPassword) {
       setFormsValidationState({
-        ...formsValidationState,
         isVerifiedPassword: false,
       });
     }
@@ -68,13 +66,9 @@ const PasswordInputGroup = () => {
   };
 
   useEffect(() => {
-    if (password.length > 0) {
-      setPassword('');
-    }
-    if (confirmPassword.length > 0) {
-      setConfirmPassword('');
-    }
-  }, []);
+    setPassword('');
+    setConfirmPassword('');
+  }, [setPassword]);
 
   return (
     <div className="flex w-full flex-col gap-4">

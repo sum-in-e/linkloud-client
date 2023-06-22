@@ -9,7 +9,6 @@ import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export const metadata = {
   title: 'Linkloud',
-  applicationName: 'Linkloud',
   description: LINKLOUD_SLOGAN,
   keywords: 'linkloud, link, manage links, save links',
   metadataBase: new URL('https://linkloud.co.kr'),
@@ -42,6 +41,13 @@ export const metadata = {
       url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
       alt: 'Linkloud Image',
     },
+  },
+  // For PWA
+  applicationName: 'Linkloud',
+  manifest: 'https://linkloud.co.kr/manifest.json',
+  appleWebApp: {
+    title: 'Linkloud App',
+    statusBarStyle: 'black-translucent',
   },
 };
 

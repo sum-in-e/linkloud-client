@@ -20,15 +20,13 @@ const EmailInputGroup = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [verificationCodeError, setVerificationCodeError] = useState('');
 
-  const { formsValidationState, setFormsValidationState } =
-    useFormsValidationState();
+  const { setFormsValidationState } = useFormsValidationState();
 
   const resetAll = () => {
     setIsSent(false);
     setIsVerified(false);
     setVerificationCode('');
     setFormsValidationState({
-      ...formsValidationState,
       isVerifiedEmail: false,
     });
   };
@@ -109,18 +107,15 @@ const EmailInputGroup = () => {
 
       setSendEmailError(errorMessage);
     }
-  }, [isErrorSendEmailMutation]);
+  }, [isErrorSendEmailMutation, sendEmailMutationError]);
 
   useEffect(() => {
     // * 인증번호 확인 성공 시 동작
     if (isSuccessConfirmVerificationCode) {
       setIsVerified(true);
-      setFormsValidationState({
-        ...formsValidationState,
-        isVerifiedEmail: true,
-      });
+      setFormsValidationState({ isVerifiedEmail: true });
     }
-  }, [isSuccessConfirmVerificationCode]);
+  }, [isSuccessConfirmVerificationCode, setFormsValidationState]);
 
   useEffect(() => {
     // * 인증번호 확인 실패 시 동작
@@ -130,17 +125,12 @@ const EmailInputGroup = () => {
 
       setVerificationCodeError(errorMessage);
     }
-  }, [isErrorConfirmVerificationCode]);
+  }, [confirmVerificationCodeMutationError, isErrorConfirmVerificationCode]);
 
   useEffect(() => {
-    // * 초기 인풋에 값이 있는 경우 초기화
-    if (email.length > 0) {
-      setEmail('');
-    }
-    if (verificationCode.length > 0) {
-      setVerificationCode('');
-    }
-  }, []);
+    setEmail('');
+    setVerificationCode('');
+  }, [setEmail]);
 
   const isShowTimer = !isVerified && sendEmailData;
 

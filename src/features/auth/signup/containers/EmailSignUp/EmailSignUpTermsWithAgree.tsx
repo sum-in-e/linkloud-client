@@ -4,12 +4,10 @@ import { useFormsValidationState } from '@/features/auth/signup/modules/stores/s
 import TermsWithAgreeForm from '@/features/auth/common/containers/TermsWithAgreeForm';
 
 const EmailSignUpTermsWithAgree = () => {
-  const { formsValidationState, setFormsValidationState } =
-    useFormsValidationState();
+  const { setFormsValidationState } = useFormsValidationState();
 
   const handleChangeValidationState = (value: boolean) => {
     setFormsValidationState({
-      ...formsValidationState,
       isVerifiedTermsOfAgree: value,
     });
   };

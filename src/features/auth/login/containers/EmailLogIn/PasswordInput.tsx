@@ -13,10 +13,8 @@ const PasswordInput = () => {
   const isValidatedPassword = password.length > 5;
 
   useEffect(() => {
-    if (password.length > 0) {
-      setPassword('');
-    }
-  }, []);
+    setPassword('');
+  }, [setPassword]);
 
   return (
     <InputFormContainer label="비밀번호*">

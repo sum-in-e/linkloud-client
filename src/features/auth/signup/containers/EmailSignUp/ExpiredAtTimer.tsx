@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import dayjs from 'dayjs';
 
 const Timer = ({ expireTimestamp }: { expireTimestamp: string }) => {
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     const now = dayjs();
     const expiryTime = dayjs(expireTimestamp);
     const diffInSeconds = expiryTime.diff(now, 'second');
@@ -15,13 +15,13 @@ const Timer = ({ expireTimestamp }: { expireTimestamp: string }) => {
     const seconds = diffInSeconds % 60;
 
     return { minutes, seconds, expired: false };
-  };
+  }, [expireTimestamp]);
 
   const [timeLeft, setTimeLeft] = useState<any>(null);
 
   useEffect(() => {
     setTimeLeft(calculateTimeLeft());
-  }, [expireTimestamp]);
+  }, [calculateTimeLeft, expireTimestamp]);
 
   useEffect(() => {
     if (timeLeft?.expired) return;
@@ -31,7 +31,7 @@ const Timer = ({ expireTimestamp }: { expireTimestamp: string }) => {
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, [timeLeft]);
+  }, [calculateTimeLeft, timeLeft]);
 
   if (timeLeft === null) return null;
 

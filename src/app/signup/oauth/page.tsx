@@ -11,7 +11,7 @@ export const metadata = {
     images: [
       {
         url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
-        alt: 'Linkloud image',
+        alt: 'Linkloud Image',
       },
     ],
   },

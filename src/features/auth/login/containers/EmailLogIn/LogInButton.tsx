@@ -36,7 +36,7 @@ const LogInButton = () => {
 
       router.push(path);
     }
-  }, [isSuccess]);
+  }, [isSuccess, returnUrl, router]);
 
   useEffect(() => {
     if (isError) {
@@ -51,7 +51,7 @@ const LogInButton = () => {
         isClosable: true,
       });
     }
-  }, [isError]);
+  }, [error, isError, toast]);
 
   return (
     <AuthCompleteButton

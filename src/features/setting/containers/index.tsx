@@ -7,7 +7,7 @@ const MySetting = () => {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   return <h1 className="md:text-2xl">{isLoading ? 'loading' : 'MyPage'}</h1>;
 };

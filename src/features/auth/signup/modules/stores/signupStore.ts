@@ -14,7 +14,7 @@ export const useNicknameState = create<NicknameStateType>((set) => ({
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
 
-interface PropertiesForSignup {
+export interface PropertiesForSignup {
   isVerifiedEmail: boolean;
   isVerifiedPassword: boolean;
   isVerifiedNickname: boolean;
@@ -23,7 +23,7 @@ interface PropertiesForSignup {
 
 interface FormsValidationStateType {
   formsValidationState: PropertiesForSignup;
-  setFormsValidationState: (newState: PropertiesForSignup) => void;
+  setFormsValidationState: (newState: Partial<PropertiesForSignup>) => void;
 }
 
 export const useFormsValidationState = create<FormsValidationStateType>(
@@ -35,7 +35,14 @@ export const useFormsValidationState = create<FormsValidationStateType>(
       isVerifiedTermsOfAgree: false,
     },
     setFormsValidationState: (newState) =>
-      set({ formsValidationState: newState }),
+      set((prev) => {
+        return {
+          formsValidationState: {
+            ...prev.formsValidationState,
+            ...newState,
+          },
+        };
+      }),
   })
 );
 
@@ -48,7 +55,9 @@ interface PropertiesForKakaoSignup {
 
 interface KakaoFormsValidationStateType {
   formsValidationState: PropertiesForKakaoSignup;
-  setFormsValidationState: (newState: PropertiesForKakaoSignup) => void;
+  setFormsValidationState: (
+    newState: Partial<PropertiesForKakaoSignup>
+  ) => void;
 }
 
 export const useKakaoFormsValidationState =
@@ -58,5 +67,12 @@ export const useKakaoFormsValidationState =
       isVerifiedTermsOfAgree: false,
     },
     setFormsValidationState: (newState) =>
-      set({ formsValidationState: newState }),
+      set((prev) => {
+        return {
+          formsValidationState: {
+            ...prev.formsValidationState,
+            ...newState,
+          },
+        };
+      }),
   }));
