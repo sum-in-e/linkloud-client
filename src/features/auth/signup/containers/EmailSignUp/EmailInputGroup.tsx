@@ -83,20 +83,14 @@ const EmailInputGroup = () => {
     error: confirmVerificationCodeMutationError,
   } = useConfirmVerificationCodeMutation();
 
-  const handleSubmitSendVerificationCode = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
+  const handleClickSendVerificationCode = () => {
     sendEmailMutate({ email });
     if (verificationCodeError) {
       setVerificationCodeError('');
     }
   };
 
-  const handleSubmitCofirmVerificationCode = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
+  const handleClickCofirmVerificationCode = () => {
     confirmVerificationCodeMutate({ email, verificationCode });
   };
 
@@ -153,10 +147,7 @@ const EmailInputGroup = () => {
   return (
     <div className="flex w-full flex-col gap-4">
       <InputFormContainer label="이메일*">
-        <form
-          onSubmit={handleSubmitSendVerificationCode}
-          className="flex w-full"
-        >
+        <div className="flex w-full">
           <input
             type="email"
             name="email"
@@ -171,9 +162,10 @@ const EmailInputGroup = () => {
             }`}
           />
           <button
-            type="submit"
+            type="button"
             disabled={isVerified || !isValidatedEmail}
             className="w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 disabled:bg-gray-400"
+            onClick={handleClickSendVerificationCode}
           >
             {isLoadingSendEmail ? (
               <Loader />
@@ -183,16 +175,13 @@ const EmailInputGroup = () => {
               '인증 번호 보내기'
             )}
           </button>
-        </form>
+        </div>
         {isErrorSendEmailMutation && sendEmailError !== '' && (
           <p className="text-xs text-red-500">{sendEmailError}</p>
         )}
       </InputFormContainer>
       <InputFormContainer label="인증번호*">
-        <form
-          onSubmit={handleSubmitCofirmVerificationCode}
-          className="flex w-full"
-        >
+        <div className="flex w-full">
           <div
             className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-100`}
           >
@@ -212,13 +201,14 @@ const EmailInputGroup = () => {
             )}
           </div>
           <button
-            type="submit"
+            type="button"
             disabled={isVerified || verificationCode.length < 6}
             className={`w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 ${
               isVerified
                 ? 'disabled:bg-emerald-600  disabled:hover:bg-emerald-600'
                 : 'disabled:bg-gray-400  disabled:hover:bg-gray-400'
             } `}
+            onClick={handleClickCofirmVerificationCode}
           >
             {isLoadingConfirmVerificationCode ? (
               <Loader />
@@ -228,7 +218,7 @@ const EmailInputGroup = () => {
               '인증 완료하기'
             )}
           </button>
-        </form>
+        </div>
         {isErrorConfirmVerificationCode && verificationCodeError !== '' && (
           <p className="text-xs text-red-500">{verificationCodeError}</p>
         )}
