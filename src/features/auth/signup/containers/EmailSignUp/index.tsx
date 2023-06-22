@@ -5,17 +5,24 @@ import EmailInputGroup from '@/features/auth/signup/containers/EmailSignUp/Email
 import PasswordInputGroup from '@/features/auth/signup/containers/EmailSignUp/PasswordInputGroup';
 import NicknameInput from '@/features/auth/signup/containers/EmailSignUp/NicknameInput';
 import SignUpButton from '@/features/auth/signup/containers/EmailSignUp/SignUpButton';
+import { FormEvent } from 'react';
 
 const EmailSignUpForm = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <section className="flex w-full flex-col gap-6">
-      <div className="flex w-full flex-col gap-4">
-        <EmailInputGroup />
-        <PasswordInputGroup />
-        <NicknameInput />
-      </div>
-      <EmailSignUpTermsWithAgree />
-      <SignUpButton />
+    <section className="w-full">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col gap-4">
+          <EmailInputGroup />
+          <PasswordInputGroup />
+          <NicknameInput />
+        </div>
+        <EmailSignUpTermsWithAgree />
+        <SignUpButton />
+      </form>
     </section>
   );
 };

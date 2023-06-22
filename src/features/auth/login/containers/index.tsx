@@ -16,7 +16,7 @@ const LogIn = () => {
 
   useEffect(() => {
     if (error) {
-      const title = `${error}`;
+      const title = `${decodeURIComponent(error)}`;
       toast({
         title,
         status: 'error',
