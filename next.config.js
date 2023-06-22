@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const TerserPlugin = require('terser-webpack-plugin');
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const nextConfig = {
@@ -12,20 +11,6 @@ const nextConfig = {
         permanent: true,
       },
     ];
-  },
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      config.optimization.minimizer.push(
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
-            },
-          },
-        })
-      );
-    }
-    return config;
   },
 };
 
