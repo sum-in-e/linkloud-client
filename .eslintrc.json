@@ -8,7 +8,7 @@
     "es6": true
   },
   "rules": {
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "error"
   },
   "extends": ["next/core-web-vitals"],
   "ignorePatterns": ["node_modules/"] // eslint 미적용될 폴더나 파일 명시

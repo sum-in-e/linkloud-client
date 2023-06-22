@@ -90,15 +90,9 @@ const TermsWithAgreeForm = ({
   };
 
   useEffect(() => {
-    if (allChecked) {
-      setAllChecked(false);
-    }
-    if (serviceChecked) {
-      setServiceChecked(false);
-    }
-    if (privacyChecked) {
-      setPrivacyChecked(false);
-    }
+    setAllChecked(false);
+    setServiceChecked(false);
+    setPrivacyChecked(false);
   }, []);
 
   return (

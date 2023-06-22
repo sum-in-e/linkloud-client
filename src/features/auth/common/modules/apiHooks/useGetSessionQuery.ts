@@ -13,5 +13,6 @@ export const useGetSessionQuery = (): UseQueryResult<
   return useQuery(queryKeys.user.getSession, getSession, {
     enabled: false,
     retry: false,
+    staleTime: 3 * 60 * 60 * 1000, // 3시간
   });
 };

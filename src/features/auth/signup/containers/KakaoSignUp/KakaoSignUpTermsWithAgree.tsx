@@ -4,12 +4,10 @@ import TermsWithAgreeForm from '@/features/auth/common/containers/TermsWithAgree
 import { useKakaoFormsValidationState } from '@/features/auth/signup/modules/stores/signupStore';
 
 const KakaoSignUpTermsWithAgree = () => {
-  const { formsValidationState, setFormsValidationState } =
-    useKakaoFormsValidationState();
+  const { setFormsValidationState } = useKakaoFormsValidationState();
 
   const handleChangeValidationState = (value: boolean) => {
     setFormsValidationState({
-      ...formsValidationState,
       isVerifiedTermsOfAgree: value,
     });
   };

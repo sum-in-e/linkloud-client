@@ -10,7 +10,7 @@ const MyKloud = () => {
 
   useEffect(() => {
     refetch(); // 로그인한 유저 확인
-  }, []);
+  }, [refetch]);
 
   return <div>{isLoading ? 'loading' : group}</div>;
 };

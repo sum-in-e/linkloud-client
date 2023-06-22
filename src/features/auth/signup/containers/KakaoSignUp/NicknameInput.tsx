@@ -17,7 +17,6 @@ const NicknameInput = () => {
     const isValid = isValidNickname(newNickname);
     if (formsValidationState.isVerifiedNickname !== isValid) {
       setFormsValidationState({
-        ...formsValidationState,
         isVerifiedNickname: isValid,
       });
     }
@@ -29,10 +28,8 @@ const NicknameInput = () => {
   };
 
   useEffect(() => {
-    if (nickname.length > 0) {
-      setNickname('');
-    }
-  }, []);
+    setNickname('');
+  }, [setNickname]);
 
   return (
     <NicknameForm

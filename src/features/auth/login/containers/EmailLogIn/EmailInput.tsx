@@ -14,10 +14,8 @@ const EmailInput = () => {
   const isValidatedEmail = isValidEmail(email);
 
   useEffect(() => {
-    if (email.length > 0) {
-      setEmail('');
-    }
-  }, []);
+    setEmail('');
+  }, [setEmail]);
 
   return (
     <InputFormContainer label="이메일*">

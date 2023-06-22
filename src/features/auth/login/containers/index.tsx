@@ -24,7 +24,7 @@ const LogIn = () => {
         isClosable: true,
       });
     }
-  }, []);
+  }, [error, toast]);
 
   return (
     <SignLayout>

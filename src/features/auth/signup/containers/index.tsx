@@ -23,7 +23,7 @@ const SignUp = () => {
         isClosable: true,
       });
     }
-  }, []);
+  }, [error, toast]);
 
   return (
     <SignLayout>
