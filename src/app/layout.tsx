@@ -9,14 +9,19 @@ import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export const metadata = {
   title: 'Linkloud',
+  applicationName: 'Linkloud',
   description: LINKLOUD_SLOGAN,
+  keywords: 'linkloud, link, manage links, save links',
+  metadataBase: new URL('https://linkloud.co.kr'),
+  alternates: {
+    canonical: '/',
+  },
   viewport: {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
   },
-  keywords: 'linkloud, link, manage links, save links',
   openGraph: {
     title: 'Linkloud',
     description: LINKLOUD_SLOGAN,
@@ -25,9 +30,18 @@ export const metadata = {
     images: [
       {
         url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
-        alt: 'Linkloud og image',
+        alt: 'Linkloud Image',
       },
     ],
+  },
+  twitter: {
+    title: 'Linkloud',
+    description: LINKLOUD_SLOGAN,
+    card: 'Linkloud',
+    images: {
+      url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
+      alt: 'Linkloud Image',
+    },
   },
 };
 

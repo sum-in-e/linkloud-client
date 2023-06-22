@@ -1,4 +1,3 @@
-import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 import MySetting from '@/features/setting/containers';
 
 export const metadata = {
