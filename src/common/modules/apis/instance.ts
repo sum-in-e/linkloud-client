@@ -27,7 +27,7 @@ instance.interceptors.response.use(
         return_to: window.location.pathname,
       });
 
-      window.location.href = `/login?${queryString}`;
+      window.location.replace(`/login?${queryString}`);
     }
 
     if (error.response.status === 500) {
