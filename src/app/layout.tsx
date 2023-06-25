@@ -49,6 +49,7 @@ export const metadata = {
     title: 'Linkloud',
     statusBarStyle: 'black-translucent',
   },
+  themeColor: 'black',
 };
 
 export default function RootLayout({
