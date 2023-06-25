@@ -50,12 +50,6 @@ export const metadata = {
     statusBarStyle: 'black-translucent',
   },
   themeColor: 'black',
-  icons: {
-    icon: [
-      { url: '/public/icons/favicon-512x512.png' },
-      new URL('/public/icons/favicon-512x512.png', 'https://linkloud.co.kr'),
-    ],
-  },
 };
 
 export default function RootLayout({
