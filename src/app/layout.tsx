@@ -46,7 +46,7 @@ export const metadata = {
   applicationName: 'Linkloud',
   manifest: 'https://linkloud.co.kr/manifest.json',
   appleWebApp: {
-    title: 'Linkloud App',
+    title: 'Linkloud',
     statusBarStyle: 'black-translucent',
   },
 };
