@@ -25,7 +25,7 @@ const Header = () => {
           height={40}
           alt="linkloud Logo"
           src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
-          className="w-[110px] cursor-pointer "
+          className="cursor-pointer "
           onClick={handleClickLogo}
         />
       </div>
