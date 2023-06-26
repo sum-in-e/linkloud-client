@@ -14,7 +14,6 @@ const KakaoSignUp = () => {
         height={40}
         alt="Linkloud Logo"
         src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
-        className="w-[120px]"
       />
       <h1 className="text-lg font-semibold">회원가입을 위한 추가 정보 입력</h1>
       <NicknameInput />

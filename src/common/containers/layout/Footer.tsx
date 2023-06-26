@@ -87,7 +87,7 @@ const Footer = () => {
 export default Footer;
 
 const Title = ({ text }: { text: string }) => {
-  return <h6 className="text-[15px] font-bold text-slate-300">{text}</h6>;
+  return <h1 className="text-[15px] font-bold text-slate-300">{text}</h1>;
 };
 
 const Text = ({ text, onClick }: { text: string; onClick?: () => void }) => {
