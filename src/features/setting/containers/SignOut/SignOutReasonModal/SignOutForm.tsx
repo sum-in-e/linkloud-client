@@ -69,25 +69,27 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
   }, [isError, toast]);
 
   return (
-    <section className="flex flex-col gap-3">
-      <div className="flex flex-col gap-3 md:px-3">
-        {reasons.map((reason) => (
-          <Checkbox
-            key={reason}
-            value={reason}
-            label={reason}
-            checked={reasonCategory === reason}
-            onChange={() => setReasonCategory(reason)}
+    <section className="flex flex-col">
+      <div className="my-5 flex h-44 flex-col gap-2 overflow-scroll md:h-auto">
+        <div className="flex flex-col gap-3 md:px-3">
+          {reasons.map((reason) => (
+            <Checkbox
+              key={reason}
+              value={reason}
+              label={reason}
+              checked={reasonCategory === reason}
+              onChange={() => setReasonCategory(reason)}
+            />
+          ))}
+        </div>
+        <div className="w-full px-5">
+          <textarea
+            className="h-28 w-full resize-none rounded-xl bg-gray-100 p-2 px-2 text-sm focus:outline-none disabled:text-gray-500"
+            onChange={handleChangeEtc}
+            placeholder="탈퇴 사유를 입력해 주세요."
+            disabled={reasonCategory !== SIGN_OUT_REASON_TYPE.OTHERS}
           />
-        ))}
-      </div>
-      <div className="w-full px-5">
-        <textarea
-          className="h-28 w-full resize-none rounded-xl bg-gray-100 p-2 px-2 text-sm focus:outline-none disabled:text-gray-500"
-          onChange={handleChangeEtc}
-          placeholder="탈퇴 사유를 입력해 주세요."
-          disabled={reasonCategory !== SIGN_OUT_REASON_TYPE.OTHERS}
-        />
+        </div>
       </div>
       <div className="flex gap-2">
         <button

@@ -48,7 +48,7 @@ export const metadata = {
   themeColor: 'white',
   appleWebApp: {
     title: 'Linkloud',
-    statusBarStyle: 'black-translucent',
+    statusBarStyle: 'default',
     startupImage: [
       {
         url: '/startup/apple-splash-750x1334.png',
