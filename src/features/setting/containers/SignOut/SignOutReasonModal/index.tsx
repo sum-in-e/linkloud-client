@@ -12,12 +12,12 @@ const SignOutReasonModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <Modal onClose={onClose} size="lg" isCentered isOpen={true}>
       <ModalOverlay />
-      <ModalContent className="md:px-5">
-        <ModalHeader className="pt-10 text-center">
+      <ModalContent className="py-5 md:px-5">
+        <ModalHeader className="text-center">
           서비스 이용을 중단하시겠어요?
         </ModalHeader>
-        <ModalBody className="pb-10">
-          <section className="mb-10 flex flex-col items-center gap-3">
+        <ModalBody>
+          <section className="mb-3 flex flex-col items-center gap-3">
             <p className="text-sm">떠나신다니 아쉬워요🥲</p>
             <div>
               <p className="text-center text-xs">
