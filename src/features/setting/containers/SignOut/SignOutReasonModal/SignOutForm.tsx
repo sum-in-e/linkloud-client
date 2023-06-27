@@ -87,7 +87,6 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
           onChange={handleChangeEtc}
           placeholder="탈퇴 사유를 입력해 주세요."
           disabled={reasonCategory !== SIGN_OUT_REASON_TYPE.OTHERS}
-          autoFocus={reasonCategory === SIGN_OUT_REASON_TYPE.OTHERS}
         />
       </div>
       <div className="flex gap-2">
