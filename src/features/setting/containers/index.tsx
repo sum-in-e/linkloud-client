@@ -1,15 +1,51 @@
 'use client';
+import NotFoundPage from '@/app/not-found';
+import NeedLogin from '@/common/containers/NeedLogin';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
+import UserInfoSkeleton from '@/features/setting/components/UserInfoSkeleton';
+import LogOutButton from '@/features/setting/containers/LogOut';
+import SignOutButton from '@/features/setting/containers/SignOut';
+import UserInfo from '@/features/setting/containers/UserInfo';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const MySetting = () => {
-  const { isLoading, refetch } = useGetSessionQuery();
+  const { isLoading, refetch, data } = useGetSessionQuery();
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/kloud/all');
+  };
 
   useEffect(() => {
-    refetch();
+    refetch(); // 로그인한 유저 확인
   }, [refetch]);
 
-  return <h1 className="md:text-2xl">{isLoading ? 'loading' : 'MyPage'}</h1>;
+  return (
+    <div className="my-10 flex w-full justify-center">
+      {isLoading ? (
+        <UserInfoSkeleton />
+      ) : data ? (
+        <div className="flex w-full max-w-[340px] flex-col gap-7">
+          <UserInfo />
+          <hr className="w-full border-gray-300" />
+          <section className="flex gap-2 md:flex-row">
+            <LogOutButton />
+            <SignOutButton />
+          </section>
+          <button
+            onClick={handleClick}
+            className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-gray-700 py-3 text-sm font-bold text-white focus:outline-none"
+          >
+            마이클라우드로 가기 임시버튼
+          </button>
+        </div>
+      ) : (
+        <NeedLogin />
+      )}
+    </div>
+  );
 };
 
 export default MySetting;

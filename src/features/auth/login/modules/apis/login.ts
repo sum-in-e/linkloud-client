@@ -11,7 +11,9 @@ export type EmailLogInResponse = SuccessResponseType<{
   method: SignUpMethodType;
 }>;
 
-export const emailLogIn = async (body: EmailLogInBody) => {
+export const emailLogIn = async (
+  body: EmailLogInBody
+): Promise<EmailLogInResponse> => {
   const { data } = await instance.post('/user/login', body);
   return data;
 };
