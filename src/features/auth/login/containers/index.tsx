@@ -1,7 +1,7 @@
 'use client';
 
 import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigationPrompt';
-import TopLogo from '@/features/auth/common/components/TopLogo';
+import AuthTitleGroup from '@/features/auth/common/components/AuthTitleGroup';
 import KakaoButton from '@/features/auth/common/containers/KakaoButton';
 import EmailLogInForm from '@/features/auth/login/containers/EmailLogIn';
 import SignLayout from '@/features/auth/common/components/SignLayout';
@@ -28,7 +28,7 @@ const LogIn = () => {
 
   return (
     <SignLayout>
-      <TopLogo />
+      <AuthTitleGroup type="login" />
       <KakaoButton type="login" />
       <hr className="w-full border-gray-300" />
       <EmailLogInForm />

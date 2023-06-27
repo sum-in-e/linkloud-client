@@ -17,16 +17,6 @@ const nextConfig = {
       },
     ];
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        port: '',
-        pathname: '/dqcgvbbv7/image/upload/v1686554950/linkloud/**',
-      },
-    ],
-  },
 };
 
 const sentryConfig = {
