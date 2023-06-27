@@ -35,7 +35,10 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
   }, 200);
 
   const handleClickSignOut = () => {
-    const reason = reasonCategory !== '기타' ? reasonCategory : etcReason;
+    const reason =
+      reasonCategory !== SIGN_OUT_REASON_TYPE.OTHERS
+        ? reasonCategory
+        : etcReason;
 
     if (!isLoading) mutate({ reason });
   };
@@ -83,19 +86,20 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
           className="h-28 w-full resize-none rounded-xl bg-gray-100 p-2 px-2 text-sm focus:outline-none disabled:text-gray-500"
           onChange={handleChangeEtc}
           placeholder="탈퇴 사유를 입력해 주세요."
-          disabled={reasonCategory !== '기타'}
+          disabled={reasonCategory !== SIGN_OUT_REASON_TYPE.OTHERS}
+          autoFocus={reasonCategory === SIGN_OUT_REASON_TYPE.OTHERS}
         />
       </div>
       <div className="flex gap-2">
         <button
           onClick={onClose}
-          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-darker focus:outline-none"
+          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-lighter focus:outline-none"
         >
           계속 이용하기
         </button>
         <button
           onClick={handleClickSignOut}
-          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-600 focus:outline-none disabled:bg-gray-400"
+          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400 focus:outline-none disabled:bg-gray-400"
         >
           {isLoading ? <Loader /> : '그만 이용하기'}
         </button>
