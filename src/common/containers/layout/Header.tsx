@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
+import logo from '/public/images/logo_v.png';
 
 const Header = () => {
   // * 헤더도 디자인이 나와야 감이 잡히니까 정말 레이아웃만 잡아놓자.
@@ -21,11 +22,9 @@ const Header = () => {
     <header className="flex h-24 w-full justify-center bg-slate-100">
       <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-6">
         <Image
-          width={120}
-          height={40}
+          src={logo}
           alt="linkloud Logo"
-          src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
-          className="cursor-pointer"
+          className="h-auto w-[120px] cursor-pointer"
           onClick={handleClickLogo}
         />
       </div>

@@ -5,7 +5,7 @@ import KakaoButton from '@/features/auth/common/containers/KakaoButton';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import TopLogo from '@/features/auth/common/components/TopLogo';
+import AuthTitleGroup from '@/features/auth/common/components/AuthTitleGroup';
 import AuthNavigationPrompt from '@/features/auth/common/components/AuthNavigationPrompt';
 
 const SignUp = () => {
@@ -27,7 +27,7 @@ const SignUp = () => {
 
   return (
     <SignLayout>
-      <TopLogo />
+      <AuthTitleGroup type="signup" />
       <KakaoButton type="signup" />
       <hr className="w-full border-gray-300" />
       <EmailSignUpForm />
