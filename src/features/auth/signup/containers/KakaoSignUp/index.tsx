@@ -9,13 +9,7 @@ import Image from 'next/image';
 const KakaoSignUp = () => {
   return (
     <SignLayout>
-      <Image
-        width={120}
-        height={40}
-        alt="Linkloud Logo"
-        src="https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686554950/linkloud/logo_v_avimgi.png"
-      />
-      <h1 className="text-lg font-semibold">회원가입을 위한 추가 정보 입력</h1>
+      <h1 className="text-xl font-semibold">회원가입을 위한 추가 정보 입력</h1>
       <NicknameInput />
       <KakaoSignUpTermsWithAgree />
       <SignUpButton />
