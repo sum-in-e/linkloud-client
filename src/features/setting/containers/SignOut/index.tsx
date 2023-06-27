@@ -9,6 +9,11 @@ const SignOutButton = () => {
     onOpen();
   };
 
+  const handleClose = () => {
+    onClose();
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <button
@@ -17,7 +22,7 @@ const SignOutButton = () => {
       >
         회원탈퇴
       </button>
-      {isOpen && <SignOutReasonModal onClose={onClose} />}
+      {isOpen && <SignOutReasonModal onClose={handleClose} />}
     </>
   );
 };
