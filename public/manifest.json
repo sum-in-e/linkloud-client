@@ -19,13 +19,33 @@
       "type": "image/png"
     },
     {
+      "src": "./icons/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    },
+    {
       "src": "./icons/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
+      "src": "./icons/apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
       "src": "./icons/apple-touch-icon-152x152.png",
       "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/apple-touch-icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
