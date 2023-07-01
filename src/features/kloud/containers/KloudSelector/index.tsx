@@ -67,7 +67,7 @@ const KloudSelector = ({ kloudId, onChange }: Props) => {
         {/* 클라우드 리스트 & 생성 폼 */}
         <AccordionPanel className="mt-2 p-0">
           <div className="flex max-h-[300px] flex-col gap-2 overflow-scroll rounded-2xl py-2">
-            <CreateKloudForm onSelect={handleSelect} />
+            <CreateKloudForm onSelect={handleSelect} isOpen={isOpen} />
             <KloudList kloudId={kloudId} onSelect={handleSelect} />
           </div>
         </AccordionPanel>

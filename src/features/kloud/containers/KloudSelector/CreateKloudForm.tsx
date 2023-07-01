@@ -10,9 +10,10 @@ import { FaPlus } from 'react-icons/fa';
 
 interface Props {
   onSelect: (id: number | null) => void;
+  isOpen: boolean;
 }
 
-const CreateKloudForm = ({ onSelect }: Props) => {
+const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -85,6 +86,10 @@ const CreateKloudForm = ({ onSelect }: Props) => {
       }
     }
   }, [isError, error, toast]);
+
+  useEffect(() => {
+    setName(''); // 클라우드명 입력 후 list 아코디언 닫으면 name 남아있는 이슈 해결하기 위해 호출
+  }, [isOpen]);
 
   const isDisabledButton = name.length === 0;
 
