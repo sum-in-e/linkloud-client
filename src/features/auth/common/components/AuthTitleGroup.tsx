@@ -1,4 +1,4 @@
-import { AuthMethodType } from '@/features/auth/common/modules/types/auth';
+import { AuthMethodType } from '@/features/auth/common/modules/types/authType';
 
 const AuthTitleGroup = ({ type }: { type: AuthMethodType }) => {
   const title = type === 'login' ? '로그인' : '회원가입';

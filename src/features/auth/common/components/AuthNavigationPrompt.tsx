@@ -1,4 +1,4 @@
-import { AuthMethodType } from '@/features/auth/common/modules/types/auth';
+import { AuthMethodType } from '@/features/auth/common/modules/types/authType';
 import Link from 'next/link';
 
 interface Props {

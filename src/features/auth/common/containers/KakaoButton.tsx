@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthMethodType } from '@/features/auth/common/modules/types/auth';
+import { AuthMethodType } from '@/features/auth/common/modules/types/authType';
 import Link from 'next/link';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import * as querystring from 'querystring';
@@ -23,7 +23,7 @@ const KakaoButton = ({ type }: { type: AuthMethodType }) => {
       <Link
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/user/auth/kakao?${queryString}`}
       >
-        <button className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3  hover:bg-[#ffe81a] focus:outline-none">
+        <button className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3  hover:bg-[#ffe81a] focus:outline-none">
           <RiKakaoTalkFill />
           <p className="text-sm font-bold text-black ">{text}</p>
         </button>
