@@ -3,7 +3,9 @@ const queryKeys = {
     getSession: ['getSession'] as const,
   },
   link: {},
-  kloud: {},
+  kloud: {
+    getKloudList: ['getKloudList'] as const,
+  },
 };
 
 export default queryKeys;
