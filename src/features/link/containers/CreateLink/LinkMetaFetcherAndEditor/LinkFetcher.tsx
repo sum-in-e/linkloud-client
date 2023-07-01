@@ -1,17 +1,17 @@
 'use client';
 
 import { useLinkAnalyzeMutation } from '@/features/link/modules/apiHooks/useLinkAnalyzeMutation';
-import {
-  useLinkState,
-  useShowLinkEditorState,
-} from '@/features/link/modules/stores/createLinkStore';
+import { useLinkState } from '@/features/link/modules/stores/createLinkStore';
 import { useToast } from '@chakra-ui/react';
 import { FormEvent, useEffect, useState } from 'react';
 
-const LinkFetcher = () => {
+interface Props {
+  handleShowLinkEditor: (isShow: boolean) => void;
+}
+
+const LinkFetcher = ({ handleShowLinkEditor }: Props) => {
   const toast = useToast();
 
-  const { setIsShowLinkEditor } = useShowLinkEditorState();
   const { setLink } = useLinkState();
 
   const [url, setUrl] = useState('');
@@ -50,9 +50,9 @@ const LinkFetcher = () => {
         description: data.data.description,
         thumbnailUrl: data.data.thumbnailUrl,
       });
-      setIsShowLinkEditor(true);
+      handleShowLinkEditor(true);
     }
-  }, [data, isSuccess, setLink, setIsShowLinkEditor]);
+  }, [data, isSuccess, setLink, handleShowLinkEditor]);
 
   useEffect(() => {
     if (isError) {

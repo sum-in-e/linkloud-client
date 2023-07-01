@@ -42,17 +42,3 @@ export const useKloudIdState = create<KloudIdStateType>((set) => ({
     }),
   resetKloudId: () => set({ kloudId: null }),
 }));
-
-// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
-
-interface ShowLinkEditorStateType {
-  isShowLinkEditor: boolean;
-  setIsShowLinkEditor: (newState: boolean) => void;
-}
-
-export const useShowLinkEditorState = create<ShowLinkEditorStateType>(
-  (set) => ({
-    isShowLinkEditor: false,
-    setIsShowLinkEditor: (newState) => set({ isShowLinkEditor: newState }),
-  })
-);
