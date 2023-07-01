@@ -52,7 +52,7 @@ const LinkFetcher = () => {
       });
       setIsShowLinkEditor(true);
     }
-  }, [data, isSuccess, setLink]);
+  }, [data, isSuccess, setLink, setIsShowLinkEditor]);
 
   useEffect(() => {
     if (isError) {
