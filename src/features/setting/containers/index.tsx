@@ -36,7 +36,7 @@ const MySetting = () => {
           </section>
           <button
             onClick={handleClick}
-            className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-gray-700 py-3 text-sm font-bold text-white focus:outline-none"
+            className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-gray-700 py-3 text-sm font-bold text-white focus:outline-none"
           >
             마이클라우드로 가기 임시버튼
           </button>
