@@ -94,13 +94,13 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
       <div className="flex gap-2">
         <button
           onClick={onClose}
-          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-lighter focus:outline-none"
+          className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-lighter focus:outline-none"
         >
           계속 이용하기
         </button>
         <button
           onClick={handleClickSignOut}
-          className="focus:shadow-outline flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400 focus:outline-none disabled:bg-gray-400"
+          className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400 focus:outline-none disabled:bg-gray-400"
         >
           {isLoading ? <Loader /> : '그만 이용하기'}
         </button>

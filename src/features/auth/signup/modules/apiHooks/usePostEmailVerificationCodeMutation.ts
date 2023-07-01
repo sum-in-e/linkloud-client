@@ -1,3 +1,4 @@
+import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
   postEmailVerificationCode,
   PostEmailVerificationCodeParams,

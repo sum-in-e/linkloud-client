@@ -1,16 +1,16 @@
 import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
-  SignOutParams,
-  SignOutResponse,
-  signOut,
-} from '@/features/auth/common/modules/apis/auth';
+  CreateLinkResponse,
+  createLink,
+  createLinkBody,
+} from '@/features/link/modules/apis/link';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const useSignOutMutation = (): UseMutationResult<
-  SignOutResponse,
+export const useCreateLinkMutation = (): UseMutationResult<
+  CreateLinkResponse,
   AxiosError<ErrorResponseType>,
-  SignOutParams
+  createLinkBody
 > => {
-  return useMutation(signOut);
+  return useMutation(createLink);
 };
