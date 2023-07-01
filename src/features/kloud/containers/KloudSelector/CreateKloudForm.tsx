@@ -68,7 +68,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
         isClosable: true,
       });
     }
-  }, [isSuccess, queryClient, toast, data]);
+  }, [isSuccess, queryClient, toast, data, onSelect]);
 
   useEffect(() => {
     if (isError) {

@@ -46,7 +46,7 @@ const CreateLinkButton = ({ onClose }: Props) => {
         router.push(`/kloud/${data.data.kloudId}`);
       }
     }
-  }, [isSuccess, data, router]);
+  }, [isSuccess, data, router, onClose, toast]);
 
   useEffect(() => {
     if (isError) {
