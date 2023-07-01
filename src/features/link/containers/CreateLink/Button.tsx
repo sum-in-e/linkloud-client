@@ -6,7 +6,6 @@ import {
   useLinkState,
 } from '@/features/link/modules/stores/createLinkStore';
 import { useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 
 const CreateLinkButton = ({ onClose }: Props) => {
   const toast = useToast();
-  const router = useRouter();
 
   const { link } = useLinkState();
   const { kloudId } = useKloudIdState();
@@ -28,25 +26,17 @@ const CreateLinkButton = ({ onClose }: Props) => {
       kloudId,
     });
   };
-
   useEffect(() => {
     if (isSuccess) {
-      onClose();
       toast({
         title: '링크가 추가되었습니다!',
         status: 'success',
         duration: 1000,
         isClosable: true,
       });
-      if (data.data.kloudId === null) {
-        // kloudId가 Null이면 미분류로 이동
-        router.push('/kloud/uncategorized');
-      } else {
-        // kloudId가 있으면 해당 클라우드로 이동
-        router.push(`/kloud/${data.data.kloudId}`);
-      }
+      onClose();
     }
-  }, [isSuccess, data, router, onClose, toast]);
+  }, [isSuccess, onClose, toast]);
 
   useEffect(() => {
     if (isError) {

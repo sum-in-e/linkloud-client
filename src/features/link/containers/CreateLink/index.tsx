@@ -2,7 +2,6 @@
 
 import CreateLinkButton from '@/features/link/containers/CreateLink/Button';
 import LinkMetaFetcherAndEditor from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor';
-import { useShowLinkEditorState } from '@/features/link/modules/stores/createLinkStore';
 import {
   Drawer,
   DrawerBody,
@@ -19,15 +18,9 @@ interface Props {
 
 const CreateLink = ({ onClose }: Props) => {
   // * 임의의 디자인으로 기능만 구현중
-  const { setIsShowLinkEditor } = useShowLinkEditorState();
-
-  const handleClose = () => {
-    setIsShowLinkEditor(false);
-    onClose();
-  };
 
   return (
-    <Drawer isOpen={true} placement="right" onClose={handleClose} size="sm">
+    <Drawer isOpen={true} placement="right" onClose={onClose} size="sm">
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -38,7 +31,7 @@ const CreateLink = ({ onClose }: Props) => {
         </DrawerBody>
 
         <DrawerFooter borderTopWidth="1px">
-          <CreateLinkButton onClose={handleClose} />
+          <CreateLinkButton onClose={onClose} />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

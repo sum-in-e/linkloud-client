@@ -2,14 +2,22 @@
 
 import LinkFetcher from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkFetcher';
 import LinkEditor from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkEditor';
-import { useShowLinkEditorState } from '@/features/link/modules/stores/createLinkStore';
+import { useState } from 'react';
 
 const LinkMetaFetcherAndEditor = () => {
-  const { isShowLinkEditor } = useShowLinkEditorState();
+  const [isShowLinkEditor, setIsShowLinkEditor] = useState(false);
+
+  const handleShowLinkEditor = (isShow: boolean) => {
+    setIsShowLinkEditor(isShow);
+  };
 
   return (
     <section className="flex flex-col items-center gap-2">
-      {isShowLinkEditor ? <LinkEditor /> : <LinkFetcher />}
+      {isShowLinkEditor ? (
+        <LinkEditor handleShowLinkEditor={handleShowLinkEditor} />
+      ) : (
+        <LinkFetcher handleShowLinkEditor={handleShowLinkEditor} />
+      )}
     </section>
   );
 };
