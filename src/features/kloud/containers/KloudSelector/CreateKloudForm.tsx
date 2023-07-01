@@ -106,6 +106,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
         disabled={isDisabledButton}
       >
         <FaPlus
+          size={15}
           className={`${isDisabledButton ? 'fill-slate-400' : 'fill-black'}`}
         />
       </button>
