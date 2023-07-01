@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { captureException, withScope } from '@sentry/nextjs';
+import { ErrorResponseType } from '@/common/modules/types/responseType';
 
 const MODE = process.env.NEXT_PUBLIC_MODE;
 

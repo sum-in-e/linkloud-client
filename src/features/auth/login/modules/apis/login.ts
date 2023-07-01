@@ -1,4 +1,5 @@
 import { instance } from '@/common/modules/apis/instance';
+import { SuccessResponseType } from '@/common/modules/types/responseType';
 import { SignUpMethodType } from '@/features/auth/signup/modules/types/signupType';
 
 export type EmailLogInBody = {

@@ -1,4 +1,4 @@
-import EmailSignUp from '@/features/auth/signup/containers/EmailSignUp';
+import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
   EmailSignUpBody,
   EmailSignUpResponse,

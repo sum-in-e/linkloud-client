@@ -1,5 +1,6 @@
+import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
-    SignOutParams,
+  SignOutParams,
   SignOutResponse,
   signOut,
 } from '@/features/auth/common/modules/apis/auth';

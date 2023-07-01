@@ -1,10 +1,10 @@
-interface SuccessResponseType<T> {
+export interface SuccessResponseType<T> {
   status: number;
   message: string;
   data: T;
 }
 
-interface ErrorResponseType {
+export interface ErrorResponseType {
   status: number;
   message: string;
   error: {

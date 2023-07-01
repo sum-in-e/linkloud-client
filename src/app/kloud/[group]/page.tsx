@@ -1,3 +1,4 @@
+import { SuccessResponseType } from '@/common/modules/types/responseType';
 import MyKloud from '@/features/kloud/containers';
 import axios from 'axios';
 import { Metadata } from 'next';
