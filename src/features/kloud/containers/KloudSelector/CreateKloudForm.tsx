@@ -14,17 +14,49 @@ interface Props {
 }
 
 const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
-  const queryClient = useQueryClient();
   const toast = useToast();
 
   const [name, setName] = useState('');
 
-  const { mutate, data, isSuccess, isError, error } = useCreateKloudMutation();
+  const { mutate } = useCreateKloudMutation();
   const { data: kloudListData } = useGetKloudListQuery();
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const kloudName = event.target.value;
     setName(kloudName);
+  };
+
+  const queryClient = useQueryClient();
+
+  const handleMutate = () => {
+    mutate(
+      { name },
+      {
+        onSuccess: (data) => {
+          queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
+          onSelect(data.data.id);
+          toast({
+            title: '클라우드가 생성되었습니다.',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
+        },
+        onError: (error) => {
+          const isNotServerError = error.response?.status !== 500;
+
+          if (isNotServerError) {
+            const message = error.response?.data.message;
+            toast({
+              title: message || '클라우드를 생성하지 못했습니다.',
+              status: 'warning',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        },
+      }
+    );
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -35,14 +67,12 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
 
     if (exceededCreateLimit || exceededNameLength) {
       const getMessage = () => {
-        let message = '클라우드를 생성할 수 없습니다.';
-
         if (exceededCreateLimit)
-          message = '유저당 최대 20개의 클라우드까지 생성 가능합니다.';
+          return '유저당 최대 20개의 클라우드까지 생성 가능합니다.';
         if (exceededNameLength)
-          message = '클라우드 이름은 50자 이내로 작성해 주세요.';
+          return '클라우드 이름은 50자 이내로 작성해 주세요.';
 
-        return message;
+        return '클라우드를 생성할 수 없습니다.';
       };
 
       toast({
@@ -54,38 +84,8 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
       return;
     }
 
-    mutate({ name });
+    handleMutate();
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
-      setName('');
-      onSelect(data.data.id);
-      toast({
-        title: '클라우드가 생성되었습니다.',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isSuccess, queryClient, toast, data, onSelect]);
-
-  useEffect(() => {
-    if (isError) {
-      const isNotServerError = error.response?.status !== 500;
-
-      if (isNotServerError) {
-        const message = error.response?.data.message;
-        toast({
-          title: message || '클라우드를 생성하지 못했습니다.',
-          status: 'warning',
-          duration: 2000,
-          isClosable: true,
-        });
-      }
-    }
-  }, [isError, error, toast]);
 
   useEffect(() => {
     setName(''); // 클라우드명 입력 후 list 아코디언 닫으면 name 남아있는 이슈 해결하기 위해 호출
