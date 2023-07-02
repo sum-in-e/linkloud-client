@@ -118,7 +118,7 @@ const LinkFetcher = () => {
       />
       <button
         type="submit"
-        className="flex h-10 w-full items-center  justify-center rounded-2xl bg-gray-700 px-5 py-3 text-sm font-bold text-white hover:bg-gray-500 disabled:bg-gray-400"
+        className="common-button  h-10 bg-gray-700 px-5 font-bold text-white hover:bg-gray-500"
         disabled={url.length === 0}
       >
         링크 정보 가져오기

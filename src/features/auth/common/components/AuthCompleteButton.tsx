@@ -21,7 +21,7 @@ const AuthCompleteButton = ({
       type="submit"
       onClick={onClick}
       disabled={isDisabled}
-      className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-darker focus:outline-none disabled:bg-gray-400"
+      className="common-button bg-primary py-3 font-bold text-white hover:bg-primary-darker focus:outline-none"
     >
       {isLoading ? <Loader /> : text}
     </button>

@@ -64,7 +64,7 @@ const CreateLinkButton = ({ onClose }: Props) => {
   return (
     <button
       type="button"
-      className="common-button flex w-[300px] items-center justify-center bg-primary font-bold text-white hover:bg-primary-lighter"
+      className="common-button w-[300px] bg-primary font-bold text-white hover:bg-primary-lighter"
       onClick={handleMutate}
       disabled={isDisabled}
     >

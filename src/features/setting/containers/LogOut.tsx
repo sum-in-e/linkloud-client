@@ -35,7 +35,7 @@ const LogOutButton = () => {
   return (
     <button
       onClick={handleClick}
-      className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-gray-600 py-3 text-sm font-bold text-white hover:bg-gray-500 focus:outline-none"
+      className=" common-button bg-gray-600 font-bold text-white hover:bg-gray-500"
     >
       {isLoading ? <Loader /> : '로그아웃'}
     </button>
