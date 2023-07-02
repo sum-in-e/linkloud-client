@@ -1,5 +1,6 @@
 'use client';
 
+import Loader from '@/common/components/Loader';
 import { useCreateLinkMutation } from '@/features/link/modules/apiHooks/useCreateLinkMutation';
 import {
   useKloudIdState,
@@ -17,7 +18,7 @@ const CreateLinkButton = ({ onClose }: Props) => {
   const { link } = useLinkState();
   const { kloudId } = useKloudIdState();
 
-  const { mutate } = useCreateLinkMutation();
+  const { mutate, isLoading } = useCreateLinkMutation();
 
   const handleMutate = () => {
     mutate(
@@ -61,7 +62,7 @@ const CreateLinkButton = ({ onClose }: Props) => {
       onClick={handleMutate}
       disabled={isDisabled}
     >
-      링크 추가하기
+      {isLoading ? <Loader /> : '링크 추가하기'}
     </button>
   );
 };
