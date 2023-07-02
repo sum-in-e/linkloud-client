@@ -8,7 +8,6 @@ import {
 } from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 
 const SignUpButton = () => {
   const toast = useToast();
@@ -23,33 +22,35 @@ const SignUpButton = () => {
 
   const isActivateButton = isVerifiedNickname && isVerifiedTermsOfAgree;
 
-  const { mutate, isSuccess, isError, error, isLoading } =
-    useKakaoSignUpMutation();
+  const { mutate, isLoading } = useKakaoSignUpMutation();
 
   const handleClick = () => {
-    if (sign) mutate({ sign, name });
+    if (sign)
+      mutate(
+        { sign, name },
+        {
+          onSuccess: (data) => {
+            onOpen();
+          },
+          onError: (error) => {
+            const isNotServerError = error.response?.status !== 500;
+
+            if (isNotServerError) {
+              const message =
+                error.response?.data.message ||
+                '회원가입에 실패하였습니다. 다시 시도해 주세요.';
+
+              toast({
+                title: message,
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+              });
+            }
+          },
+        }
+      );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      onOpen();
-    }
-  }, [isSuccess, onOpen]);
-
-  useEffect(() => {
-    if (isError) {
-      const err = error.response?.data;
-      const errorMessage =
-        err?.message || '회원가입에 실패하였습니다. 다시 시도해 주세요.';
-
-      toast({
-        title: errorMessage,
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [error, isError, toast]);
 
   return (
     <>
