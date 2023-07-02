@@ -28,7 +28,7 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
 
   const [etcReason, setEtcReason] = useState('');
 
-  const { isLoading, isError, mutate, isSuccess } = useSignOutMutation();
+  const { isLoading, mutate } = useSignOutMutation();
 
   const handleChangeEtc = debounce((e: ChangeEvent<HTMLTextAreaElement>) => {
     setEtcReason(e.target.value);
@@ -40,33 +40,36 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
         ? reasonCategory
         : etcReason;
 
-    if (!isLoading) mutate({ reason });
+    if (!isLoading)
+      mutate(
+        { reason },
+        {
+          onSuccess: (data) => {
+            toast({
+              title: '회원 탈퇴 처리되었습니다.',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+              onCloseComplete: () => {
+                router.push('/');
+              },
+            });
+          },
+          onError: (error) => {
+            const isNotServerError = error.response?.status !== 500;
+
+            if (isNotServerError) {
+              toast({
+                title: '회원탈퇴에 실패하였습니다. 다시 시도해 주세요.',
+                status: 'warning',
+                duration: 2000,
+                isClosable: true,
+              });
+            }
+          },
+        }
+      );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: '회원 탈퇴 처리되었습니다.',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        onCloseComplete: () => {
-          router.push('/');
-        },
-      });
-    }
-  }, [isSuccess, router, toast]);
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: '회원탈퇴에 실패하였습니다. 다시 시도해 주세요.',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isError, toast]);
 
   return (
     <section className="flex flex-col">
