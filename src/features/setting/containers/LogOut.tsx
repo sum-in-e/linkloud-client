@@ -2,34 +2,35 @@ import Loader from '@/common/components/Loader';
 import { useLogOutMutation } from '@/features/auth/common/modules/apiHooks/useLogOutMutation';
 import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 const LogOutButton = () => {
   const toast = useToast();
   const router = useRouter();
 
-  const { isLoading, isError, mutate, isSuccess } = useLogOutMutation();
+  const { isLoading, mutate } = useLogOutMutation();
 
   const handleClick = () => {
-    mutate({});
+    mutate(
+      {},
+      {
+        onSuccess: (data) => {
+          router.push('/');
+        },
+        onError: (error) => {
+          const isNotServerError = error.response?.status !== 500;
+
+          if (isNotServerError) {
+            toast({
+              title: '로그아웃에 실패하였습니다. 다시 시도해 주세요.',
+              status: 'warning',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        },
+      }
+    );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/');
-    }
-  }, [isSuccess, router]);
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: '로그아웃에 실패하였습니다. 다시 시도해 주세요.',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isError, toast]);
 
   return (
     <button
