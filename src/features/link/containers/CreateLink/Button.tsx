@@ -37,14 +37,20 @@ const CreateLinkButton = ({ onClose }: Props) => {
           onClose();
         },
         onError: (error) => {
-          const message = error.response?.data.message;
+          const isNotServerError = error.response?.status !== 500;
 
-          toast({
-            title: message || '링크 추가에 실패하였습니다. 다시 시도해 주세요.',
-            status: 'warning',
-            duration: 2000,
-            isClosable: true,
-          });
+          if (isNotServerError) {
+            const message =
+              error.response?.data.message ||
+              '링크 추가에 실패하였습니다. 다시 시도해 주세요.';
+
+            toast({
+              title: message,
+              status: 'warning',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
         },
       }
     );
