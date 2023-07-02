@@ -1,28 +1,57 @@
 'use client';
 
 import { useLinkAnalyzeMutation } from '@/features/link/modules/apiHooks/useLinkAnalyzeMutation';
-import { useLinkState } from '@/features/link/modules/stores/createLinkStore';
+import {
+  useLinkState,
+  useShowLinkEditorState,
+} from '@/features/link/modules/stores/createLinkStore';
 import { useToast } from '@chakra-ui/react';
 import { FormEvent, useEffect, useState } from 'react';
 
-interface Props {
-  handleShowLinkEditor: (isShow: boolean) => void;
-}
-
-const LinkFetcher = ({ handleShowLinkEditor }: Props) => {
+const LinkFetcher = () => {
   const toast = useToast();
 
   const { setLink } = useLinkState();
+  const { setIsShowLinkEditor } = useShowLinkEditorState();
 
   const [url, setUrl] = useState('');
 
   const { mutate, data, isSuccess, isError, error, isLoading } =
     useLinkAnalyzeMutation();
 
+  const handleMutate = () => {
+    mutate(
+      { url },
+      {
+        onSuccess: (data) => {
+          setLink({
+            url: data.data.url,
+            title: data.data.title,
+            description: data.data.description,
+            thumbnailUrl: data.data.thumbnailUrl,
+          });
+          setIsShowLinkEditor(true);
+        },
+        onError: (error) => {
+          const message = error.response?.data.message;
+
+          toast({
+            title:
+              message ||
+              '링크 정보 가져오기에 실패하였습니다. 다시 시도해 주세요.',
+            status: 'warning',
+            duration: 2000,
+            isClosable: true,
+          });
+        },
+      }
+    );
+  };
+
   const getLinkInfo = () => {
     try {
       new URL(url); // URL이면 링크 정보 가져오기
-      mutate({ url });
+      handleMutate();
     } catch (error) {
       toast({
         title: '유효하지 않은 형식의 링크입니다.',
@@ -41,32 +70,6 @@ const LinkFetcher = ({ handleShowLinkEditor }: Props) => {
   const handleChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setLink({
-        url: data.data.url,
-        title: data.data.title,
-        description: data.data.description,
-        thumbnailUrl: data.data.thumbnailUrl,
-      });
-      handleShowLinkEditor(true);
-    }
-  }, [data, isSuccess, setLink, handleShowLinkEditor]);
-
-  useEffect(() => {
-    if (isError) {
-      const message = error.response?.data.message;
-
-      toast({
-        title:
-          message || '링크 정보 가져오기에 실패하였습니다. 다시 시도해 주세요.',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isError, error, toast]);
 
   const fetchClipboardText = async () => {
     if (navigator.clipboard) {

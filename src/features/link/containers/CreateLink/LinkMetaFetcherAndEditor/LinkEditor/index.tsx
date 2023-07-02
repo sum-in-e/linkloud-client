@@ -2,14 +2,11 @@
 
 import KloudHandler from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkEditor/KloudHandler';
 import LinkInfoHanlder from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkEditor/LinkInfoHandler';
-interface Props {
-  handleShowLinkEditor: (isShow: boolean) => void;
-}
 
-const LinkEditor = ({ handleShowLinkEditor }: Props) => {
+const LinkEditor = () => {
   return (
     <article className="w-[300px]">
-      <LinkInfoHanlder handleShowLinkEditor={handleShowLinkEditor} />
+      <LinkInfoHanlder />
       <KloudHandler />
     </article>
   );

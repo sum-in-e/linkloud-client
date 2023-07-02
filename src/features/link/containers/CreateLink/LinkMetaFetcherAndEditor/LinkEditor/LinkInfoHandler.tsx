@@ -1,18 +1,18 @@
 'use client';
 
-import { useLinkState } from '@/features/link/modules/stores/createLinkStore';
+import {
+  useLinkState,
+  useShowLinkEditorState,
+} from '@/features/link/modules/stores/createLinkStore';
 import { ChangeEvent } from 'react';
 import { TbRefresh } from 'react-icons/tb';
 
-interface Props {
-  handleShowLinkEditor: (isShow: boolean) => void;
-}
-
-const LinkInfoHanlder = ({ handleShowLinkEditor }: Props) => {
+const LinkInfoHanlder = () => {
   const { link, setLink } = useLinkState();
+  const { setIsShowLinkEditor } = useShowLinkEditorState();
 
   const handleClickRefresh = () => {
-    handleShowLinkEditor(false);
+    setIsShowLinkEditor(false);
   };
 
   const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
