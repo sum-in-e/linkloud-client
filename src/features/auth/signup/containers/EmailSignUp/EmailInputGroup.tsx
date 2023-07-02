@@ -35,12 +35,20 @@ const EmailInputGroup = () => {
     const newEmail = event.target.value;
     setEmail(newEmail);
 
-    if (isSent) {
-      setIsSent(false);
-      isResetSendEmail();
-      isResetConfirmVerificationCode();
+    // 에러 문구 있는 상태에서 이메일 수정하면 에러 문구들 리셋
+    if (sendEmailError !== '') {
+      setSendEmailError('');
+    }
+    if (verificationCodeError !== '') {
+      setVerificationCodeError('');
     }
 
+    if (isSent) {
+      // 이미 이메일로 인증번호 보냈는데 이메일 수정하면 isSent(false)
+      setIsSent(false);
+    }
+
+    // 이메일 형식 맞아야 버튼 enabled 처리하도록 하기 위한 상태값 관리
     if (!isValidEmail(newEmail)) {
       setIsValidatedEmail(false);
     } else {
@@ -48,6 +56,7 @@ const EmailInputGroup = () => {
     }
 
     if (isVerified) {
+      // 인증 다 끝났는데 이메일 수정하면 전부 리셋
       resetAll();
     }
   };
@@ -56,7 +65,7 @@ const EmailInputGroup = () => {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setVerificationCode(event.target.value);
-    if (verificationCodeError) {
+    if (verificationCodeError !== '') {
       setVerificationCodeError('');
     }
   };
@@ -64,75 +73,62 @@ const EmailInputGroup = () => {
   const {
     mutate: sendEmailMutate,
     data: sendEmailData,
-    isSuccess: isSuccessSendEmail,
-    isError: isErrorSendEmailMutation,
     isLoading: isLoadingSendEmail,
-    reset: isResetSendEmail,
-    error: sendEmailMutationError,
   } = usePostEmailVerificationCodeMutation();
 
   const {
     mutate: confirmVerificationCodeMutate,
-    data: confirmVerificationCodeData,
-    isSuccess: isSuccessConfirmVerificationCode,
-    isError: isErrorConfirmVerificationCode,
     isLoading: isLoadingConfirmVerificationCode,
-    reset: isResetConfirmVerificationCode,
-    error: confirmVerificationCodeMutationError,
   } = useConfirmVerificationCodeMutation();
 
   const handleClickSendVerificationCode = () => {
-    sendEmailMutate({ email });
-    if (verificationCodeError) {
-      setVerificationCodeError('');
-    }
+    sendEmailMutate(
+      { email },
+      {
+        onSuccess: (data) => {
+          if (sendEmailError !== '') {
+            setSendEmailError('');
+          }
+          if (verificationCodeError !== '') {
+            setVerificationCodeError('');
+          }
+
+          setIsSent(true);
+        },
+        onError: (error) => {
+          const message =
+            error.response?.data?.message || '이메일 발송에 실패하였습니다.';
+
+          setSendEmailError(message);
+        },
+      }
+    );
   };
 
   const handleClickCofirmVerificationCode = () => {
-    confirmVerificationCodeMutate({ email, verificationCode });
+    confirmVerificationCodeMutate(
+      { email, verificationCode },
+      {
+        onSuccess: (data) => {
+          setIsVerified(true);
+          setFormsValidationState({ isVerifiedEmail: true });
+        },
+        onError: (error) => {
+          const message =
+            error.response?.data.message || '인증에 실패하였습니다.';
+
+          setVerificationCodeError(message);
+        },
+      }
+    );
   };
-
-  useEffect(() => {
-    // * 이메일 전송 성공 시 동작
-    if (isSuccessSendEmail) {
-      setIsSent(true);
-    }
-  }, [isSuccessSendEmail]);
-
-  useEffect(() => {
-    // * 이메일 전송 실패 시 동작
-    if (isErrorSendEmailMutation) {
-      const error = sendEmailMutationError.response?.data;
-      const errorMessage = error?.message || '이메일 발송에 실패하였습니다.';
-
-      setSendEmailError(errorMessage);
-    }
-  }, [isErrorSendEmailMutation, sendEmailMutationError]);
-
-  useEffect(() => {
-    // * 인증번호 확인 성공 시 동작
-    if (isSuccessConfirmVerificationCode) {
-      setIsVerified(true);
-      setFormsValidationState({ isVerifiedEmail: true });
-    }
-  }, [isSuccessConfirmVerificationCode, setFormsValidationState]);
-
-  useEffect(() => {
-    // * 인증번호 확인 실패 시 동작
-    if (isErrorConfirmVerificationCode) {
-      const error = confirmVerificationCodeMutationError.response?.data;
-      const errorMessage = error?.message || '인증에 실패하였습니다.';
-
-      setVerificationCodeError(errorMessage);
-    }
-  }, [confirmVerificationCodeMutationError, isErrorConfirmVerificationCode]);
 
   useEffect(() => {
     setEmail('');
     setVerificationCode('');
   }, [setEmail]);
 
-  const isShowTimer = !isVerified && sendEmailData;
+  const isShowTimer = !isVerified && isSent;
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -166,7 +162,7 @@ const EmailInputGroup = () => {
             )}
           </button>
         </div>
-        {isErrorSendEmailMutation && sendEmailError !== '' && (
+        {sendEmailError !== '' && (
           <p className="text-xs text-red-500">{sendEmailError}</p>
         )}
       </InputFormContainer>
@@ -186,13 +182,13 @@ const EmailInputGroup = () => {
                 isShowTimer ? 'pr-16' : 'pr-4'
               }`}
             />
-            {isShowTimer && (
+            {isShowTimer && sendEmailData && (
               <Timer expireTimestamp={sendEmailData.data.expiredAt} />
             )}
           </div>
           <button
             type="button"
-            disabled={isVerified || verificationCode.length < 6}
+            disabled={!isSent || isVerified || verificationCode.length < 6}
             className={`w-2/5 rounded-r-2xl bg-gray-700 px-4 py-3 text-sm font-bold uppercase text-gray-100 hover:bg-gray-600 ${
               isVerified
                 ? 'disabled:bg-emerald-600  disabled:hover:bg-emerald-600'
@@ -209,7 +205,7 @@ const EmailInputGroup = () => {
             )}
           </button>
         </div>
-        {isErrorConfirmVerificationCode && verificationCodeError !== '' && (
+        {verificationCodeError !== '' && (
           <p className="text-xs text-red-500">{verificationCodeError}</p>
         )}
       </InputFormContainer>
