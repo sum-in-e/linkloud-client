@@ -27,7 +27,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
           <li>
             <button
               type="button"
-              className={`common-button flex items-center justify-between  px-4 ${
+              className={`common-button px-4 ${
                 kloudId === null ? 'bg-blue-50' : 'bg-stone-100'
               }`}
               onClick={() => onSelect(null)}
@@ -41,7 +41,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
             <li key={kloud.id}>
               <button
                 type="button"
-                className={`common-button flex items-center justify-between  px-4 ${
+                className={`common-button px-4 ${
                   kloudId === kloud.id ? 'bg-blue-50' : 'bg-stone-100'
                 }`}
                 onClick={() => onSelect(kloud.id)}

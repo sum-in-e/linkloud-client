@@ -2,39 +2,40 @@ import Loader from '@/common/components/Loader';
 import { useLogOutMutation } from '@/features/auth/common/modules/apiHooks/useLogOutMutation';
 import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 const LogOutButton = () => {
   const toast = useToast();
   const router = useRouter();
 
-  const { isLoading, isError, mutate, isSuccess } = useLogOutMutation();
+  const { isLoading, mutate } = useLogOutMutation();
 
   const handleClick = () => {
-    mutate({});
+    mutate(
+      {},
+      {
+        onSuccess: (data) => {
+          router.push('/');
+        },
+        onError: (error) => {
+          const isNotServerError = error.response?.status !== 500;
+
+          if (isNotServerError) {
+            toast({
+              title: '로그아웃에 실패하였습니다. 다시 시도해 주세요.',
+              status: 'warning',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        },
+      }
+    );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/');
-    }
-  }, [isSuccess, router]);
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: '로그아웃에 실패하였습니다. 다시 시도해 주세요.',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isError, toast]);
 
   return (
     <button
       onClick={handleClick}
-      className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-gray-600 py-3 text-sm font-bold text-white hover:bg-gray-500 focus:outline-none"
+      className=" common-button bg-gray-600 font-bold text-white hover:bg-gray-500"
     >
       {isLoading ? <Loader /> : '로그아웃'}
     </button>

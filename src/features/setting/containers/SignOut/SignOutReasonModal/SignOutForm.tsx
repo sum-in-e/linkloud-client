@@ -28,7 +28,7 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
 
   const [etcReason, setEtcReason] = useState('');
 
-  const { isLoading, isError, mutate, isSuccess } = useSignOutMutation();
+  const { isLoading, mutate } = useSignOutMutation();
 
   const handleChangeEtc = debounce((e: ChangeEvent<HTMLTextAreaElement>) => {
     setEtcReason(e.target.value);
@@ -40,33 +40,36 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
         ? reasonCategory
         : etcReason;
 
-    if (!isLoading) mutate({ reason });
+    if (!isLoading)
+      mutate(
+        { reason },
+        {
+          onSuccess: (data) => {
+            toast({
+              title: '회원 탈퇴 처리되었습니다.',
+              status: 'success',
+              duration: 2000,
+              isClosable: true,
+              onCloseComplete: () => {
+                router.push('/');
+              },
+            });
+          },
+          onError: (error) => {
+            const isNotServerError = error.response?.status !== 500;
+
+            if (isNotServerError) {
+              toast({
+                title: '회원탈퇴에 실패하였습니다. 다시 시도해 주세요.',
+                status: 'warning',
+                duration: 2000,
+                isClosable: true,
+              });
+            }
+          },
+        }
+      );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: '회원 탈퇴 처리되었습니다.',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        onCloseComplete: () => {
-          router.push('/');
-        },
-      });
-    }
-  }, [isSuccess, router, toast]);
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: '회원탈퇴에 실패하였습니다. 다시 시도해 주세요.',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [isError, toast]);
 
   return (
     <section className="flex flex-col">
@@ -94,13 +97,13 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
       <div className="flex gap-2">
         <button
           onClick={onClose}
-          className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-primary py-3 text-sm font-bold text-white hover:bg-primary-lighter focus:outline-none"
+          className="common-button bg-primary font-bold text-white hover:bg-primary-lighter"
         >
           계속 이용하기
         </button>
         <button
           onClick={handleClickSignOut}
-          className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400 focus:outline-none disabled:bg-gray-400"
+          className="common-button bg-red-500 font-bold text-white hover:bg-red-400"
         >
           {isLoading ? <Loader /> : '그만 이용하기'}
         </button>

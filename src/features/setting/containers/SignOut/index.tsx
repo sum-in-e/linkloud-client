@@ -18,7 +18,7 @@ const SignOutButton = () => {
     <>
       <button
         onClick={handleClick}
-        className=" flex w-full select-none items-center justify-center gap-1 rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400 focus:outline-none"
+        className="common-button bg-red-500 font-bold text-white hover:bg-red-400"
       >
         회원탈퇴
       </button>
