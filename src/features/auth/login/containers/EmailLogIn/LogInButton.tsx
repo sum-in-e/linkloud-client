@@ -23,35 +23,32 @@ const LogInButton = () => {
 
   const isActivateButton = isValidatedEmail && isValidatedPassword;
 
-  const { isSuccess, isError, error, isLoading, mutate } =
-    useEmailLogInMutation();
+  const { isLoading, mutate } = useEmailLogInMutation();
 
   const handleClick = () => {
-    mutate({ email, password });
+    mutate(
+      { email, password },
+      {
+        onSuccess: (data) => {
+          const path = returnUrl || '/kloud';
+
+          router.push(path);
+        },
+        onError: (error) => {
+          const err = error.response?.data;
+          const errorMessage =
+            err?.message || '로그인에 실패하였습니다. 다시 시도해 주세요.';
+
+          toast({
+            title: errorMessage,
+            status: 'error',
+            duration: 2000,
+            isClosable: true,
+          });
+        },
+      }
+    );
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      const path = returnUrl || '/kloud';
-
-      router.push(path);
-    }
-  }, [isSuccess, returnUrl, router]);
-
-  useEffect(() => {
-    if (isError) {
-      const err = error.response?.data;
-      const errorMessage =
-        err?.message || '로그인에 실패하였습니다. 다시 시도해 주세요.';
-
-      toast({
-        title: errorMessage,
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
-  }, [error, isError, toast]);
 
   return (
     <AuthCompleteButton
