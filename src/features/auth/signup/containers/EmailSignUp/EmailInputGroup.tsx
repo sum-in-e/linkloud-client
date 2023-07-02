@@ -96,10 +96,14 @@ const EmailInputGroup = () => {
           setIsSent(true);
         },
         onError: (error) => {
-          const message =
-            error.response?.data?.message || '이메일 발송에 실패하였습니다.';
+          const isNotServerError = error.response?.status !== 500;
 
-          setSendEmailError(message);
+          if (isNotServerError) {
+            const message =
+              error.response?.data?.message || '이메일 발송에 실패하였습니다.';
+
+            setSendEmailError(message);
+          }
         },
       }
     );
@@ -114,10 +118,14 @@ const EmailInputGroup = () => {
           setFormsValidationState({ isVerifiedEmail: true });
         },
         onError: (error) => {
-          const message =
-            error.response?.data.message || '인증에 실패하였습니다.';
+          const isNotServerError = error.response?.status !== 500;
 
-          setVerificationCodeError(message);
+          if (isNotServerError) {
+            const message =
+              error.response?.data.message || '인증에 실패하였습니다.';
+
+            setVerificationCodeError(message);
+          }
         },
       }
     );

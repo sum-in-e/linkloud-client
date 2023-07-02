@@ -16,8 +16,7 @@ const LinkFetcher = () => {
 
   const [url, setUrl] = useState('');
 
-  const { mutate, data, isSuccess, isError, error, isLoading } =
-    useLinkAnalyzeMutation();
+  const { mutate, isLoading } = useLinkAnalyzeMutation();
 
   const handleMutate = () => {
     mutate(
@@ -33,16 +32,20 @@ const LinkFetcher = () => {
           setIsShowLinkEditor(true);
         },
         onError: (error) => {
-          const message = error.response?.data.message;
+          const isNotServerError = error.response?.status !== 500;
 
-          toast({
-            title:
-              message ||
-              '링크 정보 가져오기에 실패하였습니다. 다시 시도해 주세요.',
-            status: 'warning',
-            duration: 2000,
-            isClosable: true,
-          });
+          if (isNotServerError) {
+            const message =
+              error.response?.data.message ||
+              '링크 정보 가져오기에 실패하였습니다. 다시 시도해 주세요.';
+
+            toast({
+              title: message,
+              status: 'warning',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
         },
       }
     );

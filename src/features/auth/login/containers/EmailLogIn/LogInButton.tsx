@@ -35,16 +35,20 @@ const LogInButton = () => {
           router.push(path);
         },
         onError: (error) => {
-          const err = error.response?.data;
-          const errorMessage =
-            err?.message || '로그인에 실패하였습니다. 다시 시도해 주세요.';
+          const isNotServerError = error.response?.status !== 500;
 
-          toast({
-            title: errorMessage,
-            status: 'error',
-            duration: 2000,
-            isClosable: true,
-          });
+          if (isNotServerError) {
+            const message =
+              error.response?.data.message ||
+              '로그인에 실패하였습니다. 다시 시도해 주세요.';
+
+            toast({
+              title: message,
+              status: 'error',
+              duration: 2000,
+              isClosable: true,
+            });
+          }
         },
       }
     );
