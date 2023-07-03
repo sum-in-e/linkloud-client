@@ -5,6 +5,7 @@ const queryKeys = {
   link: {},
   kloud: {
     getKloudList: ['getKloudList'] as const,
+    getGroupMenuList: ['getGroupMenuList'] as const,
   },
 };
 

@@ -1,16 +1,16 @@
 import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
-  CreateKloudResponse,
-  createKloud,
-  createKloudBody,
+  PatchKloudByIdParam,
+  PatchKloudByIdResponse,
+  patchKloudById,
 } from '@/features/kloud/modules/apis/kloud';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const useCreateKloudMutation = (): UseMutationResult<
-  CreateKloudResponse,
+export const usePatchKloudByIdMutation = (): UseMutationResult<
+  PatchKloudByIdResponse,
   AxiosError<ErrorResponseType>,
-  createKloudBody
+  PatchKloudByIdParam
 > => {
-  return useMutation(createKloud);
+  return useMutation(patchKloudById);
 };

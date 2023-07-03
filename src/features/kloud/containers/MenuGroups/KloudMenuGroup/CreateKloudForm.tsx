@@ -2,53 +2,45 @@
 
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { usePostKloudMutation } from '@/features/kloud/modules/apiHooks/usePostKloudMutation';
-import { useGetKloudListQuery } from '@/features/kloud/modules/apiHooks/useGetKloudListQuery';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+
 import { FaPlus } from 'react-icons/fa';
 
 interface Props {
-  onSelect: (id: number | null) => void;
-  isOpen: boolean;
+  onClose: () => void;
 }
 
-const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
+const CreateKloudForm = ({ onClose }: Props) => {
+  // TODO: 다 만들고 링크 추가의 CreateKloudForm 컴포넌트와 겹치는 비즈니스 로직 공통 훅으로 빼는 등 할 수 있는지 검토
+
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   const [name, setName] = useState('');
 
-  const { mutate } = usePostKloudMutation();
-  const { data: kloudListData } = useGetKloudListQuery();
+  const { mutate: createKloudMutate } = usePostKloudMutation();
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    const kloudName = event.target.value;
-    setName(kloudName);
+    setName(event.target.value);
   };
 
-  const queryClient = useQueryClient();
-
-  const handleMutate = () => {
-    mutate(
+  const handleCreateKloud = () => {
+    createKloudMutate(
       { name },
       {
         onSuccess: (data) => {
-          queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
-          onSelect(data.data.id);
-          toast({
-            title: '클라우드가 생성되었습니다.',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
+          onClose();
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
 
           if (isNotServerError) {
             const message =
-              error.response?.data.message || '클라우드를 생성하지 못했습니다.';
+              error.response?.data.message ||
+              '클라우드를 생성하지 못했습니다. 다시 시도해 주세요.';
             toast({
               title: message,
               status: 'warning',
@@ -64,21 +56,9 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const exceededCreateLimit = kloudListData?.klouds.length === 20;
-    const exceededNameLength = name.length > 50;
-
-    if (exceededCreateLimit || exceededNameLength) {
-      const getMessage = () => {
-        if (exceededCreateLimit)
-          return '유저당 최대 20개의 클라우드까지 생성 가능합니다.';
-        if (exceededNameLength)
-          return '클라우드 이름은 50자 이내로 작성해 주세요.';
-
-        return '클라우드를 생성할 수 없습니다.';
-      };
-
+    if (name.length > 50) {
       toast({
-        title: getMessage(),
+        title: '클라우드 이름은 50자 이내로 작성해 주세요.',
         status: 'warning',
         duration: 2000,
         isClosable: true,
@@ -86,12 +66,12 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
       return;
     }
 
-    handleMutate();
+    handleCreateKloud();
   };
 
   useEffect(() => {
-    setName(''); // 클라우드명 입력 후 list 아코디언 닫으면 name 남아있는 이슈 해결하기 위해 호출
-  }, [isOpen]);
+    setName('');
+  }, [setName]);
 
   return (
     <form
@@ -100,10 +80,10 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
     >
       <input
         type="text"
-        className="common-input bg-transparent"
-        placeholder="생성할 클라우드를 50자 이내로 입력해 주세요"
-        onChange={handleChangeName}
         value={name}
+        onChange={handleChangeName}
+        className="common-input bg-slate-100"
+        placeholder="생성할 클라우드를 50자 이내로 입력해 주세요"
       />
       <button
         type="submit"
@@ -118,5 +98,4 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
     </form>
   );
 };
-
 export default CreateKloudForm;

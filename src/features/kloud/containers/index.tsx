@@ -1,6 +1,7 @@
 'use client';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
+import MenuGroups from '@/features/kloud/containers/MenuGroups';
 import CreateLink from '@/features/link/containers/CreateLink';
 import Link from 'next/link';
 
@@ -36,6 +37,7 @@ const MyKloud = () => {
       >
         마이페이지로 가기(임시버튼)
       </Link>
+      <MenuGroups />
     </div>
   );
 };
