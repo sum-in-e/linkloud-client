@@ -20,6 +20,7 @@ const KloudMenuList = () => {
   const queryClient = useQueryClient();
 
   const { data } = useGetGroupMenuListQuery();
+
   const [klouds, setKlouds] = useState(data?.klouds || []);
 
   const { mutate } = usePatchKloudPositionByIdMutation();
@@ -42,7 +43,6 @@ const KloudMenuList = () => {
 
     // 상태를 업데이트하여 UI를 새로운 순서로 렌더링
     setKlouds(copiedKlouds);
-    console.log('setKlouds');
 
     // draggableId에 클라우드 id 설정했으니 가져와서 사용
     const id = toNumber(draggableId);
@@ -67,7 +67,6 @@ const KloudMenuList = () => {
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
-          console.log('success');
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -87,6 +86,11 @@ const KloudMenuList = () => {
       }
     );
   };
+  useEffect(() => {
+    if (data) {
+      setKlouds(data.klouds);
+    }
+  }, [data]);
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
