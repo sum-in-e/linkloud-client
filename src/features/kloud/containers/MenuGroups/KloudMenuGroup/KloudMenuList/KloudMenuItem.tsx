@@ -155,6 +155,7 @@ const KloudMenuItem = ({ kloud }: Props) => {
           </button>
         )}
         <button
+          type="button"
           className="rounded-md bg-red-100 p-1"
           onClick={handleClickDelete}
         >
