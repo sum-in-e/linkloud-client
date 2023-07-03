@@ -1,7 +1,7 @@
 'use client';
 
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
-import { useCreateKloudMutation } from '@/features/kloud/modules/apiHooks/useCreateKloudMutation';
+import { usePostKloudMutation } from '@/features/kloud/modules/apiHooks/usePostKloudMutation';
 import { useGetKloudListQuery } from '@/features/kloud/modules/apiHooks/useGetKloudListQuery';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -18,7 +18,7 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
 
   const [name, setName] = useState('');
 
-  const { mutate } = useCreateKloudMutation();
+  const { mutate } = usePostKloudMutation();
   const { data: kloudListData } = useGetKloudListQuery();
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +34,7 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
+          queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
           onSelect(data.data.id);
           toast({
             title: '클라우드가 생성되었습니다.',
@@ -91,8 +92,6 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
     setName(''); // 클라우드명 입력 후 list 아코디언 닫으면 name 남아있는 이슈 해결하기 위해 호출
   }, [isOpen]);
 
-  const isDisabledButton = name.length === 0;
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -108,11 +107,11 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
       <button
         type="submit"
         className="flex w-[15%] items-center justify-center bg-transparent"
-        disabled={isDisabledButton}
+        disabled={name.length === 0}
       >
         <FaPlus
           size={15}
-          className={`${isDisabledButton ? 'fill-slate-400' : 'fill-black'}`}
+          className={`${name.length === 0 ? 'fill-slate-400' : 'fill-black'}`}
         />
       </button>
     </form>
