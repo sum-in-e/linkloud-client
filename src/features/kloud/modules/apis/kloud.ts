@@ -53,7 +53,7 @@ export type GetKloudByIdResponse = SuccessResponseType<GetKloudByIdData>;
 export type GetKloudByIdParam = { id: number };
 
 /**
- * @description id에 해당하는 클라우드 조회 API -> useQuery 안 만들었으니까 쓸 때 만들어 😊
+ * @description id에 해당하는 클라우드 조회 API
  */
 export const getKloudById = async ({
   id,
