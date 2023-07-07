@@ -7,6 +7,9 @@ import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useG
 import MenuGroups from '@/features/kloud/containers/MenuGroups';
 import ResultContainer from '@/features/kloud/containers/ResultContainer';
 import CreateLink from '@/features/link/containers/CreateLink';
+import { useParams } from 'next/navigation';
+import { toNumber } from 'lodash';
+import { groupMapper } from '@/features/kloud/modules/types/kloudType';
 
 const MyKloud = () => {
   // TODO:/kloud가 아닌 다른 페이지에서 왔을 때만 이거 실행한다던가 하는 건 어떨까? 아무리 생각해도 서버 컴포넌트에서 먼저 실행하는 게 베스튼데..
@@ -14,6 +17,13 @@ const MyKloud = () => {
   const { isLoading, refetch } = useGetSessionQuery();
 
   const { onClose, isOpen, onOpen } = useOpen();
+
+  const { group } = useParams();
+
+  const isInvalidAccess =
+    isNaN(toNumber(group)) && !Object.keys(groupMapper).includes(group)
+      ? true
+      : false;
 
   useEffect(() => {
     refetch(); // 로그인한 유저 확인
@@ -41,7 +51,12 @@ const MyKloud = () => {
           </Link>
           {isOpen && <CreateLink onClose={onClose} />}
         </div>
-        <ResultContainer />
+        {isInvalidAccess ? (
+          // TODO: 정상적인 클라우드 접근이 아니므로 해당 UI에 결과 없음 보여주기. 임의로 url에 텍스트를 쳐서 들어오는 경우를 위해
+          <p>데이터가 존재하지 않습니다.</p>
+        ) : (
+          <ResultContainer />
+        )}
       </div>
     </div>
   );

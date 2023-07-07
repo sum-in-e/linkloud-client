@@ -11,6 +11,9 @@ interface Props {
 }
 
 const LinkListHanlder = ({ data, isLoading }: Props) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
   if (isLoading) {
     // TODO: 스켈레톤 보여주기
     return <p>로딩중</p>;
@@ -22,9 +25,6 @@ const LinkListHanlder = ({ data, isLoading }: Props) => {
   }
 
   const { links, count } = data;
-
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const handleSelectItem = (id: number) => {
     if (selectedIds.includes(id)) {
