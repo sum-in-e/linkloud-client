@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import CreateKloudForm from '@/features/kloud/containers/MenuGroups/KloudMenuGroup/CreateKloudForm';
+import CreateKloudForm from '@/features/kloud/containers/MenuGroups/UsersKloudMenuGroup/CreateKloudForm';
 import { FaPlus } from 'react-icons/fa';
-import KloudMenuList from '@/features/kloud/containers/MenuGroups/KloudMenuGroup/KloudMenuList';
+import KloudMenuList from '@/features/kloud/containers/MenuGroups/UsersKloudMenuGroup/KloudMenuList';
 
 const KloudMenuGroup = () => {
   const [isShowKloudInput, setIsShowKloudInput] = useState(false);

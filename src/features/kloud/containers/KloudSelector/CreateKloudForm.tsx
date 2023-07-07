@@ -9,7 +9,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
 interface Props {
-  onSelect: (id: number | null) => void;
+  onSelect: (kloudId: number | null, kloudName: string) => void;
   isOpen: boolean;
 }
 
@@ -35,7 +35,7 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
         onSuccess: (data) => {
           queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
-          onSelect(data.data.id);
+          onSelect(data.data.id, data.data.name);
           toast({
             title: '클라우드가 생성되었습니다.',
             status: 'success',

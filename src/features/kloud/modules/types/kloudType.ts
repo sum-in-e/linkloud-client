@@ -10,3 +10,13 @@ export interface KloudEntity {
   user: UserEntity;
   links: LinkEntity[];
 }
+
+export const groupMapper = {
+  unread: '미열람',
+  uncategorized: '미분류',
+  collection: 'Collection',
+  all: '전체',
+} as const;
+
+export type GroupKeyType = keyof typeof groupMapper;
+export type GroupValueType = (typeof groupMapper)[keyof typeof groupMapper];

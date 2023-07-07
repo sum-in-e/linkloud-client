@@ -4,7 +4,7 @@ import { useGetKloudListQuery } from '@/features/kloud/modules/apiHooks/useGetKl
 
 interface Props {
   kloudId: number | null;
-  onSelect: (id: number | null) => void;
+  onSelect: (kloudId: number | null, kloudName: string) => void;
 }
 const KloudList = ({ kloudId, onSelect }: Props) => {
   const { data } = useGetKloudListQuery();
@@ -30,7 +30,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
               className={`common-button justify-between px-4 ${
                 kloudId === null ? 'bg-blue-50' : 'bg-stone-100'
               }`}
-              onClick={() => onSelect(null)}
+              onClick={() => onSelect(null, '미분류')}
             >
               <p className="overflow-hidden text-ellipsis whitespace-nowrap">
                 미분류
@@ -44,7 +44,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
                 className={`common-button justify-between px-4 ${
                   kloudId === kloud.id ? 'bg-blue-50' : 'bg-stone-100'
                 }`}
-                onClick={() => onSelect(kloud.id)}
+                onClick={() => onSelect(kloud.id, kloud.name)}
               >
                 <p className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {kloud.name}

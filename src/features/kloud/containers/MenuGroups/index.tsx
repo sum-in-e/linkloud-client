@@ -2,8 +2,9 @@
 
 import MenuItem from '@/features/kloud/components/MenuItem';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import KloudMenuGroup from '@/features/kloud/containers/MenuGroups/KloudMenuGroup';
+import KloudMenuGroup from '@/features/kloud/containers/MenuGroups/UsersKloudMenuGroup';
 import MenuGroupsSkeleton from '@/features/kloud/containers/MenuGroups/MenuGroupsSkeleton';
+import SearchHandler from '@/features/kloud/containers/MenuGroups/SearchHandler';
 
 const MenuGroups = () => {
   const { data, isLoading, isFetched } = useGetGroupMenuListQuery();
@@ -23,6 +24,7 @@ const MenuGroups = () => {
         <MenuGroupsSkeleton />
       ) : (
         <div className="flex w-full flex-col gap-4">
+          <SearchHandler />
           <ul className="flex w-full flex-col gap-2">
             <li>
               <MenuItem

@@ -125,7 +125,7 @@ export type PatchLinkReadParam = { id: number };
 export const patchLinkRead = async ({
   id,
 }: PatchLinkReadParam): Promise<PatchLinkReadResponse> => {
-  const { data } = await instance.post(`/link/${id}/read`);
+  const { data } = await instance.patch(`/link/${id}/read`);
   return data;
 };
 

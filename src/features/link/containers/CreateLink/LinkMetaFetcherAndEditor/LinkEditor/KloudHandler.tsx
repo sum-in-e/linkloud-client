@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const KloudHandler = () => {
   const { kloudId, setKloudId, resetKloudId } = useKloudIdState();
 
-  const handleChange = (newKloudId: number | null) => {
+  const handleChange = (newKloudId: number | null, newKloudName: string) => {
     setKloudId(newKloudId);
   };
 

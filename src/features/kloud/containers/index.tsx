@@ -1,16 +1,17 @@
 'use client';
+
+import Link from 'next/link';
+import { useEffect } from 'react';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
 import MenuGroups from '@/features/kloud/containers/MenuGroups';
+import ResultContainer from '@/features/kloud/containers/ResultContainer';
 import CreateLink from '@/features/link/containers/CreateLink';
-import Link from 'next/link';
-
-import { useParams } from 'next/navigation';
-import { useEffect } from 'react';
 
 const MyKloud = () => {
+  // TODO:/kloud가 아닌 다른 페이지에서 왔을 때만 이거 실행한다던가 하는 건 어떨까? 아무리 생각해도 서버 컴포넌트에서 먼저 실행하는 게 베스튼데..
+  // TODO: 로딩 UI
   const { isLoading, refetch } = useGetSessionQuery();
-  const { group } = useParams();
 
   const { onClose, isOpen, onOpen } = useOpen();
 
@@ -19,25 +20,29 @@ const MyKloud = () => {
   }, [refetch]);
 
   return (
-    <div className="flex flex-col gap-10">
-      <p className="text-2xl font-bold">
-        {isLoading ? 'loading' : '마이클라우드 페이지'}
-      </p>
-      {isOpen && <CreateLink onClose={onClose} />}
-      <button
-        type="button"
-        className="common-button w-[300px] bg-gray-700 font-bold text-white"
-        onClick={() => onOpen()}
-      >
-        링크 추가하기
-      </button>
-      <Link
-        href="/setting"
-        className="common-button w-[300px] bg-gray-700 font-bold text-white"
-      >
-        마이페이지로 가기(임시버튼)
-      </Link>
-      <MenuGroups />
+    <div className="flex gap-2">
+      <div className="flex min-h-screen flex-col border-r-[1px] border-gray-300 pr-2">
+        <MenuGroups />
+      </div>
+      <div className="flex min-h-screen flex-col">
+        <div className="flex gap-2">
+          <button
+            type="button"
+            className="common-button w-[300px] bg-gray-700 font-bold text-white"
+            onClick={() => onOpen()}
+          >
+            링크 추가하기
+          </button>
+          <Link
+            href="/setting"
+            className="common-button w-[300px] bg-gray-700 font-bold text-white"
+          >
+            마이페이지로 가기(임시버튼)
+          </Link>
+          {isOpen && <CreateLink onClose={onClose} />}
+        </div>
+        <ResultContainer />
+      </div>
     </div>
   );
 };
