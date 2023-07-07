@@ -16,7 +16,7 @@ import { FaAngleDown } from 'react-icons/fa';
 
 interface Props {
   kloudId: number | null;
-  onChange: (kloudId: number | null) => void;
+  onChange: (kloudId: number | null, kloudName: string) => void;
 }
 
 const KloudSelector = ({ kloudId, onChange }: Props) => {
@@ -25,8 +25,8 @@ const KloudSelector = ({ kloudId, onChange }: Props) => {
 
   const { data, isError, error } = useGetKloudListQuery();
 
-  const handleSelect = (id: number | null) => {
-    onChange(id);
+  const handleSelect = (id: number | null, name: string) => {
+    onChange(id, name);
     onClose();
   };
 

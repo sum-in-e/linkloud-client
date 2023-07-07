@@ -2356,6 +2356,11 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/josa@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/josa/-/josa-3.0.2.tgz#f3b37b0385f185a11b9b73114714c786c559926e"
+  integrity sha512-9XoQiicbfAFlntz4h0R7B9aQOnNQU/svBrWMjuv2NTLZumah0s1rTBReLzM3Z1YmtzoVlbKP3QC2psXV31E/Sw==
+
 "@types/js-cookie@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-3.0.3.tgz#d6bfbbdd0c187354ca555213d1962f6d0691ff4e"
@@ -4486,6 +4491,18 @@ jiti@^1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.18.2.tgz#80c3ef3d486ebf2450d9335122b32d121f2a83cd"
   integrity sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==
+
+jongseong@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/jongseong/-/jongseong-0.4.2.tgz#5008c13332829257304c54641f550087d2f4caa9"
+  integrity sha512-wBNM0B48CgphzeIIGo4vFqrAg4wlxppj7fAMa7kZ2PGgwGzoheWxyiBhz4eIxUtlVPMk9gvUsSxG9pMsTyjfSw==
+
+josa@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/josa/-/josa-3.0.1.tgz#e1fa94fc7c78be1d81e965fec0ae43be0a1df352"
+  integrity sha512-naRZOzWy/02AbP5p4Tz4lj7wpIJ93+hPk/mne8yHCpT2UZglhh2BF0f/j7SIITqZpb834B0DZ0RjJCrKji3qOQ==
+  dependencies:
+    jongseong "^0.4.2"
 
 js-cookie@^3.0.5:
   version "3.0.5"

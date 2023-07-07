@@ -84,6 +84,7 @@ const CreateKloudForm = ({ onClose }: Props) => {
         onChange={handleChangeName}
         className="common-input bg-slate-100"
         placeholder="생성할 클라우드를 50자 이내로 입력해 주세요"
+        autoFocus
       />
       <button
         type="submit"
