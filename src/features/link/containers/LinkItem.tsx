@@ -74,12 +74,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
           isClosable: true,
         });
       } catch (error) {
-        toast({
-          title: '링크 공유에 실패하였습니다.',
-          status: 'warning',
-          duration: 2000,
-          isClosable: true,
-        });
+        //
       }
     } else {
       // * Web Share API 지원하지 않는 경우
