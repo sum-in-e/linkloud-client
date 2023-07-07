@@ -13,18 +13,6 @@ import Pagination from '@/common/components/Pagination';
 const LIMIT = 10;
 
 const ResultContainer = () => {
-  const { group } = useParams();
-
-  const isInvalidAccess =
-    isNaN(toNumber(group)) && !Object.keys(groupMapper).includes(group)
-      ? true
-      : false;
-
-  if (isInvalidAccess) {
-    // TODO: 정상적인 클라우드 접근이 아니므로 해당 UI에 결과 없음 보여주기. 임의로 url에 텍스트를 쳐서 들어오는 경우를 위해
-    return <p>데이터가 존재하지 않습니다.</p>;
-  }
-
   const { offset, nextPage, previousPage, goToPage } = usePagination({
     limit: LIMIT,
   });

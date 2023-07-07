@@ -101,7 +101,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         });
       }
     }
-  }, [title, description, url]);
+  }, [title, url, toast]);
 
   const handleClickDetail = () => {
     // TODO: 상세 열기
