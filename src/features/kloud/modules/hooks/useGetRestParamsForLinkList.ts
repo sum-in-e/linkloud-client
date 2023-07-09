@@ -1,8 +1,7 @@
-import { GroupKeyType } from '@/features/kloud/modules/types/kloudType';
 import { toNumber } from 'lodash';
 import { useParams, useSearchParams } from 'next/navigation';
 
-export const useGetRestParams = () => {
+export const useGetRestParamsForLinkList = () => {
   const params = useSearchParams();
   const keyword = params.get('keyword');
 

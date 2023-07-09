@@ -17,6 +17,9 @@ export type LinkAnalyzeData = {
 
 export type LinkAnalyzeResponse = SuccessResponseType<LinkAnalyzeData>;
 
+/**
+ * @description 메타태그 기반 링크 정보 가져오는 API
+ */
 export const linkAnalyze = async ({
   url,
 }: linkAnalyzeParams): Promise<LinkAnalyzeResponse> => {
@@ -34,6 +37,9 @@ export type CreateLinkResponse = SuccessResponseType<{
   kloudId: number | null;
 }>;
 
+/**
+ * @description 링크 생성 API
+ */
 export const createLink = async (
   body: createLinkBody
 ): Promise<CreateLinkResponse> => {
@@ -43,7 +49,9 @@ export const createLink = async (
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
 
-export type LinkForList = Pick<
+export type LinkInfoKloudType = Pick<KloudEntity, 'id' | 'name'> | null;
+
+export type LinkInfoType = Pick<
   LinkEntity,
   | 'id'
   | 'url'
@@ -53,13 +61,14 @@ export type LinkForList = Pick<
   | 'memo'
   | 'isInMyCollection'
   | 'isRead'
+  | 'createdAt'
 > & {
-  kloud: Pick<KloudEntity, 'id' | 'name'> | null;
+  kloud: LinkInfoKloudType;
 };
 
 export type GetLinkListData = {
   count: number;
-  links: LinkForList[];
+  links: LinkInfoType[];
 };
 
 export type GetLinkListResponse = SuccessResponseType<GetLinkListData>;
@@ -74,6 +83,9 @@ export type GetLinkListParams = {
   kloudId?: number; // 클라우드 미지정의 경우 0 | 찾고싶은 클라우드 id
 };
 
+/**
+ * @description 링크 리스트(+검색) API
+ */
 export const getLinkList = async (
   params: GetLinkListParams
 ): Promise<GetLinkListResponse> => {
@@ -91,10 +103,13 @@ export type PatchSelectedLinksKloudParams = {
 
 export type PatchSelectedLinksKloudResponse = SuccessResponseType<{}>;
 
+/**
+ * @description 선택한 링크 일괄 클라우드 변경 API
+ */
 export const patchSelectedLinksKloud = async (
   body: PatchSelectedLinksKloudParams
 ): Promise<PatchSelectedLinksKloudResponse> => {
-  const { data } = await instance.patch('/link/ids/kloud', { ...body });
+  const { data } = await instance.patch('/link/ids/kloud', body);
   return data;
 };
 
@@ -106,10 +121,13 @@ export type DeleteSelectedLinksParam = {
 
 export type DeleteSelectedLinksResponse = SuccessResponseType<{}>;
 
+/**
+ * @description 선택한 링크 일괄 제거 API
+ */
 export const deleteSelectedLinks = async (
   body: DeleteSelectedLinksParam
 ): Promise<DeleteSelectedLinksResponse> => {
-  const { data } = await instance.post('/link/ids/delete', { ...body });
+  const { data } = await instance.post('/link/ids/delete', body);
   return data;
 };
 
@@ -130,3 +148,45 @@ export const patchLinkRead = async ({
 };
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+
+export type PatchLinkByIdResponse = SuccessResponseType<LinkInfoType>;
+
+export type PatchLinkByIdParam = {
+  id: number;
+  body: {
+    title?: string;
+    description?: string;
+    memo?: string;
+    isInMyCollection?: boolean;
+    kloudId?: number | null;
+  };
+};
+
+/**
+ * @description 링크 수정 API
+ */
+export const patchLinkById = async ({
+  id,
+  body,
+}: PatchLinkByIdParam): Promise<PatchLinkByIdResponse> => {
+  const { data } = await instance.patch(`/link/${id}`, body);
+  return data;
+};
+
+// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+
+export type DeleteLinkByIdResponse = SuccessResponseType<{}>;
+
+export type DeleteLinkByIdParam = {
+  id: number;
+};
+
+/**
+ * @description 링크 수정 API
+ */
+export const deleteLinkById = async ({
+  id,
+}: DeleteLinkByIdParam): Promise<DeleteLinkByIdResponse> => {
+  const { data } = await instance.delete(`/link/${id}`);
+  return data;
+};

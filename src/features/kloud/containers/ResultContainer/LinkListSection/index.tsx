@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import EditModeHandler from '@/features/kloud/containers/ResultContainer/LinkListSection/EditModeHandler';
-import LinkItem from '@/features/link/containers/LinkItem';
+import LinkItem from '@/features/kloud/containers/ResultContainer/LinkListSection/LinkItem';
 import { GetLinkListData } from '@/features/link/modules/apis/link';
 
 interface Props {
