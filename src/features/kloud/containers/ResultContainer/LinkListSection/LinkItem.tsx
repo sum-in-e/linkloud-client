@@ -1,26 +1,21 @@
 'use client';
 
-import queryKeys from '@/common/modules/apiHooks/queryKeys';
+import { useParams } from 'next/navigation';
+import { ChangeEvent } from 'react';
+import { FaBookmark, FaRegFileAlt, FaCheck, FaPenSquare } from 'react-icons/fa';
+import LinkDetailDrawer from '@/features/kloud/containers/ResultContainer/LinkListSection/LinkDetailDrawer';
+import { useLinkSharing } from '@/features/kloud/modules/hooks/useLinkSharing';
+import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import {
   GroupKeyType,
   groupMapper,
 } from '@/features/kloud/modules/types/kloudType';
-import { usePatchLinkReadMutation } from '@/features/link/modules/apiHooks/usePatchLinkReadMutation';
-import { LinkForList } from '@/features/link/modules/apis/link';
-import { useToast } from '@chakra-ui/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-import { ChangeEvent, useCallback } from 'react';
-import {
-  FaBookmark,
-  FaRegFileAlt,
-  FaCheck,
-  FaShareSquare,
-  FaPenSquare,
-} from 'react-icons/fa';
+import { useOpen } from '@/common/modules/hooks/useOpen';
+import { LinkInfoType } from '@/features/link/modules/apis/link';
+import { MdIosShare } from 'react-icons/md';
 
 interface Props {
-  link: LinkForList;
+  link: LinkInfoType;
   isEditMode: boolean;
   onSelectItem: (id: number) => void;
   isSelected: boolean;
@@ -39,8 +34,8 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
     kloud,
   } = link;
 
-  const toast = useToast();
   const { group } = useParams();
+  const { onClose, isOpen, onOpen } = useOpen();
 
   const changeImageSrcToDefault = (element: HTMLImageElement) => {
     element.src = '/images/linkloud_thumbnail.png';
@@ -51,86 +46,17 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   };
 
   const hasMemo = memo.length > 0;
+
   const isShowKloud =
     kloud !== null &&
     Object.keys(groupMapper).includes(group) &&
     group !== 'uncategorized'; // 저장된 클라우드가 있고, 전체 || 미열람 || 내 컬렉션 페이지인 경우 클라우드를 보여줘야합니다.
+
   const isShowUnread = group !== ('unread' as GroupKeyType) && !isRead; // 미열람인 링크는 눈에 띄게 만들기(미열람 페이지일 경우 제외)
 
-  const handleClickShare = useCallback(async () => {
-    if (navigator.share) {
-      // * Web Share API 지원하는 경우
-      try {
-        await navigator.share({
-          title: 'Link sharing on Linkloud',
-          text: title,
-          url: url,
-        });
+  const { handleClickShare } = useLinkSharing({ title, url });
 
-        toast({
-          title: '링크가 공유되었습니다.',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
-      } catch (error) {
-        toast({
-          title: '링크 공유에 실패하였습니다.',
-          status: 'warning',
-          duration: 2000,
-          isClosable: true,
-        });
-      }
-    } else {
-      // * Web Share API 지원하지 않는 경우
-      try {
-        await navigator.clipboard.writeText(url);
-
-        toast({
-          title: '링크가 복사되었습니다.',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
-      } catch (err) {
-        toast({
-          title: '링크 복사에 실패하였습니다.',
-          status: 'warning',
-          duration: 2000,
-          isClosable: true,
-        });
-      }
-    }
-  }, [title, url, toast]);
-
-  const handleClickDetail = () => {
-    // TODO: 상세 열기
-    toast({
-      title: '상세 열기 기능 추가 예정',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-    });
-  };
-
-  const { mutate: linkReadMutate } = usePatchLinkReadMutation();
-  const queryClient = useQueryClient();
-  const handleClickItem = () => {
-    if (!isRead) {
-      // 미열람 링크를 열었을 경우에만 열람 처리
-      linkReadMutate(
-        { id },
-        {
-          onSuccess: () => {
-            // 열람 처리 성공하면 링크 리스트 새로고침해야 미열람에서는 링크 사라지고 미열람 UI도 사라지게 됨
-            queryClient.invalidateQueries(queryKeys.link.getLinkList());
-          },
-        }
-      );
-    }
-
-    window.open(url, '_blank');
-  };
+  const { openLinkInNewTap } = useOpenLink({ id, isRead, url });
 
   // TODO: description ellipsis 적용 -> 디자인 나오면 그 사이즈에 맞춰서 진행
   return (
@@ -140,13 +66,13 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         className={`w-[300px] rounded-lg border-stone-400 shadow-xl ${
           isShowUnread ? 'bg-secondary-lighter' : 'bg-transparent'
         } cursor-pointer`}
-        onClick={handleClickItem}
+        onClick={openLinkInNewTap}
       >
         <picture>
           <img
             alt="thumbnail"
             src={thumbnailUrl}
-            className="aspect-[1.91/1] w-full rounded-b-none rounded-t-lg"
+            className="aspect-[1.91/1] w-full rounded-b-none rounded-t-lg object-cover"
             onError={handleErrorImage}
           />
         </picture>
@@ -196,14 +122,14 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         <button
           type="button"
           className="h-fit w-fit rounded-full bg-black p-2"
-          onClick={handleClickShare} // TODO: 링크 복사하기 기능
+          onClick={handleClickShare}
         >
-          <FaShareSquare size={15} className="fill-gray-200" />
+          <MdIosShare size={15} className="fill-gray-200" />
         </button>
         <button
           type="button"
           className="h-fit w-fit rounded-full bg-black p-2"
-          onClick={handleClickDetail}
+          onClick={onOpen}
         >
           <FaPenSquare size={15} className="fill-gray-200" />
         </button>
@@ -221,6 +147,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
           />
         </div>
       )}
+      {isOpen && <LinkDetailDrawer link={link} onClose={onClose} />}
     </li>
   );
 };

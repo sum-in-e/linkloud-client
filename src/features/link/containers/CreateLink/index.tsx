@@ -18,7 +18,6 @@ interface Props {
 }
 
 const CreateLink = ({ onClose }: Props) => {
-  // * 임의의 디자인으로 기능만 구현중
   const { setIsShowLinkEditor } = useShowLinkEditorState();
 
   const handleClose = () => {

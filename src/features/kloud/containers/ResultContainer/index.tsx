@@ -1,9 +1,6 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { toNumber } from 'lodash';
-import { groupMapper } from '@/features/kloud/modules/types/kloudType';
-import { useGetRestParams } from '@/features/kloud/modules/hooks/useGetRestParams';
+import { useGetRestParamsForLinkList } from '@/features/kloud/modules/hooks/useGetRestParamsForLinkList';
 import { useGetLinkListQuery } from '@/features/link/modules/apiHooks/useGetLinkListQuery';
 import { usePagination } from '@/common/modules/hooks/usePagination';
 import TitleAndCountSection from '@/features/kloud/containers/ResultContainer/TitleAndCountSection';
@@ -17,7 +14,7 @@ const ResultContainer = () => {
     limit: LIMIT,
   });
 
-  const restParams = useGetRestParams();
+  const restParams = useGetRestParamsForLinkList();
 
   const { data, isLoading } = useGetLinkListQuery({
     offset,
