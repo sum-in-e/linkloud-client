@@ -12,6 +12,5 @@ export const useGetSessionQuery = (): UseQueryResult<
 > => {
   return useQuery(queryKeys.user.getSession, getSession, {
     retry: false,
-    enabled: false,
   });
 };
