@@ -136,13 +136,22 @@ export const checkNotificationSubscription = async () => {
   if (!('serviceWorker' in navigator)) return;
 
   try {
-    // * 서비스워커 등록
-    const registration = await navigator.serviceWorker.register('/sw.js');
+    let serviceWorker;
+
+    if (navigator.serviceWorker.controller) {
+      // 서비스워커가 이미 등록되어 있음
+      console.log('Service Worker is already registered.');
+      serviceWorker = await navigator.serviceWorker.ready;
+    } else {
+      // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
+      console.log('Service Worker is not registered.');
+      serviceWorker = await navigator.serviceWorker.register('/sw.js');
+    }
 
     // * 사용자의 알림 권한을 확인
     if (Notification.permission === 'granted') {
       // * 사용자가 이미 알림 수신을 허용한 상태 -> 구독 확인
-      const serviceWorker = await navigator.serviceWorker.ready;
+
       const subscription = await serviceWorker.pushManager.getSubscription();
 
       if (!subscription) {
