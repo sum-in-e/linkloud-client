@@ -9,7 +9,7 @@ import CreateLink from '@/features/link/containers/CreateLink';
 import { useParams } from 'next/navigation';
 import { toNumber } from 'lodash';
 import { groupMapper } from '@/features/kloud/modules/types/kloudType';
-import { checkNotificationSubscription } from '@/features/kloud/modules/utils/subscription';
+import { checkNotificationSubscription } from '../../../../worker/subscription';
 
 const MyKloud = () => {
   // TODO: 로딩 UI
