@@ -4,12 +4,19 @@ import { ErrorResponseType } from '@/common/modules/types/responseType';
 
 const MODE = process.env.NEXT_PUBLIC_MODE;
 
-export const sentryLogger = (error: AxiosError<ErrorResponseType>) => {
+export const sentryLogger = (
+  error: AxiosError<ErrorResponseType> | unknown
+) => {
   if (MODE === 'production') {
     withScope((scope) => {
-      scope.setTransactionName(
-        error.response?.data.message || '알 수 없는 에러'
-      );
+      if (error instanceof AxiosError) {
+        scope.setTransactionName(
+          error.response?.data.message || '🚨AxiosError🚨'
+        );
+      } else {
+        scope.setTransactionName('🚨unknownError🚨');
+      }
+
       captureException(error);
     });
   }

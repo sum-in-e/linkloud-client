@@ -7,6 +7,29 @@ import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
 import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const isProduction = process.env.NEXT_PUBLIC_MODE === 'production';
+
+  return (
+    <html lang="ko">
+      {isProduction && <GoogleAnalytics />}
+      <body>
+        <QueryProvider>
+          <ChakraUiProvider>
+            <Header />
+            <MainContent>{children}</MainContent>
+            <Footer />
+          </ChakraUiProvider>
+        </QueryProvider>
+      </body>
+    </html>
+  );
+}
+
 export const metadata = {
   title: 'Linkloud',
   description: LINKLOUD_SLOGAN,
@@ -82,26 +105,3 @@ export const metadata = {
     ],
   },
 };
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const isProduction = process.env.NEXT_PUBLIC_MODE === 'production';
-
-  return (
-    <html lang="ko">
-      {isProduction && <GoogleAnalytics />}
-      <body>
-        <QueryProvider>
-          <ChakraUiProvider>
-            <Header />
-            <MainContent>{children}</MainContent>
-            <Footer />
-          </ChakraUiProvider>
-        </QueryProvider>
-      </body>
-    </html>
-  );
-}

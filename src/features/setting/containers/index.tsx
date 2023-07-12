@@ -7,20 +7,15 @@ import LogOutButton from '@/features/setting/containers/LogOut';
 import SignOutButton from '@/features/setting/containers/SignOut';
 import UserInfo from '@/features/setting/containers/UserInfo';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 const MySetting = () => {
-  const { isLoading, refetch, data } = useGetSessionQuery();
+  const { isLoading, data } = useGetSessionQuery();
 
   const router = useRouter();
 
   const handleClick = () => {
     router.push('/kloud/all');
   };
-
-  useEffect(() => {
-    refetch(); // 로그인한 유저 확인
-  }, [refetch]);
 
   return (
     <div className="my-10 flex w-full justify-center">
