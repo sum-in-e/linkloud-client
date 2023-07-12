@@ -27,9 +27,24 @@ const MyKloud = () => {
     if (!('serviceWorker' in navigator)) return;
     console.log('서비서워커 동작 가능');
 
-    navigator.serviceWorker.ready.then((sw) => {
-      console.log('서비스워커 등록됨', sw);
-    });
+    // navigator.serviceWorker.ready.then((sw) => {
+    //   console.log('서비스워커 등록됨', sw);
+    // });
+
+    if (navigator.serviceWorker.controller) {
+      // 서비스워커가 이미 등록되어 있음
+      console.log('Service Worker is already registered.');
+      // 서비스워커가 활성화되면 ready 프로미스가 resolve됨
+      navigator.serviceWorker.ready.then((sw) => {
+        console.log('서비스워커 is ready', sw);
+      });
+    } else {
+      // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
+      console.log('Service Worker is not registered.');
+      navigator.serviceWorker.register('/sw.js').then((sw) => {
+        console.log('서비스워커 등록 완료', sw);
+      });
+    }
 
     // checkNotificationSubscription(); // 알림 구독 확인
   }, []);
