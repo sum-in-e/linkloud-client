@@ -137,20 +137,20 @@ export const checkNotificationSubscription = async () => {
   console.log('서비서워커 동작 가능');
 
   try {
-    // let serviceWorker;
+    let serviceWorker;
 
-    // if (navigator.serviceWorker.controller) {
-    //   // 서비스워커가 이미 등록되어 있음
-    //   console.log('Service Worker is already registered.');
-    //   // 서비스워커가 활성화되면 ready 프로미스가 resolve됨
-    //   serviceWorker = await navigator.serviceWorker.ready;
-    // } else {
-    //   // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
-    //   console.log('Service Worker is not registered.');
-    //   serviceWorker = await navigator.serviceWorker.register('/public/sw.js');
-    // }
+    // Check if a service worker is already registered
+    const registration = await navigator.serviceWorker.getRegistration();
 
-    const serviceWorker = await navigator.serviceWorker.register('/sw.js');
+    if (registration) {
+      // If a service worker is already registered, use it
+      serviceWorker = registration;
+      console.log('서비스워커 재사용');
+    } else {
+      // If no service worker is registered, register a new one
+      serviceWorker = await navigator.serviceWorker.register('/sw.js');
+      console.log('서비스워커 등록');
+    }
 
     // * 사용자의 알림 권한을 확인
     if (Notification.permission === 'granted') {
