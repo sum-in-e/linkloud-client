@@ -24,7 +24,14 @@ const MyKloud = () => {
       : false;
 
   useEffect(() => {
-    checkNotificationSubscription(); // 알림 구독 확인
+    if (!('serviceWorker' in navigator)) return;
+    console.log('서비서워커 동작 가능');
+
+    navigator.serviceWorker.ready.then((sw) => {
+      console.log('서비스워커 등록됨', sw);
+    });
+
+    // checkNotificationSubscription(); // 알림 구독 확인
   }, []);
 
   return (
