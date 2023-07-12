@@ -145,7 +145,9 @@ export const checkNotificationSubscription = async () => {
     } else {
       // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
       console.log('Service Worker is not registered.');
-      serviceWorker = await navigator.serviceWorker.register('/sw.js');
+      serviceWorker = await navigator.serviceWorker.ready;
+
+      // serviceWorker = await navigator.serviceWorker.register('/sw.js');
     }
 
     console.log('serviceWorker', serviceWorker);
@@ -157,11 +159,12 @@ export const checkNotificationSubscription = async () => {
       const subscription = await serviceWorker.pushManager.getSubscription();
 
       if (!subscription) {
+        console.log('!subscription');
         // 구독 정보가 없으므로, 새로운 구독을 생성
         await subscribeWithRegistration(serviceWorker);
       } else {
         const LAST_CHECKED_TIME = 'lastCheckedTime';
-
+        console.log('subscription');
         // 마지막으로 구독 정보를 확인한 시점을 가져옴
         const lastCheckedTime = localStorage.getItem(LAST_CHECKED_TIME);
 
