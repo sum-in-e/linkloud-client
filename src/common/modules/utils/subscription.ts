@@ -134,14 +134,14 @@ const handleNotificationPermission = async (
  */
 export const checkNotificationSubscription = async () => {
   if (!('serviceWorker' in navigator)) return;
-
+  console.log('registrateion');
   try {
     const serviceWorker = await navigator.serviceWorker.ready;
 
     // * 사용자의 알림 권한을 확인
     if (Notification.permission === 'granted') {
       // * 사용자가 이미 알림 수신을 허용한 상태 -> 구독 확인
-
+      console.log('granted');
       const subscription = await serviceWorker.pushManager.getSubscription();
 
       if (!subscription) {
@@ -167,7 +167,7 @@ export const checkNotificationSubscription = async () => {
       }
     } else if (Notification.permission !== 'denied') {
       // * 사용자가 권한 거절이나 수락 어느것도 하지 않은 상태
-
+      console.log('denied');
       // 권한 요청
       const permission = await Notification.requestPermission();
       // 수락 혹은 거절에 따른 처리
