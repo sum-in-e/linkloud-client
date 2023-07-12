@@ -4,8 +4,8 @@
  */
 self.addEventListener('push', (event) => {
   const data = event.data.json();
-
-  const title = data.description || '흥미로운 링크를 담아두셨네요?👀';
+  console.log(data);
+  const title = data.title || '흥미로운 링크를 담아두셨네요?👀';
   const options = {
     body: data.description || '저장한 글을 읽고 더 성장한 나를 만나보세요!', // 푸시 알림 본문
     icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg', // 푸시 알림에 표시될 아이콘
