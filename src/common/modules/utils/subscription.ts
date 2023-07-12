@@ -150,9 +150,7 @@ export const checkNotificationSubscription = async () => {
     //   serviceWorker = await navigator.serviceWorker.register('/public/sw.js');
     // }
 
-    const serviceWorker = await navigator.serviceWorker.register(
-      '/public/sw.js'
-    );
+    const serviceWorker = await navigator.serviceWorker.register('/sw.js');
 
     // * 사용자의 알림 권한을 확인
     if (Notification.permission === 'granted') {
