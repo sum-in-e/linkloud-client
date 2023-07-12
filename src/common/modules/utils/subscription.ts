@@ -145,9 +145,7 @@ export const checkNotificationSubscription = async () => {
     } else {
       // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
       console.log('Service Worker is not registered.');
-      serviceWorker = await navigator.serviceWorker.ready;
-
-      // serviceWorker = await navigator.serviceWorker.register('/sw.js');
+      serviceWorker = await navigator.serviceWorker.register('/sw.js');
     }
 
     console.log('serviceWorker', serviceWorker);
