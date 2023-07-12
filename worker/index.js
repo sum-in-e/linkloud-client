@@ -6,11 +6,8 @@ self.addEventListener('install', (event) => {
 });
 
 // 서비스 워커 설치 중일 때
-self.addEventListener('activate', (event) => {
-  // 활성화 즉시 클라이언트를 제어한다.(새로고침 불필요)
-  console.log('activate');
-  self.clients.claim();
-});
+// self.addEventListener('activate', (event) => {
+// });
 
 /**
  * @description 서비스워커에서 발생하는 푸시 이벤트를 수신한다.(서버에서 푸시 이벤트 보내도록 구현)
