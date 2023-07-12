@@ -141,11 +141,14 @@ export const checkNotificationSubscription = async () => {
     if (navigator.serviceWorker.controller) {
       // 서비스워커가 이미 등록되어 있음
       console.log('Service Worker is already registered.');
+      // 서비스워커가 활성화되면 ready 프로미스가 resolve됨
       serviceWorker = await navigator.serviceWorker.ready;
     } else {
       // 서비스워커가 등록되어 있지 않음 -> 서비스워커 등록
       console.log('Service Worker is not registered.');
-      serviceWorker = await navigator.serviceWorker.register('/sw.js');
+      serviceWorker = await navigator.serviceWorker.register(
+        '/worker/index.js'
+      );
     }
 
     console.log('serviceWorker', serviceWorker);
