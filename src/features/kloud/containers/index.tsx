@@ -24,16 +24,7 @@ const MyKloud = () => {
       : false;
 
   useEffect(() => {
-    if (!('serviceWorker' in navigator)) return;
-    console.log('서비서워커 동작 가능');
-    navigator.serviceWorker.ready.then((sw) => {
-      console.log('서비스워커 is ready', sw);
-    });
-    // register:true가 동작을 안 하는 게 아니라 서비스워커 경로가 문제다?
-    // 로컬에서는 register:true하면 navigator.serviceWorker.ready가 resolve 상태로 잘 넘어온다.
-    // 배포 후가 문제임
-
-    // checkNotificationSubscription(); // 알림 구독 확인
+    checkNotificationSubscription(); // 알림 구독 확인
   }, []);
 
   return (
