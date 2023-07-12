@@ -1,12 +1,14 @@
 // 서비스 워커 설치할 때
 self.addEventListener('install', (event) => {
   // 제어중인 서비스 워커가 존재해도 대기 상태를 건너뛴다.
+  console.log('install');
   self.skipWaiting();
 });
 
 // 서비스 워커 설치 중일 때
 self.addEventListener('activate', (event) => {
   // 활성화 즉시 클라이언트를 제어한다.(새로고침 불필요)
+  console.log('activate');
   self.clients.claim();
 });
 
@@ -16,7 +18,7 @@ self.addEventListener('activate', (event) => {
  */
 self.addEventListener('push', (event) => {
   const data = event.data.json();
-
+  console.log('push');
   const title = data.title || '흥미로운 링크를 담아두셨네요?👀';
   const options = {
     body: data.description || '저장한 글을 읽고 더 성장한 나를 만나보세요!', // 푸시 알림 본문
