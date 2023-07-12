@@ -24,7 +24,11 @@ const MyKloud = () => {
       : false;
 
   useEffect(() => {
-    checkNotificationSubscription(); // 알림 구독 확인
+    const fetchSubscription = async () => {
+      await checkNotificationSubscription(); // 알림 구독 확인
+    };
+
+    fetchSubscription();
   }, []);
 
   return (
