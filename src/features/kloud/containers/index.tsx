@@ -3,18 +3,16 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
 import MenuGroups from '@/features/kloud/containers/MenuGroups';
 import ResultContainer from '@/features/kloud/containers/ResultContainer';
 import CreateLink from '@/features/link/containers/CreateLink';
 import { useParams } from 'next/navigation';
 import { toNumber } from 'lodash';
 import { groupMapper } from '@/features/kloud/modules/types/kloudType';
+import { checkNotificationSubscription } from '@/features/kloud/modules/utils/subscription';
 
 const MyKloud = () => {
-  // TODO:/kloud가 아닌 다른 페이지에서 왔을 때만 이거 실행한다던가 하는 건 어떨까? 아무리 생각해도 서버 컴포넌트에서 먼저 실행하는 게 베스튼데..
   // TODO: 로딩 UI
-  const { isLoading, refetch } = useGetSessionQuery();
 
   const { onClose, isOpen, onOpen } = useOpen();
 
@@ -26,8 +24,8 @@ const MyKloud = () => {
       : false;
 
   useEffect(() => {
-    refetch(); // 로그인한 유저 확인
-  }, [refetch]);
+    checkNotificationSubscription(); // 알림 구독 확인
+  }, []);
 
   return (
     <div className="flex gap-2">
