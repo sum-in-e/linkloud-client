@@ -9,10 +9,7 @@ import CreateLink from '@/features/link/containers/CreateLink';
 import { useParams } from 'next/navigation';
 import { toNumber } from 'lodash';
 import { groupMapper } from '@/features/kloud/modules/types/kloudType';
-import {
-  checkNotificationSubscription,
-  subscribeWithRegistration,
-} from '@/common/modules/utils/subscription';
+import { checkNotificationSubscription } from '@/common/modules/utils/subscription';
 
 const MyKloud = () => {
   // TODO: 로딩 UI
@@ -27,27 +24,11 @@ const MyKloud = () => {
       : false;
 
   useEffect(() => {
-    // const fetchSubscription = async () => {
-    //   await checkNotificationSubscription(); // 알림 구독 확인
-    // };
-    // fetchSubscription();
+    const fetchSubscription = async () => {
+      await checkNotificationSubscription(); // 알림 구독 확인
+    };
+    fetchSubscription();
   }, []);
-
-  const sendNotification = async () => {
-    const registration = await navigator.serviceWorker.getRegistration();
-    console.log('sendNotification');
-    if (registration) {
-      console.log('registration', registration);
-
-      registration.showNotification('Test Notification');
-    }
-  };
-
-  const handleRegister = async () => {
-    if (!('serviceWorker' in navigator)) return;
-    const serviceWorker = await navigator.serviceWorker.register('/sw.js');
-    subscribeWithRegistration(serviceWorker);
-  };
 
   return (
     <div className="flex gap-2">
@@ -71,20 +52,6 @@ const MyKloud = () => {
           </Link>
           {isOpen && <CreateLink onClose={onClose} />}
         </div>
-        <button
-          type="button"
-          className="common-button w-[300px] bg-gray-700 font-bold text-white"
-          onClick={handleRegister}
-        >
-          등록
-        </button>
-        <button
-          type="button"
-          className="common-button w-[300px] bg-gray-700 font-bold text-white"
-          onClick={sendNotification}
-        >
-          알림 발송
-        </button>
 
         {isInvalidAccess ? (
           // TODO: 정상적인 클라우드 접근이 아니므로 해당 UI에 결과 없음 보여주기. 임의로 url에 텍스트를 쳐서 들어오는 경우를 위해
