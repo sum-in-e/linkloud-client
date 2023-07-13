@@ -11,6 +11,8 @@ const withPWA = require('next-pwa')({
   // runtimeCaching, //PWA가 오프라인 작동을 지원하기 위해 캐싱해주는 역할
   // disable: process.env.NEXT_PUBLIC_MODE === 'development', // disable is help to disable PWA in deployment mode
   // exclude: ['_next/app-build-manifest.json'], // exclude this file from precache
+  // buildExcludes: [/middleware-manifest.json$/],
+  buildExcludes: ['app-build-manifest.json'],
 });
 
 const nextConfig = withPWA({
