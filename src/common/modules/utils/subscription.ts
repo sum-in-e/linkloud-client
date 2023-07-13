@@ -70,7 +70,7 @@ const checkSubscriptionStatus = async (
 /**
  * @description registration으로 구독을 등록
  */
-const subscribeWithRegistration = async (
+export const subscribeWithRegistration = async (
   registration: ServiceWorkerRegistration
 ) => {
   try {

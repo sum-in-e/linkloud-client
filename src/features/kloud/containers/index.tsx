@@ -9,7 +9,10 @@ import CreateLink from '@/features/link/containers/CreateLink';
 import { useParams } from 'next/navigation';
 import { toNumber } from 'lodash';
 import { groupMapper } from '@/features/kloud/modules/types/kloudType';
-import { checkNotificationSubscription } from '@/common/modules/utils/subscription';
+import {
+  checkNotificationSubscription,
+  subscribeWithRegistration,
+} from '@/common/modules/utils/subscription';
 
 const MyKloud = () => {
   // TODO: 로딩 UI
@@ -41,6 +44,12 @@ const MyKloud = () => {
     }
   };
 
+  const handleRegister = async () => {
+    if (!('serviceWorker' in navigator)) return;
+    const serviceWorker = await navigator.serviceWorker.register('/sw.js');
+    subscribeWithRegistration(serviceWorker);
+  };
+
   return (
     <div className="flex gap-2">
       <div className="flex min-h-screen flex-col border-r-[1px] border-gray-300 pr-2">
@@ -66,9 +75,16 @@ const MyKloud = () => {
         <button
           type="button"
           className="common-button w-[300px] bg-gray-700 font-bold text-white"
+          onClick={handleRegister}
+        >
+          등록
+        </button>
+        <button
+          type="button"
+          className="common-button w-[300px] bg-gray-700 font-bold text-white"
           onClick={sendNotification}
         >
-          Send Notification
+          알림 발송
         </button>
 
         {isInvalidAccess ? (
