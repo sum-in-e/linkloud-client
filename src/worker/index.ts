@@ -13,14 +13,15 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('push', (e) => {
-  const message = e.data?.json();
+  const message = e.data?.text() || '타이틀';
+  // const message = e.data?.json();
   console.log('👀 - message', message);
 
   e.waitUntil(
-    self.registration.showNotification(message.sender.nickname, {
-      body: message.content,
-      icon: message.sender.imageUrl,
-      data: message.url,
+    self.registration.showNotification(message, {
+      body: '메세지',
+      icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686571366/linkloud/logo_200_rxrkca.png',
+      data: 'https://linkloud.co.kr',
     })
   );
 });

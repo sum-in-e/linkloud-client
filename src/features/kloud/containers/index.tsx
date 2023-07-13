@@ -35,12 +35,11 @@ const MyKloud = () => {
 
   const sendNotification = async () => {
     const registration = await navigator.serviceWorker.getRegistration();
+    console.log('sendNotification');
     if (registration) {
-      registration.showNotification('Test Notification', {
-        body: 'This is a test notification',
-        icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
-        data: 'https://example.com',
-      });
+      console.log('registration', registration);
+
+      registration.showNotification('Test Notification');
     }
   };
 
