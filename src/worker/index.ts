@@ -16,6 +16,7 @@ self.addEventListener('push', (event) => {
     icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686571366/linkloud/logo_200_rxrkca.png', // 푸시 알림에 표시될 아이콘
     badge:
       'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686571366/linkloud/logo_200_rxrkca.png', // 푸시 알림 배지 이미지 / android에서만 보인다.
+    tag: 'unread-notification',
     actions: [
       {
         action: 'show-unread-action',
