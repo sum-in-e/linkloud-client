@@ -10,7 +10,7 @@ import { useCheckSubscriptionMutation } from '@/features/kloud/modules/apiHooks/
 import { useDeleteSubscriptionMutation } from '@/features/kloud/modules/apiHooks/subscription/useDeleteSubscriptionMutation';
 import { useSaveSubscriptionMutation } from '@/features/kloud/modules/apiHooks/subscription/useSaveSubscriptionMutation';
 import { AlertStatus, Switch, useToast } from '@chakra-ui/react';
-import { ChangeEvent, ReactNode, useState } from 'react';
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 
 const NotificationHandler = () => {
   const toast = useToast();
@@ -34,23 +34,6 @@ const NotificationHandler = () => {
       duration: 2000,
       isClosable: true,
     });
-  };
-
-  const checkServiceWorkerSupport = async (): Promise<boolean> => {
-    // * 서비스워커 지원하는지 확인
-    if (!('serviceWorker' in navigator)) {
-      showToast({
-        title: (
-          <p className="whitespace-pre">
-            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n(Chrome, Firefox, Safari 등)`}
-          </p>
-        ),
-        status: 'info',
-      });
-      return false;
-    }
-
-    return true;
   };
 
   const saveSubscription = ({
@@ -175,7 +158,7 @@ const NotificationHandler = () => {
       showToast({
         title: (
           <p className="whitespace-pre">
-            {`브라우저 알림이 차단된 상태입니다🥲\n[브라우저 설정] - [개인 정보 보호 및 보안] - [사이트 설정] - [linkloud.co.kr]을 눌러 알림을 "허용"으로 변경후 다시 시도해 주세요!`}
+            {`브라우저 알림이 차단된 상태입니다🥲\n[브라우저 설정] - [개인 정보 보호 및 보안] - [사이트 설정] -\n[linkloud.co.kr]을 눌러 알림을 "허용"으로 변경후 다시 시도해 주세요!`}
           </p>
         ),
         status: 'info',
@@ -192,6 +175,7 @@ const NotificationHandler = () => {
         showToast({
           title: (
             <p className="whitespace-pre">
+              {/* // TODO: 이거 브라우저별로 안내해주는 곳으로 보내자 */}
               {`알림 권한을 허용하지 않으셨습니다🥲\n 이후 알림 받기를 원하신다면 [브라우저 설정] - [개인 정보 보호 및 보안] - [사이트 설정] - [linkloud.co.kr]을 눌러 알림을 "허용"으로 변경후 다시 시도해 주세요!`}
             </p>
           ),
@@ -227,10 +211,12 @@ const NotificationHandler = () => {
       };
       deleteSubscriptionMutate(subscriptionInfo, {
         onSuccess: async () => {
-          // 브라우저 푸쉬 구독 취소
-          await subscription.unsubscribe();
-          // 서비스워커 제거
-          await serviceWorker.unregister();
+          await subscription.unsubscribe(); // 브라우저 푸쉬 구독 취소
+          await serviceWorker.unregister(); // 서비스워커 제거
+          showToast({
+            title: '알림이 비활성화 되었습니다.',
+            status: 'success',
+          });
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -251,7 +237,9 @@ const NotificationHandler = () => {
     }
   };
 
-  const unsubscribe = async (serviceWorker: ServiceWorkerRegistration) => {
+  const handleUnsubscribe = async (
+    serviceWorker: ServiceWorkerRegistration
+  ) => {
     const subscription = await serviceWorker.pushManager.getSubscription();
 
     if (!subscription) {
@@ -262,59 +250,101 @@ const NotificationHandler = () => {
     deleteSubscription({ subscription, serviceWorker });
   };
 
+  const handleServiceWorkerError = (prevChecked: boolean) => {
+    showToast({
+      title: (
+        <p className="whitespace-pre">
+          {`서버 에러로 인해 요청을 수행하지 못했습니다.\n잠시후 다시 시도해 주세요.`}
+        </p>
+      ),
+      status: 'warning',
+    });
+    setIsChecked(prevChecked);
+  };
+
+  const getServiceWorker =
+    async (): Promise<ServiceWorkerRegistration | null> => {
+      // Returns existing service worker or register new one.
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (registration) {
+        return registration;
+      }
+      return await navigator.serviceWorker.register('/sw.js');
+    };
+
+  const isServiceWorkerSupported = async (): Promise<boolean> => {
+    // * 서비스워커 지원하는지 확인
+    if (!('serviceWorker' in navigator)) {
+      showToast({
+        title: (
+          <p className="whitespace-pre">
+            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n(Chrome, Firefox, Safari 등)`}
+          </p>
+        ),
+        status: 'info',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSwitch = async (event: ChangeEvent<HTMLInputElement>) => {
     const prevChecked = isChecked;
     const newChecked = event.target.checked;
-
     setIsChecked(newChecked);
 
-    const isServiceWorkerSupported = await checkServiceWorkerSupport();
-
-    if (!isServiceWorkerSupported) {
+    if (!(await isServiceWorkerSupported())) {
       setIsChecked(prevChecked);
       return;
     }
 
+    let serviceWorker;
+
     try {
-      let serviceWorker;
-
-      // 등록된 서비스워커 있는지 확인
-      const registration = await navigator.serviceWorker.getRegistration();
-
-      if (registration) {
-        // 기존에 등록된 서비스워커 사용
-        console.log('기존 서비스워커');
-        serviceWorker = registration;
-      } else {
-        // 서비스워커 없으면 등록
-        console.log('새 서비스워커');
-        serviceWorker = await navigator.serviceWorker.register('/sw.js');
-      }
-
-      if (!newChecked) {
-        // 알림 비활성화하는 경우
-        console.log('비 활성화');
-        await unsubscribe(serviceWorker);
-        return;
-      }
-
-      // 알림 활성화하는 경우
-      console.log('활성화');
-
-      await checkSubscribable(serviceWorker); // TODO: 내부 함수 쪼개기
+      serviceWorker = await getServiceWorker();
     } catch (error) {
-      // 서비스 워커의 설치 또는 활성화 과정에서 오류 발생 시
-      showToast({
-        title: (
-          <p className="whitespace-pre">
-            {`서버 에러로 인해 요청을 수행하지 못했습니다.\n잠시후 다시 시도해 주세요.`}
-          </p>
-        ),
-        status: 'warning',
-      });
-      setIsChecked(prevChecked);
+      handleServiceWorkerError(prevChecked);
+      return;
     }
+
+    if (!serviceWorker) {
+      handleServiceWorkerError(prevChecked);
+      return;
+    }
+
+    if (!newChecked) {
+      // 알림 비활성화하는 경우
+      console.log('비활성화');
+      await handleUnsubscribe(serviceWorker);
+      return;
+    }
+
+    // 알림 활성화하는 경우
+    await checkSubscribable(serviceWorker);
   };
+
+  useEffect(() => {
+    // 알림 구독 여부 체크
+    navigator.serviceWorker.ready.then((serviceWorker) => {
+      serviceWorker.pushManager.getSubscription().then((subscription) => {
+        console.log(subscription);
+        if (subscription) {
+          const subscriptionInfo = getSubscriptionInfo(subscription);
+
+          if (subscriptionInfo) {
+            checkSubscriptionMutate(subscriptionInfo, {
+              onSuccess: (data) => {
+                if (data.data.status === 'valid') {
+                  setIsChecked(true);
+                }
+              },
+            });
+          }
+        }
+      });
+    });
+  }, [checkSubscriptionMutate, setIsChecked]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -325,13 +355,14 @@ const NotificationHandler = () => {
         <Switch
           id="notification-handler"
           size="md"
-          checked={isChecked}
+          isChecked={isChecked}
           onChange={handleSwitch}
         />
       </form>
       <p className="whitespace-pre text-sm">{`확인하지 않은 링크가 10개 이상일 경우 알림을 보내드려요.\n저장한 글을 읽고 더 성장한 나를 만나보세요!`}</p>
+      <p className="whitespace-pre text-xs text-gray-500">{`알림은 기기 혹은 브라우저별로 등록됩니다.\n이전에 기기에서 알림 활성화를 했더라도\n다른 기기로 접속 시 알림이 비활성화 되어있을 수 있습니다!`}</p>
       <p className="whitespace-pre text-sm text-gray-500">{`✅window, mac에서 브라우저 자체 알림 기능 활성화 필요 안내`}</p>
-      <p className="whitespace-pre text-sm text-gray-500">{`✅알림 권한을 수락해주세요! 안내`}</p>
+      <p className="whitespace-pre text-sm text-gray-500">{`✅알림 권한을 수락해주세요! 브라우저별 안내`}</p>
     </div>
   );
 };
