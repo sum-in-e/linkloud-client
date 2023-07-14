@@ -1,23 +1,6 @@
 import { instance } from '@/common/modules/apis/instance';
 import { SuccessResponseType } from '@/common/modules/types/responseType';
 
-export type GetSubscriptionPublicKeyResponse = SuccessResponseType<{
-  publicKey: string;
-}>;
-
-/**
- * @description VAPID 공개키 조회 API
- */
-export const getSubscriptionPublicKey =
-  async (): Promise<GetSubscriptionPublicKeyResponse> => {
-    const { data } = await instance.get(`/subscription/publicKey`);
-    return data;
-  };
-
-// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
-
-export type SaveSubscriptionResponse = SuccessResponseType<{}>;
-
 export type SubscriptionParams = {
   endpoint: string;
   keys: {
@@ -26,6 +9,8 @@ export type SubscriptionParams = {
     p256dh: string;
   };
 };
+
+export type SaveSubscriptionResponse = SuccessResponseType<{}>;
 
 /**
  * @description 구독 등록 API
@@ -58,3 +43,16 @@ export const checkSubscription = async (
 };
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
+export type DeleteSubscriptionResponse = SuccessResponseType<{}>;
+
+/**
+ * @description 구독 제거 API
+ */
+export const deleteSubscription = async (
+  params: SubscriptionParams
+): Promise<DeleteSubscriptionResponse> => {
+  const { data } = await instance.post(`/subscription/delete-subscription`, {
+    ...params,
+  });
+  return data;
+};
