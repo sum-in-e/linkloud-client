@@ -9,7 +9,6 @@ import CreateLink from '@/features/link/containers/CreateLink';
 import { useParams } from 'next/navigation';
 import { toNumber } from 'lodash';
 import { groupMapper } from '@/features/kloud/modules/types/kloudType';
-import { checkNotificationSubscription } from '@/common/modules/utils/subscription';
 
 const MyKloud = () => {
   // TODO: 로딩 UI
@@ -22,13 +21,6 @@ const MyKloud = () => {
     isNaN(toNumber(group)) && !Object.keys(groupMapper).includes(group)
       ? true
       : false;
-
-  useEffect(() => {
-    const fetchSubscription = async () => {
-      await checkNotificationSubscription(); // 알림 구독 확인
-    };
-    fetchSubscription();
-  }, []);
 
   return (
     <div className="flex gap-2">
