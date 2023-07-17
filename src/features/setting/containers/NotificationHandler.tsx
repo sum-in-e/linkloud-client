@@ -215,7 +215,6 @@ const NotificationHandler = () => {
    *
    * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
-
   const checkSubscribable = async (
     serviceWorker: ServiceWorkerRegistration
   ): Promise<void> => {
@@ -331,20 +330,6 @@ const NotificationHandler = () => {
   };
 
   /**
-   * 서비스 워커 등록을 가져옵니다.
-   *
-   * @returns {Promise<ServiceWorkerRegistration|null>} 서비스 워커 등록 객체입니다.
-   */
-  const getServiceWorker =
-    async (): Promise<ServiceWorkerRegistration | null> => {
-      const registration = await navigator.serviceWorker.getRegistration();
-      if (registration) {
-        return registration;
-      }
-      return await navigator.serviceWorker.register('/sw.js');
-    };
-
-  /**
    * 브라우저가 서비스 워커를 지원하는지 확인합니다.
    *
    * @returns {Promise<boolean>} 지원하면 true, 그렇지 않으면 false입니다.
@@ -368,6 +353,19 @@ const NotificationHandler = () => {
   };
 
   /**
+   * 서비스 워커 등록을 가져옵니다.
+   *
+   * @returns {Promise<ServiceWorkerRegistration>} 서비스 워커 등록 객체입니다.
+   */
+  const getServiceWorker = async (): Promise<ServiceWorkerRegistration> => {
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (registration) {
+      return registration;
+    }
+    return await navigator.serviceWorker.register('/sw.js');
+  };
+
+  /**
    * 스위치 이벤트를 처리합니다.
    *
    * @param {ChangeEvent<HTMLInputElement>} event - 스위치 이벤트입니다.
@@ -382,28 +380,25 @@ const NotificationHandler = () => {
       return;
     }
 
-    let serviceWorker;
-
     try {
-      serviceWorker = await getServiceWorker();
+      if (!newChecked) {
+        // 알림 비활성화하는 경우
+        const serviceWorker = await navigator.serviceWorker.getRegistration(); // 기존 서비스워커 가져오기
+
+        if (serviceWorker) {
+          await handleUnsubscribe(serviceWorker);
+        } else {
+          setIsChecked(!newChecked);
+        }
+      } else {
+        // 알림 활성화하는 경우
+        const serviceWorker = await getServiceWorker();
+        await checkSubscribable(serviceWorker);
+      }
     } catch (error) {
       handleServiceWorkerError(prevChecked);
       return;
     }
-
-    if (!serviceWorker) {
-      handleServiceWorkerError(prevChecked);
-      return;
-    }
-
-    if (!newChecked) {
-      // 알림 비활성화하는 경우
-      await handleUnsubscribe(serviceWorker);
-      return;
-    }
-
-    // 알림 활성화하는 경우
-    await checkSubscribable(serviceWorker);
   };
 
   useEffect(() => {
