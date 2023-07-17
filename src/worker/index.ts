@@ -9,7 +9,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  console.log('[Service Worker] Push Received.', event.data?.text());
   const data = event.data?.json();
   const title = data.title || '흥미로운 링크를 담아두셨네요?👀';
   const options = {
