@@ -353,19 +353,6 @@ const NotificationHandler = () => {
   };
 
   /**
-   * 서비스 워커 등록을 가져옵니다.
-   *
-   * @returns {Promise<ServiceWorkerRegistration>} 서비스 워커 등록 객체입니다.
-   */
-  const getServiceWorker = async (): Promise<ServiceWorkerRegistration> => {
-    const registration = await navigator.serviceWorker.getRegistration();
-    if (registration) {
-      return registration;
-    }
-    return await navigator.serviceWorker.register('/sw.js');
-  };
-
-  /**
    * 스위치 이벤트를 처리합니다.
    *
    * @param {ChangeEvent<HTMLInputElement>} event - 스위치 이벤트입니다.
@@ -383,7 +370,7 @@ const NotificationHandler = () => {
     try {
       if (!newChecked) {
         // 알림 비활성화하는 경우
-        const serviceWorker = await navigator.serviceWorker.getRegistration(); // 기존 서비스워커 가져오기
+        const serviceWorker = await navigator.serviceWorker.getRegistration(); // 기존 서비스워커
 
         if (serviceWorker) {
           await handleUnsubscribe(serviceWorker);
@@ -392,7 +379,7 @@ const NotificationHandler = () => {
         }
       } else {
         // 알림 활성화하는 경우
-        const serviceWorker = await getServiceWorker();
+        const serviceWorker = await navigator.serviceWorker.register('/sw.js'); // 새 서비스워커 등록
         await checkSubscribable(serviceWorker);
       }
     } catch (error) {
@@ -403,6 +390,7 @@ const NotificationHandler = () => {
 
   useEffect(() => {
     // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
+    console.log('use Effect');
     navigator.serviceWorker.ready.then((serviceWorker) => {
       serviceWorker.pushManager.getSubscription().then((subscription) => {
         if (subscription) {
