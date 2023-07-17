@@ -4,6 +4,7 @@
 export declare const self: ServiceWorkerGlobalScope;
 
 self.addEventListener('install', (event) => {
+  // 대기 중인 서비스 워커를 강제로 활성화
   event.waitUntil(self.skipWaiting());
 });
 
@@ -30,6 +31,13 @@ self.addEventListener('push', (event) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
+  // 버튼 클릭이 아닌 알림 자체 클릭시 실행할 동작
+  if (!event.action) {
+    event.waitUntil(
+      self.clients.openWindow('https://linkloud.co.kr/kloud/unread')
+    );
+  }
+
   if (event.action === 'show-unread-action') {
     // 지금 확인하기 버튼 클릭 시 미열람 페이지로 이동
     event.waitUntil(

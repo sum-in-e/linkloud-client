@@ -27,7 +27,7 @@ export const saveSubscription = async (
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
 
 export type CheckSubscriptionResponse = SuccessResponseType<{
-  status: 'valid';
+  status: 'valid' | 'invalid';
 }>;
 
 /**

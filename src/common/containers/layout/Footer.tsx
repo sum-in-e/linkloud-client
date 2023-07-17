@@ -57,6 +57,12 @@ const Footer = () => {
                 text="서비스 발전에 도움주기"
                 onClick={() => window.open('https://toss.me/linkloud')}
               />
+              <Text
+                text="사용 가이드"
+                onClick={() =>
+                  window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+                }
+              />
             </div>
           </div>
           <div className="flex flex-col gap-4">
