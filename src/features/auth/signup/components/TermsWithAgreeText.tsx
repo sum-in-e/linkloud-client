@@ -1,7 +1,7 @@
 const TermsWithAgreeText = () => {
   return (
     <p className="whitespace-pre text-center text-xs text-gray-500">
-      {`가입 진행은 `}
+      {`회원가입 진행 시 `}
       <button
         type="button"
         className="w-fit text-xs text-gray-500 underline"
@@ -19,7 +19,7 @@ const TermsWithAgreeText = () => {
       </button>
       {`에`}
       <br />
-      {`동의하는 것을 의미합니다.`}
+      {`동의하는 것으로 간주됩니다.`}
     </p>
   );
 };
