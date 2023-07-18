@@ -30,8 +30,8 @@ const PasswordInput = () => {
             ? 'border-red-400'
             : isValidatedPassword
             ? 'border-emerald-600'
-            : 'border-stone-100'
-        } bg-stone-100 text-gray-800`}
+            : 'border-stone-200'
+        } bg-white text-gray-800`}
       />
     </InputFormContainer>
   );
