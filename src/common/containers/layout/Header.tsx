@@ -1,35 +1,55 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
+import Image from 'next/image';
 import logo from '/public/images/logo_v.png';
+import { usePageType } from '@/common/modules/hooks/usePageType';
+import { Avatar } from '@chakra-ui/react';
+import Link from 'next/link';
 
 const Header = () => {
-  // * 헤더도 디자인이 나와야 감이 잡히니까 정말 레이아웃만 잡아놓자.
-
   const router = useRouter();
-  const pathname = usePathname();
+  const pageType = usePageType();
 
-  const handleClickLogo = () => {
-    // 로고 클릭 시 랜딩 페이지로 가는 경우 -> 랜딩페이지, 회원가입, 로그인, 서비스소개에서 로그인 안 했을 경우
-    // 로고 클릭 시 마이클라우드로 가는 경우 -> 마이클라우드, 마이페이지, 서비스 소개에서 로그인된 경우
+  const handlePushToDefaultPage = () => {
+    if (pageType === 'private') {
+      router.push('/kloud/all');
+      return;
+    }
+
     router.push('/');
   };
 
-  const isShow = !pathname.includes('/kloud') && !pathname.includes('/setting');
+  const handlePushToSetting = () => {
+    router.push('/setting');
+  };
 
-  return isShow ? (
-    <header className="flex h-24 w-full justify-center bg-slate-100">
-      <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-6">
+  return (
+    <header className="flex h-20 w-full justify-center bg-white">
+      <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-5">
         <Image
           src={logo}
           alt="linkloud Logo"
           className="h-auto w-[120px] cursor-pointer"
-          onClick={handleClickLogo}
+          onClick={handlePushToDefaultPage}
         />
+        {pageType === 'public' ? (
+          <Link
+            href="/login"
+            className="rounded-2xl bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-lighter"
+          >
+            시작하기
+          </Link>
+        ) : (
+          <Avatar
+            size={'sm'}
+            onClick={handlePushToSetting}
+            className="cursor-pointer"
+          />
+        )}
       </div>
     </header>
-  ) : null;
+  );
 };
 
 export default Header;

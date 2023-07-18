@@ -85,8 +85,8 @@ const PasswordInputGroup = () => {
               ? 'border-red-400'
               : isVerifiedPassword
               ? 'border-emerald-600'
-              : 'border-stone-100'
-          } bg-stone-100 text-gray-800`}
+              : 'border-stone-200'
+          } bg-white text-gray-800`}
         />
       </InputContainer>
       <InputContainer label="비밀번호 확인*">
@@ -102,8 +102,8 @@ const PasswordInputGroup = () => {
               ? 'border-red-400'
               : hasConfirmPassword && isMatch
               ? 'border-emerald-600'
-              : 'border-stone-100'
-          } bg-stone-100 text-gray-800`}
+              : 'border-stone-200'
+          } bg-white text-gray-800`}
         />
       </InputContainer>
     </div>

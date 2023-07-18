@@ -7,6 +7,7 @@ import LogOutButton from '@/features/setting/containers/LogOut';
 import SignOutButton from '@/features/setting/containers/SignOut';
 import UserInfo from '@/features/setting/containers/UserInfo';
 import NotificationHandler from '@/features/setting/containers/NotificationHandler';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const MySetting = () => {
   const { isLoading, data } = useGetSessionQuery();
@@ -18,28 +19,29 @@ const MySetting = () => {
   };
 
   return (
-    <div className="my-10 flex w-full justify-center">
+    <>
       {isLoading ? (
         <UserInfoSkeleton />
       ) : (
-        <div className="flex w-full max-w-[340px] flex-col gap-7">
+        <div className="flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
+          <button
+            type="button"
+            onClick={handleClick}
+            className="h-fit w-fit rounded-2xl border-[1px] border-stone-200 px-4 py-2 hover:bg-slate-200"
+          >
+            <FaArrowLeft size={15} className="fill-gray-600" />
+          </button>
           <UserInfo />
-          <hr className="w-full border-gray-300" />
+          <hr className="bordser-gray-300 w-full" />
           <NotificationHandler />
           <hr className="w-full border-gray-300" />
-          <section className="flex gap-2 md:flex-row">
+          <section className="flex w-full justify-center gap-3">
             <LogOutButton />
             <SignOutButton />
           </section>
-          <button
-            onClick={handleClick}
-            className="common-button bg-gray-700 py-3 font-bold text-white"
-          >
-            마이클라우드로 가기 임시버튼
-          </button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -149,10 +149,10 @@ const EmailInputGroup = () => {
             value={email}
             onChange={handleChangeEmail}
             placeholder="id@example.com"
-            className={`w-3/5 rounded-l-2xl rounded-r-none border-[1px] bg-stone-100 px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none ${
+            className={`w-3/5 rounded-l-2xl rounded-r-none border-[1px] bg-white px-4 py-3 text-sm text-gray-800 placeholder-gray-500 outline-none ${
               !isValidatedEmail && email.length > 0
                 ? 'border-red-500'
-                : 'border-stone-100'
+                : 'border-stone-200'
             }`}
           />
           <button
@@ -177,7 +177,7 @@ const EmailInputGroup = () => {
       <InputFormContainer label="인증번호*">
         <div className="flex w-full">
           <div
-            className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-100`}
+            className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-200`}
           >
             <input
               type="number"
@@ -186,7 +186,7 @@ const EmailInputGroup = () => {
               value={verificationCode}
               onChange={handleChangeVerificationCode}
               placeholder="인증번호를 입력해 주세요."
-              className={`w-full rounded-l-2xl rounded-r-none bg-stone-100 py-3 pl-4  text-sm text-gray-800 placeholder-gray-500 outline-none ${
+              className={`w-full rounded-l-2xl rounded-r-none bg-white py-3 pl-4  text-sm text-gray-800 placeholder-gray-500 outline-none ${
                 isShowTimer ? 'pr-16' : 'pr-4'
               }`}
             />
