@@ -17,7 +17,12 @@ export default async function HomePage() {
     <>
       <h1 className="font-bold italic md:text-2xl">Linkloud Randing Page</h1>
       <div className="mt-4 flex flex-col gap-4">
-        <Link href="/login">로그인으로 이동</Link>
+        <Link
+          href="/login"
+          className="w-full rounded-2xl bg-primary px-4 py-3 text-center text-sm font-bold text-white hover:bg-primary-lighter md:w-fit"
+        >
+          지금 시작하기
+        </Link>
       </div>
     </>
   );

@@ -36,12 +36,7 @@ const MyKloud = () => {
           >
             링크 추가하기
           </button>
-          <Link
-            href="/setting"
-            className="common-button w-[300px] bg-gray-700 font-bold text-white"
-          >
-            마이페이지로 가기(임시버튼)
-          </Link>
+
           {isOpen && <CreateLink onClose={onClose} />}
         </div>
 
