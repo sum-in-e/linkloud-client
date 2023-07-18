@@ -37,6 +37,12 @@ const Footer = () => {
             <Title text="서비스" />
             <div className="flex flex-col gap-2">
               <Text
+                text="사용 가이드"
+                onClick={() =>
+                  window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+                }
+              />
+              <Text
                 text="의견 들려주기"
                 onClick={() => window.open('https://tally.so/r/wkl2B6')}
               />
@@ -47,12 +53,6 @@ const Footer = () => {
               <Text
                 text="서비스 발전에 도움주기"
                 onClick={() => window.open('https://toss.me/linkloud')}
-              />
-              <Text
-                text="사용 가이드"
-                onClick={() =>
-                  window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
-                }
               />
             </div>
           </div>
