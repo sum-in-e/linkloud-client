@@ -18,7 +18,6 @@ export interface PropertiesForSignup {
   isVerifiedEmail: boolean;
   isVerifiedPassword: boolean;
   isVerifiedNickname: boolean;
-  isVerifiedTermsOfAgree: boolean;
 }
 
 interface FormsValidationStateType {
@@ -32,7 +31,6 @@ export const useFormsValidationState = create<FormsValidationStateType>(
       isVerifiedEmail: false,
       isVerifiedPassword: false,
       isVerifiedNickname: false,
-      isVerifiedTermsOfAgree: false,
     },
     setFormsValidationState: (newState) =>
       set((prev) => {
@@ -45,34 +43,3 @@ export const useFormsValidationState = create<FormsValidationStateType>(
       }),
   })
 );
-
-// ✂️✂️✂️✂️✂️✂️✂️✂️✂️
-// 카카오 회원가입용 가입을 위한 폼 유효성 검사 상태 관리
-interface PropertiesForKakaoSignup {
-  isVerifiedNickname: boolean;
-  isVerifiedTermsOfAgree: boolean;
-}
-
-interface KakaoFormsValidationStateType {
-  formsValidationState: PropertiesForKakaoSignup;
-  setFormsValidationState: (
-    newState: Partial<PropertiesForKakaoSignup>
-  ) => void;
-}
-
-export const useKakaoFormsValidationState =
-  create<KakaoFormsValidationStateType>((set) => ({
-    formsValidationState: {
-      isVerifiedNickname: false,
-      isVerifiedTermsOfAgree: false,
-    },
-    setFormsValidationState: (newState) =>
-      set((prev) => {
-        return {
-          formsValidationState: {
-            ...prev.formsValidationState,
-            ...newState,
-          },
-        };
-      }),
-  }));

@@ -1,11 +1,11 @@
 'use client';
 
-import EmailSignUpTermsWithAgree from '@/features/auth/signup/containers/EmailSignUp/EmailSignUpTermsWithAgree';
 import EmailInputGroup from '@/features/auth/signup/containers/EmailSignUp/EmailInputGroup';
 import PasswordInputGroup from '@/features/auth/signup/containers/EmailSignUp/PasswordInputGroup';
 import NicknameInput from '@/features/auth/signup/containers/EmailSignUp/NicknameInput';
 import SignUpButton from '@/features/auth/signup/containers/EmailSignUp/SignUpButton';
 import { FormEvent } from 'react';
+import TermsWithAgreeText from '@/features/auth/signup/components/TermsWithAgreeText';
 
 const EmailSignUpForm = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ const EmailSignUpForm = () => {
           <PasswordInputGroup />
           <NicknameInput />
         </div>
-        <EmailSignUpTermsWithAgree />
+        <TermsWithAgreeText />
         <SignUpButton />
       </form>
     </section>

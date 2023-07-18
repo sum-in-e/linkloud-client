@@ -1,30 +1,14 @@
 'use client';
 import { isValidNickname } from '@/common/modules/utils/validation';
-import {
-  useKakaoFormsValidationState,
-  useNicknameState,
-} from '@/features/auth/signup/modules/stores/signupStore';
+import { useNicknameState } from '@/features/auth/signup/modules/stores/signupStore';
 import NicknameForm from '@/features/auth/common/containers/NicknameForm';
 import { useEffect } from 'react';
 
 const NicknameInput = () => {
   const { nickname, setNickname } = useNicknameState();
 
-  const { formsValidationState, setFormsValidationState } =
-    useKakaoFormsValidationState();
-
-  const handleChangeNicknameValidationStatus = (newNickname: string) => {
-    const isValid = isValidNickname(newNickname);
-    if (formsValidationState.isVerifiedNickname !== isValid) {
-      setFormsValidationState({
-        isVerifiedNickname: isValid,
-      });
-    }
-  };
-
   const handleChangeNickname = (newNickname: string) => {
     setNickname(newNickname);
-    handleChangeNicknameValidationStatus(newNickname);
   };
 
   useEffect(() => {
@@ -35,7 +19,7 @@ const NicknameInput = () => {
     <NicknameForm
       value={nickname}
       onChange={handleChangeNickname}
-      isVerified={formsValidationState.isVerifiedNickname}
+      isVerified={isValidNickname(nickname)}
     />
   );
 };
