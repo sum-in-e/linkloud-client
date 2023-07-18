@@ -29,15 +29,6 @@ const Footer = () => {
     }
   };
 
-  const 준비중안내 = () => {
-    toast({
-      title: '기능 추가 예정입니다.',
-      status: 'info',
-      duration: 2000,
-      isClosable: true,
-    });
-  };
-
   return isShow ? (
     <footer className="flex w-full justify-center bg-stone-900">
       <div className="flex w-full max-w-screen-xl flex-col gap-10 p-6">
@@ -78,8 +69,18 @@ const Footer = () => {
         <div className="flex w-full flex-col gap-4">
           <Title text="Linkloud" />
           <div className="flex flex-col gap-2">
-            <Text text="서비스 이용약관" onClick={준비중안내} />
-            <Text text="개인정보 처리방침" onClick={준비중안내} />
+            <Text
+              text="서비스 이용약관"
+              onClick={() =>
+                window.open('https://www.craft.me/s/T6jZMsE55ZspAY')
+              }
+            />
+            <Text
+              text="개인정보 처리방침"
+              onClick={() =>
+                window.open('https://www.craft.me/s/XsDZfFvOjq9Glv')
+              }
+            />
           </div>
         </div>
         <p className="text-xs text-zinc-500">

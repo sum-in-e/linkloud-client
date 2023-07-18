@@ -1,11 +1,9 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
+import { isValidNickname } from '@/common/modules/utils/validation';
 import AuthCompleteButton from '@/features/auth/common/components/AuthCompleteButton';
 import SignUpCompleteModal from '@/features/auth/signup/containers/EmailSignUp/SignUpCompleteModal';
 import { useKakaoSignUpMutation } from '@/features/auth/signup/modules/apiHooks/useKakaoSignUpMutation';
-import {
-  useKakaoFormsValidationState,
-  useNicknameState,
-} from '@/features/auth/signup/modules/stores/signupStore';
+import { useNicknameState } from '@/features/auth/signup/modules/stores/signupStore';
 import { useToast } from '@chakra-ui/react';
 import { useSearchParams } from 'next/navigation';
 
@@ -16,11 +14,8 @@ const SignUpButton = () => {
   const { isOpen, onOpen } = useOpen();
 
   const { nickname: name } = useNicknameState();
-  const {
-    formsValidationState: { isVerifiedNickname, isVerifiedTermsOfAgree },
-  } = useKakaoFormsValidationState();
 
-  const isActivateButton = isVerifiedNickname && isVerifiedTermsOfAgree;
+  const isActivateButton = isValidNickname(name);
 
   const { mutate, isLoading } = useKakaoSignUpMutation();
 

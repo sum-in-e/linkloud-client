@@ -26,15 +26,11 @@ const SignUpButton = () => {
       isVerifiedEmail,
       isVerifiedNickname,
       isVerifiedPassword,
-      isVerifiedTermsOfAgree,
     },
   } = useFormsValidationState();
 
   const isActivateButton =
-    isVerifiedEmail &&
-    isVerifiedPassword &&
-    isVerifiedNickname &&
-    isVerifiedTermsOfAgree;
+    isVerifiedEmail && isVerifiedPassword && isVerifiedNickname;
 
   const { mutate, isLoading } = useEmailSignUpMutation();
 
