@@ -1,5 +1,8 @@
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
-import Link from 'next/link';
+import ActionSection from '@/features/randing/ActionSection';
+import FeatureSection from '@/features/randing/FeatureSection';
+import IntroSection from '@/features/randing/IntroSection';
+import { Divider } from '@chakra-ui/react';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
@@ -14,16 +17,10 @@ export default async function HomePage() {
   }
 
   return (
-    <>
-      <h1 className="font-bold italic md:text-2xl">Linkloud Randing Page</h1>
-      <div className="mt-4 flex flex-col gap-4">
-        <Link
-          href="/login"
-          className="w-full rounded-2xl bg-primary px-4 py-3 text-center text-sm font-bold text-white hover:bg-primary-lighter md:w-fit"
-        >
-          지금 시작하기
-        </Link>
-      </div>
-    </>
+    <div className="my-10 flex w-full flex-col items-center justify-center gap-20">
+      <IntroSection />
+      <FeatureSection />
+      <ActionSection />
+    </div>
   );
 }
