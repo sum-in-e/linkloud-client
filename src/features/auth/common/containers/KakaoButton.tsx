@@ -15,19 +15,32 @@ const KakaoButton = ({ type }: { type: AuthMethodType }) => {
     return_to: returnUrl || '/kloud',
   });
 
-  const text =
-    type === 'login' ? '카카오로 계속하기' : '카카오로 바로 시작하기';
+  // TODO: 걷어내기
+  // const text =
+  //   type === 'login' ? '카카오로 계속하기' : '카카오로 바로 시작하기';
+  const text = '서비스 준비중입니다.';
 
   return (
     <section className="w-full">
-      <Link
+      <button
+        className="common-button gap-1 bg-[#FAE100] py-3  hover:bg-[#ffe81a]"
+        disabled={true}
+      >
+        <RiKakaoTalkFill />
+        <p className="text-sm font-bold text-black ">{text}</p>
+      </button>
+      {/* TODO: 위 버튼 지우고 아래꺼 활성화 */}
+      {/* <Link
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/user/auth/kakao?${queryString}`}
       >
-        <button className="common-button gap-1 bg-[#FAE100] py-3  hover:bg-[#ffe81a]">
+        <button
+          className="common-button gap-1 bg-[#FAE100] py-3  hover:bg-[#ffe81a]"
+          disabled={true}
+        >
           <RiKakaoTalkFill />
           <p className="text-sm font-bold text-black ">{text}</p>
         </button>
-      </Link>
+      </Link> */}
     </section>
   );
 };
