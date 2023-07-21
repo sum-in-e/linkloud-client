@@ -19,7 +19,7 @@ const SignOutButton = () => {
       <button
         type="button"
         onClick={handleClick}
-        className="w-fit rounded-xl bg-red-500 px-4 py-2 text-sm font-bold text-white hover:bg-red-400"
+        className="w-fit min-w-[90px] rounded-xl bg-red-500 px-4 py-2 text-sm font-bold text-white hover:bg-red-400"
       >
         회원탈퇴
       </button>
