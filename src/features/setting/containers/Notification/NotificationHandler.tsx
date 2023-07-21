@@ -390,7 +390,6 @@ const NotificationHandler = () => {
 
   useEffect(() => {
     // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
-    console.log('use Effect');
     navigator.serviceWorker.ready.then((serviceWorker) => {
       serviceWorker.pushManager.getSubscription().then((subscription) => {
         if (subscription) {
