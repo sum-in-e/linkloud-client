@@ -2,7 +2,6 @@ import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import ActionSection from '@/features/randing/ActionSection';
 import FeatureSection from '@/features/randing/FeatureSection';
 import IntroSection from '@/features/randing/IntroSection';
-import { Divider } from '@chakra-ui/react';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
@@ -17,7 +16,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="my-10 flex w-full flex-col items-center justify-center gap-20">
+    <div className="my-20 flex w-full flex-col items-center justify-center gap-20">
       <IntroSection />
       <FeatureSection />
       <ActionSection />

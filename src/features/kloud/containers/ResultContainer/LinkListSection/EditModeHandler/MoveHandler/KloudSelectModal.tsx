@@ -110,7 +110,7 @@ const KloudSelectModal = ({
       <ModalContent className="max-w-[340px] rounded-3xl">
         <ModalHeader className="font-bold">{title}</ModalHeader>
         <ModalBody>
-          <p className="mb-2 text-sm font-semibold text-gray-600">{`"기존 클라우드 유지하기" 선택 시 클라우드는 변경되지 않습니다.`}</p>
+          <p className="mb-2 text-sm font-semibold text-gray-600">{`이동할 클라우드를 선택해 주세요.`}</p>
           <KloudSelector kloudId={kloudId} onChange={handleChange} />
         </ModalBody>
 

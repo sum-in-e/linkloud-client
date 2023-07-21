@@ -14,16 +14,13 @@ const AuthCompleteButton = ({
   isLoading,
   type,
 }: Props) => {
-  // TODO: 걷어내기
-  // const text = type === 'login' ? '로그인하기' : '가입 완료하기';
-  const text = '서비스 준비중입니다.';
+  const text = type === 'login' ? '로그인하기' : '가입 완료하기';
 
   return (
     <button
       type="submit"
       onClick={onClick}
-      // disabled={isDisabled}
-      disabled={true}
+      disabled={isDisabled}
       className="common-button bg-primary py-3 font-bold text-white hover:bg-primary-darker focus:outline-none"
     >
       {isLoading ? <Loader /> : text}

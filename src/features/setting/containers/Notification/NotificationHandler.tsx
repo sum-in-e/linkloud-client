@@ -413,8 +413,11 @@ const NotificationHandler = () => {
   return (
     <div className="flex flex-col gap-2">
       <form className="flex items-center justify-between">
-        <label htmlFor="notification-handler" className="text-lg font-bold">
-          알림 활성화
+        <label
+          htmlFor="notification-handler"
+          className="text-lg font-bold text-gray-800"
+        >
+          미열람 링크 알림
         </label>
         <Switch
           id="notification-handler"
@@ -423,8 +426,10 @@ const NotificationHandler = () => {
           onChange={handleSwitch}
         />
       </form>
-      <p className="whitespace-pre text-sm">{`확인하지 않은 링크가 10개 이상일 경우 알림을 보내드려요.\n저장한 글을 읽고 더 성장한 나를 만나보세요!`}</p>
-      <p className="whitespace-pre text-xs text-gray-500">
+      <p className="break-keep text-sm">
+        확인하지 않은 링크가 10개 이상일 경우 알림을 보내드려요.
+      </p>
+      <p className="text-xs text-gray-500">
         {`알림 활성화가 되지 않는다면 `}
         <button
           type="button"
