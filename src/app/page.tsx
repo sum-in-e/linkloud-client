@@ -16,7 +16,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="my-20 flex w-full flex-col items-center justify-center gap-20">
+    <div className="mb-20 mt-10 flex w-full flex-col items-center justify-center gap-20">
       <IntroSection />
       <FeatureSection />
       <ActionSection />

@@ -2,7 +2,6 @@
 
 import Loader from '@/common/components/Loader';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
-import { groupMapper } from '@/features/kloud/modules/types/kloudType';
 import { useCreateLinkMutation } from '@/features/link/modules/apiHooks/useCreateLinkMutation';
 import {
   useKloudIdState,
@@ -10,8 +9,6 @@ import {
 } from '@/features/link/modules/stores/createLinkStore';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { toNumber } from 'lodash';
-import { useParams } from 'next/navigation';
 
 interface Props {
   onClose: () => void;
@@ -20,7 +17,6 @@ interface Props {
 const CreateLinkButton = ({ onClose }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { group } = useParams();
 
   const { link, resetLink } = useLinkState();
   const { kloudId } = useKloudIdState();

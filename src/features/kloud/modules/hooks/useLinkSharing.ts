@@ -17,13 +17,6 @@ export const useLinkSharing = ({ title, url }: UseLinkSharingProps) => {
           text: title,
           url: url,
         });
-
-        toast({
-          title: '링크가 공유되었습니다.',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
       } catch (error) {
         //
       }
