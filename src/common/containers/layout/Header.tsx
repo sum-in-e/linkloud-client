@@ -6,10 +6,12 @@ import logo from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { Avatar } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 
 const Header = () => {
   const router = useRouter();
   const pageType = usePageType();
+  const { isHeaderVisible } = useIsShowLayout();
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
@@ -24,7 +26,7 @@ const Header = () => {
     router.push('/setting');
   };
 
-  return (
+  return isHeaderVisible ? (
     <header className="fixed left-0 top-0 z-50 flex h-20 w-full justify-center bg-white">
       <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-5">
         <Image
@@ -49,7 +51,7 @@ const Header = () => {
         )}
       </div>
     </header>
-  );
+  ) : null;
 };
 
 export default Header;

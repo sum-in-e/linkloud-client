@@ -1,13 +1,13 @@
 'use client';
 
+import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 import { useToast } from '@chakra-ui/toast';
 import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const toast = useToast();
-  const pathname = usePathname();
 
-  const isShow = !pathname.includes('/kloud'); // 마이클라우드 제외한 페이지 에서만 푸터 노출
+  const { isFooterVisible } = useIsShowLayout();
 
   const handleClickCopyEmail = async () => {
     try {
@@ -29,7 +29,7 @@ const Footer = () => {
     }
   };
 
-  return isShow ? (
+  return isFooterVisible ? (
     <footer className="flex w-full justify-center bg-stone-900">
       <div className="flex w-full max-w-screen-xl flex-col gap-10 p-6">
         <div className="flex w-full flex-col gap-10 md:flex-row">
