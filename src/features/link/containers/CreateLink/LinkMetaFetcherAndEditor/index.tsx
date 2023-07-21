@@ -2,7 +2,6 @@
 
 import LinkFetcher from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkFetcher';
 import LinkEditor from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkEditor';
-import { useState } from 'react';
 import { useShowLinkEditorState } from '@/features/link/modules/stores/createLinkStore';
 
 const LinkMetaFetcherAndEditor = () => {
