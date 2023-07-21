@@ -30,7 +30,7 @@ const sections = [
     title: '어디서든 사용하기',
     text: (
       <>
-        <span>{`PC에서는 웹으로, 모바일에서는 App으로\n어디서든 사용하세요.\n모바일에서 링클라우드를 홈 화면에 바로가기로 추가하면 App으로 사용할 수 있어요!\n`}</span>
+        <span>{`PC에서는 웹으로, 모바일에서는 웹 App으로\n어디서든 사용하세요.\n모바일에서 링클라우드를 홈 화면에 바로가기로 추가하면 웹 App으로 사용할 수 있어요!\n`}</span>
         <span className="text-xs text-gray-500">
           {`추가하는 방법은 `}
           <button
