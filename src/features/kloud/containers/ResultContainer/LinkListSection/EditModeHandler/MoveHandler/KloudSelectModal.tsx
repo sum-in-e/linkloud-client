@@ -32,7 +32,6 @@ const KloudSelectModal = ({
   onSuccess,
   selectedIds,
 }: Props) => {
-  console.log('modal');
   const toast = useToast();
   const { group } = useParams();
   const queryClient = useQueryClient();
