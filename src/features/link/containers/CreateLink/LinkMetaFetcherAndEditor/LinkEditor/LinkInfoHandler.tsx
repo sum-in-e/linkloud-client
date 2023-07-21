@@ -65,7 +65,7 @@ const LinkInfoHanlder = () => {
           value={link.description}
           onChange={handleChangeDescription}
           className="w-full resize-none rounded-2xl bg-stone-100 px-4 py-3 text-sm"
-          placeholder="링크에 대한 설명을 입력해 보세요!"
+          placeholder="이 링크는 어떤 링크인가요?👀"
         />
       </div>
     </div>
