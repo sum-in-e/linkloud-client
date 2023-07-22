@@ -143,7 +143,7 @@ const NotReadNotificationHandler = () => {
   /**
    * 푸시 구독 정보를 검사하고 저장하는 함수입니다.
    */
-  const checkAnSaveSubscription = async ({
+  const checkAndSaveSubscription = async ({
     serviceWorker,
     subscription,
     publicKey,
@@ -168,10 +168,12 @@ const NotReadNotificationHandler = () => {
       }
     } else {
       // 새로운 푸쉬 구독 생성
+
       const newSubscription = await createNewSubscription({
         serviceWorker,
         publicKey,
       });
+
       const newSubscriptionInfo = getSubscriptionInfo(newSubscription);
       if (newSubscriptionInfo) {
         saveSubscription({
@@ -187,16 +189,19 @@ const NotReadNotificationHandler = () => {
    *
    * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
-  const handleSubscription = async () => {
+  const handleSubscription = async (
+    serviceWorker: ServiceWorkerRegistration
+  ) => {
     try {
       const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
       if (!publicKey) throw new Error();
 
-      const serviceWorker = await navigator.serviceWorker.ready;
-      if (!navigator.serviceWorker.controller) throw new Error();
-
       const subscription = await serviceWorker.pushManager.getSubscription();
-      await checkAnSaveSubscription({ serviceWorker, subscription, publicKey });
+      await checkAndSaveSubscription({
+        serviceWorker,
+        subscription,
+        publicKey,
+      });
     } catch (error) {
       handleFailedError();
     }
@@ -220,7 +225,9 @@ const NotReadNotificationHandler = () => {
   /**
    * 푸시 알림을 위한 권한을 요청하고 응답을 처리합니다.
    */
-  const requestPermission = async () => {
+  const requestPermission = async (
+    serviceWorker: ServiceWorkerRegistration
+  ) => {
     // 알림 권한 요청
     const permission = await Notification.requestPermission();
 
@@ -239,17 +246,19 @@ const NotReadNotificationHandler = () => {
       return;
     }
     // 알림 권한 수락
-    handleSubscription();
+    handleSubscription(serviceWorker);
   };
 
   /**
    * 브라우저가 알림을 구독할 수 있는 상태인지 확인하고 처리합니다.
    */
-  const checkSubscribable = async (): Promise<void> => {
+  const checkSubscribable = async (
+    serviceWorker: ServiceWorkerRegistration
+  ): Promise<void> => {
     switch (Notification.permission) {
       // 이미 브라우저 알림 권한 동의되어있는 상태
       case 'granted':
-        await handleSubscription();
+        await handleSubscription(serviceWorker);
         break;
 
       // 브라우저 알림 권한이 거절되었거나, 권한 요청을 받아본 적이 없는 상태
@@ -261,7 +270,7 @@ const NotReadNotificationHandler = () => {
 
       // 권한 요청 및 유저 선택에 따른 로직 수행
       default:
-        requestPermission();
+        requestPermission(serviceWorker);
         break;
     }
   };
@@ -378,9 +387,25 @@ const NotReadNotificationHandler = () => {
       } else {
         // 알림 활성화
         await navigator.serviceWorker.register('/sw.js'); // 새 서비스워커 등록
-        await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
+        const serviceWorker = await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
 
-        await checkSubscribable();
+        // 서비스워커가 페이지를 제어하고 있는지 확인
+        if (navigator.serviceWorker.controller) {
+          await checkSubscribable(serviceWorker);
+        } else {
+          // 제어하고 있지 않으면 controllerchange 이벤트 리스너 등록 -> 서비스워커가 페이지 제어할 수 있는 상태 되는 것을 기다림
+          navigator.serviceWorker.addEventListener(
+            'controllerchange',
+            async () => {
+              // 이벤트 발생 시 푸시 구독 처리
+              if (
+                serviceWorker.active?.state === 'activated' ||
+                serviceWorker.active?.state === 'activating'
+              )
+                await checkSubscribable(serviceWorker);
+            }
+          );
+        }
       }
     } catch (error) {
       handleFailedError();
@@ -390,7 +415,6 @@ const NotReadNotificationHandler = () => {
   useEffect(() => {
     // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
     navigator.serviceWorker.ready.then((serviceWorker) => {
-      console.log('isReady', serviceWorker);
       serviceWorker.pushManager.getSubscription().then((subscription) => {
         if (subscription) {
           const subscriptionInfo = getSubscriptionInfo(subscription);
