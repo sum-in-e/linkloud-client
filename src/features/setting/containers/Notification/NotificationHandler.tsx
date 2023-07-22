@@ -362,7 +362,12 @@ const NotificationHandler = () => {
     const newChecked = event.target.checked;
     setIsChecked(newChecked);
 
-    if (!(await isServiceWorkerSupported())) {
+    if (!(await isServiceWorkerSupported()) || !('Notification' in window)) {
+      showToast({
+        title: `!isServiceWorkerSupported || !"Notification" in window`,
+        status: 'warning',
+        duration: 3000,
+      });
       setIsChecked(prevChecked);
       return;
     }
@@ -383,6 +388,11 @@ const NotificationHandler = () => {
 
         const serviceWorker = await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
         console.log('serviceWorker.ready', serviceWorker);
+        showToast({
+          title: 'pass',
+          status: 'info',
+          duration: 2000,
+        });
         await checkSubscribable(serviceWorker);
       }
     } catch (error) {
