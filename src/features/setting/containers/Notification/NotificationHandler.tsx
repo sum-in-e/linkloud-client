@@ -386,7 +386,12 @@ const NotificationHandler = () => {
         await checkSubscribable(serviceWorker);
       }
     } catch (error) {
-      handleServiceWorkerError(prevChecked);
+      // handleServiceWorkerError(prevChecked);
+      showToast({
+        title: <p className="whitespace-pre">{`${error}`}</p>,
+        status: 'warning',
+      });
+      setIsChecked(prevChecked);
       return;
     }
   };
