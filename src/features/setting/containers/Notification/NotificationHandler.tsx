@@ -381,12 +381,7 @@ const NotificationHandler = () => {
         await navigator.serviceWorker.register('/sw.js'); // 새 서비스워커 등록
 
         const serviceWorker = await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
-        console.log('serviceWorker.ready', serviceWorker);
-        showToast({
-          title: 'pass',
-          status: 'info',
-          duration: 2000,
-        });
+
         await checkSubscribable(serviceWorker);
       }
     } catch (error) {
