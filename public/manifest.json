@@ -11,7 +11,13 @@
   "lang": "ko",
   "orientation": "portrait",
   "dir": "auto",
-  "display_override": ["standalone", "fullscreen", "window-controls-overlay"],
+  "share_target": {
+    "action": "/link/share-target",
+    "method": "GET",
+    "params": {
+      "url": "link"
+    }
+  },
   "icons": [
     {
       "src": "./icons/favicon-96x96.png",
