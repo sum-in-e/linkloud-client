@@ -12,7 +12,7 @@ import { useSaveSubscriptionMutation } from '@/features/kloud/modules/apiHooks/s
 import { AlertStatus, Switch, useToast } from '@chakra-ui/react';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 
-const NotificationHandler = () => {
+const NotReadNotificationHandler = () => {
   const toast = useToast();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -39,11 +39,35 @@ const NotificationHandler = () => {
   };
 
   /**
+   * 알림 활성화 완료 토스트를 보여줍니다.
+   */
+  const showSuccessToast = () => {
+    return showToast({
+      title: '알림이 활성화 되었습니다.',
+      status: 'success',
+    });
+  };
+
+  /**
+   * 서비스 워커를 가져오는 도중 발생한 오류를 처리합니다.
+   */
+  const handleFailedError = () => {
+    showToast({
+      title: (
+        <p className="whitespace-pre">
+          {`알림을 활성화하지 못했습니다.\n새로고침후 다시 시도해 주세요.`}
+        </p>
+      ),
+      status: 'warning',
+    });
+    setIsChecked(isChecked);
+  };
+
+  /**
    * 서버에 구독을 저장하고 응답을 처리합니다.
    *
-   * @param {Object} options - 옵션 객체입니다.
-   * @param {PushSubscription} options.subscription - 구독 객체입니다.
-   * @param {SubscriptionInfoType} options.subscriptionInfo - 구독 정보입니다.
+   * @param {PushSubscription} subscription - 구독 객체입니다.
+   * @param {SubscriptionInfoType} subscriptionInfo - 구독 정보입니다.
    */
   const saveSubscription = ({
     subscription,
@@ -54,10 +78,7 @@ const NotificationHandler = () => {
   }) => {
     saveSubscriptionMutate(subscriptionInfo, {
       onSuccess: (data) => {
-        showToast({
-          title: '알림이 활성화 되었습니다.',
-          status: 'success',
-        });
+        showSuccessToast();
       },
       onError: async (error) => {
         const isNotServerError = error.response?.status !== 500;
@@ -79,34 +100,86 @@ const NotificationHandler = () => {
   /**
    * 서버에서 구독 상태를 확인하고 응답을 처리합니다.
    *
-   * @param {Object} options - 옵션 객체입니다.
-   * @param {PushSubscription} options.subscription - 구독 객체입니다.
-   * @param {SubscriptionInfoType} options.subscriptionInfo - 구독 정보입니다.
+   * @param {SubscriptionInfoType} subscriptionInfo - 구독 정보입니다.
    */
   const checkSubscription = ({
-    subscription,
     subscriptionInfo,
   }: {
-    subscription: PushSubscription;
     subscriptionInfo: SubscriptionInfoType;
-  }) => {
-    checkSubscriptionMutate(subscriptionInfo, {
-      onSuccess: (data) => {
-        // 이미 서버에 구독 정보가 등록된 브라우저 -> 활성화 됐다고 안내 해주기
-        if (data.data.status === 'valid') {
-          showToast({
-            title: '알림이 활성화 되었습니다.',
-            status: 'success',
-          });
-          return;
-        }
-
-        if (data.data.status === 'invalid') {
-          saveSubscription({ subscription, subscriptionInfo });
-          return;
-        }
-      },
+  }): Promise<'valid' | 'invalid'> => {
+    return new Promise((resolve, reject) => {
+      checkSubscriptionMutate(subscriptionInfo, {
+        onSuccess: (data) => {
+          if (data.data.status === 'valid') {
+            resolve('valid');
+          }
+          if (data.data.status === 'invalid') {
+            resolve('invalid');
+          }
+        },
+        onError: (error) => {
+          reject(error);
+        },
+      });
     });
+  };
+
+  /**
+   * 새 알림 구독을 생성합니다.
+   */
+  const createNewSubscription = async ({
+    serviceWorker,
+    publicKey,
+  }: {
+    serviceWorker: ServiceWorkerRegistration;
+    publicKey: string;
+  }) => {
+    return await serviceWorker.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicKey),
+    });
+  };
+
+  /**
+   * 푸시 구독 정보를 검사하고 저장하는 함수입니다.
+   */
+  const checkAnSaveSubscription = async ({
+    serviceWorker,
+    subscription,
+    publicKey,
+  }: {
+    serviceWorker: ServiceWorkerRegistration;
+    subscription: PushSubscription | null;
+    publicKey: string;
+  }) => {
+    if (subscription) {
+      // 기존 푸쉬 구독 정보 사용
+      const subscriptionInfo = getSubscriptionInfo(subscription);
+      if (subscriptionInfo) {
+        const subscriptionStatus = await checkSubscription({
+          subscriptionInfo,
+        });
+        if (subscriptionStatus === 'valid') {
+          showSuccessToast();
+        }
+        if (subscriptionStatus === 'invalid') {
+          saveSubscription({ subscription, subscriptionInfo });
+        }
+      }
+    } else {
+      // 새로운 푸쉬 구독 생성
+      const newSubscription = await createNewSubscription({
+        serviceWorker,
+        publicKey,
+      });
+      const newSubscriptionInfo = getSubscriptionInfo(newSubscription);
+      if (newSubscriptionInfo) {
+        saveSubscription({
+          subscription: newSubscription,
+          subscriptionInfo: newSubscriptionInfo,
+        });
+      }
+    }
   };
 
   /**
@@ -114,54 +187,18 @@ const NotificationHandler = () => {
    *
    * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
-  const handleSubscription = async (
-    serviceWorker: ServiceWorkerRegistration
-  ) => {
-    const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-
-    if (!publicKey) {
-      showToast({
-        title: (
-          <p className="whitespace-pre">
-            {`서버 에러로 인해 알림을 활성화할 수 없습니다.\n잠시후 다시 시도해 주세요.`}
-          </p>
-        ),
-        status: 'warning',
-      });
-      setIsChecked(false);
-      return;
-    }
-
-    // 푸쉬 구독
+  const handleSubscription = async () => {
     try {
+      const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+      if (!publicKey) throw new Error();
+
+      const serviceWorker = await navigator.serviceWorker.ready;
+      if (!navigator.serviceWorker.controller) throw new Error();
+
       const subscription = await serviceWorker.pushManager.getSubscription();
-
-      if (subscription) {
-        // * 기존 푸쉬 구독 정보 사용
-        const subscriptionInfo = getSubscriptionInfo(subscription);
-
-        if (subscriptionInfo) {
-          checkSubscription({
-            subscription,
-            subscriptionInfo,
-          });
-        }
-      } else {
-        // * 새로운 푸쉬 구독 생성
-        // 푸시 구독 정보의 endpoint와 keys는 각 구독 생성 시에 unique하게 생성되므로 서버에 있을 수 없다. = 서버에 있는지 확인할 필요가 없다.
-        const subscription = await serviceWorker.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(publicKey),
-        });
-
-        const subscriptionInfo = getSubscriptionInfo(subscription);
-
-        if (subscriptionInfo) {
-          saveSubscription({ subscription, subscriptionInfo });
-        }
-      }
+      await checkAnSaveSubscription({ serviceWorker, subscription, publicKey });
     } catch (error) {
-      // 구독 관련 에러 발생 시
+      handleFailedError();
     }
   };
 
@@ -182,12 +219,8 @@ const NotificationHandler = () => {
 
   /**
    * 푸시 알림을 위한 권한을 요청하고 응답을 처리합니다.
-   *
-   * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
-  const requestPermission = async (
-    serviceWorker: ServiceWorkerRegistration
-  ) => {
+  const requestPermission = async () => {
     // 알림 권한 요청
     const permission = await Notification.requestPermission();
 
@@ -205,47 +238,39 @@ const NotificationHandler = () => {
       setIsChecked(false);
       return;
     }
-
     // 알림 권한 수락
-    handleSubscription(serviceWorker);
+    handleSubscription();
   };
 
   /**
-   * 브라우저가 알림을 구독할 수 있는지 확인하고 처리합니다.
-   *
-   * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
+   * 브라우저가 알림을 구독할 수 있는 상태인지 확인하고 처리합니다.
    */
-  const checkSubscribable = async (
-    serviceWorker: ServiceWorkerRegistration
-  ): Promise<void> => {
-    if (Notification.permission === 'granted') {
-      // * 이미 브라우저 알림 권한 동의되어있는 상태
-      handleSubscription(serviceWorker);
-    } else if (Notification.permission === 'denied') {
-      // * 이미 브라우저 알림 권한이 거절되어있는 상태
-      showPermissionRequiredToast();
-      setIsChecked(false);
-    } else {
-      // * 권한 요청을 받아본적이 없는 상태
+  const checkSubscribable = async (): Promise<void> => {
+    switch (Notification.permission) {
+      // 이미 브라우저 알림 권한 동의되어있는 상태
+      case 'granted':
+        await handleSubscription();
+        break;
 
-      if (Notification.permission === 'default') {
-        // 사용자에게 알림 권한 요청이 보여지지 않았을 경우
+      // 브라우저 알림 권한이 거절되었거나, 권한 요청을 받아본 적이 없는 상태
+      case 'denied':
+      case 'default':
         showPermissionRequiredToast();
         setIsChecked(false);
-        return;
-      }
+        break;
 
       // 권한 요청 및 유저 선택에 따른 로직 수행
-      requestPermission(serviceWorker);
+      default:
+        requestPermission();
+        break;
     }
   };
 
   /**
    * 서버에서 구독을 삭제하고 응답을 처리합니다.
    *
-   * @param {Object} options - 옵션 객체입니다.
-   * @param {PushSubscription} options.subscription - 구독 객체입니다.
-   * @param {ServiceWorkerRegistration} options.serviceWorker - 서비스 워커 등록 객체입니다.
+   * @param {PushSubscription} subscription - 구독 객체입니다.
+   * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
   const deleteSubscription = ({
     subscription,
@@ -266,6 +291,7 @@ const NotificationHandler = () => {
           p256dh: arrayBufferToBase64(p256dh),
         },
       };
+
       deleteSubscriptionMutate(subscriptionInfo, {
         onSuccess: async () => {
           await subscription.unsubscribe(); // 브라우저 푸쉬 구독 취소
@@ -279,15 +305,7 @@ const NotificationHandler = () => {
           const isNotServerError = error.response?.status !== 500;
 
           if (isNotServerError) {
-            showToast({
-              title: (
-                <p className="whitespace-pre">
-                  {`서버 에러로 인해 비활성화에 실패하였습니다.\n잠시후 다시 시도해 주세요.`}
-                </p>
-              ),
-              status: 'warning',
-            });
-            setIsChecked(true);
+            handleFailedError();
           }
         },
       });
@@ -296,7 +314,6 @@ const NotificationHandler = () => {
 
   /**
    * 푸시 알림을 구독 해제하고 응답을 처리합니다.
-   *
    * @param {ServiceWorkerRegistration} serviceWorker - 서비스 워커 등록 객체입니다.
    */
   const handleUnsubscribe = async (
@@ -313,33 +330,16 @@ const NotificationHandler = () => {
   };
 
   /**
-   * 서비스 워커를 가져오는 도중 발생한 오류를 처리합니다.
-   *
-   * @param {boolean} prevChecked - 이전 체크 상태입니다.
-   */
-  const handleServiceWorkerError = (prevChecked: boolean) => {
-    showToast({
-      title: (
-        <p className="whitespace-pre">
-          {`서버 에러로 인해 요청을 수행하지 못했습니다.\n잠시후 다시 시도해 주세요.`}
-        </p>
-      ),
-      status: 'warning',
-    });
-    setIsChecked(prevChecked);
-  };
-
-  /**
    * 브라우저가 Service worker API와 Notification API를 지원하는지 확인합니다.
    * 모바일의 경우 PWA 앱을 설치하지 않고 알림 활성화가 불가능합니다.
-   * @returns {Promise<boolean>} 지원하면 true, 그렇지 않으면 false입니다.
+   * @returns {Promise<boolean>}
    */
   const isSupported = async (): Promise<boolean> => {
     if (!('serviceWorker' in navigator) || !('Notification' in window)) {
       showToast({
         title: (
           <p className="whitespace-pre">
-            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n모바일의 경우 알림을 위해 App 설치가 필요합니다.`}
+            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n모바일은 알림을 위해 App 설치가 필요합니다.`}
           </p>
         ),
         status: 'info',
@@ -353,12 +353,11 @@ const NotificationHandler = () => {
 
   /**
    * 스위치 이벤트를 처리합니다.
-   *
-   * @param {ChangeEvent<HTMLInputElement>} event - 스위치 이벤트입니다.
    */
   const handleSwitch = async (event: ChangeEvent<HTMLInputElement>) => {
     const prevChecked = isChecked;
     const newChecked = event.target.checked;
+
     setIsChecked(newChecked);
 
     if (!(await isSupported())) {
@@ -368,7 +367,7 @@ const NotificationHandler = () => {
 
     try {
       if (!newChecked) {
-        // 알림 비활성화하는 경우
+        // 알림 비활성화
         const serviceWorker = await navigator.serviceWorker.getRegistration(); // 기존 서비스워커
 
         if (serviceWorker) {
@@ -377,22 +376,21 @@ const NotificationHandler = () => {
           setIsChecked(!newChecked);
         }
       } else {
-        // 알림 활성화하는 경우
+        // 알림 활성화
         await navigator.serviceWorker.register('/sw.js'); // 새 서비스워커 등록
+        await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
 
-        const serviceWorker = await navigator.serviceWorker.ready; // 서비스 워커가 활성화될 때까지 대기
-
-        await checkSubscribable(serviceWorker);
+        await checkSubscribable();
       }
     } catch (error) {
-      handleServiceWorkerError(prevChecked);
-      return;
+      handleFailedError();
     }
   };
 
   useEffect(() => {
     // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
     navigator.serviceWorker.ready.then((serviceWorker) => {
+      console.log('isReady', serviceWorker);
       serviceWorker.pushManager.getSubscription().then((subscription) => {
         if (subscription) {
           const subscriptionInfo = getSubscriptionInfo(subscription);
@@ -416,7 +414,7 @@ const NotificationHandler = () => {
       <form className="flex items-center justify-between">
         <label
           htmlFor="notification-handler"
-          className="text-lg font-bold text-gray-800"
+          className="font-semibold text-gray-800"
         >
           미열람 링크 알림
         </label>
@@ -445,4 +443,4 @@ const NotificationHandler = () => {
   );
 };
 
-export default NotificationHandler;
+export default NotReadNotificationHandler;
