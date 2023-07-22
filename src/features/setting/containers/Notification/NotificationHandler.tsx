@@ -330,17 +330,16 @@ const NotificationHandler = () => {
   };
 
   /**
-   * 브라우저가 서비스 워커를 지원하는지 확인합니다.
-   *
+   * 브라우저가 Service worker API와 Notification API를 지원하는지 확인합니다.
+   * 모바일의 경우 PWA 앱을 설치하지 않고 알림 활성화가 불가능합니다.
    * @returns {Promise<boolean>} 지원하면 true, 그렇지 않으면 false입니다.
    */
-  const isServiceWorkerSupported = async (): Promise<boolean> => {
-    // 서비스워커 지원여부 확인
-    if (!('serviceWorker' in navigator)) {
+  const isSupported = async (): Promise<boolean> => {
+    if (!('serviceWorker' in navigator) || !('Notification' in window)) {
       showToast({
         title: (
           <p className="whitespace-pre">
-            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.`}
+            {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n모바일의 경우 알림을 위해 App 설치가 필요합니다.`}
           </p>
         ),
         status: 'info',
@@ -362,12 +361,7 @@ const NotificationHandler = () => {
     const newChecked = event.target.checked;
     setIsChecked(newChecked);
 
-    if (!(await isServiceWorkerSupported()) || !('Notification' in window)) {
-      showToast({
-        title: `!isServiceWorkerSupported || !"Notification" in window`,
-        status: 'warning',
-        duration: 3000,
-      });
+    if (!(await isSupported())) {
       setIsChecked(prevChecked);
       return;
     }
@@ -396,12 +390,7 @@ const NotificationHandler = () => {
         await checkSubscribable(serviceWorker);
       }
     } catch (error) {
-      // handleServiceWorkerError(prevChecked);
-      showToast({
-        title: <p className="whitespace-pre">{`${error}`}</p>,
-        status: 'warning',
-      });
-      setIsChecked(prevChecked);
+      handleServiceWorkerError(prevChecked);
       return;
     }
   };
