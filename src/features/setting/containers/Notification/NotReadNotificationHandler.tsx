@@ -442,6 +442,7 @@ const NotReadNotificationHandler = () => {
       navigator.serviceWorker.getRegistration().then(async (serviceWorker) => {
         if (serviceWorker) {
           // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
+          console.log('scope', serviceWorker.scope);
           navigator.serviceWorker.ready.then((serviceWorker) => {
             serviceWorker.pushManager.getSubscription().then((subscription) => {
               if (subscription) {
