@@ -16,10 +16,14 @@ const NotReadNotificationHandler = () => {
   const toast = useToast();
 
   const [isChecked, setIsChecked] = useState(false);
+  const [isNotSupported, setIsNotSupported] = useState(false);
 
   const { mutate: checkSubscriptionMutate } = useCheckSubscriptionMutation();
   const { mutate: saveSubscriptionMutate } = useSaveSubscriptionMutation();
   const { mutate: deleteSubscriptionMutate } = useDeleteSubscriptionMutation();
+
+  const isSupportedServiceWorker = 'serviceWorker' in navigator;
+  const isSupportedNotification = 'Notification' in window;
 
   const showToast = ({
     title,
@@ -271,11 +275,6 @@ const NotReadNotificationHandler = () => {
         await handleSubscription(serviceWorker);
         break;
 
-      // 권한 요청에 대한 사용자의 결정이 알려지지 않은 상태 (app의 경우 denied와 같은 상태로 여겨지기 때문에 먼저 선언하지 않으면 denied 처리되서 권한 요청이 안 되는 이슈 발생)
-      // case 'default':
-      //   requestPermission(serviceWorker);
-      //   break;
-
       // 브라우저 알림 권한이 거절되었거나
       case 'denied':
         showToast({
@@ -367,7 +366,7 @@ const NotReadNotificationHandler = () => {
    * @returns {Promise<boolean>}
    */
   const isSupported = async (): Promise<boolean> => {
-    if (!('serviceWorker' in navigator) || !('Notification' in window)) {
+    if (!isSupportedServiceWorker || !isSupportedNotification) {
       showToast({
         title: (
           <p className="whitespace-pre">
@@ -436,25 +435,35 @@ const NotReadNotificationHandler = () => {
   };
 
   useEffect(() => {
-    // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
-    navigator.serviceWorker.ready.then((serviceWorker) => {
-      serviceWorker.pushManager.getSubscription().then((subscription) => {
-        if (subscription) {
-          const subscriptionInfo = getSubscriptionInfo(subscription);
+    if (!isSupportedServiceWorker || !isSupportedNotification) {
+      // * 서비스워커 혹은 알림 기능 미지원 시 알림 활성화 불가
+      setIsNotSupported(true);
+    } else {
+      // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
+      navigator.serviceWorker.ready.then((serviceWorker) => {
+        serviceWorker.pushManager.getSubscription().then((subscription) => {
+          if (subscription) {
+            const subscriptionInfo = getSubscriptionInfo(subscription);
 
-          if (subscriptionInfo) {
-            checkSubscriptionMutate(subscriptionInfo, {
-              onSuccess: (data) => {
-                if (data.data.status === 'valid') {
-                  setIsChecked(true);
-                }
-              },
-            });
+            if (subscriptionInfo) {
+              checkSubscriptionMutate(subscriptionInfo, {
+                onSuccess: (data) => {
+                  if (data.data.status === 'valid') {
+                    setIsChecked(true);
+                  }
+                },
+              });
+            }
           }
-        }
+        });
       });
-    });
-  }, [checkSubscriptionMutate, setIsChecked]);
+    }
+  }, [
+    checkSubscriptionMutate,
+    isSupportedNotification,
+    isSupportedServiceWorker,
+    setIsChecked,
+  ]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -468,24 +477,35 @@ const NotReadNotificationHandler = () => {
         <Switch
           id="notification-handler"
           size="md"
+          isDisabled={isNotSupported}
           isChecked={isChecked}
           onChange={handleSwitch}
         />
       </form>
-      <p className="break-keep text-sm">
-        확인하지 않은 링크가 10개 이상일 경우 알림을 보내드려요.
-      </p>
-      <p className="text-xs text-gray-500">
-        {`알림 활성화가 되지 않는다면 `}
-        <button
-          type="button"
-          className="w-fit text-xs text-gray-500 underline"
-          onClick={() => window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')}
-        >
-          {`사용 가이드`}
-        </button>
-        {` 문서를 확인해 주세요.`}
-      </p>
+      {isNotSupported ? (
+        <p className="break-keep text-xs text-gray-500">
+          해당 기기에서는 알림 기능을 지원하지 않습니다.
+        </p>
+      ) : (
+        <div>
+          <p className="mb-1 break-keep text-sm">
+            확인하지 않은 링크가 10개 이상일 경우 알림을 보내드려요.
+          </p>
+          <p className="text-xs text-gray-500">
+            {`알림 활성화가 되지 않는다면 `}
+            <button
+              type="button"
+              className="w-fit text-xs text-gray-500 underline"
+              onClick={() =>
+                window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+              }
+            >
+              {`사용 가이드`}
+            </button>
+            {` 문서를 확인해 주세요.`}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
