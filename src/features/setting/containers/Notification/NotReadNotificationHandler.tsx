@@ -255,20 +255,44 @@ const NotReadNotificationHandler = () => {
   const checkSubscribable = async (
     serviceWorker: ServiceWorkerRegistration
   ): Promise<void> => {
+    showToast({
+      title: `권한 ${Notification.permission}`,
+      status: 'info',
+      duration: 2000,
+    });
     switch (Notification.permission) {
       // 이미 브라우저 알림 권한 동의되어있는 상태
       case 'granted':
+        showToast({
+          title: 'case: granted',
+          status: 'info',
+          duration: 2000,
+        });
         await handleSubscription(serviceWorker);
         break;
 
+      // 권한 요청에 대한 사용자의 결정이 알려지지 않은 상태 (app의 경우 denied와 같은 상태로 여겨지기 때문에 먼저 선언하지 않으면 denied 처리되서 권한 요청이 안 되는 이슈 발생)
+      // case 'default':
+      //   requestPermission(serviceWorker);
+      //   break;
+
       // 브라우저 알림 권한이 거절되었거나
       case 'denied':
+        showToast({
+          title: 'case: denied',
+          status: 'info',
+          duration: 2000,
+        });
         showPermissionRequiredToast();
         setIsChecked(false);
         break;
 
-      // 권한 요청에 대한 사용자의 결정이 알려지지 않은 상태
       default:
+        showToast({
+          title: 'default',
+          status: 'info',
+          duration: 2000,
+        });
         requestPermission(serviceWorker);
         break;
     }
