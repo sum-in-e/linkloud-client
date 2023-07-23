@@ -180,7 +180,7 @@ const EmailInputGroup = () => {
             className={`relative w-3/5 rounded-l-2xl  border-[1px] border-stone-200`}
           >
             <input
-              type="number"
+              inputMode="numeric"
               name="verification code"
               disabled={isVerified}
               value={verificationCode}
