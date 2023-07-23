@@ -72,13 +72,13 @@ const Footer = () => {
             <Text
               text="서비스 이용약관"
               onClick={() =>
-                window.open('https://www.craft.me/s/T6jZMsE55ZspAY')
+                window.open('https://www.craft.me/s/u150oK9QGBnX4U')
               }
             />
             <Text
               text="개인정보 처리방침"
               onClick={() =>
-                window.open('https://www.craft.me/s/XsDZfFvOjq9Glv')
+                window.open('https://www.craft.me/s/CJKMGCcnuC5YDf')
               }
             />
           </div>

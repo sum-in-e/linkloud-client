@@ -5,7 +5,7 @@ const TermsWithAgreeText = () => {
       <button
         type="button"
         className="w-fit text-xs text-gray-500 underline"
-        onClick={() => window.open('https://www.craft.me/s/yG0eJS9FTPXVGh ')}
+        onClick={() => window.open('https://www.craft.me/s/JpqZ4wRl0FqFWJ')}
       >
         {`개인정보 수집 및 이용`}
       </button>
@@ -13,7 +13,7 @@ const TermsWithAgreeText = () => {
       <button
         type="button"
         className="w-fit text-xs text-gray-500 underline"
-        onClick={() => window.open('https://www.craft.me/s/T6jZMsE55ZspAY')}
+        onClick={() => window.open('https://www.craft.me/s/u150oK9QGBnX4U')}
       >
         {`서비스 이용약관`}
       </button>
