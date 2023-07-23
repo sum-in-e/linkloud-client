@@ -261,14 +261,13 @@ const NotReadNotificationHandler = () => {
         await handleSubscription(serviceWorker);
         break;
 
-      // 브라우저 알림 권한이 거절되었거나, 권한 요청을 받아본 적이 없는 상태
+      // 브라우저 알림 권한이 거절되었거나
       case 'denied':
-      case 'default':
         showPermissionRequiredToast();
         setIsChecked(false);
         break;
 
-      // 권한 요청 및 유저 선택에 따른 로직 수행
+      // 권한 요청에 대한 사용자의 결정이 알려지지 않은 상태
       default:
         requestPermission(serviceWorker);
         break;
