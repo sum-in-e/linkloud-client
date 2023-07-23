@@ -439,7 +439,7 @@ const NotReadNotificationHandler = () => {
       // * 서비스워커 혹은 알림 기능 미지원 시 알림 활성화 불가
       setIsNotSupported(true);
     } else {
-      navigator.serviceWorker.getRegistration().then((serviceWorker) => {
+      navigator.serviceWorker.getRegistration().then(async (serviceWorker) => {
         if (serviceWorker) {
           // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
           navigator.serviceWorker.ready.then((serviceWorker) => {
@@ -461,7 +461,13 @@ const NotReadNotificationHandler = () => {
           });
         } else {
           // 서비스워커 등록
-          navigator.serviceWorker.register('/sw.js');
+          await navigator.serviceWorker.register('/sw.js');
+          toast({
+            title: '서비스워커 등록 완료',
+            status: 'info',
+            duration: 2000,
+            isClosable: true,
+          });
         }
       });
 
@@ -488,7 +494,7 @@ const NotReadNotificationHandler = () => {
     checkSubscriptionMutate,
     isSupportedNotification,
     isSupportedServiceWorker,
-    setIsChecked,
+    toast,
   ]);
 
   return (
