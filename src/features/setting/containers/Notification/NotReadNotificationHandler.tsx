@@ -439,24 +439,50 @@ const NotReadNotificationHandler = () => {
       // * 서비스워커 혹은 알림 기능 미지원 시 알림 활성화 불가
       setIsNotSupported(true);
     } else {
-      // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
-      navigator.serviceWorker.ready.then((serviceWorker) => {
-        serviceWorker.pushManager.getSubscription().then((subscription) => {
-          if (subscription) {
-            const subscriptionInfo = getSubscriptionInfo(subscription);
+      navigator.serviceWorker.getRegistration().then((serviceWorker) => {
+        if (serviceWorker) {
+          // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
+          navigator.serviceWorker.ready.then((serviceWorker) => {
+            serviceWorker.pushManager.getSubscription().then((subscription) => {
+              if (subscription) {
+                const subscriptionInfo = getSubscriptionInfo(subscription);
 
-            if (subscriptionInfo) {
-              checkSubscriptionMutate(subscriptionInfo, {
-                onSuccess: (data) => {
-                  if (data.data.status === 'valid') {
-                    setIsChecked(true);
-                  }
-                },
-              });
-            }
-          }
-        });
+                if (subscriptionInfo) {
+                  checkSubscriptionMutate(subscriptionInfo, {
+                    onSuccess: (data) => {
+                      if (data.data.status === 'valid') {
+                        setIsChecked(true);
+                      }
+                    },
+                  });
+                }
+              }
+            });
+          });
+        } else {
+          // 서비스워커 등록
+          navigator.serviceWorker.register('/sw.js');
+        }
       });
+
+      // * 알림 구독 여부 체크 및 그에 따른 스위치 활성화
+      // navigator.serviceWorker.ready.then((serviceWorker) => {
+      //   serviceWorker.pushManager.getSubscription().then((subscription) => {
+      //     if (subscription) {
+      //       const subscriptionInfo = getSubscriptionInfo(subscription);
+
+      //       if (subscriptionInfo) {
+      //         checkSubscriptionMutate(subscriptionInfo, {
+      //           onSuccess: (data) => {
+      //             if (data.data.status === 'valid') {
+      //               setIsChecked(true);
+      //             }
+      //           },
+      //         });
+      //       }
+      //     }
+      //   });
+      // });
     }
   }, [
     checkSubscriptionMutate,
