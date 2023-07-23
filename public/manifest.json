@@ -14,8 +14,8 @@
   "display_override": ["standalone", "fullscreen", "window-controls-overlay"],
   "share_target": {
     "action": "https://linkloud.co.kr/link/share-target",
-    "method": "GET",
-    "enctype": "application/x-www-form-urlencoded",
+    "method": "POST",
+    "enctype": "multipart/form-data",
     "params": {
       "url": "link"
     }
