@@ -3,7 +3,7 @@
   "short_name": "Linkloud",
   "name": "Linkloud",
   "description": "손쉽게 링크를 관리하고 생산적인 일상으로",
-  "start_url": "https://linkloud.co.kr/",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
@@ -13,9 +13,8 @@
   "dir": "auto",
   "display_override": ["standalone", "fullscreen", "window-controls-overlay"],
   "share_target": {
-    "action": "https://linkloud.co.kr/link/share-target",
-    "method": "POST",
-    "enctype": "multipart/form-data",
+    "action": "/link/share-target",
+    "method": "GET",
     "params": {
       "url": "link"
     }
