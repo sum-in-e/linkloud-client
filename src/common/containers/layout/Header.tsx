@@ -34,6 +34,7 @@ const Header = () => {
           alt="linkloud Logo"
           className="h-auto w-[90px] cursor-pointer md:w-[120px]"
           onClick={handlePushToDefaultPage}
+          priority
         />
         {pageType === 'public' ? (
           <Link
