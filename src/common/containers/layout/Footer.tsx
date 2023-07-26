@@ -31,7 +31,7 @@ const Footer = () => {
 
   return isFooterVisible ? (
     <footer className="flex w-full justify-center bg-stone-900">
-      <div className="flex w-full max-w-screen-xl flex-col gap-10 p-6">
+      <div className="flex w-full max-w-screen-xl flex-col gap-10 p-5">
         <div className="flex w-full flex-col gap-10 md:flex-row">
           <div className="flex flex-col gap-4">
             <Title text="서비스" />
