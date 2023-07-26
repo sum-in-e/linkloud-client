@@ -9,9 +9,9 @@ import { usePathname } from 'next/navigation';
 export const useIsShowLayout = () => {
   const pathname = usePathname();
 
-  const isHeaderVisible = !pathname.includes('/link/share-target'); // 모바일 링크 공유하기 페이지에서는 보이지 않음
+  const isHeaderVisible = !pathname.includes('/chrome-extentions');
   const isFooterVisible =
-    !pathname.includes('/kloud') && !pathname.includes('/link/share-target'); // 모바일 링크 공유하기 페이지와 클라우드 페이지에서는 보이지 않음
+    !pathname.includes('/kloud') && !pathname.includes('/chrome-extentions');
 
   return {
     isHeaderVisible,
