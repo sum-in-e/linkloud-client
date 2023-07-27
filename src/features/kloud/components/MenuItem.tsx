@@ -23,8 +23,8 @@ const MenuItem = ({
       onClick={handleClick}
       type="button"
     >
-      <p className="">{title}</p>
-      <p className="">{count}</p>
+      <p className="overflow-hidden text-ellipsis whitespace-nowrap">{title}</p>
+      <p>{count}</p>
     </button>
   );
 };

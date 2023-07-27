@@ -12,7 +12,7 @@ const UserInfo = () => {
   return (
     <section className="flex w-full flex-col items-center gap-2">
       <div className="flex items-end gap-1">
-        <h1 className="text-2xl font-bold">{`${name} 님, 반가워요!`}</h1>
+        <h2 className="text-2xl font-bold">{`${name} 님, 반가워요!`}</h2>
       </div>
       <div>
         <div className="flex items-center gap-2">
