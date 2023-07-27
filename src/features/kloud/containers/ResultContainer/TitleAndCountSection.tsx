@@ -49,9 +49,9 @@ const TitleAndCountSection = ({ count }: Props) => {
     <section className="flex items-end gap-3">
       {isShowLoading ? (
         // TODO 조회중 스켈레톤 넣기
-        <h1 className="text-2xl font-bold">조회중</h1>
+        <h2 className="text-2xl font-bold">조회중</h2>
       ) : (
-        <h1 className="text-2xl font-bold">{getTitle()}</h1>
+        <h2 className="text-2xl font-bold">{getTitle()}</h2>
       )}
 
       <p className="text-xl font-semibold">{count}</p>

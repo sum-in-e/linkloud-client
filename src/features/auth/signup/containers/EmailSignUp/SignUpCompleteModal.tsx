@@ -10,7 +10,7 @@ const SignUpCompleteModal = () => {
       <ModalOverlay />
       <ModalContent>
         <div className="flex flex-col items-center justify-center gap-5 px-5 py-10">
-          <h1 className="text-xl font-bold">🎉 가입을 환영합니다! 🎉</h1>
+          <h2 className="text-xl font-bold">🎉 가입을 환영합니다! 🎉</h2>
           <p className="text-center">
             이제부터 Linkloud와 함께
             <br />

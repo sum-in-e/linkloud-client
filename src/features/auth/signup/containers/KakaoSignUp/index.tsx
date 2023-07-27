@@ -8,7 +8,7 @@ import SignUpButton from '@/features/auth/signup/containers/KakaoSignUp/SignUpBu
 const KakaoSignUp = () => {
   return (
     <SignLayout>
-      <h1 className="text-xl font-semibold">회원가입을 위한 추가 정보 입력</h1>
+      <h2 className="text-xl font-semibold">회원가입을 위한 추가 정보 입력</h2>
       <NicknameInput />
       <TermsWithAgreeText />
       <SignUpButton />
