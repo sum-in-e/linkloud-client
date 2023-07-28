@@ -32,7 +32,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
               }`}
               onClick={() => onSelect(null, '미분류')}
             >
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+              <p className="truncate">
                 미분류
               </p>
             </button>
@@ -46,7 +46,7 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
                 }`}
                 onClick={() => onSelect(kloud.id, kloud.name)}
               >
-                <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+                <p className="truncate">
                   {kloud.name}
                 </p>
                 <p>{kloud.linkCount}</p>

@@ -93,9 +93,7 @@ const LinkShareTarget = ({
           className="aspect-[1.91/1] w-full rounded-lg"
         />
       </picture>
-      <p className="mb-3 overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-500">
-        {url}
-      </p>
+      <p className="mb-3 truncate text-sm text-gray-500">{url}</p>
       <input
         value={newTitle}
         onChange={handleChangeTitle}

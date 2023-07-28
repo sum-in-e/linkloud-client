@@ -38,14 +38,12 @@ const LinkInfoHanlder = () => {
           <img
             alt="thumbnail"
             src={link.thumbnailUrl}
-            className="aspect-[1.91/1] w-full rounded-lg"
+            className="aspect-[1.91/1] w-full rounded-lg object-cover"
             onError={handleErrorImage}
           />
         </picture>
         <div className="mt-1 flex items-center justify-between">
-          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-500">
-            {link.url}
-          </p>
+          <p className="truncate text-sm text-gray-500">{link.url}</p>
           <button
             className="rounded-2xl bg-blue-200 p-1"
             onClick={handleClickRefresh}
