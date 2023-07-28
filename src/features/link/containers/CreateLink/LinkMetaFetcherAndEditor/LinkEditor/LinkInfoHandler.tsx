@@ -43,7 +43,7 @@ const LinkInfoHanlder = () => {
           />
         </picture>
         <div className="mt-1 flex items-center justify-between">
-          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-500">
+          <p className="truncate text-sm text-gray-500">
             {link.url}
           </p>
           <button

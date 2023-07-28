@@ -78,9 +78,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </picture>
         {/* // TODO: 컨텐츠 감싸는 div 높이도 조정 필요 */}
         <div className="h-[150px] max-h-[150px] p-2">
-          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-500">
-            {url}
-          </p>
+          <p className="truncate text-sm text-gray-500">{url}</p>
           <p className="text-sm font-bold">{title}</p>
           <p className="text-sm text-gray-500">{description}</p>
           <div className="flex items-center gap-1">
