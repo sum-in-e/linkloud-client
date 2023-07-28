@@ -32,16 +32,6 @@
       "src": "./icons/196x196.png",
       "sizes": "196x196",
       "type": "image/png"
-    },
-    {
-      "src": "./icons/310x310.png",
-      "sizes": "310x310",
-      "type": "image/png"
-    },
-    {
-      "src": "./icons/512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
     }
   ]
 }
