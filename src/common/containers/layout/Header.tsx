@@ -1,17 +1,21 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import logo from '/public/images/logo_v.png';
-import { usePageType } from '@/common/modules/hooks/usePageType';
 import { Avatar } from '@chakra-ui/react';
 import Link from 'next/link';
+import { FaPlus } from 'react-icons/fa';
+import logo from '/public/images/logo_v.png';
+import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
+import { useOpen } from '@/common/modules/hooks/useOpen';
+import CreateLink from '@/features/link/containers/CreateLink';
 
 const Header = () => {
   const router = useRouter();
   const pageType = usePageType();
   const { isHeaderVisible } = useIsShowLayout();
+  const { onClose, isOpen, onOpen } = useOpen();
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
@@ -44,11 +48,21 @@ const Header = () => {
             시작하기
           </Link>
         ) : (
-          <Avatar
-            size={'sm'}
-            onClick={handlePushToSetting}
-            className="cursor-pointer"
-          />
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="flex items-center justify-center rounded-full bg-primary p-[6px] hover:bg-primary-lighter"
+              onClick={() => onOpen()}
+            >
+              <FaPlus size={20} className="fill-white" />
+            </button>
+            {isOpen && <CreateLink onClose={onClose} />}
+            <Avatar
+              size={'sm'}
+              onClick={handlePushToSetting}
+              className="cursor-pointer"
+            />
+          </div>
         )}
       </div>
     </header>
