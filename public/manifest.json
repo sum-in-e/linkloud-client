@@ -12,30 +12,34 @@
   "orientation": "portrait",
   "dir": "auto",
   "display_override": ["standalone", "fullscreen", "window-controls-overlay"],
-
   "icons": [
     {
-      "src": "./icons/favicon-16x16.png",
-      "sizes": "16x16",
+      "src": "./icons/96x96.png",
+      "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "./icons/favicon-32x32.png",
-      "sizes": "32x32",
+      "src": "./icons/128x128.png",
+      "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "./icons/apple-touch-icon.png",
-      "sizes": "180x180",
+      "src": "./icons/152x152.png",
+      "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "./icons/android-chrome-192x192.png",
-      "sizes": "192x192",
+      "src": "./icons/196x196.png",
+      "sizes": "196x196",
       "type": "image/png"
     },
     {
-      "src": "./icons/android-chrome-512x512.png",
+      "src": "./icons/310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
