@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
-      url: 'https://linkloud.co.kr/setting',
+      url: 'https://linkloud.co.kr/my/profile',
       lastModified: new Date(),
     },
   ];

@@ -4,12 +4,12 @@ import { useRouter } from 'next/navigation';
 import { Skeleton } from '@chakra-ui/react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
-import LogOutButton from '@/features/setting/containers/LogOut';
-import SignOutButton from '@/features/setting/containers/SignOut';
-import UserInfo from '@/features/setting/containers/UserInfo';
-import NotificationArea from '@/features/setting/containers/Notification';
+import LogOutButton from '@/features/my/containers/LogOut';
+import SignOutButton from '@/features/my/containers/SignOut';
+import UserInfo from '@/features/my/containers/UserInfo';
+import NotificationArea from '@/features/my/containers/Notification';
 
-const MySetting = () => {
+const MyProfile = () => {
   const { isLoading, data } = useGetSessionQuery();
 
   const router = useRouter();
@@ -45,7 +45,7 @@ const MySetting = () => {
   );
 };
 
-export default MySetting;
+export default MyProfile;
 
 const Devider = () => {
   return <hr className="w-full border-gray-300" />;

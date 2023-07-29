@@ -4,7 +4,7 @@ import Checkbox from '@/features/auth/signup/components/Checkbox';
 import {
   SIGN_OUT_REASON_TYPE,
   SignOutReasonType,
-} from '@/features/setting/modules/types/signoutType';
+} from '@/features/my/modules/types/signoutType';
 import { useToast } from '@chakra-ui/react';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';

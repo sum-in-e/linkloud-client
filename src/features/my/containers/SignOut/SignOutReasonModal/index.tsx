@@ -1,5 +1,5 @@
 'use client';
-import SignOutForm from '@/features/setting/containers/SignOut/SignOutReasonModal/SignOutForm';
+import SignOutForm from '@/features/my/containers/SignOut/SignOutReasonModal/SignOutForm';
 import {
   Modal,
   ModalBody,

@@ -1,6 +1,6 @@
 'use client';
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import SignOutReasonModal from '@/features/setting/containers/SignOut/SignOutReasonModal';
+import SignOutReasonModal from '@/features/my/containers/SignOut/SignOutReasonModal';
 
 const SignOutButton = () => {
   const { isOpen, onOpen, onClose } = useOpen();

@@ -1,4 +1,4 @@
-import NotReadNotificationHandler from '@/features/setting/containers/Notification/NotReadNotificationHandler';
+import NotReadNotificationHandler from '@/features/my/containers/Notification/NotReadNotificationHandler';
 
 const NotificationArea = () => {
   return (
