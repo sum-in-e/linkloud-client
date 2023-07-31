@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
-      url: 'https://linkloud.co.kr/kloud',
+      url: 'https://linkloud.co.kr/link',
       lastModified: new Date(),
     },
     {

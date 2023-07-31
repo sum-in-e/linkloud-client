@@ -12,7 +12,7 @@ export default async function HomePage() {
   const isLogin = await getSessionWithJwtInServer();
 
   if (isLogin) {
-    redirect('/kloud');
+    redirect('/link/all');
   }
 
   return (

@@ -12,7 +12,7 @@ const KakaoButton = ({ type }: { type: AuthMethodType }) => {
 
   const queryString = querystring.stringify({
     type,
-    return_to: returnUrl || '/kloud',
+    return_to: returnUrl || '/link',
   });
 
   const text =

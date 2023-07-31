@@ -12,7 +12,7 @@ type PageType = 'public' | 'private';
 export const usePageType = (): PageType => {
   const pathname = usePathname();
 
-  const privatePaths = useMemo(() => ['/kloud', '/my'], []);
+  const privatePaths = useMemo(() => ['/link', '/my'], []);
 
   const pageType = useMemo<PageType>(() => {
     if (privatePaths.some((path) => pathname.includes(path))) {

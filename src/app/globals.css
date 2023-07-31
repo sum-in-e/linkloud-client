@@ -23,6 +23,10 @@
   .common-button {
     @apply flex w-full select-none items-center justify-center rounded-2xl py-3 text-sm disabled:bg-gray-400 disabled:hover:bg-gray-400;
   }
+
+  .color-duration {
+    @apply transition-colors duration-300;
+  }
 }
 
 @tailwind components;

@@ -15,7 +15,7 @@ const MyProfile = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/kloud/all');
+    router.push('/link/all');
   };
 
   return (

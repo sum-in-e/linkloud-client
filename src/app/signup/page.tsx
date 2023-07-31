@@ -23,7 +23,7 @@ export default async function SignUpPage() {
   const isLogin = await getSessionWithJwtInServer();
 
   if (isLogin) {
-    redirect('/kloud');
+    redirect('/link/all');
   }
 
   return <SignUp />;

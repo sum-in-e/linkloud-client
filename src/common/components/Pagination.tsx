@@ -26,7 +26,7 @@ const Pagination = ({
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / limit);
   const currentPage = offset / limit + 1;
-
+  console.log(currentPage, totalPages);
   // 페이지 번호 생성
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -35,23 +35,26 @@ const Pagination = ({
     (page) => Math.abs(currentPage - page) <= 2
   );
 
+  const isDisabledPrev = currentPage === 1;
+  const isDisalbedNext = currentPage === totalPages || currentPage > totalPages;
+
   return (
     <div className="flex justify-center space-x-2">
       <button
         className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
-          currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
+          isDisabledPrev ? 'cursor-not-allowed opacity-50' : ''
         }`}
         onClick={() => goToPage(0)} // 맨처음 페이지로 이동
-        disabled={currentPage === 1}
+        disabled={isDisabledPrev}
       >
         <FaAngleDoubleLeft />
       </button>
       <button
         className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
-          currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
+          isDisabledPrev ? 'cursor-not-allowed opacity-50' : ''
         }`}
         onClick={previousPage}
-        disabled={currentPage === 1}
+        disabled={isDisabledPrev}
       >
         <FaAngleLeft />
       </button>
@@ -68,19 +71,19 @@ const Pagination = ({
       ))}
       <button
         className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
-          currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''
+          isDisalbedNext ? 'cursor-not-allowed opacity-50' : ''
         }`}
         onClick={nextPage}
-        disabled={currentPage === totalPages}
+        disabled={isDisalbedNext}
       >
         <FaAngleRight />
       </button>
       <button
         className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
-          currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''
+          isDisalbedNext ? 'cursor-not-allowed opacity-50' : ''
         }`}
         onClick={() => goToPage(totalPages - 1)} // 마지막 페이지로 이동
-        disabled={currentPage === totalPages}
+        disabled={isDisalbedNext}
       >
         <FaAngleDoubleRight />
       </button>
