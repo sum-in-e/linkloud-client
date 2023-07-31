@@ -10,7 +10,8 @@ import {
 } from 'react-icons/bs';
 import { MenuButton } from '@/common/containers/MenuList/MenuButton';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import { Skeleton } from '@chakra-ui/react';
+import MenuListError from '@/common/containers/MenuList/DataFetchUI/ErrorUI';
+import MenuListLoading from '@/common/containers/MenuList/DataFetchUI/LoadingUI';
 
 const MenuList = () => {
   const router = useRouter();
@@ -19,16 +20,7 @@ const MenuList = () => {
   const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col gap-2">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <div
-            key={index}
-            className="h-11 w-full animate-pulse rounded-full bg-gray-300"
-          />
-        ))}
-      </div>
-    );
+    return <MenuListLoading />;
   }
 
   if (!data) {
@@ -36,19 +28,7 @@ const MenuList = () => {
       refetch();
     };
 
-    return (
-      <div className="flex h-full flex-col items-center gap-2 rounded-xl bg-zinc-200 py-5">
-        <p className="whitespace-pre-wrap break-keep text-center text-sm font-semibold">
-          메뉴를 불러오는데 실패했습니다.
-        </p>
-        <button
-          className="rounded-full bg-primary p-[6px] hover:bg-primary-lighter"
-          onClick={handleRefetch}
-        >
-          <BsArrowRepeat size={18} className="fill-white" />
-        </button>
-      </div>
-    );
+    return <MenuListError onRetry={handleRefetch} />;
   }
 
   return (
