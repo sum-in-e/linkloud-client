@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@chakra-ui/react';
-import { FaArrowLeft } from 'react-icons/fa';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
 import LogOutButton from '@/features/my/containers/LogOut';
 import SignOutButton from '@/features/my/containers/SignOut';
@@ -12,25 +11,12 @@ import NotificationArea from '@/features/my/containers/Notification';
 const MyProfile = () => {
   const { isLoading, data } = useGetSessionQuery();
 
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push('/link/all');
-  };
-
   return (
     <>
       {isLoading ? (
         <Skeleton className="h-[70vh] w-full max-w-[340px]" />
       ) : (
-        <div className="mb-10 flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
-          <button
-            type="button"
-            onClick={handleClick}
-            className="h-fit w-fit rounded-2xl border-[1px] border-stone-200 px-4 py-2"
-          >
-            <FaArrowLeft size={15} className="fill-gray-600" />
-          </button>
+        <div className="mb-10 mt-4 flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
           <UserInfo />
           <Devider />
           <NotificationArea />

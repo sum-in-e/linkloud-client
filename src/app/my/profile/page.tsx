@@ -1,3 +1,4 @@
+import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import MyProfile from '@/features/my/containers';
 import { redirect } from 'next/navigation';
@@ -19,5 +20,9 @@ export default async function MyProfilePage() {
     redirect(`/login?${queryString}`);
   }
 
-  return <MyProfile />;
+  return (
+    <SidebarLayout>
+      <MyProfile />
+    </SidebarLayout>
+  );
 }

@@ -36,22 +36,16 @@ const MenuList = () => {
   return (
     <div>
       <MenuButton
-        title="홈"
-        leftIcon={<BsHouseDoor size={20} className="text flex-shrink-0" />}
+        title="전체"
+        leftIcon={<BsListUl size={20} className="flex-shrink-0" />}
         onClick={() => router.push('/link/all')}
-        isActivating={false}
+        isActivating={pathname === '/link/all'}
       />
       <MenuButton
         title="내 컬렉션"
         leftIcon={<BsJournalBookmarkFill size={20} className="flex-shrink-0" />}
         onClick={() => router.push('/link/collection')}
         isActivating={pathname === '/link/collection'}
-      />
-      <MenuButton
-        title="전체"
-        leftIcon={<BsListUl size={20} className="flex-shrink-0" />}
-        onClick={() => router.push('/link/all')}
-        isActivating={pathname === '/link/all'}
       />
       <MenuButton
         title="미열람"
