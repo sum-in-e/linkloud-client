@@ -1,22 +1,19 @@
 'use client';
 
+import { Avatar } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Avatar } from '@chakra-ui/react';
 import Link from 'next/link';
+import { BsSearch } from 'react-icons/bs';
 import logo from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
-import { useOpen } from '@/common/modules/hooks/useOpen';
-import CreateLink from '@/features/link/containers/CreateLink';
 import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchForm';
-import { BsSearch } from 'react-icons/bs';
 
 const Header = () => {
   const router = useRouter();
   const pageType = usePageType();
   const { isHeaderVisible } = useIsShowLayout();
-  const { onClose, isOpen, onOpen } = useOpen();
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
@@ -62,7 +59,6 @@ const Header = () => {
           >
             <BsSearch size={20} className="fill-white" />
           </button>
-          {isOpen && <CreateLink onClose={onClose} />}
           <Avatar
             onClick={handlePushToMyProfile}
             className="h-9 w-9 cursor-pointer"

@@ -3,10 +3,10 @@
 import { usePathname, useRouter } from 'next/navigation';
 import {
   BsListUl,
-  BsHouseDoor,
   BsJournalBookmarkFill,
   BsEyeSlash,
   BsCloudSlash,
+  BsArrowRepeat,
 } from 'react-icons/bs';
 import { MenuButton } from '@/common/containers/MenuList/MenuButton';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
@@ -16,21 +16,39 @@ const MenuList = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const { data, isLoading, isFetched } = useGetGroupMenuListQuery();
+  const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   if (isLoading) {
     return (
       <div className="flex flex-col gap-2">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="h-11 w-full rounded-full" />
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-11 w-full animate-pulse rounded-full bg-gray-300"
+          />
         ))}
       </div>
     );
   }
 
   if (!data) {
-    // TODO: 메뉴 못 불러 왔을 경우 UI 적용
-    return <div></div>;
+    const handleRefetch = () => {
+      refetch();
+    };
+
+    return (
+      <div className="flex h-full flex-col items-center gap-2 rounded-xl bg-zinc-200 py-5">
+        <p className="whitespace-pre-wrap break-keep text-center text-sm font-semibold">
+          메뉴를 불러오는데 실패했습니다.
+        </p>
+        <button
+          className="rounded-full bg-primary p-[6px] hover:bg-primary-lighter"
+          onClick={handleRefetch}
+        >
+          <BsArrowRepeat size={18} className="fill-white" />
+        </button>
+      </div>
+    );
   }
 
   return (
