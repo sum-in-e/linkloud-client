@@ -26,7 +26,7 @@ const Pagination = ({
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / limit);
   const currentPage = offset / limit + 1;
-  console.log(currentPage, totalPages);
+
   // 페이지 번호 생성
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 

@@ -11,13 +11,13 @@ import {
   notKloudCategory,
 } from '@/features/kloud/modules/types/kloudType';
 import SearchLinks from '@/features/link/containers/SearchLinks';
-import { LinkListQueryResultSection } from '@/features/link/components/LinkListQueryResultSection';
+import { LinkListQueryResult } from '@/features/link/containers/LinkListQueryResult/common/LinkListQueryResult';
 
 interface Props {
   category: NotKloudCategoryKeyType;
 }
 
-export const LinkListLimit = 10;
+export const linkListLimit = 10;
 
 const LinkListQueryResultForNotKloud = ({ category }: Props) => {
   const keyword = useSearchParams().get('keyword');
@@ -38,12 +38,12 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
   };
 
   const { offset, nextPage, previousPage, goToPage } = usePagination({
-    limit: LinkListLimit,
+    limit: linkListLimit,
   });
 
   const { data, isLoading } = useGetLinkListQuery({
     offset,
-    limit: LinkListLimit,
+    limit: linkListLimit,
     ...getRestParams(),
   });
 
@@ -57,27 +57,22 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
     return notKloudCategory[category];
   };
 
+  // TODO: Title and count section 로딩 스켈레톤 적용 필요
   return (
-    <LinkListQueryResultSection>
-      {/* TODO: Title and count section 로딩 스켈레톤 적용 필요 */}
-      <div>
-        {category === 'search' && <SearchLinks />}
-        <TitleAndCount title={getTitle()} count={count} />
-      </div>
-      <div className="h-full overflow-scroll">
-        <LinkList isLoading={isLoading} data={data} />
-      </div>
-      <div className="mt-5">
-        <Pagination
-          totalItems={count}
-          limit={LinkListLimit}
-          offset={offset}
-          nextPage={nextPage}
-          previousPage={previousPage}
-          goToPage={goToPage}
-        />
-      </div>
-    </LinkListQueryResultSection>
+    <LinkListQueryResult
+      Header={
+        <div>
+          {category === 'search' && <SearchLinks />}
+          <TitleAndCount title={getTitle()} count={count} />
+        </div>
+      }
+      isLoading={isLoading}
+      data={data}
+      offset={offset}
+      nextPage={nextPage}
+      previousPage={previousPage}
+      goToPage={goToPage}
+    />
   );
 };
 

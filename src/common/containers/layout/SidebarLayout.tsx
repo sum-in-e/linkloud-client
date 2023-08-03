@@ -1,8 +1,9 @@
 'use client';
 
-import MenuList from '@/common/containers/MenuList';
-import HomeButton from '@/common/containers/MenuList/MenuButton/HomeButton';
-import KloudList from '@/features/kloud/containers/KloudList';
+import MenuListWithCreateLink from '@/common/containers/MenuListWithCreateLink';
+import HomeButton from '@/common/containers/MenuListWithCreateLink/MenuButton/HomeButton';
+import MobileNav from '@/common/containers/layout/MobileNav';
+import KloudListSidebar from '@/features/kloud/containers/KloudListSidebar';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
@@ -13,17 +14,18 @@ const SidebarLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="flex">
-      <aside className="h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[200px] border-r py-3 pl-10 pr-5">
-        {isMyKloudPage ? <MenuList /> : <HomeButton />}
+      <aside className="hidden h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[200px] border-r py-3 pl-10 pr-5 md:block">
+        {isMyKloudPage ? <MenuListWithCreateLink /> : <HomeButton />}
       </aside>
       {isMyKloudPage && (
-        <aside className="h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[240px] overflow-scroll bg-[#3A42DA] pb-6 pt-3">
-          <KloudList />
+        <aside className="hidden h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[240px] overflow-scroll bg-[#3A42DA] pb-6 pt-3 md:block">
+          <KloudListSidebar />
         </aside>
       )}
-      <div className="flex h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full justify-center pb-6 pr-10 pt-3">
+      <div className="flex h-[calc(100vh-80px-64px)] max-h-[calc(100vh-80px-64px)] w-full justify-center px-5 md:mb-0 md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:pb-6 md:pr-10 md:pt-3 ">
         {children}
       </div>
+      <MobileNav />
     </div>
   );
 };

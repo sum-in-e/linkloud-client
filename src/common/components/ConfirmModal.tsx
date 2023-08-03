@@ -7,6 +7,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
 
 export type positiveActionColorType = 'blue' | 'red';
@@ -39,6 +40,7 @@ const ConfirmModal = ({
 }: Props) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <ModalOverlay />
       <ModalContent className="max-w-[340px] rounded-3xl">
         <ModalHeader className="font-bold">{title}</ModalHeader>
         <ModalBody>

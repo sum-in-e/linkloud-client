@@ -6,14 +6,14 @@ import {
   BsJournalBookmarkFill,
   BsEyeSlash,
   BsCloudSlash,
-  BsArrowRepeat,
 } from 'react-icons/bs';
-import { MenuButton } from '@/common/containers/MenuList/MenuButton';
+import { MenuButton } from '@/common/containers/MenuListWithCreateLink/MenuButton';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import MenuListError from '@/common/containers/MenuList/DataFetchUI/ErrorUI';
-import MenuListLoading from '@/common/containers/MenuList/DataFetchUI/LoadingUI';
+import MenuListError from '@/common/containers/MenuListWithCreateLink/DataFetchUI/ErrorUI';
+import MenuListLoading from '@/common/containers/MenuListWithCreateLink/DataFetchUI/LoadingUI';
+import CreateLinkButton from '@/features/link/containers/CreateLink/CreateLinkButton';
 
-const MenuList = () => {
+const MenuListWithCreateLink = () => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -67,11 +67,12 @@ const MenuList = () => {
         onClick={() => router.push('/link/uncategorized')}
         isActivating={pathname === '/link/uncategorized'}
       />
+      <CreateLinkButton />
     </div>
   );
 };
 
-export default MenuList;
+export default MenuListWithCreateLink;
 
 const CircleMark = () => {
   return (

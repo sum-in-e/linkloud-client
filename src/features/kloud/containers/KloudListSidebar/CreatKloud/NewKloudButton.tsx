@@ -1,7 +1,7 @@
 'use client';
 
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import CreateKloudModal from '@/features/kloud/containers/KloudList/CreatKloud/CreateKloudModal';
+import CreateKloudModal from '@/features/kloud/containers/KloudListSidebar/CreatKloud/CreateKloudModal';
 
 import { BsCloudPlus } from 'react-icons/bs';
 

@@ -1,8 +1,8 @@
 'use client';
 
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
-import NewKloudButton from '@/features/kloud/containers/KloudList/CreatKloud/NewKloudButton';
-import KloudMenuItem from '@/features/kloud/containers/KloudList/KloudMenuItem';
+import NewKloudButton from '@/features/kloud/containers/KloudListSidebar/CreatKloud/NewKloudButton';
+import KloudMenuItem from '@/features/kloud/containers/KloudListSidebar/KloudMenuItem';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
 import { usePatchKloudPositionByIdMutation } from '@/features/kloud/modules/apiHooks/usePatchKloudPositionByIdMutation';
 import { Skeleton, useToast } from '@chakra-ui/react';
@@ -17,7 +17,7 @@ import {
   Droppable,
 } from 'react-beautiful-dnd';
 
-const KloudList = () => {
+const KloudListSidebar = () => {
   const { kloudId } = useParams();
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -163,4 +163,4 @@ const KloudList = () => {
   );
 };
 
-export default KloudList;
+export default KloudListSidebar;

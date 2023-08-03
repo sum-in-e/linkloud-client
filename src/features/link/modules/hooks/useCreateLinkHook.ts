@@ -1,12 +1,8 @@
 'use client';
 
-import Loader from '@/common/components/Loader';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { useCreateLinkMutation } from '@/features/link/modules/apiHooks/useCreateLinkMutation';
-import {
-  useKloudIdState,
-  useLinkState,
-} from '@/features/link/modules/stores/createLinkStore';
+import { useLinkState } from '@/features/link/modules/stores/createLinkStore';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -14,20 +10,22 @@ interface Props {
   onClose: () => void;
 }
 
-const CreateLinkButton = ({ onClose }: Props) => {
+export const useCreateLinkHook = ({ onClose }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
   const { link, resetLink } = useLinkState();
-  const { kloudId } = useKloudIdState();
 
   const { mutate, isLoading } = useCreateLinkMutation();
 
   const handleMutate = () => {
     mutate(
       {
-        ...link,
-        kloudId,
+        url: link.url,
+        title: link.title,
+        description: link.description,
+        thumbnailUrl: link.thumbnailUrl,
+        kloudId: link.kloud === null ? null : link.kloud.id,
       },
       {
         onSuccess: (data, variables) => {
@@ -67,16 +65,9 @@ const CreateLinkButton = ({ onClose }: Props) => {
     link.title.length === 0 ||
     link.thumbnailUrl.length === 0;
 
-  return (
-    <button
-      type="button"
-      className="common-button w-[300px] bg-primary font-bold text-white hover:bg-primary-lighter"
-      onClick={handleMutate}
-      disabled={isDisabled}
-    >
-      {isLoading ? <Loader /> : '링크 추가하기'}
-    </button>
-  );
+  return {
+    isDisabled,
+    isLoading,
+    onCreateLinkMutate: handleMutate,
+  };
 };
-
-export default CreateLinkButton;
