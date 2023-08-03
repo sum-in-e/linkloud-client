@@ -21,7 +21,7 @@ const LinkEditor = ({ onClose }: Props) => {
   const { isShowKloudSelector, setIsShowKloudSelector } =
     useShowKloudSelectorState();
 
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleKloudSelectMode = (state: boolean) => {
     setIsShowKloudSelector(state);
@@ -56,7 +56,7 @@ const LinkEditor = ({ onClose }: Props) => {
       ) : (
         <div className="w-full">
           <div className="flex items-center justify-between p-3 md:px-5">
-            {isDesktop ? (
+            {!isMobile ? (
               <button
                 type="button"
                 className="w-fit rounded-full py-2"

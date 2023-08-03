@@ -13,7 +13,7 @@ export const MenuButton = ({
     <button
       type="button"
       onClick={onClick}
-      className={`color-duration mb-2 flex items-center gap-3 rounded-full px-3 py-2 text-lg font-bold hover:bg-zinc-200 ${
+      className={`color-duration mb-1 flex items-center gap-3 rounded-full px-3 py-2 text-lg font-bold hover:bg-zinc-200 md:mb-2 ${
         isActivating ? 'bg-zinc-200' : 'bg-transparent'
       } max-w-full`}
     >

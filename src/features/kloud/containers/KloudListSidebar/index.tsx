@@ -18,7 +18,6 @@ import {
 } from 'react-beautiful-dnd';
 
 const KloudListSidebar = () => {
-  const { kloudId } = useParams();
   const toast = useToast();
   const queryClient = useQueryClient();
 

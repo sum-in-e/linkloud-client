@@ -1,6 +1,6 @@
 'use client';
 
-import { MenuButton } from '@/common/containers/MenuListWithCreateLink/MenuButton';
+import { MenuButton } from '@/common/containers/MenuButton';
 import { useRouter } from 'next/navigation';
 import { BsHouseDoor } from 'react-icons/bs';
 

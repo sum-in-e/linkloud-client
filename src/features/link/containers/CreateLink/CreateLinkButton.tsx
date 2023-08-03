@@ -10,7 +10,7 @@ const CreateLinkButton = () => {
     <>
       <button
         type="button"
-        className="w-full rounded-2xl bg-black px-5 py-2 text-sm font-bold text-white hover:bg-zinc-700"
+        className="color-duration w-full rounded-2xl bg-black px-5 py-2 text-sm font-bold text-white hover:bg-zinc-700"
         onClick={onOpen}
       >
         링크 추가하기

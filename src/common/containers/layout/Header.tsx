@@ -10,11 +10,17 @@ import logo from '/public/images/logo.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchForm';
+import { useOpen } from '@/common/modules/hooks/useOpen';
+import MobileMenuDrawer from '@/common/containers/MobileMenuDrawer';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 const Header = () => {
   const router = useRouter();
   const pageType = usePageType();
+
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { isHeaderVisible } = useIsShowLayout();
+  const { isOpen, onClose, onOpen } = useOpen();
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
@@ -30,14 +36,16 @@ const Header = () => {
   };
 
   const handleClickListButton = () => {
-    //
+    onOpen();
   };
 
   return isHeaderVisible ? (
-    <header className="fixed left-0 top-0 z-10 flex h-20 w-full items-center justify-between bg-white px-5 py-5 md:px-10">
+    <header className="fixed left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white px-5 md:h-20 md:px-10">
+      {isMobile && isOpen && <MobileMenuDrawer onClose={onClose} />}
       <button className="md:hidden" onClick={handleClickListButton}>
         <BsList size={28} />
       </button>
+
       <Image
         src={logo_v}
         alt="linkloud Logo"

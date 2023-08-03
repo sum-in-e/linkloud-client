@@ -1,6 +1,6 @@
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="mt-20 w-full">
+    <main className="mt-16 w-full md:mt-20">
       <div>{children}</div>
     </main>
   );

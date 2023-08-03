@@ -172,7 +172,7 @@ const KloudMenuItem = ({ kloud }: Props) => {
 
   return (
     <div
-      className={`color-duration relative flex w-full items-center justify-between gap-1 rounded-lg border bg-[#3A42DA] px-3 py-2 hover:bg-primary-lighter`}
+      className={`color-duration relative flex w-full items-center justify-between gap-1 rounded-lg border bg-primary-alt px-3 py-2 hover:bg-primary-alt-lighter`}
       onClick={handlePushToKloudPage}
     >
       <p
@@ -185,7 +185,7 @@ const KloudMenuItem = ({ kloud }: Props) => {
         {kloud.name}
       </p>
       {kloud.unreadLinkCount > 0 && (
-        <div className="absolute left-[8px] top-[8px] h-[6px] w-[6px] rounded-full bg-yellow-400" />
+        <div className="absolute left-[8px] top-[8px] h-[6px] w-[6px] rounded-full bg-secondary-lighter" />
       )}
       <div className="flex w-fit items-center justify-end">
         <Popover

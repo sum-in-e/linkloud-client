@@ -90,7 +90,7 @@ const KloudItem = ({ isCurrentKloud, onClick, children }: KloudItemProps) => {
         type="button"
         className={`reset-button flex justify-between rounded-xl px-4 py-3 text-sm ${
           isCurrentKloud
-            ? 'bg-[#3A42DA] text-white hover:bg-primary-lighter'
+            ? 'bg-primary-alt text-white hover:bg-primary-alt-lighter'
             : 'bg-zinc-100 hover:bg-zinc-200'
         }`}
         onClick={onClick}
