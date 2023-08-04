@@ -90,14 +90,14 @@ const LinkDeleteButton = ({ id, onClose }: Props) => {
       >
         정리하기
       </button>
-      <ConfirmModal
+      {/* <ConfirmModal
         title={title}
         description={description}
         isOpen={isOpenConfirmModal}
         onClose={onCloseConfirmModal}
         positiveAction={positiveAction}
         negativeAction={negativeAction}
-      />
+      /> */}
     </>
   );
 };

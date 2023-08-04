@@ -1,15 +1,15 @@
 'use client';
 
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import MenuListError from '@/common/containers/MenuListWithCreateLink/DataFetchUI/ErrorUI';
-import MenuListLoading from '@/common/containers/MenuListWithCreateLink/DataFetchUI/LoadingUI';
+import MenuListError from '@/common/containers/MenuListWithCreateLinkSidebar/DataFetchUI/ErrorUI';
+import MenuListLoading from '@/common/containers/MenuListWithCreateLinkSidebar/DataFetchUI/LoadingUI';
 import CreateLinkButton from '@/features/link/containers/CreateLink/CreateLinkButton';
 import AllButton from '@/common/containers/MenuButton/All';
 import CollectionButton from '@/common/containers/MenuButton/Collection';
 import UnreadButton from '@/common/containers/MenuButton/Unread';
 import UncategorizedButton from '@/common/containers/MenuButton/Uncategorized';
 
-const MenuListWithCreateLink = () => {
+const MenuListWithCreateLinkSidebar = () => {
   const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   if (isLoading) {
@@ -17,11 +17,7 @@ const MenuListWithCreateLink = () => {
   }
 
   if (!data) {
-    const handleRefetch = () => {
-      refetch();
-    };
-
-    return <MenuListError onRetry={handleRefetch} />;
+    return <MenuListError onRetry={refetch} />;
   }
 
   return (
@@ -35,4 +31,4 @@ const MenuListWithCreateLink = () => {
   );
 };
 
-export default MenuListWithCreateLink;
+export default MenuListWithCreateLinkSidebar;

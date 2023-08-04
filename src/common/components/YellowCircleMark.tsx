@@ -1,6 +1,6 @@
 const YellowCircleMark = () => {
   return (
-    <div className="absolute right-0 top-0 h-[6px] w-[6px] rounded-full bg-secondary-lighter" />
+    <div className="absolute -left-1 top-0 h-[6px] w-[6px] rounded-full bg-secondary-lighter" />
   );
 };
 

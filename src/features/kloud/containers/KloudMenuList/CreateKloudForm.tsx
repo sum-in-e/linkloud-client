@@ -1,16 +1,17 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { Modal, ModalContent, ModalOverlay, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePostKloudMutation } from '@/features/kloud/modules/apiHooks/usePostKloudMutation';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
+import { BsX } from 'react-icons/bs';
 
 interface Props {
   onClose: () => void;
 }
 
-const CreateKloudModal = ({ onClose }: Props) => {
+const CreateKloudForm = ({ onClose }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
@@ -20,6 +21,10 @@ const CreateKloudModal = ({ onClose }: Props) => {
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+  };
+
+  const handleReset = () => {
+    setName('');
   };
 
   const handleCreateKloud = () => {
@@ -71,35 +76,30 @@ const CreateKloudModal = ({ onClose }: Props) => {
     handleCreateKloud();
   };
 
-  useEffect(() => {
-    setName('');
-  }, [setName]);
-
   return (
-    <Modal isOpen onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <form
-          onSubmit={handleSubmit}
-          className="flex w-full items-center justify-between rounded-2xl bg-stone-100"
+    <div className="mb-2 md:px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full items-center justify-between gap-2 rounded-full border px-3 py-[10px] md:rounded-lg md:bg-zinc-50 md:py-2"
+      >
+        <input
+          type="text"
+          value={name}
+          onChange={handleChangeName}
+          className="reset-input text-sm placeholder:text-gray-600 md:bg-zinc-50"
+          placeholder="생성할 클라우드의 이름을 50자 이내로 입력해 주세요"
+          autoFocus
+        />
+        <button
+          type="button"
+          className="flex items-center justify-center rounded-full bg-zinc-300 p-[2px] md:hidden"
+          onClick={handleReset}
         >
-          <input
-            type="text"
-            value={name}
-            onChange={handleChangeName}
-            className="common-input bg-slate-100"
-            placeholder="생성할 클라우드의 이름을 50자 이내로 입력해 주세요"
-            autoFocus
-          />
-          <button
-            type="submit"
-            className="flex w-[15%] items-center justify-center bg-transparent"
-            disabled={name.length === 0}
-          />
-        </form>
-      </ModalContent>
-    </Modal>
+          <BsX size={16} />
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default CreateKloudModal;
+export default CreateKloudForm;

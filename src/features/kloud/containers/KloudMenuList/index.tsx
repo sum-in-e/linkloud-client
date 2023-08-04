@@ -1,14 +1,8 @@
 'use client';
 
-import queryKeys from '@/common/modules/apiHooks/queryKeys';
-import NewKloudButton from '@/features/kloud/containers/KloudListSidebar/CreatKloud/NewKloudButton';
-import KloudMenuItem from '@/features/kloud/containers/KloudListSidebar/KloudMenuItem';
-import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import { usePatchKloudPositionByIdMutation } from '@/features/kloud/modules/apiHooks/usePatchKloudPositionByIdMutation';
-import { Skeleton, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { toNumber } from 'lodash';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
   DragDropContext,
@@ -16,12 +10,25 @@ import {
   DropResult,
   Droppable,
 } from 'react-beautiful-dnd';
+import queryKeys from '@/common/modules/apiHooks/queryKeys';
+import KloudMenuItem from '@/features/kloud/containers/KloudMenuList/KloudMenuItem';
+import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
+import { usePatchKloudPositionByIdMutation } from '@/features/kloud/modules/apiHooks/usePatchKloudPositionByIdMutation';
+import { BsPlus, BsX, BsArrowRepeat } from 'react-icons/bs';
+import CreateKloudForm from '@/features/kloud/containers/KloudMenuList/CreateKloudForm';
+import { kloudMessage } from '@/features/kloud/modules/constants/kloud';
 
-const KloudListSidebar = () => {
+interface Props {
+  onCloseDrawer?: () => void;
+}
+
+const KloudMenuList = ({ onCloseDrawer }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useGetGroupMenuListQuery();
+  const [isShowCreateForm, setIsShowCreateForm] = useState(false);
+
+  const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   const [klouds, setKlouds] = useState(data?.klouds || []);
 
@@ -33,20 +40,37 @@ const KloudListSidebar = () => {
     }
   }, [data]);
 
+  const handleRefetch = () => {
+    refetch();
+  };
+
   if (isLoading) {
-    // TODO: 스켈레톤 작업
     return (
-      <div className="flex flex-col gap-2">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="h-11 w-full rounded-lg" />
+      <section className="flex flex-col gap-2 p-3 md:p-4">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-10 w-full animate-pulse rounded-full bg-gray-300 md:rounded-lg"
+          />
         ))}
-      </div>
+      </section>
     );
   }
 
   if (!data) {
-    // TODO: 메뉴 못 불러 왔을 경우 UI 적용
-    return <div></div>;
+    return (
+      <section className="flex w-full flex-col items-center gap-2 py-5">
+        <p className="whitespace-pre-wrap break-keep text-center text-sm font-semibold text-black md:text-white">
+          클라우드를 불러오는데 실패했습니다.
+        </p>
+        <button
+          className="rounded-full bg-black p-[6px] hover:bg-gray-700"
+          onClick={handleRefetch}
+        >
+          <BsArrowRepeat size={18} className="fill-white" />
+        </button>
+      </section>
+    );
   }
 
   const handleOnDragEnd = (result: DropResult) => {
@@ -62,7 +86,7 @@ const KloudListSidebar = () => {
     // 드래그된 아이템을 기존 위치에서 제거
     const [reorderedItem] = copiedKlouds.splice(result.source.index, 1);
 
-    //드래그된 아이템을 새로운 위치에 삽입
+    // 드래그된 아이템을 새로운 위치에 삽입
     copiedKlouds.splice(destination.index, 0, reorderedItem);
 
     // 상태를 업데이트하여 UI를 새로운 순서로 렌더링
@@ -111,28 +135,64 @@ const KloudListSidebar = () => {
     );
   };
 
-  const isShowCreatKloudButton = klouds.length < 20;
+  const handleClickKloudFormButton = () => {
+    if (!isShowCreateForm) {
+      if (data.klouds.length === 20) {
+        toast({
+          title: kloudMessage.클라우드_20개_생성제한, // TODO: 이렇게 같은 문구들 묶어서 사용하기
+          status: 'warning',
+          duration: 2000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      setIsShowCreateForm(true);
+      return;
+    }
+
+    setIsShowCreateForm(false);
+  };
 
   return (
     <div>
-      <div className="p-4">
-        <p className="text-md font-bold text-white">클라우드</p>
+      <div className="flex items-center justify-between p-3 md:p-4">
+        <p className="md:text-md text-sm font-bold text-gray-600 md:text-white">
+          클라우드
+        </p>
+        <button
+          type="button"
+          className="color-duration rounded-md bg-black md:border md:border-zinc-200 md:bg-primary-alt md:hover:bg-primary-alt-lighter"
+          onClick={handleClickKloudFormButton}
+        >
+          {isShowCreateForm ? (
+            <BsX size={20} className="fill-white" />
+          ) : (
+            <BsPlus size={20} className="fill-white" />
+          )}
+        </button>
       </div>
+
+      {isShowCreateForm && (
+        <CreateKloudForm onClose={() => setIsShowCreateForm(false)} />
+      )}
+
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="klouds">
           {(provided) => (
             <div>
               {klouds.length === 0 ? (
-                <li>
-                  <p>☁️ 보유한 클라우드가 없어요 ☁️</p>
-                </li>
+                <div className="flex items-center justify-center p-3">
+                  <p className="whitespace-pre text-center text-sm text-white">
+                    {`☁️ 보유한 클라우드가 없어요 ☁️\n상단의 "+" 버튼을 눌러 생성해 보세요!`}
+                  </p>
+                </div>
               ) : (
                 <ul
-                  className=" flex w-full flex-col gap-2 px-4"
+                  className="flex w-full flex-col gap-2 md:px-4"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {isShowCreatKloudButton && <NewKloudButton />}
                   {klouds.map((kloud, index) => (
                     <Draggable
                       key={kloud.id}
@@ -146,7 +206,10 @@ const KloudListSidebar = () => {
                           ref={provided.innerRef}
                           key={`${kloud.id}_${kloud.name}`}
                         >
-                          <KloudMenuItem kloud={kloud} />
+                          <KloudMenuItem
+                            kloud={kloud}
+                            onCloseDrawer={onCloseDrawer}
+                          />
                         </li>
                       )}
                     </Draggable>
@@ -162,4 +225,4 @@ const KloudListSidebar = () => {
   );
 };
 
-export default KloudListSidebar;
+export default KloudMenuList;

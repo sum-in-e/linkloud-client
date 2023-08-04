@@ -6,12 +6,13 @@ import { BsHouseDoor } from 'react-icons/bs';
 
 const HomeButton = () => {
   const router = useRouter();
+  const homepath = '/link/all';
 
   return (
     <MenuButton
       title="홈"
+      href={homepath}
       leftIcon={<BsHouseDoor size={20} className="text flex-shrink-0" />}
-      onClick={() => router.push('/link/all')}
       isActivating={false}
     />
   );

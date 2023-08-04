@@ -19,13 +19,13 @@ const CollectionButton = ({ onClick }: Props) => {
   const collectionPath = '/link/collection';
 
   const handleClick = () => {
-    router.push(collectionPath);
     onClick && onClick();
   };
 
   return (
     <MenuButton
       title="내 컬렉션"
+      href={collectionPath}
       leftIcon={<BsJournalBookmarkFill size={20} className="flex-shrink-0" />}
       onClick={handleClick}
       isActivating={pathname === collectionPath}

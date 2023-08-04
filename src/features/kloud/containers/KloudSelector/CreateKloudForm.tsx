@@ -7,6 +7,7 @@ import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { usePostKloudMutation } from '@/features/kloud/modules/apiHooks/usePostKloudMutation';
 import { useGetKloudListQuery } from '@/features/kloud/modules/apiHooks/useGetKloudListQuery';
 import { BsX } from 'react-icons/bs';
+import { kloudMessage } from '@/features/kloud/modules/constants/kloud';
 
 interface Props {
   onSelect: (kloudId: number | null, kloudName: string) => void;
@@ -68,8 +69,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
 
     if (exceededCreateLimit || exceededNameLength) {
       const getMessage = () => {
-        if (exceededCreateLimit)
-          return '유저당 최대 20개의 클라우드까지 생성 가능합니다.';
+        if (exceededCreateLimit) return kloudMessage.클라우드_20개_생성제한;
         if (exceededNameLength)
           return '클라우드 이름은 50자 이내로 작성해 주세요.';
 

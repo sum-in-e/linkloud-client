@@ -85,7 +85,7 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
       >
         정리하기
       </button>
-      {isOpen && (
+      {/* {isOpen && (
         <ConfirmModal
           isOpen={isOpen}
           onClose={onClose}
@@ -94,7 +94,7 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
           negativeAction={negativeAction}
           positiveAction={positiveAction}
         />
-      )}
+      )} */}
     </>
   );
 };

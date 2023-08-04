@@ -14,12 +14,10 @@ interface Props {
 }
 
 const AllButton = ({ onClick }: Props) => {
-  const router = useRouter();
   const pathname = usePathname();
   const allPath = '/link/all';
 
   const handleClick = () => {
-    router.push(allPath);
     onClick && onClick();
   };
 
@@ -27,6 +25,7 @@ const AllButton = ({ onClick }: Props) => {
     <MenuButton
       title="전체"
       leftIcon={<BsListUl size={20} className="flex-shrink-0" />}
+      href={allPath}
       onClick={handleClick}
       isActivating={pathname === allPath}
     />

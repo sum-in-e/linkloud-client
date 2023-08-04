@@ -16,18 +16,17 @@ interface Props {
 }
 
 const UnreadButton = ({ onClick, isShowMark }: Props) => {
-  const router = useRouter();
   const pathname = usePathname();
   const unreadPath = '/link/unread';
 
   const handleClick = () => {
-    router.push(unreadPath);
     onClick && onClick();
   };
 
   return (
     <MenuButton
       title="미열람"
+      href={unreadPath}
       leftIcon={
         <div className="relative">
           {isShowMark && <YellowCircleMark />}

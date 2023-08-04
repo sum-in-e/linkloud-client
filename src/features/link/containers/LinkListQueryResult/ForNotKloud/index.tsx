@@ -1,9 +1,7 @@
 'use client';
 
-import Pagination from '@/common/components/Pagination';
 import { usePagination } from '@/common/modules/hooks/usePagination';
 import TitleAndCount from '@/features/link/containers/LinkListQueryResult/common/TitleAndCount';
-import LinkList from '@/features/link/containers/LinkListQueryResult/common/LinkList';
 import { useGetLinkListQuery } from '@/features/link/modules/apiHooks/useGetLinkListQuery';
 import { useSearchParams } from 'next/navigation';
 import {

@@ -21,13 +21,13 @@ const UncategorizedButton = ({ onClick, isShowMark }: Props) => {
   const uncategorizedPath = '/link/uncategorized';
 
   const handleClick = () => {
-    router.push(uncategorizedPath);
     onClick && onClick();
   };
 
   return (
     <MenuButton
       title="미분류"
+      href={uncategorizedPath}
       leftIcon={
         <div className="relative">
           {isShowMark && <YellowCircleMark />}

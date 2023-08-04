@@ -15,7 +15,6 @@ interface Props {
   isEditMode: boolean;
   handleChangeEditMode: (value: boolean) => void;
   onCloseLinkDetail: () => void;
-
 }
 
 const LinkEditHandler = ({
@@ -27,7 +26,7 @@ const LinkEditHandler = ({
   kloudId,
   isEditMode,
   handleChangeEditMode,
-  onCloseLinkDetail
+  onCloseLinkDetail,
 }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
