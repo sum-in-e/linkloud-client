@@ -38,7 +38,7 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
     <Link
       href={`/link/${kloud.id}`}
       className={`color-duration relative flex w-full items-center justify-between gap-1 rounded-full border px-3 py-2 md:rounded-lg md:bg-primary-alt md:pl-3 md:pr-[5px] md:hover:bg-primary-alt-lighter ${
-        isActivating ? 'bg-zinc-200' : 'bg-white'
+        isActivating ? 'bg-zinc-200 md:bg-primary-alt-lighter' : 'bg-white'
       }`}
       onClick={onCloseDrawer}
     >
@@ -75,7 +75,7 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
               />
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-fit">
+          <PopoverContent className="w-fit p-1">
             <DeleteKloudButton kloud={kloud} />
           </PopoverContent>
         </Popover>

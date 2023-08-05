@@ -83,10 +83,10 @@ const DeleteKloudButton = ({ kloud }: Props) => {
   return (
     <>
       <button
-        className="w-fit rounded-lg px-3 py-2 text-sm font-semibold text-gray-600 hover:font-bold hover:text-black"
+        className="w-fit rounded-md px-3 py-2 text-sm font-semibold hover:bg-zinc-200 hover:text-black"
         onClick={handleClick}
       >
-        제거
+        삭제
       </button>
       {isOpen && (
         <ConfirmModal
