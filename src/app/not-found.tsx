@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const NotFoundPage = () => {
   return (
-    <section className="flex h-full flex-col items-center justify-center gap-5">
+    <section className="flex h-full min-h-[75vh] flex-col items-center justify-center gap-5">
       <h2 className="text-2xl font-bold">페이지를 찾을 수 없습니다 😅</h2>
       <Link
         href="/"

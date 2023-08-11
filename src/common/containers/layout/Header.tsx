@@ -40,15 +40,19 @@ const Header = () => {
 
   return isHeaderVisible ? (
     <header className="fixed left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white px-4 md:h-20 md:px-10">
-      {isMobile && isOpen && <MobileMenuDrawer onClose={onClose} />}
-      <button className="md:hidden" onClick={handleClickListButton}>
-        <BsList size={28} />
-      </button>
+      {pageType === 'private' && isMobile && isOpen && (
+        <MobileMenuDrawer onClose={onClose} />
+      )}
+      {pageType === 'private' && (
+        <button className="md:hidden" onClick={handleClickListButton}>
+          <BsList size={28} />
+        </button>
+      )}
 
       <Image
         src={logo_v}
         alt="linkloud Logo"
-        className="h-auto w-14 cursor-pointer md:w-[110px]"
+        className="h-auto w-16 cursor-pointer md:w-[110px]"
         onClick={handlePushToDefaultPage}
         priority
       />
