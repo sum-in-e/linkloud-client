@@ -10,6 +10,7 @@ import DeleteKloudButton from '@/features/kloud/containers/KloudMenuList/DeleteK
 import { KloudListKloudType } from '@/features/kloud/modules/apis/kloud';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
+import EditKloudButton from '@/features/kloud/containers/KloudMenuList/EditKloudButton';
 
 interface Props {
   kloud: KloudListKloudType;
@@ -74,7 +75,8 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
             />
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-fit p-1">
+        <PopoverContent className="flex w-fit flex-col gap-1 p-1">
+          <EditKloudButton kloud={kloud} />
           <DeleteKloudButton kloud={kloud} />
         </PopoverContent>
       </Popover>

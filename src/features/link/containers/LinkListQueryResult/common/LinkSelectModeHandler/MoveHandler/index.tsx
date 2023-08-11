@@ -16,7 +16,7 @@ const MoveHandler = ({ onDisableEditMode, selectedIds }: Props) => {
       <button
         onClick={onOpen}
         disabled={selectedIds.length === 0}
-        className="reset-button w-fit rounded-full bg-primary px-3 py-[6px] text-sm font-semibold text-white hover:bg-primary-lighter"
+        className="reset-button w-fit rounded-full bg-black px-3 py-[6px] text-xs font-semibold text-white hover:bg-zinc-700 md:text-sm"
       >
         이동하기
       </button>

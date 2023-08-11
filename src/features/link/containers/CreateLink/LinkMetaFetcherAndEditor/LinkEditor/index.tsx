@@ -1,5 +1,6 @@
 'use client';
 
+import { BsX } from 'react-icons/bs';
 import KloudSelector from '@/features/kloud/containers/KloudSelector';
 import LinkInfoHanlder from '@/features/link/containers/CreateLink/LinkMetaFetcherAndEditor/LinkEditor/LinkInfoHandler';
 import {
@@ -10,7 +11,6 @@ import BackButton from '@/features/link/containers/CreateLink/BackButton';
 import { useCreateLinkHook } from '@/features/link/modules/hooks/useCreateLinkHook';
 import Loader from '@/common/components/Loader';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
-import { BsX } from 'react-icons/bs';
 
 interface Props {
   onClose: () => void;
@@ -65,7 +65,7 @@ const LinkEditor = ({ onClose }: Props) => {
             )}
             <button
               type="button"
-              className="reset-button w-fit rounded-2xl bg-primary px-4 py-2 text-sm font-bold text-white md:hidden"
+              className="reset-button w-fit rounded-2xl bg-black px-4 py-2 text-sm font-bold text-white md:hidden"
               onClick={onCreateLinkMutate}
               disabled={isDisabled}
             >
@@ -76,7 +76,7 @@ const LinkEditor = ({ onClose }: Props) => {
           <div className="w-full p-3 md:px-5">
             <button
               type="button"
-              className="reset-button hidden rounded-xl bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-lighter md:block"
+              className="reset-button hidden rounded-xl bg-black px-4 py-3 text-sm font-bold text-white hover:bg-zinc-700 md:block"
               onClick={onCreateLinkMutate}
               disabled={isDisabled}
             >

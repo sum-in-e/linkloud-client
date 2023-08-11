@@ -2,13 +2,14 @@
 
 import CustomModal from '@/common/components/CustomModal';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 import KloudSelector from '@/features/kloud/containers/KloudSelector';
 import { usePatchLinkByIdMutation } from '@/features/link/modules/apiHooks/usePatchLinkByIdMutation';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { toNumber } from 'lodash';
 import { useParams } from 'next/navigation';
-import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft, BsX } from 'react-icons/bs';
 
 interface Props {
   onCloseModal: () => void;
@@ -25,12 +26,9 @@ const KloudSelectModal = ({
 
   const toast = useToast();
   const queryClient = useQueryClient();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const { mutate } = usePatchLinkByIdMutation();
-
-  const handleCloseModal = () => {
-    onCloseModal();
-  };
 
   const handleMutate = (selectedKloudId: number | null) => {
     mutate(
@@ -56,7 +54,7 @@ const KloudSelectModal = ({
             duration: 2000,
             isClosable: true,
           });
-          handleCloseModal();
+          onCloseModal();
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -79,16 +77,26 @@ const KloudSelectModal = ({
   };
 
   return (
-    <CustomModal onClose={handleCloseModal}>
+    <CustomModal onClose={onCloseModal}>
       <div className="flex h-screen w-screen flex-col rounded-none bg-white md:h-fit md:w-[400px] md:rounded-lg ">
-        <div className="flex items-center justify-between p-3 md:px-5">
-          <button
-            type="button"
-            className="w-fit rounded-full p-2"
-            onClick={handleCloseModal}
-          >
-            <BsArrowLeft size={18} />
-          </button>
+        <div className="flex items-center justify-between px-3 pt-3 md:px-5">
+          {isMobile ? (
+            <button
+              type="button"
+              className="w-fit rounded-full px-2 py-3"
+              onClick={onCloseModal}
+            >
+              <BsArrowLeft size={18} />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="w-fit rounded-full px-1 py-2"
+              onClick={onCloseModal}
+            >
+              <BsX size={25} />
+            </button>
+          )}
         </div>
         <KloudSelector kloudId={currentKloudId} onChange={handleSelectKloud} />
       </div>

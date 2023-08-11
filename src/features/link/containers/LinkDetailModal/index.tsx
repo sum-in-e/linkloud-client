@@ -2,11 +2,11 @@
 
 import CustomModal from '@/common/components/CustomModal';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
-import LinkCreatedAt from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal/LinkCreatedAt';
-import LinkDescription from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal/LinkDescription';
-import LinksKloud from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal/LinksKloud';
-import LinkMemo from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal/LinkMemo';
-import LinkTitle from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal/LinkTitle';
+import LinkCreatedAt from '@/features/link/containers/LinkDetailModal/LinkCreatedAt';
+import LinkDescription from '@/features/link/containers/LinkDetailModal/LinkDescription';
+import LinksKloud from '@/features/link/containers/LinkDetailModal/LinksKloud';
+import LinkMemo from '@/features/link/containers/LinkDetailModal/LinkMemo';
+import LinkTitle from '@/features/link/containers/LinkDetailModal/LinkTitle';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
 import { ChangeEvent, useState } from 'react';
 import { BsX, BsArrowLeft, BsPencilSquare } from 'react-icons/bs';

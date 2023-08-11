@@ -50,7 +50,7 @@ export const LinkListQueryResult = ({
   return (
     <section className="relative flex h-full w-full flex-col">
       {Header}
-      <div className="flex items-center justify-end pb-5">
+      <div className="flex items-center justify-end pb-4">
         <LinkSelectModeHandler
           isEditMode={isEditMode}
           onEnableEditMode={handleEnabledEditMode}

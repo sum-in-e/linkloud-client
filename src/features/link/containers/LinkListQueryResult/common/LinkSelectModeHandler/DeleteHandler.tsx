@@ -71,7 +71,7 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
     title: `${selectedIds.length}개의 링크를 삭제하시겠어요?`,
     description: `링크를 정리하면 공간이 깔끔해지고, 보다 효율적으로 링크를 관리할 수 있어요 :) `,
     positiveAction: {
-      text: '선택한 링크 정리하기',
+      text: '선택한 링크 삭제하기',
       action: () => {
         handleMutate();
       },
@@ -79,7 +79,7 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
       isLoading,
     },
     negativeAction: {
-      text: '정리하지 않기',
+      text: '삭제하지 않기',
       action: onClose,
       isLoading: false,
     },
@@ -90,9 +90,9 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
       <button
         onClick={onOpen}
         disabled={selectedIds.length === 0}
-        className="reset-button w-fit rounded-full bg-red-500 px-3 py-[6px] text-sm font-semibold text-white hover:bg-red-400"
+        className="reset-button w-fit rounded-full bg-red-500 px-3 py-[6px] text-xs font-semibold text-white hover:bg-red-400 md:text-sm"
       >
-        정리하기
+        삭제하기
       </button>
       {isOpen && (
         <ConfirmModal

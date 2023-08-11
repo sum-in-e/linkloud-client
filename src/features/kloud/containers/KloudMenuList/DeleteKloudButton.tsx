@@ -24,7 +24,7 @@ const DeleteKloudButton = ({ kloud }: Props) => {
 
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { isOpen: isOpen, onClose: onClose, onOpen: onOpen } = useOpen();
+  const { isOpen, onClose, onOpen } = useOpen();
 
   const { mutate: deleteKloudMutate, isLoading: isLoadingDeleteKloud } =
     useDeleteKloudByIdMutation();
@@ -83,10 +83,10 @@ const DeleteKloudButton = ({ kloud }: Props) => {
   return (
     <>
       <button
-        className="w-fit rounded-md px-3 py-2 text-sm font-semibold hover:bg-zinc-200 hover:text-black"
+        className="w-fit rounded-md px-3 py-2 text-sm font-semibold text-red-500 hover:bg-zinc-200"
         onClick={handleClick}
       >
-        삭제
+        삭제하기
       </button>
       {isOpen && (
         <ConfirmModal

@@ -18,7 +18,7 @@ import {
 import { usePatchLinkByIdMutation } from '@/features/link/modules/apiHooks/usePatchLinkByIdMutation';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { useQueryClient } from '@tanstack/react-query';
-import LinkDetailModal from '@/features/link/containers/LinkListQueryResult/common/LinkDetailModal';
+import LinkDetailModal from '@/features/link/containers/LinkDetailModal';
 import ConfirmModal, {
   positiveActionColorType,
 } from '@/common/components/ConfirmModal';
@@ -194,7 +194,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
     title: `링크를 삭제하시겠어요?`,
     description: `링크를 정리하면 공간이 깔끔해지고, 보다 효율적으로 링크를 관리할 수 있어요 :) `,
     positiveAction: {
-      text: '선택한 링크 정리하기',
+      text: '삭제하기',
       action: () => {
         handleDeleteLink();
       },
@@ -202,7 +202,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
       isLoading,
     },
     negativeAction: {
-      text: '정리하지 않기',
+      text: '삭제하지 않기',
       action: onCloseDelete,
       isLoading: false,
     },
@@ -211,7 +211,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   return (
     <li className="relative">
       <div
-        className={`group/item aspect-square w-[270px] cursor-pointer`}
+        className={`group/item aspect-square w-[300px] cursor-pointer md:w-[270px]`}
         onClick={openLinkInNewTap}
       >
         <picture>
@@ -306,7 +306,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         >
           <BsCheckLg
             size={70}
-            className={`${isSelected ? 'fill-secondary' : 'fill-zinc-500'}`}
+            className={`${isSelected ? 'fill-black' : 'fill-zinc-400'}`}
           />
         </div>
       )}

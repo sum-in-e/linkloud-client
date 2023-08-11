@@ -7,7 +7,7 @@ interface Props {
 
 const TitleAndCount = ({ title, count }: Props) => {
   return (
-    <div className="py-4">
+    <div className="pt-4">
       <span className="break-all text-xl font-bold">{title}</span>
       <div className="relative ml-2 inline-flex">
         <span className="text-sm font-semibold">{count}</span>
