@@ -50,7 +50,7 @@ const KloudMenuList = ({ onCloseDrawer }: Props) => {
         {Array.from({ length: 5 }).map((_, index) => (
           <div
             key={index}
-            className="h-10 w-full animate-pulse rounded-full bg-gray-300 md:rounded-lg"
+            className="skeleton h-10 w-full rounded-full md:rounded-lg"
           />
         ))}
       </section>

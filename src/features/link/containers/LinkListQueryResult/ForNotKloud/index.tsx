@@ -10,6 +10,8 @@ import {
 } from '@/features/kloud/modules/types/kloudType';
 import SearchLinks from '@/features/link/containers/SearchLinks';
 import { LinkListQueryResult } from '@/features/link/containers/LinkListQueryResult/common/LinkListQueryResult';
+import TitleAndCountLoadingUI from '@/features/link/containers/LinkListQueryResult/common/TitleAndCount/DataFetchUI/LoadingUI';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 interface Props {
   category: NotKloudCategoryKeyType;
@@ -19,6 +21,7 @@ export const linkListLimit = 10;
 
 const LinkListQueryResultForNotKloud = ({ category }: Props) => {
   const keyword = useSearchParams().get('keyword');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const getRestParams = () => {
     switch (category) {
@@ -55,13 +58,16 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
     return notKloudCategory[category];
   };
 
-  // TODO: Title and count section 로딩 스켈레톤 적용 필요
   return (
     <LinkListQueryResult
       Header={
         <div>
-          {category === 'search' && <SearchLinks />}
-          <TitleAndCount title={getTitle()} count={count} />
+          {category === 'search' && isMobile && <SearchLinks />}
+          {isLoading ? (
+            <TitleAndCountLoadingUI />
+          ) : (
+            <TitleAndCount title={getTitle()} count={count} />
+          )}
         </div>
       }
       isLoading={isLoading}

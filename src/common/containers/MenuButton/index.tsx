@@ -19,7 +19,7 @@ export const MenuButton = ({
     <Link
       href={href}
       onClick={onClick}
-      className={`color-duration mb-1 flex w-fit items-center gap-3 rounded-full px-3 py-2 hover:bg-zinc-200 md:mb-2 ${
+      className={`color-duration mb-1 flex w-fit items-center gap-3 rounded-full px-3 py-2 md:mb-2 md:hover:bg-zinc-200 ${
         isActivating ? 'bg-zinc-200' : 'bg-transparent'
       } max-w-full`}
     >

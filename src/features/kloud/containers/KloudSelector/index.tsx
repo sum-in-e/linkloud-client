@@ -6,13 +6,11 @@ import KloudList from '@/features/kloud/containers/KloudSelector/KloudList';
 interface Props {
   kloudId: number | null;
   onChange: (kloudId: number | null, kloudName: string) => void;
-  onClose: () => void;
 }
 
-const KloudSelector = ({ kloudId, onChange, onClose }: Props) => {
+const KloudSelector = ({ kloudId, onChange }: Props) => {
   const handleSelect = (id: number | null, name: string) => {
     onChange(id, name);
-    onClose();
   };
 
   return (

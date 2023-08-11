@@ -36,12 +36,6 @@ const CreateKloudForm = ({ onSelect }: Props) => {
           queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
           onSelect(data.data.id, data.data.name);
-          toast({
-            title: '클라우드가 생성되었습니다.',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -88,7 +82,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
     handleMutate();
   };
 
-  const handleReset = () => {
+  const handleClear = () => {
     setName('');
   };
 
@@ -99,7 +93,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
     >
       <input
         type="text"
-        className="reset-input flex items-center justify-between text-sm"
+        className="reset-input text-sm"
         placeholder="생성할 클라우드의 이름을 50자 이내로 입력해 주세요."
         onChange={handleChangeName}
         value={name}
@@ -107,7 +101,7 @@ const CreateKloudForm = ({ onSelect }: Props) => {
       <button
         type="button"
         className="flex items-center justify-center rounded-full bg-zinc-300 p-[2px] md:hidden"
-        onClick={handleReset}
+        onClick={handleClear}
       >
         <BsX size={16} />
       </button>

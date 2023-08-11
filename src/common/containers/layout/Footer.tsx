@@ -30,7 +30,7 @@ const Footer = () => {
   };
 
   return isFooterVisible ? (
-    <footer className="flex w-full flex-col justify-center gap-10 bg-stone-900 px-5 py-5 md:px-10">
+    <footer className="flex w-full flex-col justify-center gap-10 bg-stone-900 px-4 py-5 md:px-10">
       <div className="flex w-full flex-col gap-10 md:flex-row">
         <div className="flex flex-col gap-4">
           <Title text="서비스" />

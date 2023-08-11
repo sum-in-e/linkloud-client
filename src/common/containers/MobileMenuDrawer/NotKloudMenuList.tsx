@@ -18,10 +18,7 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
     return (
       <section className="flex flex-col gap-2 p-3 md:p-4">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div
-            key={index}
-            className="h-10 w-full animate-pulse rounded-full bg-gray-300"
-          />
+          <div key={index} className="skeleton h-10 w-full rounded-full" />
         ))}
       </section>
     );

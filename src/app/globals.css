@@ -25,6 +25,10 @@
     @apply transition-colors duration-300;
   }
 
+  .skeleton {
+    @apply animate-pulse bg-gray-300;
+  }
+
   .reset-input {
     @apply w-full placeholder-gray-400 outline-none;
   }

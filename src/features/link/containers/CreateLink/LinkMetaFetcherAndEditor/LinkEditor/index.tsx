@@ -47,14 +47,10 @@ const LinkEditor = ({ onClose }: Props) => {
           <div className="flex items-center justify-between p-3 md:px-5">
             <BackButton onClose={() => handleKloudSelectMode(false)} />
           </div>
-          <KloudSelector
-            kloudId={kloudId}
-            onChange={handleSelectKloud}
-            onClose={() => handleKloudSelectMode(false)}
-          />
+          <KloudSelector kloudId={kloudId} onChange={handleSelectKloud} />
         </div>
       ) : (
-        <div className="w-full">
+        <div>
           <div className="flex items-center justify-between p-3 md:px-5">
             {!isMobile ? (
               <button
@@ -67,16 +63,14 @@ const LinkEditor = ({ onClose }: Props) => {
             ) : (
               <BackButton onClose={onClose} />
             )}
-            <div className="md:hidden">
-              <button
-                type="button"
-                className="reset-button rounded-2xl bg-primary px-4 py-2 text-sm font-bold text-white"
-                onClick={onCreateLinkMutate}
-                disabled={isDisabled}
-              >
-                {isLoading ? <Loader /> : '추가하기'}
-              </button>
-            </div>
+            <button
+              type="button"
+              className="reset-button w-fit rounded-2xl bg-primary px-4 py-2 text-sm font-bold text-white md:hidden"
+              onClick={onCreateLinkMutate}
+              disabled={isDisabled}
+            >
+              {isLoading ? <Loader /> : '추가하기'}
+            </button>
           </div>
           <LinkInfoHanlder handleKloudSelectMode={handleKloudSelectMode} />
           <div className="w-full p-3 md:px-5">

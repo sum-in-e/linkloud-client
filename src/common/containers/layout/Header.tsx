@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Avatar } from '@chakra-ui/react';
 import { BsList } from 'react-icons/bs';
 import logo_v from '/public/images/logo_v.png';
-import logo from '/public/images/logo.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchForm';
@@ -40,7 +39,7 @@ const Header = () => {
   };
 
   return isHeaderVisible ? (
-    <header className="fixed left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white px-5 md:h-20 md:px-10">
+    <header className="fixed left-0 top-0 z-10 flex h-16 w-full items-center justify-between bg-white px-4 md:h-20 md:px-10">
       {isMobile && isOpen && <MobileMenuDrawer onClose={onClose} />}
       <button className="md:hidden" onClick={handleClickListButton}>
         <BsList size={28} />

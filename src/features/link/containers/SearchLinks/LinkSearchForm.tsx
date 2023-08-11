@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { BsX } from 'react-icons/bs';
 
 const LinkSearchForm = () => {
   const router = useRouter();
@@ -17,14 +18,29 @@ const LinkSearchForm = () => {
     setValue(event.target.value);
   };
 
+  const handleClear = () => {
+    setValue('');
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center justify-between gap-2 rounded-full bg-zinc-100 px-2 py-3"
+    >
       <input
         type="text"
         placeholder="제목이나 url로 저장한 링크를 검색해 보세요!"
-        className="common-input bg-slate-100"
+        className="reset-input bg-transparent text-sm"
         onChange={handleChange}
+        value={value}
       />
+      <button
+        type="button"
+        className="flex items-center justify-center rounded-full bg-zinc-300 p-[2px] md:hidden"
+        onClick={handleClear}
+      >
+        <BsX size={16} />
+      </button>
     </form>
   );
 };

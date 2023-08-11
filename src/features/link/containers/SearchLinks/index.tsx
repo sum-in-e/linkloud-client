@@ -4,7 +4,7 @@ import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchFor
 
 const SearchLinks = () => {
   return (
-    <div className="">
+    <div className="w-full pt-5">
       <LinkSearchForm />
     </div>
   );

@@ -25,11 +25,10 @@ export default async function MyKloudSearchPage({
   }
 
   const keyword = searchParams.keyword;
-
   // undefined이면 검색 초기 화면
   return (
     <SidebarLayout>
-      {!keyword ? (
+      {keyword === undefined ? (
         <SearchLinks />
       ) : (
         <LinkListQueryResultForNotKloud category="search" />

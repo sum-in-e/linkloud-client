@@ -1,10 +1,9 @@
-import Pagination from '@/common/components/Pagination';
-import { linkListLimit } from '@/features/link/containers/LinkListQueryResult/ForNotKloud';
-import LinkList from '@/features/link/containers/LinkListQueryResult/common/LinkList';
-import EditModeHandler from '@/features/link/containers/LinkListQueryResult/common/LinkList/EditModeHandler';
-import { GetLinkListData } from '@/features/link/modules/apis/link';
+'use client';
 
 import { ReactElement, useState } from 'react';
+import LinkList from '@/features/link/containers/LinkListQueryResult/common/LinkList';
+import LinkSelectModeHandler from '@/features/link/containers/LinkListQueryResult/common/LinkSelectModeHandler';
+import { GetLinkListData } from '@/features/link/modules/apis/link';
 
 export interface Props {
   Header: ReactElement;
@@ -25,8 +24,6 @@ export const LinkListQueryResult = ({
   previousPage,
   goToPage,
 }: Props) => {
-  const count = data?.count || 0;
-
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
@@ -47,41 +44,32 @@ export const LinkListQueryResult = ({
     setSelectedIds([]);
   };
 
-  const isDisabledEditModeActivationButton = count === 0;
+  const count = data?.count || 0;
+  const isDisabledActivationButton = count === 0;
 
   return (
-    <section className="relative flex h-full w-full flex-col justify-between md:ml-10">
+    <section className="relative flex h-full w-full flex-col">
       {Header}
       <div className="flex items-center justify-end pb-5">
-        <EditModeHandler
+        <LinkSelectModeHandler
           isEditMode={isEditMode}
           onEnableEditMode={handleEnabledEditMode}
           onDisableEditMode={handleDisabledEditMode}
           selectedIds={selectedIds}
-          isDisabledEditModeActivationButton={
-            isDisabledEditModeActivationButton
-          }
+          isDisabledActivationButton={isDisabledActivationButton}
         />
       </div>
-      <div className="overflow-scroll">
-        <LinkList
-          isLoading={isLoading}
-          data={data}
-          isEditMode={isEditMode}
-          selectedIds={selectedIds}
-          onSelectItem={handleSelectItem}
-        />
-        <div className="py-5">
-          <Pagination
-            totalItems={count}
-            limit={linkListLimit}
-            offset={offset}
-            nextPage={nextPage}
-            previousPage={previousPage}
-            goToPage={goToPage}
-          />
-        </div>
-      </div>
+      <LinkList
+        data={data}
+        isLoading={isLoading}
+        isEditMode={isEditMode}
+        selectedIds={selectedIds}
+        onSelectItem={handleSelectItem}
+        offset={offset}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        goToPage={goToPage}
+      />
     </section>
   );
 };

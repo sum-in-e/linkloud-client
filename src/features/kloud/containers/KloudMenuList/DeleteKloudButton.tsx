@@ -64,7 +64,7 @@ const DeleteKloudButton = ({ kloud }: Props) => {
 
   const modalInfo = {
     title: josa(`"${kloud.name}" 클라우드를 삭제하시겠어요?`),
-    description: `"삭제하기"를 선택하시면 클라우드에 저장된 링크도 함께 제거됩니다.`,
+    description: `삭제 시 클라우드에 저장된 링크도 함께 제거됩니다.`,
     positiveAction: {
       text: '삭제하기',
       action: () => {
