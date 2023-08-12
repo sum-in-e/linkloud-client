@@ -25,6 +25,7 @@ export type KloudListKloudType = Pick<
   'id' | 'name' | 'position'
 > & {
   linkCount: number;
+  unreadLinkCount: number;
 };
 
 export type GetKloudListData = {

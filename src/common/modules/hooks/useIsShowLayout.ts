@@ -11,7 +11,7 @@ export const useIsShowLayout = () => {
 
   const isHeaderVisible = !pathname.includes('/chrome-extentions');
   const isFooterVisible =
-    !pathname.includes('/kloud') && !pathname.includes('/chrome-extentions');
+    !pathname.includes('/link') && !pathname.includes('/chrome-extentions');
 
   return {
     isHeaderVisible,

@@ -9,7 +9,8 @@ import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 export const useGetLinkListQuery = (
-  params: GetLinkListParams
+  params: GetLinkListParams,
+  enabledOption?: { enabled: boolean }
 ): UseQueryResult<GetLinkListData, AxiosError<ErrorResponseType>> => {
   return useQuery(
     queryKeys.link.getLinkList(params),
@@ -18,6 +19,7 @@ export const useGetLinkListQuery = (
       select: (data) => {
         return data.data;
       },
+      ...enabledOption,
     }
   );
 };

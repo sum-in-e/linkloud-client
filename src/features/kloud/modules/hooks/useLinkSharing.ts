@@ -8,7 +8,7 @@ interface UseLinkSharingProps {
 export const useLinkSharing = ({ title, url }: UseLinkSharingProps) => {
   const toast = useToast();
 
-  const handleClickShare = async () => {
+  const handleShare = async () => {
     if (navigator.share) {
       // * Web Share API 지원하는 경우
       try {
@@ -42,5 +42,5 @@ export const useLinkSharing = ({ title, url }: UseLinkSharingProps) => {
     }
   };
 
-  return { handleClickShare };
+  return { handleShare };
 };

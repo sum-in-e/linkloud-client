@@ -1,19 +1,19 @@
 'use client';
 
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
+import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { usePostKloudMutation } from '@/features/kloud/modules/apiHooks/usePostKloudMutation';
 import { useGetKloudListQuery } from '@/features/kloud/modules/apiHooks/useGetKloudListQuery';
-import { useToast } from '@chakra-ui/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { BsX } from 'react-icons/bs';
+import { kloudMessage } from '@/features/kloud/modules/constants/kloud';
 
 interface Props {
   onSelect: (kloudId: number | null, kloudName: string) => void;
-  isOpen: boolean;
 }
 
-const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
+const CreateKloudForm = ({ onSelect }: Props) => {
   const toast = useToast();
 
   const [name, setName] = useState('');
@@ -36,12 +36,6 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
           queryClient.invalidateQueries(queryKeys.kloud.getKloudList);
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
           onSelect(data.data.id, data.data.name);
-          toast({
-            title: '클라우드가 생성되었습니다.',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -69,8 +63,7 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
 
     if (exceededCreateLimit || exceededNameLength) {
       const getMessage = () => {
-        if (exceededCreateLimit)
-          return '유저당 최대 20개의 클라우드까지 생성 가능합니다.';
+        if (exceededCreateLimit) return kloudMessage.클라우드_20개_생성제한;
         if (exceededNameLength)
           return '클라우드 이름은 50자 이내로 작성해 주세요.';
 
@@ -89,31 +82,28 @@ const CreateKloudForm = ({ onSelect, isOpen }: Props) => {
     handleMutate();
   };
 
-  useEffect(() => {
-    setName(''); // 클라우드명 입력 후 list 아코디언 닫으면 name 남아있는 이슈 해결하기 위해 호출
-  }, [isOpen]);
+  const handleClear = () => {
+    setName('');
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full items-center justify-between rounded-2xl bg-stone-100"
+      className="flex items-center justify-between gap-2 border-b px-2 py-3"
     >
       <input
         type="text"
-        className="common-input bg-transparent"
-        placeholder="생성할 클라우드를 50자 이내로 입력해 주세요"
+        className="reset-input text-sm"
+        placeholder="생성할 클라우드의 이름을 50자 이내로 입력해 주세요."
         onChange={handleChangeName}
         value={name}
       />
       <button
-        type="submit"
-        className="flex w-[15%] items-center justify-center bg-transparent"
-        disabled={name.length === 0}
+        type="button"
+        className="flex items-center justify-center rounded-full bg-zinc-300 p-[2px] md:hidden"
+        onClick={handleClear}
       >
-        <FaPlus
-          size={15}
-          className={`${name.length === 0 ? 'fill-slate-400' : 'fill-black'}`}
-        />
+        <BsX size={16} />
       </button>
     </form>
   );

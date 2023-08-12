@@ -1,12 +1,13 @@
 'use client';
 
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
+import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useToast } from '@chakra-ui/toast';
-import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const toast = useToast();
 
+  const pageType = usePageType();
   const { isFooterVisible } = useIsShowLayout();
 
   const handleClickCopyEmail = async () => {
@@ -30,8 +31,12 @@ const Footer = () => {
   };
 
   return isFooterVisible ? (
-    <footer className="flex w-full justify-center bg-stone-900">
-      <div className="flex w-full max-w-screen-xl flex-col gap-10 p-5">
+    <footer className="flex w-full justify-center bg-stone-900 px-4 py-5 md:px-10">
+      <div
+        className={`flex w-full flex-col justify-center gap-10 ${
+          pageType === 'public' && 'max-w-screen-xl'
+        }`}
+      >
         <div className="flex w-full flex-col gap-10 md:flex-row">
           <div className="flex flex-col gap-4">
             <Title text="서비스" />
