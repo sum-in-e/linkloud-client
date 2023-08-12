@@ -17,7 +17,7 @@ interface Props {
   category: NotKloudCategoryKeyType;
 }
 
-export const linkListLimit = 10;
+export const linkListLimit = 20;
 
 const LinkListQueryResultForNotKloud = ({ category }: Props) => {
   const keyword = useSearchParams().get('keyword');

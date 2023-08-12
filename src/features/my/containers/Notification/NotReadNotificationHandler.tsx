@@ -58,7 +58,7 @@ const NotReadNotificationHandler = () => {
   const handleFailedError = () => {
     showToast({
       title: (
-        <p className="whitespace-pre">
+        <p className="whitespace-pre-wrap">
           {`알림을 활성화하지 못했습니다.\n새로고침후 다시 시도해 주세요.`}
         </p>
       ),
@@ -217,7 +217,7 @@ const NotReadNotificationHandler = () => {
   const showPermissionRequiredToast = () => {
     return showToast({
       title: (
-        <p className="whitespace-pre">
+        <p className="whitespace-pre-wrap">
           {`브라우저 알림 허용이 필요합니다🥲\n하단의 사용 가이드 문서를 확인하여\n알림 권한 허용 후 다시 시도해 주세요!`}
         </p>
       ),
@@ -239,7 +239,7 @@ const NotReadNotificationHandler = () => {
       // 알림 권한 거절
       showToast({
         title: (
-          <p className="whitespace-pre">
+          <p className="whitespace-pre-wrap">
             {`알림 권한을 허용하지 않으셨습니다🥲\n이후 알림 받기를 원하신다면\n하단의 사용 가이드 문서를 확인하여\n알림 권한 허용 후 다시 시도해 주세요!`}
           </p>
         ),
@@ -349,7 +349,7 @@ const NotReadNotificationHandler = () => {
     if (!isSupportedServiceWorker || !isSupportedNotification) {
       showToast({
         title: (
-          <p className="whitespace-pre">
+          <p className="whitespace-pre-wrap">
             {`해당 브라우저는 알림 기능을 지원하지 않아요🥲\n다른 브라우저에서 다시 시도해 주세요.\n모바일은 알림을 위해 App 설치가 필요합니다.`}
           </p>
         ),

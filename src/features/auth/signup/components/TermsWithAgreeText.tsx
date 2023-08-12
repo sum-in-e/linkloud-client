@@ -1,6 +1,6 @@
 const TermsWithAgreeText = () => {
   return (
-    <p className="whitespace-pre text-center text-xs text-gray-500">
+    <p className="whitespace-pre-wrap text-center text-xs text-gray-500">
       {`회원가입 진행 시 `}
       <button
         type="button"

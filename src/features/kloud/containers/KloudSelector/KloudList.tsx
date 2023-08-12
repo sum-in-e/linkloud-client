@@ -47,8 +47,8 @@ const KloudList = ({ kloudId, onSelect }: Props) => {
 
       {!data || data.klouds.length === 0 ? (
         <div className="flex w-full items-center justify-center bg-zinc-100 p-5">
-          <p className="whitespace-pre text-center text-sm font-semibold text-gray-500">
-            {`클라우드가 없어요🥲\n바로 위의 입력창에서 생성해 볼까요?`}
+          <p className="whitespace-pre-wrap text-center text-sm font-semibold text-gray-500">
+            {`클라우드가 없어요🥲\n상단의 입력창에서 바로 생성할 수 있어요!`}
           </p>
         </div>
       ) : (

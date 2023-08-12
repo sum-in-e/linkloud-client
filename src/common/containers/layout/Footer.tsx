@@ -1,12 +1,13 @@
 'use client';
 
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
+import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useToast } from '@chakra-ui/toast';
-import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const toast = useToast();
 
+  const pageType = usePageType();
   const { isFooterVisible } = useIsShowLayout();
 
   const handleClickCopyEmail = async () => {
@@ -30,57 +31,67 @@ const Footer = () => {
   };
 
   return isFooterVisible ? (
-    <footer className="flex w-full flex-col justify-center gap-10 bg-stone-900 px-4 py-5 md:px-10">
-      <div className="flex w-full flex-col gap-10 md:flex-row">
-        <div className="flex flex-col gap-4">
-          <Title text="서비스" />
+    <footer className="flex w-full justify-center bg-stone-900 px-4 py-5 md:px-10">
+      <div
+        className={`flex w-full flex-col justify-center gap-10 ${
+          pageType === 'public' && 'max-w-screen-xl'
+        }`}
+      >
+        <div className="flex w-full flex-col gap-10 md:flex-row">
+          <div className="flex flex-col gap-4">
+            <Title text="서비스" />
+            <div className="flex flex-col gap-2">
+              <Text
+                text="사용 가이드"
+                onClick={() =>
+                  window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+                }
+              />
+              <Text
+                text="의견 들려주기"
+                onClick={() => window.open('https://tally.so/r/wkl2B6')}
+              />
+              <Text
+                text="문제점 알려주기"
+                onClick={() => window.open('https://tally.so/r/wAzEeB')}
+              />
+              <Text
+                text="서비스 발전에 도움주기"
+                onClick={() => window.open('https://toss.me/linkloud')}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <Title text="문의" />
+            <div className="flex flex-col gap-2">
+              <Text
+                text="linkloud.official@gmail.com"
+                onClick={handleClickCopyEmail}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <Title text="Linkloud" />
           <div className="flex flex-col gap-2">
             <Text
-              text="사용 가이드"
+              text="서비스 이용약관"
               onClick={() =>
-                window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+                window.open('https://www.craft.me/s/u150oK9QGBnX4U')
               }
             />
             <Text
-              text="의견 들려주기"
-              onClick={() => window.open('https://tally.so/r/wkl2B6')}
-            />
-            <Text
-              text="문제점 알려주기"
-              onClick={() => window.open('https://tally.so/r/wAzEeB')}
-            />
-            <Text
-              text="서비스 발전에 도움주기"
-              onClick={() => window.open('https://toss.me/linkloud')}
+              text="개인정보 처리방침"
+              onClick={() =>
+                window.open('https://www.craft.me/s/CJKMGCcnuC5YDf')
+              }
             />
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <Title text="문의" />
-          <div className="flex flex-col gap-2">
-            <Text
-              text="linkloud.official@gmail.com"
-              onClick={handleClickCopyEmail}
-            />
-          </div>
-        </div>
+        <p className="text-xs text-zinc-500">
+          copyright {new Date().getFullYear()}. Linkloud All rights reservesd.
+        </p>
       </div>
-      <div className="flex w-full flex-col gap-4">
-        <Title text="Linkloud" />
-        <div className="flex flex-col gap-2">
-          <Text
-            text="서비스 이용약관"
-            onClick={() => window.open('https://www.craft.me/s/u150oK9QGBnX4U')}
-          />
-          <Text
-            text="개인정보 처리방침"
-            onClick={() => window.open('https://www.craft.me/s/CJKMGCcnuC5YDf')}
-          />
-        </div>
-      </div>
-      <p className="text-xs text-zinc-500">
-        copyright {new Date().getFullYear()}. Linkloud All rights reservesd.
-      </p>
     </footer>
   ) : null;
 };

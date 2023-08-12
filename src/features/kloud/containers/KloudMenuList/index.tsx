@@ -183,7 +183,7 @@ const KloudMenuList = ({ onCloseDrawer }: Props) => {
             <div>
               {klouds.length === 0 ? (
                 <div className="flex items-center justify-center p-3">
-                  <p className="whitespace-pre text-center text-sm text-white">
+                  <p className="whitespace-pre-wrap text-center text-sm text-white">
                     {`☁️ 보유한 클라우드가 없어요 ☁️\n상단의 "+" 버튼을 눌러 생성해 보세요!`}
                   </p>
                 </div>

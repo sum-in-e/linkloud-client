@@ -17,7 +17,7 @@ const LinkListErrorUI = ({ onRefetch }: Props) => {
         className="h-auto w-28"
         priority
       />
-      <h4 className="whitespace-pre text-center text-lg font-bold text-zinc-700">
+      <h4 className="whitespace-pre-wrap text-center text-lg font-bold text-zinc-700">
         {`링크를 가져오지 못했어요..🥲\n아래 버튼을 눌러 다시 시도해 주세요.`}
       </h4>
       <button
