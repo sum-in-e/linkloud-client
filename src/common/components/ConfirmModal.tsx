@@ -1,18 +1,11 @@
 'use client';
 
+import CustomModal from '@/common/components/CustomModal';
 import Loader from '@/common/components/Loader';
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from '@chakra-ui/react';
 
 export type positiveActionColorType = 'blue' | 'red';
 
 interface Props {
-  isOpen: boolean;
   onClose: () => void;
   title: string;
   description: string;
@@ -30,7 +23,6 @@ interface Props {
 }
 
 const ConfirmModal = ({
-  isOpen,
   onClose,
   title,
   description,
@@ -38,17 +30,14 @@ const ConfirmModal = ({
   negativeAction,
 }: Props) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalContent className="max-w-[340px] rounded-3xl">
-        <ModalHeader className="font-bold">{title}</ModalHeader>
-        <ModalBody>
-          <p className="text-sm font-semibold text-gray-600">{description}</p>
-        </ModalBody>
-
-        <ModalFooter className="flex flex-col gap-2">
+    <CustomModal onClose={onClose}>
+      <div className="flex max-w-[340px] flex-col gap-5 rounded-2xl bg-white p-5">
+        <h3 className="text-lg font-bold">{title}</h3>
+        <p className="text-sm font-semibold text-gray-600">{description}</p>
+        <div className="flex flex-col gap-2">
           <button
             onClick={positiveAction.action}
-            className={`common-button font-bold text-white  ${
+            className={`reset-button rounded-full px-4 py-3 text-sm font-bold text-white  ${
               positiveAction.color === 'red'
                 ? 'bg-red-500 hover:bg-red-400'
                 : 'bg-primary hover:bg-primary-lighter'
@@ -58,13 +47,13 @@ const ConfirmModal = ({
           </button>
           <button
             onClick={negativeAction.action}
-            className="common-button bg-black font-bold text-white hover:bg-gray-800"
+            className="reset-button rounded-full bg-black px-4 py-3 text-sm font-bold text-white hover:bg-gray-800"
           >
             {negativeAction.isLoading ? <Loader /> : negativeAction.text}
           </button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </div>
+      </div>
+    </CustomModal>
   );
 };
 

@@ -2,41 +2,64 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Avatar } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FaPlus } from 'react-icons/fa';
-import logo from '/public/images/logo_v.png';
+import { Avatar } from '@chakra-ui/react';
+import { BsList } from 'react-icons/bs';
+import logo_v from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
+import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchForm';
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import CreateLink from '@/features/link/containers/CreateLink';
+import MobileMenuDrawer from '@/common/containers/MobileMenuDrawer';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 const Header = () => {
   const router = useRouter();
   const pageType = usePageType();
+
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { isHeaderVisible } = useIsShowLayout();
-  const { onClose, isOpen, onOpen } = useOpen();
+  const { isOpen, onClose, onOpen } = useOpen();
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
-      router.push('/kloud/all');
+      router.push('/link/all');
       return;
     }
 
     router.push('/');
   };
 
-  const handlePushToSetting = () => {
-    router.push('/setting');
+  const handlePushToMyProfile = () => {
+    router.push('/my/profile');
+  };
+
+  const handleClickListButton = () => {
+    onOpen();
   };
 
   return isHeaderVisible ? (
-    <header className="fixed left-0 top-0 z-50 flex h-20 w-full justify-center bg-white">
-      <div className="flex h-full w-full max-w-screen-xl items-center justify-between p-5">
+    <header
+      className={`fixed left-0 top-0 z-10 flex h-16 w-full justify-center bg-white px-4 md:h-20 md:px-10`}
+    >
+      <div
+        className={`flex h-full w-full items-center justify-between ${
+          pageType === 'public' && 'max-w-screen-xl'
+        }`}
+      >
+        {pageType === 'private' && isMobile && isOpen && (
+          <MobileMenuDrawer onClose={onClose} />
+        )}
+        {pageType === 'private' && (
+          <button className="md:hidden" onClick={handleClickListButton}>
+            <BsList size={28} />
+          </button>
+        )}
+
         <Image
-          src={logo}
+          src={logo_v}
           alt="linkloud Logo"
-          className="h-auto w-[90px] cursor-pointer md:w-[120px]"
+          className="h-auto w-16 cursor-pointer md:w-[110px]"
           onClick={handlePushToDefaultPage}
           priority
         />
@@ -49,18 +72,12 @@ const Header = () => {
           </Link>
         ) : (
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="flex items-center justify-center rounded-full bg-primary p-[6px] hover:bg-primary-lighter"
-              onClick={() => onOpen()}
-            >
-              <FaPlus size={20} className="fill-white" />
-            </button>
-            {isOpen && <CreateLink onClose={onClose} />}
+            <div className="hidden w-80 md:block">
+              <LinkSearchForm />
+            </div>
             <Avatar
-              size={'sm'}
-              onClick={handlePushToSetting}
-              className="cursor-pointer"
+              onClick={handlePushToMyProfile}
+              className="h-8 w-8 cursor-pointer md:h-9 md:w-9"
             />
           </div>
         )}

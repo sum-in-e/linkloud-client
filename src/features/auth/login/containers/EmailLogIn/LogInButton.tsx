@@ -30,7 +30,7 @@ const LogInButton = () => {
       { email, password },
       {
         onSuccess: (data) => {
-          const path = returnUrl || '/kloud';
+          const path = returnUrl || '/link';
 
           router.push(path);
         },

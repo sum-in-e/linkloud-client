@@ -11,12 +11,14 @@ export interface KloudEntity {
   links: LinkEntity[];
 }
 
-export const groupMapper = {
+export const notKloudCategory = {
   unread: '미열람',
   uncategorized: '미분류',
   collection: 'Collection',
+  search: '검색',
   all: '전체',
 } as const;
 
-export type GroupKeyType = keyof typeof groupMapper;
-export type GroupValueType = (typeof groupMapper)[keyof typeof groupMapper];
+export type NotKloudCategoryKeyType = keyof typeof notKloudCategory;
+export type NotKloudCategoryValueType =
+  (typeof notKloudCategory)[keyof typeof notKloudCategory];

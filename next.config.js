@@ -17,8 +17,8 @@ const nextConfig = withPWA({
   async redirects() {
     return [
       {
-        source: '/kloud',
-        destination: '/kloud/all',
+        source: '/link',
+        destination: '/link/all',
         permanent: true,
       },
     ];

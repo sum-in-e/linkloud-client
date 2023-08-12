@@ -1,12 +1,14 @@
 'use client';
 
+import { FormEvent, useEffect, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { useLinkAnalyzeMutation } from '@/features/link/modules/apiHooks/useLinkAnalyzeMutation';
 import {
   useLinkState,
   useShowLinkEditorState,
 } from '@/features/link/modules/stores/createLinkStore';
-import { useToast } from '@chakra-ui/react';
-import { FormEvent, useEffect, useState } from 'react';
+import Loader from '@/common/components/Loader';
+import { BsPlus, BsX } from 'react-icons/bs';
 
 const LinkFetcher = () => {
   const toast = useToast();
@@ -18,6 +20,10 @@ const LinkFetcher = () => {
 
   const { mutate, isLoading } = useLinkAnalyzeMutation();
 
+  const handleReset = () => {
+    setUrl('');
+  };
+
   const handleMutate = () => {
     mutate(
       { url },
@@ -28,6 +34,7 @@ const LinkFetcher = () => {
             title: data.data.title,
             description: data.data.description,
             thumbnailUrl: data.data.thumbnailUrl,
+            kloud: null,
           });
           setIsShowLinkEditor(true);
         },
@@ -99,30 +106,38 @@ const LinkFetcher = () => {
       fetchClipboardText();
     }
 
-    setUrl(''); // 진입 시 url input 초기화
+    setUrl('');
   }, []);
 
-  return isLoading ? (
-    <div className="flex h-32 w-full items-center justify-center rounded-lg bg-blue-100">
-      <p className="text-sm font-semibold">링크 정보를 가져오고 있어요!</p>
-    </div>
-  ) : (
-    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-1">
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full items-center justify-between border-b"
+    >
+      <div className="flex w-9 flex-shrink-0 items-center justify-center">
+        {isLoading ? (
+          <Loader theme="black" size={20} />
+        ) : (
+          <BsPlus size={25} className="fill-zinc-500" />
+        )}
+      </div>
       <input
         type="url"
-        placeholder="이곳에 링크를 붙여넣으세요🔗"
-        className="common-input h-10 w-full bg-slate-100"
+        placeholder="어떤 링크를 저장해 볼까요?👀"
+        className="h-10 w-full outline-none"
         value={url}
         onChange={handleChangeUrl}
         autoFocus
       />
-      <button
-        type="submit"
-        className="common-button  h-10 bg-gray-700 px-5 font-bold text-white hover:bg-gray-500"
-        disabled={url.length === 0}
-      >
-        링크 정보 가져오기
-      </button>
+      <div className="px-2 md:hidden">
+        <button
+          type="button"
+          className="flex items-center justify-center rounded-full bg-zinc-300 p-[2px]"
+          onClick={handleReset}
+        >
+          <BsX size={16} />
+        </button>
+      </div>
     </form>
   );
 };

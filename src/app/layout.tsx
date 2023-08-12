@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       {isProduction && <GoogleAnalytics />}
-      <body>
+      <body className="box-border bg-zinc-50">
         <QueryProvider>
           <ChakraUiProvider>
             <Header />

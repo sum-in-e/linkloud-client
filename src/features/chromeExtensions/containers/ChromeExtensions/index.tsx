@@ -12,7 +12,7 @@ const ChromeExtentions = () => {
         className="h-auto w-[50px]"
         priority
       />
-      <h2 className="mb-5 whitespace-pre text-center text-sm text-gray-500">
+      <h2 className="mb-5 whitespace-pre-wrap text-center text-sm text-gray-500">
         {`🎉 이제 더욱 간편하게 링크를 저장할 수 있습니다! 🎉\n기존 탭으로 돌아가 링클라우드 크롬 익스텐션을 사용해 보세요!`}
       </h2>
 

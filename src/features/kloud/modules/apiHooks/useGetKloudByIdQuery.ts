@@ -15,7 +15,7 @@ import { AxiosError } from 'axios';
 
 export const useGetKloudByIdQuery = (
   params: GetKloudByIdParam,
-  enabled: boolean = true
+  enabledOption?: { enabled: boolean }
 ): UseQueryResult<GetKloudByIdData, AxiosError<ErrorResponseType>> => {
   return useQuery(
     queryKeys.kloud.getKloudById(params.id),
@@ -24,7 +24,7 @@ export const useGetKloudByIdQuery = (
       select: (data) => {
         return data.data;
       },
-      enabled,
+      ...enabledOption,
       retry: 1,
     }
   );
