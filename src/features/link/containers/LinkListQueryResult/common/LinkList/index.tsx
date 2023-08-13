@@ -37,7 +37,7 @@ const LinkList = ({
   goToPage,
 }: Props) => {
   const { kloudId } = useParams();
-  const isSearchedList = usePathname() === '/link/search';
+  const pathname = usePathname();
 
   const queryClient = useQueryClient();
 
@@ -62,6 +62,19 @@ const LinkList = ({
 
   const { links, count } = data;
 
+  const getEmptyListText = () => {
+    switch (pathname) {
+      case '/link/search':
+        return '검색어를 포함하는 링크가 없어요!';
+      case '/link/unread':
+        return '대단해요! 모든 링크를 확인했어요👍';
+      case '/link/uncategorized':
+        return '대단해요! 모든 링크가 분류되었어요👍';
+      default:
+        return '링크를 저장할 준비가 됐어요!';
+    }
+  };
+
   return links.length === 0 ? (
     <div className="flex h-full w-full flex-col items-center justify-center gap-3">
       <Image
@@ -70,11 +83,7 @@ const LinkList = ({
         className="h-auto w-28"
         priority
       />
-      <h4 className="text-lg font-bold text-zinc-700">
-        {isSearchedList
-          ? '검색어를 포함하는 링크가 없어요!'
-          : '링크를 저장할 준비가 됐어요!'}
-      </h4>
+      <h4 className="text-lg font-bold text-zinc-700">{getEmptyListText()}</h4>
     </div>
   ) : (
     <div className="flex h-full flex-col justify-between overflow-x-hidden overflow-y-scroll">

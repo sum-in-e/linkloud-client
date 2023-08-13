@@ -95,7 +95,7 @@ const KloudSelectModal = ({ onClose, onSuccess, selectedIds }: Props) => {
   return (
     <CustomModal onClose={onClose}>
       {isShowKloudSelector ? (
-        <div className="flex max-w-[340px] flex-col rounded-2xl bg-white">
+        <div className="flex w-[340px] flex-col rounded-2xl bg-white">
           <div className="px-3 pt-3 md:px-5">
             <button
               type="button"
@@ -108,7 +108,7 @@ const KloudSelectModal = ({ onClose, onSuccess, selectedIds }: Props) => {
           <KloudSelector kloudId={selectedKloudId} onChange={handleSelect} />
         </div>
       ) : (
-        <div className="flex max-w-[340px] flex-col gap-5 rounded-2xl bg-white p-5">
+        <div className="flex w-[340px] flex-col gap-5 rounded-2xl bg-white p-5">
           <h3 className="text-lg font-bold">{title}</h3>
           <p className="text-sm font-semibold text-gray-600">{`이동할 클라우드를 선택해 주세요.`}</p>
           <button

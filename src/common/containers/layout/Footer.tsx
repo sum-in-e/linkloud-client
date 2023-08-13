@@ -40,31 +40,34 @@ const Footer = () => {
         <div className="flex w-full flex-col gap-10 md:flex-row">
           <div className="flex flex-col gap-4">
             <Title text="서비스" />
+            <Menu
+              text="사용 가이드"
+              onClick={() =>
+                window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <Title text="피드백" />
             <div className="flex flex-col gap-2">
-              <Text
-                text="사용 가이드"
-                onClick={() =>
-                  window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
-                }
-              />
-              <Text
-                text="의견 들려주기"
+              <Menu
+                text="리뷰 작성하기"
                 onClick={() => window.open('https://tally.so/r/wkl2B6')}
               />
-              <Text
-                text="문제점 알려주기"
+              <Menu
+                text="버그 제보하기"
                 onClick={() => window.open('https://tally.so/r/wAzEeB')}
               />
-              <Text
+              <Menu
                 text="서비스 발전에 도움주기"
                 onClick={() => window.open('https://toss.me/linkloud')}
               />
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <Title text="문의" />
+            <Title text="문의 및 제안" />
             <div className="flex flex-col gap-2">
-              <Text
+              <Menu
                 text="linkloud.official@gmail.com"
                 onClick={handleClickCopyEmail}
               />
@@ -74,13 +77,13 @@ const Footer = () => {
         <div className="flex w-full flex-col gap-4">
           <Title text="Linkloud" />
           <div className="flex flex-col gap-2">
-            <Text
+            <Menu
               text="서비스 이용약관"
               onClick={() =>
                 window.open('https://www.craft.me/s/u150oK9QGBnX4U')
               }
             />
-            <Text
+            <Menu
               text="개인정보 처리방침"
               onClick={() =>
                 window.open('https://www.craft.me/s/CJKMGCcnuC5YDf')
@@ -102,7 +105,7 @@ const Title = ({ text }: { text: string }) => {
   return <h2 className="text-[15px] font-bold text-slate-300">{text}</h2>;
 };
 
-const Text = ({ text, onClick }: { text: string; onClick?: () => void }) => {
+const Menu = ({ text, onClick }: { text: string; onClick?: () => void }) => {
   return (
     <p
       className="cursor-pointer text-sm text-slate-500 hover:underline"
