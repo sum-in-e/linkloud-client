@@ -1,7 +1,7 @@
 'use client';
 
 import { Portal } from '@chakra-ui/react';
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode, useEffect } from 'react';
 
 interface Props {
   onClose: () => void;
@@ -29,6 +29,16 @@ const CustomModal = ({ onClose, children }: Props) => {
   const handleContentClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    // 모달이 마운트될 때 body의 스크롤을 막습니다. (배경 스크롤 막기 위함)
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      // 모달이 언마운트될 때 원래대로 되돌립니다.
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <Portal>
