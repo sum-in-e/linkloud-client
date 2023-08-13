@@ -59,7 +59,7 @@ const Header = () => {
         <Image
           src={logo_v}
           alt="linkloud Logo"
-          className="h-auto w-16 cursor-pointer md:w-[110px]"
+          className="h-auto w-20 cursor-pointer md:w-28"
           onClick={handlePushToDefaultPage}
           priority
         />
