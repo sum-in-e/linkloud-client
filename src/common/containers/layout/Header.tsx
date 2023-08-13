@@ -75,10 +75,9 @@ const Header = () => {
             <div className="hidden w-80 md:block">
               <LinkSearchForm />
             </div>
-            <Avatar
-              onClick={handlePushToMyProfile}
-              className="h-8 w-8 cursor-pointer md:h-9 md:w-9"
-            />
+            <Link href="/my/profile">
+              <Avatar className="h-8 w-8 cursor-pointer md:h-9 md:w-9" />
+            </Link>
           </div>
         )}
       </div>
