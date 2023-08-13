@@ -11,7 +11,7 @@ const IntroSection = () => {
           관심있는 정보들을 Linkloud에 담아두고 확인하세요.
         </p>
         <p className="whitespace-pre-wrap break-keep text-center">
-          여러분이 얻고자 했던 정보를 놓치지 않을 수 있도록 도와드립니다.
+          여러분이 얻고자 했던 정보를 놓치지 않을 수 있도록 도와드려요!
         </p>
       </div>
     </section>

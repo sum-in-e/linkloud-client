@@ -59,7 +59,7 @@ const Header = () => {
         <Image
           src={logo_v}
           alt="linkloud Logo"
-          className="h-auto w-16 cursor-pointer md:w-[110px]"
+          className="h-auto w-20 cursor-pointer md:w-28"
           onClick={handlePushToDefaultPage}
           priority
         />
@@ -75,10 +75,9 @@ const Header = () => {
             <div className="hidden w-80 md:block">
               <LinkSearchForm />
             </div>
-            <Avatar
-              onClick={handlePushToMyProfile}
-              className="h-8 w-8 cursor-pointer md:h-9 md:w-9"
-            />
+            <Link href="/my/profile">
+              <Avatar className="h-8 w-8 cursor-pointer md:h-9 md:w-9" />
+            </Link>
           </div>
         )}
       </div>
