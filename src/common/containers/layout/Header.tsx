@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Avatar } from '@chakra-ui/react';
-import { BsList } from 'react-icons/bs';
+import { BsList, BsFillPersonFill } from 'react-icons/bs';
 import logo_v from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
@@ -76,7 +75,9 @@ const Header = () => {
               <LinkSearchForm />
             </div>
             <Link href="/my/profile">
-              <Avatar className="h-8 w-8 cursor-pointer md:h-9 md:w-9" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 p-1 md:h-10 md:w-10">
+                <BsFillPersonFill className="h-full w-full fill-white" />
+              </div>
             </Link>
           </div>
         )}
