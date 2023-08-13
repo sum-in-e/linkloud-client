@@ -4,10 +4,6 @@ import TopSection from '@/features/randing/TopSection';
 import IntroSection from '@/features/randing/IntroSection';
 import PointSection from '@/features/randing/PointSection';
 
-export const metadata = {
-  title: 'Linkloud',
-};
-
 export default async function HomePage() {
   const isLogin = await getSessionWithJwtInServer();
 

@@ -33,7 +33,7 @@ export default function RootLayout({
 export const metadata = {
   title: 'Linkloud',
   description: LINKLOUD_SLOGAN,
-  keywords: 'linkloud, link, manage links, save links',
+  keywords: 'linkloud, 링클라우드, link, manage links',
   metadataBase: new URL('https://linkloud.co.kr'),
   alternates: {
     canonical: '/',
