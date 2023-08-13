@@ -35,13 +35,30 @@ export const LinkListQueryResult = ({
     }
   };
 
+  const resetSelectedIds = () => {
+    if (selectedIds.length > 0) setSelectedIds([]);
+  };
+
+  const handleNextPage = () => {
+    nextPage();
+    resetSelectedIds();
+  };
+  const handlePreviousPage = () => {
+    previousPage();
+    resetSelectedIds();
+  };
+  const handleGoToPage = (page: number) => {
+    goToPage(page);
+    resetSelectedIds();
+  };
+
   const handleEnabledEditMode = () => {
     setIsEditMode(true);
   };
 
   const handleDisabledEditMode = () => {
     setIsEditMode(false);
-    setSelectedIds([]);
+    resetSelectedIds();
   };
 
   const count = data?.count || 0;
@@ -66,9 +83,9 @@ export const LinkListQueryResult = ({
         selectedIds={selectedIds}
         onSelectItem={handleSelectItem}
         offset={offset}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        goToPage={goToPage}
+        nextPage={handleNextPage}
+        previousPage={handlePreviousPage}
+        goToPage={handleGoToPage}
       />
     </section>
   );
