@@ -72,8 +72,8 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <section className="flex flex-col">
-      <div className="my-5 flex h-44 flex-col gap-2 overflow-scroll md:h-auto">
+    <section className="flex flex-col px-6">
+      <div className="my-5 flex flex-col gap-2">
         <div className="flex flex-col gap-3 md:px-3">
           {reasons.map((reason) => (
             <Checkbox

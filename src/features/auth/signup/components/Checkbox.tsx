@@ -1,6 +1,6 @@
 'use client';
 
-import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
+import { BsFillCheckSquareFill, BsSquare } from 'react-icons/bs';
 
 interface Props {
   value: string;
@@ -22,9 +22,9 @@ const Checkbox = ({ value, label, checked, onChange }: Props) => {
       />
       <label htmlFor={value} className="flex cursor-pointer items-center gap-1">
         {checked ? (
-          <ImCheckboxChecked className="h-4 w-4 fill-gray-700" />
+          <BsFillCheckSquareFill className="h-4 w-4 fill-gray-700" />
         ) : (
-          <ImCheckboxUnchecked className="h-4 w-4 fill-gray-500" />
+          <BsSquare className="h-4 w-4 fill-gray-500" />
         )}
         <p className="text-sm text-gray-900">{label}</p>
       </label>

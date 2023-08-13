@@ -9,25 +9,29 @@ import UserInfo from '@/features/my/containers/UserInfo';
 import NotificationArea from '@/features/my/containers/Notification';
 
 const MyProfile = () => {
-  const { isLoading, data } = useGetSessionQuery();
+  const { isLoading } = useGetSessionQuery();
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full max-w-[340px] flex-col items-center gap-5 py-5">
+        <div className="skeleton h-7 w-4/5 rounded-full" />
+        <div className="skeleton h-3 w-3/5 rounded-full" />
+        <div className="skeleton h-32 w-4/5 rounded-lg" />
+      </div>
+    );
+  }
 
   return (
-    <>
-      {isLoading ? (
-        <Skeleton className="h-[70vh] w-full max-w-[340px]" />
-      ) : (
-        <div className="mb-10 mt-4 flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
-          <UserInfo />
-          <Devider />
-          <NotificationArea />
-          <Devider />
-          <section className="flex w-full justify-center gap-3">
-            <LogOutButton />
-            <SignOutButton />
-          </section>
-        </div>
-      )}
-    </>
+    <div className="mb-10 mt-4 flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
+      <UserInfo />
+      <Devider />
+      <NotificationArea />
+      <Devider />
+      <section className="flex w-full justify-center gap-3">
+        <LogOutButton />
+        <SignOutButton />
+      </section>
+    </div>
   );
 };
 

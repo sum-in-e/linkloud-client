@@ -25,7 +25,7 @@ const CreateLinkModal = ({ onCloseModal }: Props) => {
 
   return (
     <CustomModal onClose={handleClose}>
-      <div className="flex h-screen w-screen flex-col rounded-none bg-white md:h-fit md:w-fit md:rounded-lg ">
+      <div className="flex h-screen w-screen flex-col bg-white md:h-fit md:w-fit md:rounded-lg ">
         {isShowLinkEditor ? (
           <div className="flex justify-center md:w-[400px]">
             <LinkEditor onClose={handleClose} />
