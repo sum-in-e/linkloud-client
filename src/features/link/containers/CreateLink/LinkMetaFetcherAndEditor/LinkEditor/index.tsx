@@ -65,7 +65,7 @@ const LinkEditor = ({ onClose }: Props) => {
             )}
             <button
               type="button"
-              className="reset-button w-fit rounded-2xl bg-black px-4 py-2 text-sm font-bold text-white md:hidden"
+              className="reset-button w-fit min-w-[81px] rounded-2xl bg-black px-4 py-2 text-sm font-bold text-white md:hidden"
               onClick={onCreateLinkMutate}
               disabled={isDisabled}
             >
