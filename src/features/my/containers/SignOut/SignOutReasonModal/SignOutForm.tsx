@@ -97,7 +97,7 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
       <div className="flex gap-2">
         <button
           onClick={onClose}
-          className="common-button bg-primary font-bold text-white hover:bg-primary-lighter"
+          className="common-button bg-black font-bold text-white hover:bg-zinc-700"
         >
           계속 이용하기
         </button>
