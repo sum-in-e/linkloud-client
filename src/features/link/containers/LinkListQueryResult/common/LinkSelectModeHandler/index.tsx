@@ -38,7 +38,7 @@ const LinkSelectModeHandler = ({
       <div className="mx-1 h-7 border-r border-zinc-400" />
       <button
         onClick={onDisableEditMode}
-        className="reset-button w-fit rounded-full border border-zinc-400 bg-inherit px-3 py-[6px] text-xs font-semibold text-black hover:bg-zinc-200 md:text-sm"
+        className="reset-button w-fit rounded-full border border-zinc-400 bg-inherit px-3 py-[6px] text-xs font-semibold text-black md:text-sm  md:hover:bg-zinc-200"
       >
         취소하기
       </button>
