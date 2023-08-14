@@ -26,7 +26,7 @@ const EmailInput = () => {
         placeholder="이메일을 입력해 주세요."
         value={email}
         onChange={handleChange}
-        className={`common-input border-[1px] ${
+        className={`reset-input rounded-2xl border-[1px] px-4 py-3 text-sm ${
           hasEmail && !isValidatedEmail
             ? 'border-red-400'
             : isValidatedEmail

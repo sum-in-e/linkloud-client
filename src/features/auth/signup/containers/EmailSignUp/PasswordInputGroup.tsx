@@ -80,7 +80,7 @@ const PasswordInputGroup = () => {
           placeholder="영어, 숫자, 특수문자를 모두 포함하는 8~15자"
           value={password}
           onChange={handleChangePassword}
-          className={`common-input border-[1px] ${
+          className={`reset-input rounded-2xl border-[1px] px-4 py-3 text-sm ${
             hasPassword && !isVerifiedPassword
               ? 'border-red-400'
               : isVerifiedPassword
@@ -97,7 +97,7 @@ const PasswordInputGroup = () => {
           placeholder="비밀번호를 한 번 더 입력해 주세요."
           value={confirmPassword}
           onChange={handleChangeConfirmPassword}
-          className={`common-input border-[1px] ${
+          className={`reset-input rounded-2xl border-[1px] px-4 py-3 text-sm ${
             hasConfirmPassword && !isMatch
               ? 'border-red-400'
               : hasConfirmPassword && isMatch
