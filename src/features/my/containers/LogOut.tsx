@@ -14,7 +14,7 @@ const LogOutButton = () => {
       {},
       {
         onSuccess: (data) => {
-          router.push('/');
+          if (data.status === 201) router.push('/');
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
