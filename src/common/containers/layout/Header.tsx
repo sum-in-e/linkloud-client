@@ -51,6 +51,7 @@ const Header = () => {
         )}
         {pageType === 'private' && (
           <button
+            aria-label="Open Menu List"
             type="button"
             className="md:hidden"
             onClick={handleClickListButton}
@@ -78,7 +79,7 @@ const Header = () => {
             <div className="hidden w-80 md:block">
               <LinkSearchForm />
             </div>
-            <Link href="/my/profile">
+            <Link href="/my/profile" aria-label="Go to My Profile Page">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 p-1 md:h-10 md:w-10">
                 <BsFillPersonFill className="h-full w-full fill-white" />
               </div>

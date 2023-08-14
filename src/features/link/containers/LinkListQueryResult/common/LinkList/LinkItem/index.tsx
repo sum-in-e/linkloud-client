@@ -247,6 +247,9 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         {/* 버튼 */}
         <div className="z-5 absolute bottom-3 right-2 flex gap-[6px] md:hidden md:group-hover/item:flex">
           <button
+            aria-label={
+              isInMyCollection ? 'Remove from Collection' : 'Add to Collection'
+            }
             type="button"
             className="group/collection"
             onClick={handleClickCollection}
@@ -267,6 +270,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
           >
             <PopoverTrigger>
               <button
+                aria-label="Show More Options"
                 type="button"
                 className="group/more"
                 onClick={handleClickMore}
