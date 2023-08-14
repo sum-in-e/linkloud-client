@@ -41,6 +41,7 @@ const Pagination = ({
   return (
     <div className="flex justify-center">
       <button
+        type="button"
         className={`flex aspect-square min-w-[35px] items-center justify-center rounded-full p-1 text-sm font-semibold text-zinc-700 md:min-w-[40px] md:hover:bg-zinc-200 ${
           isDisabledPrev && 'cursor-not-allowed opacity-50'
         }`}
@@ -50,6 +51,7 @@ const Pagination = ({
         <FaAngleDoubleLeft />
       </button>
       <button
+        type="button"
         className={`flex aspect-square min-w-[35px] items-center justify-center rounded-full p-1 text-sm font-semibold text-zinc-700 md:min-w-[40px] md:hover:bg-zinc-200 ${
           isDisabledPrev && 'cursor-not-allowed opacity-50'
         }`}
@@ -60,6 +62,7 @@ const Pagination = ({
       </button>
       {displayedPages.map((page) => (
         <button
+          type="button"
           key={page}
           className={`aspect-square min-w-[35px] rounded-full p-1 text-sm font-semibold md:min-w-[40px] ${
             page === currentPage
@@ -72,6 +75,7 @@ const Pagination = ({
         </button>
       ))}
       <button
+        type="button"
         className={`flex aspect-square min-w-[35px] items-center justify-center rounded-full p-1 text-sm font-semibold text-zinc-700 md:min-w-[40px] md:hover:bg-zinc-200 ${
           isDisalbedNext && 'cursor-not-allowed opacity-50'
         }`}
@@ -81,6 +85,7 @@ const Pagination = ({
         <FaAngleRight />
       </button>
       <button
+        type="button"
         className={`flex aspect-square min-w-[35px] items-center justify-center rounded-full p-1 text-sm font-semibold text-zinc-700 md:min-w-[40px] md:hover:bg-zinc-200 ${
           isDisalbedNext && 'cursor-not-allowed opacity-50'
         }`}

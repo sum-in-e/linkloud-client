@@ -66,6 +66,7 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
       >
         <PopoverTrigger>
           <button
+          type='button'
             className="group/button rounded-lg p-1 md:hidden md:group-hover:block"
             onClick={handleClickDots}
           >

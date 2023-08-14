@@ -21,6 +21,7 @@ const EditKloudButton = ({ kloud }: Props) => {
   return (
     <>
       <button
+        type="button"
         className="w-fit rounded-md px-3 py-2 text-sm font-semibold hover:bg-zinc-200"
         onClick={handleClick}
       >

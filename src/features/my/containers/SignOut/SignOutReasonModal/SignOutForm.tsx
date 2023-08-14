@@ -96,12 +96,14 @@ const SignOutForm = ({ onClose }: { onClose: () => void }) => {
       </div>
       <div className="flex gap-2">
         <button
+          type="button"
           onClick={onClose}
           className="reset-button flex items-center justify-center rounded-2xl bg-black py-3 text-sm font-bold text-white hover:bg-zinc-700"
         >
           계속 이용하기
         </button>
         <button
+          type="button"
           onClick={handleClickSignOut}
           className="reset-button flex items-center justify-center rounded-2xl bg-red-500 py-3 text-sm font-bold text-white hover:bg-red-400"
         >

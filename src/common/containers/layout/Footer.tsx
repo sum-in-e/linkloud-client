@@ -102,13 +102,13 @@ const Footer = () => {
 export default Footer;
 
 const Title = ({ text }: { text: string }) => {
-  return <h2 className="text-[15px] font-bold text-slate-300">{text}</h2>;
+  return <h2 className="text-[15px] font-bold text-slate-200">{text}</h2>;
 };
 
 const Menu = ({ text, onClick }: { text: string; onClick?: () => void }) => {
   return (
     <p
-      className="cursor-pointer text-sm text-slate-500 hover:underline"
+      className="cursor-pointer text-sm text-slate-300 hover:underline"
       onClick={onClick}
     >
       {text}

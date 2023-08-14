@@ -83,6 +83,7 @@ const DeleteKloudButton = ({ kloud }: Props) => {
   return (
     <>
       <button
+        type="button"
         className="w-fit rounded-md px-3 py-2 text-sm font-semibold text-red-500 hover:bg-zinc-200"
         onClick={handleClick}
       >

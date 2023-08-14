@@ -50,7 +50,11 @@ const Header = () => {
           <MobileMenuDrawer onClose={onClose} />
         )}
         {pageType === 'private' && (
-          <button className="md:hidden" onClick={handleClickListButton}>
+          <button
+            type="button"
+            className="md:hidden"
+            onClick={handleClickListButton}
+          >
             <BsList size={28} />
           </button>
         )}

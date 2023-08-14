@@ -21,6 +21,7 @@ const LinkListErrorUI = ({ onRefetch }: Props) => {
         {`링크를 가져오지 못했어요..🥲\n아래 버튼을 눌러 다시 시도해 주세요.`}
       </h4>
       <button
+        type="button"
         className="rounded-full bg-black p-[6px] hover:bg-gray-700"
         onClick={onRefetch}
       >
