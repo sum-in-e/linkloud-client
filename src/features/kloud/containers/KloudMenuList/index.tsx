@@ -17,6 +17,7 @@ import { usePatchKloudPositionByIdMutation } from '@/features/kloud/modules/apiH
 import { BsPlus, BsX, BsArrowRepeat } from 'react-icons/bs';
 import CreateKloudForm from '@/features/kloud/containers/KloudMenuList/CreateKloudForm';
 import { kloudMessage } from '@/features/kloud/modules/constants/kloud';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 interface Props {
   onCloseDrawer?: () => void;
@@ -25,6 +26,7 @@ interface Props {
 const KloudMenuList = ({ onCloseDrawer }: Props) => {
   const toast = useToast();
   const queryClient = useQueryClient();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const [isShowCreateForm, setIsShowCreateForm] = useState(false);
 
@@ -184,7 +186,11 @@ const KloudMenuList = ({ onCloseDrawer }: Props) => {
             <div>
               {klouds.length === 0 ? (
                 <div className="flex items-center justify-center p-3">
-                  <p className="whitespace-pre-wrap text-center text-sm text-white">
+                  <p
+                    className={`whitespace-pre-wrap text-center text-sm ${
+                      isMobile ? 'text-black' : 'text-white'
+                    }`}
+                  >
                     {`☁️ 보유한 클라우드가 없어요 ☁️\n상단의 "+" 버튼을 눌러 생성해 보세요!`}
                   </p>
                 </div>
