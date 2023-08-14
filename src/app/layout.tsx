@@ -4,7 +4,7 @@ import Header from '@/common/containers/layout/Header';
 import MainContent from '@/common/containers/layout/MainContent';
 import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
-import { LINKLOUD_SLOGAN } from '@/common/modules/constants/brand';
+import { LINKLOUD_DESCRIPTION } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 
 export const metadata = {
   title: 'Linkloud',
-  description: LINKLOUD_SLOGAN,
+  description: LINKLOUD_DESCRIPTION,
   keywords: 'linkloud, 링클라우드, link, manage links',
   metadataBase: new URL('https://linkloud.co.kr'),
   alternates: {
@@ -46,7 +46,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Linkloud',
-    description: LINKLOUD_SLOGAN,
+    description: LINKLOUD_DESCRIPTION,
     url: 'https://linkloud.co.kr',
     type: 'website',
     images: [
@@ -58,7 +58,7 @@ export const metadata = {
   },
   twitter: {
     title: 'Linkloud',
-    description: LINKLOUD_SLOGAN,
+    description: LINKLOUD_DESCRIPTION,
     card: 'Linkloud',
     images: {
       url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
