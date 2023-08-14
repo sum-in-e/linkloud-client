@@ -216,6 +216,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
       >
         <picture>
           <img
+            loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
             className={`aspect-[1.91/1] h-1/2 w-full rounded-lg object-cover ${
