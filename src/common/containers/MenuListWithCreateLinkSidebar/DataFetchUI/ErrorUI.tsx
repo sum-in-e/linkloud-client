@@ -13,6 +13,7 @@ const MenuListError = ({ onRetry }: Props) => {
         메뉴를 불러오는데 실패했습니다.
       </p>
       <button
+        type="button"
         className="rounded-full bg-black p-[6px] hover:bg-gray-700"
         onClick={onRetry}
       >

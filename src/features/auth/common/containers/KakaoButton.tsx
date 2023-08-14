@@ -23,7 +23,10 @@ const KakaoButton = ({ type }: { type: AuthMethodType }) => {
       <Link
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/user/auth/kakao?${queryString}`}
       >
-        <button className="reset-button flex items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3 text-sm  hover:bg-[#ffe81a]">
+        <button
+          type="button"
+          className="reset-button flex items-center justify-center gap-1 rounded-2xl bg-[#FAE100] py-3 text-sm  hover:bg-[#ffe81a]"
+        >
           <RiKakaoTalkFill />
           <p className="text-sm font-bold text-black ">{text}</p>
         </button>

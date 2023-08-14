@@ -245,7 +245,11 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         )}
         {/* 버튼 */}
         <div className="z-5 absolute bottom-3 right-2 flex gap-[6px] md:hidden md:group-hover/item:flex">
-          <button className="group/collection" onClick={handleClickCollection}>
+          <button
+            type="button"
+            className="group/collection"
+            onClick={handleClickCollection}
+          >
             <BsJournalBookmarkFill
               size={18}
               className={`color-duration ${
@@ -261,7 +265,11 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
             closeOnBlur={true}
           >
             <PopoverTrigger>
-              <button className="group/more" onClick={handleClickMore}>
+              <button
+                type="button"
+                className="group/more"
+                onClick={handleClickMore}
+              >
                 <BsThreeDotsVertical
                   size={18}
                   className={`color-duration fill-zinc-400 transition-colors md:group-hover/more:fill-zinc-600`}
@@ -270,24 +278,28 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
             </PopoverTrigger>
             <PopoverContent className="flex w-fit flex-col gap-1 p-1">
               <button
+                type="button"
                 className="rounded-md px-3 py-2 hover:bg-zinc-200"
                 onClick={handleClickOpenDetail}
               >
                 <p className="text-sm font-semibold">상세보기</p>
               </button>
               <button
+                type="button"
                 className="rounded-md px-3 py-2 hover:bg-zinc-200"
                 onClick={handleClickOpenChangeKloud}
               >
                 <p className="text-sm font-semibold">이동하기</p>
               </button>
               <button
+                type="button"
                 className="rounded-md px-3 py-2 hover:bg-zinc-200"
                 onClick={handleClickOpenDelete}
               >
                 <p className="text-sm font-semibold text-red-500">삭제하기</p>
               </button>
               <button
+                type="button"
                 className="flex items-center justify-center rounded-md px-3 py-2 hover:bg-zinc-200"
                 onClick={handleClickShare}
               >

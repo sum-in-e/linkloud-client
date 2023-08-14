@@ -88,6 +88,7 @@ const DeleteHandler = ({ onDisableEditMode, selectedIds }: Props) => {
   return (
     <>
       <button
+        type="button"
         onClick={onOpen}
         disabled={selectedIds.length === 0}
         className="reset-button w-fit rounded-full bg-red-500 px-3 py-[6px] text-xs font-semibold text-white hover:bg-red-400 md:text-sm"

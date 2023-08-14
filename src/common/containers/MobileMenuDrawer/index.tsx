@@ -21,7 +21,11 @@ const MobileMenuDrawer = ({ onClose }: Props) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerHeader className="flex items-center justify-end">
-          <button onClick={onClose} className="rounded-lg border p-1">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg border p-1"
+          >
             <BsArrowBarLeft size={18} />
           </button>
         </DrawerHeader>

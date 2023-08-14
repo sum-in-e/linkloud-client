@@ -36,6 +36,7 @@ const ConfirmModal = ({
         <p className="text-sm font-semibold text-gray-600">{description}</p>
         <div className="flex flex-col gap-2">
           <button
+            type="button"
             onClick={positiveAction.action}
             className={`reset-button rounded-full px-4 py-3 text-sm font-bold text-white  ${
               positiveAction.color === 'red'
@@ -46,6 +47,7 @@ const ConfirmModal = ({
             {positiveAction.isLoading ? <Loader /> : positiveAction.text}
           </button>
           <button
+            type="button"
             onClick={negativeAction.action}
             className="reset-button rounded-full bg-black px-4 py-3 text-sm font-bold text-white hover:bg-gray-800"
           >

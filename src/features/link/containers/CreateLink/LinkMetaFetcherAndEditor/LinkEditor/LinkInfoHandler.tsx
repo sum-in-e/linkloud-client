@@ -54,6 +54,7 @@ const LinkInfoHanlder = ({ handleKloudSelectMode }: Props) => {
         <div className="mt-2 flex items-center justify-between gap-3">
           <p className="truncate text-sm text-gray-500">{link.url}</p>
           <button
+            type="button"
             className="rounded-2xl bg-black p-1 hover:bg-zinc-600"
             onClick={handleClickRefresh}
           >

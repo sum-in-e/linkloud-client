@@ -121,6 +121,7 @@ const KloudSelectModal = ({ onClose, onSuccess, selectedIds }: Props) => {
           </button>
           <div className="flex flex-col gap-2">
             <button
+              type="button"
               onClick={handleClick}
               disabled={isDisabledMoveButton}
               className="reset-button rounded-full bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-lighter"
@@ -128,6 +129,7 @@ const KloudSelectModal = ({ onClose, onSuccess, selectedIds }: Props) => {
               {isLoading ? <Loader /> : '이동하기'}
             </button>
             <button
+              type="button"
               onClick={onClose}
               className="reset-button rounded-full bg-black px-4 py-3 text-sm font-bold text-white hover:bg-gray-900"
             >
