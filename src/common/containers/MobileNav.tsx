@@ -8,6 +8,7 @@ import React, { MouseEvent, ReactElement } from 'react';
 import { BsHouseDoor, BsSearch, BsEyeSlash, BsPlus } from 'react-icons/bs';
 
 interface Tab {
+  label: string;
   icon: ReactElement;
   href: string;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
@@ -20,18 +21,22 @@ const MobileNav = () => {
 
   const tabs: Tab[] = [
     {
+      label: 'Go to All Link Page',
       icon: <BsHouseDoor size={20} />,
       href: '/link/all',
     },
     {
+      label: 'Go to Unread Link Page',
       icon: <BsEyeSlash size={20} />,
       href: '/link/unread',
     },
     {
+      label: 'Go to Search',
       icon: <BsSearch size={20} />,
       href: '/link/search',
     },
     {
+      label: 'Add a Link',
       icon: <BsPlus size={30} />,
       href: '',
       onClick: (event: MouseEvent<HTMLAnchorElement>) => {
@@ -46,6 +51,7 @@ const MobileNav = () => {
       <div className="grid h-full grid-cols-4">
         {tabs.map((tab, index) => (
           <Link
+            aria-label={tab.label}
             href={tab.href}
             key={index}
             className="flex cursor-pointer flex-col items-center justify-center"
