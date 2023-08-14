@@ -42,15 +42,6 @@
   .reset-button {
     @apply w-full select-none disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:bg-gray-400;
   }
-
-  /* TODO: common input, common button 적용하던거 위 스타일로 바꾸고 디테일한 스타일은 추가 적용하게 수정 */
-  .common-input {
-    @apply w-full rounded-2xl px-4 py-3 text-sm placeholder-gray-400 outline-none;
-  }
-
-  .common-button {
-    @apply flex w-full select-none items-center justify-center rounded-2xl py-3 text-sm disabled:bg-gray-400 disabled:hover:bg-gray-400;
-  }
 }
 
 @tailwind components;

@@ -24,7 +24,7 @@ const NicknameForm = ({ value, onChange, isVerified }: Props) => {
         value={value}
         onChange={handleChange}
         placeholder="닉네임을 입력해 주세요.(2~15자)"
-        className={`common-input border-[1px] bg-white text-gray-800  ${
+        className={`reset-input rounded-2xl border-[1px] bg-white px-4 py-3 text-sm text-gray-800  ${
           hasNickname && !isVerified
             ? 'border-red-400'
             : isVerified

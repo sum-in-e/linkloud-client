@@ -25,7 +25,7 @@ const PasswordInput = () => {
         placeholder="비밀번호를 입력해 주세요."
         value={password}
         onChange={handleChange}
-        className={`common-input border-[1px] ${
+        className={`reset-input rounded-2xl border-[1px] px-4 py-3 text-sm ${
           hasPassword && !isValidatedPassword
             ? 'border-red-400'
             : isValidatedPassword

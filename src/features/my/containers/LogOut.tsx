@@ -14,7 +14,13 @@ const LogOutButton = () => {
       {},
       {
         onSuccess: (data) => {
-          if (data.status === 201) router.push('/');
+          toast({
+            title: '로그아웃 되었습니다.',
+            status: 'success',
+            duration: 1000,
+            isClosable: true,
+            onCloseComplete: () => router.push('/'),
+          });
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
