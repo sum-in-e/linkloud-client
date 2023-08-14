@@ -31,6 +31,17 @@ const KloudSelectModal = ({
   const { mutate } = usePatchLinkByIdMutation();
 
   const handleMutate = (selectedKloudId: number | null) => {
+    if (currentKloudId === selectedKloudId) {
+      toast({
+        title: '클라우드를 변경했습니다!',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+      onCloseModal();
+      return;
+    }
+
     mutate(
       {
         id: linkId,
