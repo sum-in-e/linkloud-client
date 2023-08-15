@@ -65,9 +65,9 @@ export const LinkListQueryResult = ({
   const isDisabledActivationButton = count === 0;
 
   return (
-    <section className="relative flex h-full w-full flex-col">
+    <section className="flex h-full w-full flex-col">
       {Header}
-      <div className="flex items-center justify-end pb-4">
+      <div className="flex items-center justify-end pb-4 pt-1">
         <LinkSelectModeHandler
           isEditMode={isEditMode}
           onEnableEditMode={handleEnabledEditMode}
