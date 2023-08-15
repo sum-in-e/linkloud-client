@@ -1,7 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { Skeleton } from '@chakra-ui/react';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
 import LogOutButton from '@/features/my/containers/LogOut';
 import SignOutButton from '@/features/my/containers/SignOut';
@@ -22,11 +20,8 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="mb-10 mt-4 flex w-full max-w-[340px] flex-col gap-7 overflow-hidden">
+    <div className="mb-10 mt-6 flex w-full max-w-[340px] flex-col justify-between gap-7 overflow-hidden md:mt-4 md:justify-normal">
       <UserInfo />
-      <Devider />
-      <NotificationArea />
-      <Devider />
       <section className="flex w-full justify-center gap-3">
         <LogOutButton />
         <SignOutButton />
