@@ -17,7 +17,7 @@ const LogOutButton = () => {
           toast({
             title: '로그아웃 되었습니다.',
             status: 'success',
-            duration: 1500,
+            duration: 2000,
             isClosable: true,
             onCloseComplete: () => router.push('/'),
           });
