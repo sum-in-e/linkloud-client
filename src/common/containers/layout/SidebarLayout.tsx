@@ -6,11 +6,13 @@ import MenuListWithCreateLinkSidebar from '@/common/containers/MenuListWithCreat
 import HomeButton from '@/common/containers/MenuButton/Home';
 import MobileNav from '@/common/containers/MobileNav';
 import KloudListSidebar from '@/common/containers/KloudListSidebar';
+import useViewportHeight from '@/common/modules/hooks/useViewportHeight';
 
 const SidebarLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
   const isMyKloudPage = pathname.includes('/link');
+  useViewportHeight();
 
   return (
     <div className="flex">
@@ -28,7 +30,7 @@ const SidebarLayout = ({ children }: { children: ReactNode }) => {
           <HomeButton />
         </MenuSidebar>
       )}
-      <div className="flex h-[calc(100vh-64px)] max-h-[calc(100vh-64px)] w-full justify-center px-4 pb-[64px] md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:px-10 md:pb-6 md:pt-3">
+      <div className="flex h-[calc(calc(var(--calcvh)*100)-64px)] max-h-[calc(calc(var(--calcvh)*100)-64px)] w-full justify-center px-4 pb-[64px] md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:px-10 md:pb-6 md:pt-3">
         {children}
       </div>
       <MobileNav />
