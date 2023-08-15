@@ -190,6 +190,11 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
     );
   };
 
+  const handleCheckItem = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    onSelectItem(link.id);
+  };
+
   const modalInfo = {
     title: `링크를 삭제하시겠어요?`,
     description: `링크를 정리하면 공간이 깔끔해지고, 보다 효율적으로 링크를 관리할 수 있어요 :) `,
@@ -209,43 +214,37 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   };
 
   return (
-    <li className="relative">
-      <div
-        className={`group/item aspect-square w-[300px] cursor-pointer md:w-[270px]`}
-        onClick={openLinkInNewTap}
-      >
+    <li
+      className={`group/item relative cursor-pointer overflow-hidden rounded-lg`}
+      onClick={openLinkInNewTap}
+    >
+      <div className="relative">
         <picture>
           <img
             loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
-            className={`aspect-[1.91/1] h-1/2 w-full rounded-lg object-cover ${
+            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover ${
               isRead && 'opacity-50'
             } md:group-hover/item:brightness-125`}
             onError={handleErrorImage}
           />
         </picture>
+        {hasMemo && (
+          <div
+            className={`absolute -bottom-7 right-3 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[5px] md:-bottom-10 md:p-[10px]`}
+          >
+            <BsFileTextFill size={15} className="fill-secondary" />
+          </div>
+        )}
+      </div>
+      <div>
         <div className="p-2 pt-4">
           <p className="mb-2 truncate text-xs text-zinc-400">{url}</p>
           <p className="mb-1 truncate text-sm font-bold">{title}</p>
           <p className="truncate text-xs text-zinc-600">{description}</p>
         </div>
-        {hasMemo && (
-          <div
-            className={`absolute right-2 top-1/2 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[10px]`}
-          >
-            <BsFileTextFill size={15} className="fill-secondary" />
-          </div>
-        )}
-        {isShowKloud && (
-          <div className="absolute left-2 top-2 w-fit max-w-[60%] select-none rounded-full bg-primary-alt px-3 py-1">
-            <p className="truncate text-xs font-bold text-white">
-              {kloud?.name}
-            </p>
-          </div>
-        )}
-        {/* 버튼 */}
-        <div className="z-5 absolute bottom-3 right-2 flex gap-[6px] md:hidden md:group-hover/item:flex">
+        <div className="flex justify-end gap-[6px] py-4 md:opacity-0 md:group-hover/item:opacity-100">
           <button
             aria-label={
               isInMyCollection ? 'Remove from Collection' : 'Add to Collection'
@@ -315,11 +314,18 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </div>
       </div>
 
+      {/* absolute elements */}
+      {isShowKloud && (
+        <div className="absolute left-2 top-2 w-fit max-w-[60%] select-none rounded-full bg-primary-alt px-3 py-1">
+          <p className="truncate text-xs font-bold text-white">{kloud?.name}</p>
+        </div>
+      )}
+
       {/* 체크 UI */}
       {isEditMode && (
         <div
-          onClick={() => onSelectItem(link.id)}
-          className={`absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-zinc-300 bg-opacity-60 md:hover:bg-opacity-40`}
+          onClick={handleCheckItem}
+          className={`absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-zinc-300 bg-opacity-60 md:hover:bg-opacity-40`}
         >
           <BsCheckLg
             size={70}

@@ -12,6 +12,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { useParams, usePathname } from 'next/navigation';
 import { toNumber } from 'lodash';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 interface Props {
   data?: GetLinkListData;
@@ -38,7 +39,7 @@ const LinkList = ({
 }: Props) => {
   const { kloudId } = useParams();
   const pathname = usePathname();
-
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const queryClient = useQueryClient();
 
   const handleRefetch = () => {
@@ -86,8 +87,12 @@ const LinkList = ({
       <h4 className="text-lg font-bold text-zinc-700">{getEmptyListText()}</h4>
     </div>
   ) : (
-    <div className="flex h-full flex-col justify-between overflow-x-hidden overflow-y-scroll">
-      <ul className="flex flex-wrap justify-center gap-3 md:justify-normal">
+    <div className="flex h-full flex-col justify-between overflow-y-scroll">
+      <ul
+        className={`grid grid-cols-[repeat(auto-fill,minmax(${
+          isMobile ? 'calc(50%-10px)' : '270px'
+        },1fr))] grid-rows-[1fr] gap-5`}
+      >
         {links.map((link) => (
           <LinkItem
             key={link.id}

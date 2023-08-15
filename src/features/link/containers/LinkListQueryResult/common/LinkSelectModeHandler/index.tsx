@@ -49,7 +49,7 @@ const LinkSelectModeHandler = ({
       type="button"
       onClick={onEnableEditMode}
       disabled={isDisabledActivationButton}
-      className="reset-button w-fit rounded-full bg-black px-3 py-[6px] text-xs font-semibold text-white md:text-sm md:hover:bg-zinc-700"
+      className="reset-button w-fit rounded-full border border-black bg-black px-3 py-[6px] text-xs font-semibold text-white disabled:border-inherit md:text-sm md:hover:bg-zinc-700"
     >
       선택하기
     </button>
