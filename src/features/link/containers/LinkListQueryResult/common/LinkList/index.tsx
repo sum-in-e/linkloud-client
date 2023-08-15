@@ -89,9 +89,12 @@ const LinkList = ({
   ) : (
     <div className="flex h-full flex-col justify-between overflow-y-scroll">
       <ul
-        className={`grid grid-cols-[repeat(auto-fill,minmax(${
-          isMobile ? 'calc(50%-10px)' : '270px'
-        },1fr))] grid-rows-[1fr] gap-5`}
+        className={`grid grid-rows-[1fr] gap-5`}
+        style={{
+          gridTemplateColumns: `repeat(auto-fill,minmax(${
+            isMobile ? 'calc(50% - 10px)' : '270px'
+          },1fr))`,
+        }}
       >
         {links.map((link) => (
           <LinkItem
