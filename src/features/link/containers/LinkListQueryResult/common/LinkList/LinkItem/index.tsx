@@ -232,7 +232,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </picture>
         {hasMemo && (
           <div
-            className={`absolute -bottom-7 right-3 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[5px] md:-bottom-10 md:p-[10px]`}
+            className={`absolute -bottom-7 right-2 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[5px] md:-bottom-10 md:p-[10px]`}
           >
             <BsFileTextFill size={15} className="fill-secondary" />
           </div>
