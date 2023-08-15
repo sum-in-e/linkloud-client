@@ -1,18 +1,11 @@
 'use client';
 
-import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 
 const LinkListLoadingUI = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <ul
-      className={`grid grid-rows-[1fr] gap-5`}
-      style={{
-        gridTemplateColumns: `repeat(auto-fill,minmax(${
-          isMobile ? 'calc(50% - 10px)' : '270px'
-        },1fr))`,
-      }}
+      className={`grid grid-cols-[repeat(auto-fill,minmax(calc(50%-10px),1fr))] grid-rows-[1fr] gap-5 md:grid-cols-[repeat(auto-fill,minmax(270px,1fr))]`}
     >
       {Array.from({ length: 6 }).map((_, index) => (
         <li key={index} className="">
