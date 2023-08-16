@@ -19,7 +19,7 @@ const LinkTitle = ({ value, onChange, isEditMode }: Props) => {
       value={value}
       placeholder="링크를 한눈에 알아볼 수 있는 제목을 입력해 보세요!(*)"
       onChange={handleChange}
-      className={`reset-textarea text-md h-20 border-b bg-inherit font-bold ${
+      className={`reset-textarea text-md h-20 border-b bg-inherit font-bold text-black disabled:text-black ${
         isEditMode ? 'border-zinc-300' : 'border-transparent'
       }`}
     />
