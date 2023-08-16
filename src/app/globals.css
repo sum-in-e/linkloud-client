@@ -22,7 +22,9 @@
   }
   .disabled-textarea:disabled {
     /* 모바일 사파리 브라우저에서 textarea가 disabled 되었을 때 회색으로 변하는 이슈가 있어서 생성한 클래스입니다. */
-    color: black !important;
+    color: black;
+    -webkit-text-fill-color: black;
+    opacity: 1;
   }
 }
 
