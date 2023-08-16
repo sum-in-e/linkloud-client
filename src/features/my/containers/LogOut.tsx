@@ -14,14 +14,12 @@ const LogOutButton = () => {
       {},
       {
         onSuccess: (data) => {
-          setTimeout(() => {
-            router.push('/');
-          }, 1000);
           toast({
-            title: '로그아웃 되었습니다.',
+            title: `로그아웃 되었습니다. ${data.status}`,
             status: 'success',
             duration: 1000,
             isClosable: true,
+            onCloseComplete: () => router.push('/'),
           });
         },
         onError: (error) => {
