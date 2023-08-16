@@ -44,7 +44,7 @@ self.addEventListener('notificationclick', (event) => {
   }
 
   if (event.action === 'show-unread-action') {
-    // 지금 확인하기 버튼 클릭 시 미열람 페이지로 이동
+    // 지금 확인하기 버튼 클릭 시 미확인 페이지로 이동
     event.waitUntil(
       self.clients.openWindow('https://linkloud.co.kr/link/unread')
     );
