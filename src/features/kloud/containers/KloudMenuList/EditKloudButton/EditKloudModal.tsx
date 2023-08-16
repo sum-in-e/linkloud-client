@@ -35,6 +35,7 @@ const EditKloudModal = ({ kloud, onCloseModal }: Props) => {
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
+          queryClient.invalidateQueries(queryKeys.link.getLinkList());
           if (toNumber(kloudId) === kloud.id) {
             // 수정한 클라우드가 현재 보여지고 있는 페이지의 클라우드라면 리스트 상단의 클라우드명 새로고침
             queryClient.invalidateQueries(
