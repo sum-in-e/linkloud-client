@@ -21,13 +21,15 @@
     list-style: none;
   }
   textarea:disabled,
-  input:disabled,
+  input:disabled {
+    /* 모바일 사파리 브라우저에서 textarea와 input이 disabled 되었을 때 회색으로 보이는 이슈가 있어서 생성한 클래스입니다. */
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+    opacity: 1;
+  }
   textarea:disabled::placeholder,
   input:disabled::placeholder {
-    /* 모바일 사파리 브라우저에서 textarea와 input이 disabled 되었을 때 회색으로 보이는 이슈가 있어서 생성한 클래스입니다. */
-    color: currentColor;
-    -webkit-text-fill-color: currentColor;
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
