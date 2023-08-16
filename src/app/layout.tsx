@@ -7,6 +7,8 @@ import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
 import { LINKLOUD_DESCRIPTION } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: {
