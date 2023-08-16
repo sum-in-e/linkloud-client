@@ -7,6 +7,12 @@ import jwt from 'jsonwebtoken';
  */
 export const getSessionWithJwtInServer = async () => {
   const cookieStore = cookies();
+
+  console.log(
+    cookieStore.has('sq'),
+    cookieStore.get('sq'),
+    cookieStore.get('sq')?.value
+  );
   const acc = cookieStore.get('sq')?.value;
   const rft = cookieStore.get('bp')?.value;
   const secret = process.env.NEXT_PUBLIC_JWT_SECRET || 'linkloud_230218';
