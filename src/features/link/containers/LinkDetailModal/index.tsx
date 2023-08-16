@@ -105,7 +105,7 @@ const LinkDetailModal = ({ link, onCloseModal }: Props) => {
 
   return (
     <CustomModal onClose={onCloseModal}>
-      <div className="flex h-screen w-screen flex-col overflow-y-scroll rounded-none bg-white md:h-fit md:max-h-[700px] md:w-[400px] md:rounded-lg">
+      <div className="flex h-[calc(var(--calcvh)*100)] w-screen flex-col overflow-y-scroll rounded-none bg-white md:h-fit md:max-h-[700px] md:w-[400px] md:rounded-lg">
         <div className="flex items-center justify-between p-3 md:px-5">
           {isMobile ? (
             <button

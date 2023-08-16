@@ -38,7 +38,7 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
   return (
     <Link
       href={`/link/${kloud.id}`}
-      className={`color-duration relative flex w-full items-center justify-between gap-1 rounded-full border px-3 py-2 md:min-h-[42px] md:rounded-lg md:bg-primary-alt md:pl-3 md:pr-[5px] md:hover:bg-primary-alt-lighter ${
+      className={`color-duration relative flex w-full items-center justify-between gap-1 rounded-full border px-3 py-2 md:min-h-[44px] md:rounded-lg md:bg-primary-alt md:pl-3 md:pr-[5px] md:hover:bg-primary-alt-lighter ${
         isActivating ? 'bg-zinc-200 md:bg-primary-alt-lighter' : 'bg-white'
       } group`}
       onClick={onCloseDrawer}
@@ -66,12 +66,12 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
       >
         <PopoverTrigger>
           <button
-          type='button'
+            type="button"
             className="group/button rounded-lg p-1 md:hidden md:group-hover:block"
             onClick={handleClickDots}
           >
             <BsThreeDotsVertical
-              size={16}
+              size={18}
               className="fill-black md:fill-zinc-300 md:group-hover/button:fill-white"
             />
           </button>
