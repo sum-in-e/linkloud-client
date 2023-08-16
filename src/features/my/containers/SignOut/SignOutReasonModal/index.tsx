@@ -5,7 +5,7 @@ import SignOutForm from '@/features/my/containers/SignOut/SignOutReasonModal/Sig
 const SignOutReasonModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <CustomModal onClose={onClose}>
-      <div className="h-screen w-screen overflow-scroll bg-white py-8 md:h-fit md:w-fit md:rounded-lg md:px-16 md:py-5">
+      <div className="h-[calc(var(--calcvh)*100)] w-screen overflow-scroll bg-white py-8 md:h-fit md:w-fit md:rounded-lg md:px-16 md:py-5">
         <h4 className="text-center text-lg font-bold">
           서비스 이용을 중단하시겠어요?
         </h4>
