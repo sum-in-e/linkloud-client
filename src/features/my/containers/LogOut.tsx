@@ -15,11 +15,11 @@ const LogOutButton = () => {
       {
         onSuccess: (data) => {
           toast({
-            title: `로그아웃 되었습니다. ${data.status}`,
+            title: `로그아웃 되었습니다.`,
             status: 'success',
             duration: 1000,
             isClosable: true,
-            onCloseComplete: () => router.push('/'),
+            onCloseComplete: () => (window.location.href = '/'),
           });
         },
         onError: (error) => {
