@@ -25,7 +25,7 @@ const UnreadButton = ({ onClick, isShowMark }: Props) => {
 
   return (
     <MenuButton
-      title="미열람"
+      title="미확인"
       href={unreadPath}
       leftIcon={
         <div className="relative">

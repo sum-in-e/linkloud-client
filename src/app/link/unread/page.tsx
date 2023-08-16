@@ -5,7 +5,7 @@ import LinkListQueryResultForNotKloud from '@/features/link/containers/LinkListQ
 import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 
 export const metadata = {
-  title: 'MyKloud | 미열람',
+  title: 'MyKloud | 미확인',
 };
 
 export default async function MyKloudUnreadPage() {

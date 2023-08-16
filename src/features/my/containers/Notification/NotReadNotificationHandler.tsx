@@ -451,7 +451,7 @@ const NotReadNotificationHandler = () => {
           htmlFor="notification-handler"
           className="font-semibold text-gray-800"
         >
-          미열람 링크 알림
+          미확인 링크 알림
         </label>
         <Switch
           id="notification-handler"

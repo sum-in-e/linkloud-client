@@ -12,7 +12,7 @@ export interface KloudEntity {
 }
 
 export const notKloudCategory = {
-  unread: '미열람',
+  unread: '미확인',
   uncategorized: '미분류',
   collection: 'Collection',
   search: '검색',
