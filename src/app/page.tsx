@@ -1,7 +1,7 @@
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import { redirect } from 'next/navigation';
-import TopSection from '@/features/randing/TopSection';
-import PointSection from '@/features/randing/PointSection';
+import TopSection from '@/features/landing/TopSection';
+import PointSection from '@/features/landing/PointSection';
 
 export default async function HomePage() {
   const isLogin = await getSessionWithJwtInServer();
