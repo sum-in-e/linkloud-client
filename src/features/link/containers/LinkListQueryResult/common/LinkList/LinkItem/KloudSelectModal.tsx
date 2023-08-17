@@ -89,7 +89,7 @@ const KloudSelectModal = ({
 
   return (
     <CustomModal onClose={onCloseModal}>
-      <div className="flex h-[calc(var(--calcvh)*100)] w-screen flex-col rounded-none bg-white md:h-fit md:w-[400px] md:rounded-lg ">
+      <div className="vh-full flex w-screen flex-col rounded-none bg-white md:h-fit md:w-[400px] md:rounded-lg ">
         <div className="flex items-center justify-between px-3 pt-3 md:px-5">
           {isMobile ? (
             <button

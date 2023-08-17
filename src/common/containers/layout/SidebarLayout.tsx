@@ -21,7 +21,7 @@ const SidebarLayout = ({ children }: { children: ReactNode }) => {
           <MenuSidebar>
             <MenuListWithCreateLinkSidebar />
           </MenuSidebar>
-          <aside className="hidden h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[240px] flex-shrink-0 overflow-scroll bg-primary-alt pb-6 pt-3 md:block">
+          <aside className="hidden h-[calc(100dvh-80px)] max-h-[calc(100dvh-80px)] w-full max-w-[240px] flex-shrink-0 overflow-scroll bg-primary-alt pb-6 pt-3 md:block">
             <KloudListSidebar />
           </aside>
         </>
@@ -30,7 +30,7 @@ const SidebarLayout = ({ children }: { children: ReactNode }) => {
           <HomeButton />
         </MenuSidebar>
       )}
-      <div className="flex h-[calc(calc(var(--calcvh)*100)-64px)] max-h-[calc(calc(var(--calcvh)*100)-64px)] w-full justify-center px-4 pb-[64px] md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:px-10 md:pb-6 md:pt-3">
+      <div className="flex h-[calc(100dvh-64px)] max-h-[calc(100dvh-64px)] w-full justify-center px-4 pb-[64px] md:h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] md:px-10 md:pb-6 md:pt-3">
         {children}
       </div>
       <MobileNav />
@@ -42,7 +42,7 @@ export default SidebarLayout;
 
 const MenuSidebar = ({ children }: { children: ReactNode }) => {
   return (
-    <aside className="hidden h-[calc(100vh-80px)] max-h-[calc(100vh-80px)] w-full max-w-[200px] flex-shrink-0 border-r pb-6 pl-10 pr-5 pt-3 md:block">
+    <aside className="hidden h-[calc(100dvh-80px)] max-h-[calc(100dvh-80px)] w-full max-w-[200px] flex-shrink-0 border-r pb-6 pl-10 pr-5 pt-3 md:block">
       {children}
     </aside>
   );
