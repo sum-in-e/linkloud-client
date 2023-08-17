@@ -86,15 +86,16 @@ const LinkFetcher = () => {
       try {
         const text = await navigator.clipboard.readText(); // 클립보드에서 텍스트 읽기
 
-        // 텍스트에서 링크 찾기
-        const linkRegex = /https?:\/\/\S+/gi;
-        const match = text.match(linkRegex);
-
-        if (match) {
-          setUrl(match[0]);
+        // 텍스트가 유효한 URL인지 검사하기
+        try {
+          new URL(text);
+          // 에러가 발생하지 않으면 유효한 URL
+          setUrl(text);
+        } catch (urlError) {
+          // 유효하지 않은 URL
         }
-      } catch (error) {
-        // 에러 처리
+      } catch (clipboardError) {
+        // 클립보드 읽기 에러 처리
       }
     }
   };
