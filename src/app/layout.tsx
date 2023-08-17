@@ -6,6 +6,7 @@ import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
 import { LINKLOUD_DESCRIPTION } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
+import GoogleAdsense from '@/common/containers/GoogleAdsense';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,7 +19,12 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      {isProduction && <GoogleAnalytics />}
+      {isProduction && (
+        <>
+          <GoogleAnalytics />
+          <GoogleAdsense />
+        </>
+      )}
       <body className="box-border bg-zinc-50">
         <QueryProvider>
           <ChakraUiProvider>
