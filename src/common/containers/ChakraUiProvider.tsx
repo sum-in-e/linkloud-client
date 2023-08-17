@@ -5,7 +5,11 @@ import { CacheProvider } from '@chakra-ui/next-js';
 const ChakraUiProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <CacheProvider>
-      <ChakraProvider>{children}</ChakraProvider>
+      <ChakraProvider
+        toastOptions={{ defaultOptions: { position: 'bottom-left' } }}
+      >
+        {children}
+      </ChakraProvider>
     </CacheProvider>
   );
 };

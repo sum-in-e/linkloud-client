@@ -29,10 +29,6 @@ const Header = () => {
     router.push('/');
   };
 
-  const handlePushToMyProfile = () => {
-    router.push('/my/profile');
-  };
-
   const handleClickListButton = () => {
     onOpen();
   };
