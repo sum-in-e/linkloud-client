@@ -29,6 +29,11 @@
   input:disabled::placeholder {
     opacity: 0.5;
   }
+  .vh-full {
+    /*  높이를 100vh로 적용할 필요가 있는 곳에서 사용하는 클래스(모바일에서 vh 검색창 포함 여부에 따라 레이아웃이 달라지기 때문) */
+    height: 100vh; /* 새 단위를 지원하지 않는 소수의 브라우저를 위해 */
+    height: 100dvh; /* dvh, lvh, svh 중 선택해서 사용 */
+  }
 }
 
 @layer components {
