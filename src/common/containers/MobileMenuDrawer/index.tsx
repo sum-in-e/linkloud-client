@@ -19,7 +19,7 @@ const MobileMenuDrawer = ({ onClose }: Props) => {
   return (
     <Drawer placement="left" onClose={onClose} isOpen={true}>
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent className="vh-full">
         <DrawerHeader className="flex items-center justify-end">
           <button
             type="button"
