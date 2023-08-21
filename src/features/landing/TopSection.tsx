@@ -17,7 +17,7 @@ const TopSection = () => {
         </p>
         <Link
           href="/login"
-          className="reset-button text-md w-fit rounded-xl border-2 border-primary px-10 py-2 font-bold  text-primary hover:bg-zinc-100 md:w-fit md:text-lg"
+          className="reset-button text-md w-fit rounded-xl bg-black px-10 py-2 font-bold  text-white md:w-fit md:text-lg md:hover:bg-zinc-700"
         >
           시작하기
         </Link>
