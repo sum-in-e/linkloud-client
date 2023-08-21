@@ -58,6 +58,10 @@ const CreateKloudForm = ({ onSelect }: Props) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // 키보드 닫기
+    }
+
     const exceededCreateLimit = kloudListData?.klouds.length === 20;
     const exceededNameLength = name.length > 50;
 

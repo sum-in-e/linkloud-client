@@ -18,7 +18,7 @@ interface Props {
 const MobileMenuDrawer = ({ onClose }: Props) => {
   return (
     <Drawer placement="left" onClose={onClose} isOpen={true}>
-      <DrawerOverlay />
+      <DrawerOverlay className="vh-full" />
       <DrawerContent className="vh-full">
         <DrawerHeader className="flex items-center justify-end">
           <button

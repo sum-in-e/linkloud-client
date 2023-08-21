@@ -10,6 +10,10 @@ import TermsWithAgreeText from '@/features/auth/signup/components/TermsWithAgree
 const EmailSignUpForm = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // 키보드 닫기
+    }
   };
 
   return (

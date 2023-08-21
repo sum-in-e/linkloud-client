@@ -76,10 +76,7 @@ const LinkFetcher = () => {
     event.preventDefault();
     getLinkInfo();
 
-    if (
-      typeof window !== 'undefined' &&
-      document.activeElement instanceof HTMLElement
-    ) {
+    if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur(); // 키보드 닫기
     }
   };
