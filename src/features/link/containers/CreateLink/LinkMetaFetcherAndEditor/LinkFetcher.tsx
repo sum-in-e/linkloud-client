@@ -74,7 +74,14 @@ const LinkFetcher = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    getLinkInfo(); // 입력된 링크의 정보를 가져온다
+    getLinkInfo();
+
+    if (
+      typeof window !== 'undefined' &&
+      document.activeElement instanceof HTMLElement
+    ) {
+      document.activeElement.blur(); // 키보드 닫기
+    }
   };
 
   const handleChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
