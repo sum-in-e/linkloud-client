@@ -63,6 +63,10 @@ const CreateKloudForm = ({ onClose }: Props) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // 키보드 닫기
+    }
+
     if (name.length > 50) {
       toast({
         title: '클라우드 이름은 50자 이내로 작성해 주세요.',
