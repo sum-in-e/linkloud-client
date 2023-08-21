@@ -1,5 +1,6 @@
 'use client';
 
+import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
 import LinkInfoLabel from '@/features/link/components/LinkInfoLabel';
 import {
   useLinkState,
@@ -29,7 +30,7 @@ const LinkInfoHanlder = ({ handleKloudSelectMode }: Props) => {
   };
 
   const changeImageSrcToDefault = (element: HTMLImageElement) => {
-    element.src = '/images/linkloud_thumbnail.png';
+    element.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
   };
 
   const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
