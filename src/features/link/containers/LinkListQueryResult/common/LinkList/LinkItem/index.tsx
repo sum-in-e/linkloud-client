@@ -29,6 +29,7 @@ import { useLinkSharing } from '@/features/kloud/modules/hooks/useLinkSharing';
 import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
+import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
 
 interface Props {
   link: LinkInfoType;
@@ -86,7 +87,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   const { openLinkInNewTap } = useOpenLink({ id, isRead, url });
 
   const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
-    event.target.src = '/images/linkloud_thumbnail.png';
+    event.target.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
   };
 
   const hasMemo = memo.length > 0;

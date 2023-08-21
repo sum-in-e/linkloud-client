@@ -15,6 +15,7 @@ import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePatchLinkByIdMutation } from '@/features/link/modules/apiHooks/usePatchLinkByIdMutation';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
+import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
 
 interface Props {
   link: LinkInfoType;
@@ -47,7 +48,7 @@ const LinkDetailModal = ({ link, onCloseModal }: Props) => {
   };
 
   const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
-    event.target.src = '/images/linkloud_thumbnail.png';
+    event.target.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
   };
 
   const handleCancelEdit = () => {
