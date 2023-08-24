@@ -321,6 +321,12 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
           <p className="truncate text-xs font-bold text-white">{kloud?.name}</p>
         </div>
       )}
+      {!isRead && pathname !== '/link/unread' && (
+        <div className="absolute left-1 top-1">
+          <div className="absolute h-3 w-3 animate-ping rounded-full bg-secondary-lighter" />
+          <div className="h-3 w-3 rounded-full bg-secondary-lighter" />
+        </div>
+      )}
 
       {/* 체크 UI */}
       {isEditMode && (
