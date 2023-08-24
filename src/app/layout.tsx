@@ -4,7 +4,10 @@ import Header from '@/common/containers/layout/Header';
 import MainContent from '@/common/containers/layout/MainContent';
 import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
-import { LINKLOUD_DESCRIPTION } from '@/common/modules/constants/brand';
+import {
+  LINKLOUD_DESCRIPTION,
+  LINKLOUD_THUMBNAIL_IMAGE_URL,
+} from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export const dynamic = 'force-dynamic';
@@ -53,19 +56,21 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
+        url: LINKLOUD_THUMBNAIL_IMAGE_URL,
         alt: 'Linkloud Image',
       },
     ],
   },
   twitter: {
+    card: 'summary',
     title: 'Linkloud',
     description: LINKLOUD_DESCRIPTION,
-    card: 'Linkloud',
-    images: {
-      url: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg',
-      alt: 'Linkloud Image',
-    },
+    images: [
+      {
+        url: LINKLOUD_THUMBNAIL_IMAGE_URL,
+        alt: 'Linkloud Image',
+      },
+    ],
   },
   // For PWA
   applicationName: 'Linkloud',
