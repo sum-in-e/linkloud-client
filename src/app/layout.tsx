@@ -6,7 +6,7 @@ import Footer from '@/common/containers/layout/Footer';
 import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
 import {
   LINKLOUD_DESCRIPTION,
-  LINKLOUD_THUMBNAIL_IMAGE_URL,
+  LINKLOUD_OG_IMAGE_URL,
 } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
@@ -56,18 +56,18 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: LINKLOUD_THUMBNAIL_IMAGE_URL,
+        url: LINKLOUD_OG_IMAGE_URL,
         alt: 'Linkloud Image',
       },
     ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Linkloud',
     description: LINKLOUD_DESCRIPTION,
     images: [
       {
-        url: LINKLOUD_THUMBNAIL_IMAGE_URL,
+        url: LINKLOUD_OG_IMAGE_URL,
         alt: 'Linkloud Image',
       },
     ],
