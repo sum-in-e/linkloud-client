@@ -2,12 +2,6 @@
 
 import DeleteHandler from '@/features/link/containers/LinkListQueryResult/common/LinkSelectModeHandler/DeleteHandler';
 import MoveHandler from '@/features/link/containers/LinkListQueryResult/common/LinkSelectModeHandler/MoveHandler';
-import {
-  BsCheckSquareFill,
-  BsCheck,
-  BsTrashFill,
-  BsArrowLeftRight,
-} from 'react-icons/bs';
 
 interface Props {
   isDisabledActivationButton: boolean;

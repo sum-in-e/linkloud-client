@@ -27,11 +27,7 @@ const LinkListQueryResultForKloud = () => {
 
   return (
     <LinkListQueryResult
-      Header={
-        <div>
-          <TitleAndCountParserForKloud />
-        </div>
-      }
+      Header={<TitleAndCountParserForKloud />}
       isLoading={isLoading}
       data={data}
       offset={offset}
