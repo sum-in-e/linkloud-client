@@ -50,6 +50,7 @@ const LinkInfoHanlder = ({ handleKloudSelectMode }: Props) => {
             src={link.thumbnailUrl}
             className="aspect-[1.91/1] w-full rounded-lg object-cover"
             onError={handleErrorImage}
+            loading="eager"
           />
         </picture>
         <div className="mt-2 flex items-center justify-between gap-3">
