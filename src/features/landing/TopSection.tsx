@@ -26,6 +26,7 @@ const TopSection = () => {
             src={preview_pc}
             alt="linkloud preview"
             className="h-auto w-full"
+            loading="eager"
           />
         </div>
         <div className="absolute bottom-6 right-6 hidden w-[30%] overflow-hidden rounded-lg border border-zinc-200 shadow-sm md:block">
@@ -33,6 +34,7 @@ const TopSection = () => {
             src={preview_mobile}
             alt="linkloud mobile preview"
             className="h-auto w-full"
+            loading="eager"
           />
         </div>
       </div>
