@@ -133,17 +133,17 @@ export const deleteSelectedLinks = async (
 
 // ✂️✂️✂️✂️✂️✂️✂️✂️✂️
 
-export type PatchLinkReadResponse = SuccessResponseType<{}>;
+export type PatchLinkCountResponse = SuccessResponseType<{}>;
 
-export type PatchLinkReadParam = { id: number };
+export type PatchLinkCountParam = { id: number };
 
 /**
- * @description 링크 열람 처리 API
+ * @description 링크 클릭 횟수 카운팅 API
  */
-export const patchLinkRead = async ({
+export const patchLinkCount = async ({
   id,
-}: PatchLinkReadParam): Promise<PatchLinkReadResponse> => {
-  const { data } = await instance.patch(`/link/${id}/read`);
+}: PatchLinkCountParam): Promise<PatchLinkCountResponse> => {
+  const { data } = await instance.patch(`/link/${id}/click-count`);
   return data;
 };
 

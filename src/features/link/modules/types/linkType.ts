@@ -11,6 +11,9 @@ export interface LinkEntity {
   isInMyCollection: boolean;
   isRead: boolean;
   readAt: string;
+  clickCount: number;
+  clickFrequency: number | null;
+  lastClickedAt: string | null;
   createdAt: string;
   updatedAt: string;
   kloud: KloudEntity | null;

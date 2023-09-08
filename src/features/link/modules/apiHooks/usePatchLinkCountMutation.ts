@@ -1,16 +1,16 @@
 import { ErrorResponseType } from '@/common/modules/types/responseType';
 import {
-  PatchLinkReadParam,
-  PatchLinkReadResponse,
-  patchLinkRead,
+  PatchLinkCountParam,
+  PatchLinkCountResponse,
+  patchLinkCount,
 } from '@/features/link/modules/apis/link';
 import { UseMutationResult, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-export const usePatchLinkReadMutation = (): UseMutationResult<
-  PatchLinkReadResponse,
+export const usePatchLinkCountMutation = (): UseMutationResult<
+  PatchLinkCountResponse,
   AxiosError<ErrorResponseType>,
-  PatchLinkReadParam
+  PatchLinkCountParam
 > => {
-  return useMutation(patchLinkRead);
+  return useMutation(patchLinkCount);
 };

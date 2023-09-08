@@ -84,7 +84,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   const { mutate: patchLinkById } = usePatchLinkByIdMutation();
 
   const { handleShare } = useLinkSharing({ title, url });
-  const { openLinkInNewTap } = useOpenLink({ id, isRead, url });
+  const { openLinkInNewTap } = useOpenLink({ id, url });
 
   const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
     event.target.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
