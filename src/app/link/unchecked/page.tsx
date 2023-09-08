@@ -8,11 +8,11 @@ export const metadata = {
   title: 'MyKloud | 미확인',
 };
 
-export default async function MyKloudUnreadPage() {
+export default async function MyKloudUncheckedPage() {
   const isLogin = await getSessionWithJwtInServer();
 
   const queryString = querystring.stringify({
-    return_to: '/link/unread',
+    return_to: '/link/unchecked',
   });
 
   if (!isLogin) {
@@ -21,7 +21,7 @@ export default async function MyKloudUnreadPage() {
 
   return (
     <SidebarLayout>
-      <LinkListQueryResultForNotKloud category="unread" />
+      <LinkListQueryResultForNotKloud category="unchecked" />
     </SidebarLayout>
   );
 }

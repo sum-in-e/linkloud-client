@@ -29,8 +29,8 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
         return { myCollection: true };
       case 'uncategorized':
         return { kloudId: 0 };
-      case 'unread':
-        return { isRead: false };
+      case 'unchecked':
+        return { isChecked: false };
       case 'search':
         return keyword !== null ? { keyword } : { keyword: '' };
       default:

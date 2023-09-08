@@ -60,7 +60,7 @@ export type LinkInfoType = Pick<
   | 'description'
   | 'memo'
   | 'isInMyCollection'
-  | 'isRead'
+  | 'isChecked'
   | 'createdAt'
 > & {
   kloud: LinkInfoKloudType;
@@ -78,7 +78,7 @@ export type GetLinkListParams = {
   limit: number; // (requiered)
   sort?: 'ASC' | 'DESC';
   keyword?: string;
-  isRead?: boolean;
+  isChecked?: boolean;
   myCollection?: boolean;
   kloudId?: number; // 클라우드 미지정의 경우 0 | 찾고싶은 클라우드 id
 };

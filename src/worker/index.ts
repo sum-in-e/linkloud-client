@@ -22,10 +22,10 @@ self.addEventListener('push', (event) => {
     icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686571366/linkloud/logo_200_rxrkca.png', // 푸시 알림에 표시될 아이콘
     badge:
       'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1686571366/linkloud/logo_200_rxrkca.png', // 푸시 알림 배지 이미지 / android에서만 보인다.
-    tag: 'unread-notification',
+    tag: 'unchecked-notification',
     actions: [
       {
-        action: 'show-unread-action',
+        action: 'show-unchecked-action',
         title: '지금 보러가기',
       },
     ],
@@ -39,14 +39,14 @@ self.addEventListener('notificationclick', (event) => {
   // 버튼 클릭이 아닌 알림 자체 클릭시 실행할 동작
   if (!event.action) {
     event.waitUntil(
-      self.clients.openWindow('https://linkloud.co.kr/link/unread')
+      self.clients.openWindow('https://linkloud.co.kr/link/unchecked')
     );
   }
 
-  if (event.action === 'show-unread-action') {
+  if (event.action === 'show-unchecked-action') {
     // 지금 확인하기 버튼 클릭 시 미확인 페이지로 이동
     event.waitUntil(
-      self.clients.openWindow('https://linkloud.co.kr/link/unread')
+      self.clients.openWindow('https://linkloud.co.kr/link/unchecked')
     );
   }
 

@@ -1,12 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  BsListUl,
-  BsJournalBookmarkFill,
-  BsEyeSlash,
-  BsCloudSlash,
-} from 'react-icons/bs';
+import { BsEyeSlash } from 'react-icons/bs';
 import { MenuButton } from '@/common/containers/MenuButton';
 import YellowCircleMark from '@/common/components/YellowCircleMark';
 
@@ -15,9 +10,9 @@ interface Props {
   isShowMark: boolean;
 }
 
-const UnreadButton = ({ onClick, isShowMark }: Props) => {
+const UncheckedButton = ({ onClick, isShowMark }: Props) => {
   const pathname = usePathname();
-  const unreadPath = '/link/unread';
+  const uncheckedPagePath = '/link/unchecked';
 
   const handleClick = () => {
     onClick && onClick();
@@ -26,7 +21,7 @@ const UnreadButton = ({ onClick, isShowMark }: Props) => {
   return (
     <MenuButton
       title="미확인"
-      href={unreadPath}
+      href={uncheckedPagePath}
       leftIcon={
         <div className="relative">
           {isShowMark && <YellowCircleMark />}
@@ -34,9 +29,9 @@ const UnreadButton = ({ onClick, isShowMark }: Props) => {
         </div>
       }
       onClick={handleClick}
-      isActivating={pathname === unreadPath}
+      isActivating={pathname === uncheckedPagePath}
     />
   );
 };
 
-export default UnreadButton;
+export default UncheckedButton;

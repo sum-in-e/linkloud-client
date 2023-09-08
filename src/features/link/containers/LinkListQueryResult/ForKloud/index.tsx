@@ -6,7 +6,7 @@ import { usePagination } from '@/common/modules/hooks/usePagination';
 import { linkListLimit } from '@/features/link/containers/LinkListQueryResult/ForNotKloud';
 import { useGetLinkListQuery } from '@/features/link/modules/apiHooks/useGetLinkListQuery';
 import { LinkListQueryResult } from '@/features/link/containers/LinkListQueryResult/common/LinkListQueryResult';
-import TitleAndCountParserForKloud from '@/features/link/containers/LinkListQueryResult/ForKloud/TitleAndCountParser';
+import TitleParser from '@/features/link/containers/LinkListQueryResult/ForKloud/TitleParser';
 
 const LinkListQueryResultForKloud = () => {
   const { kloudId } = useParams();
@@ -27,7 +27,7 @@ const LinkListQueryResultForKloud = () => {
 
   return (
     <LinkListQueryResult
-      Header={<TitleAndCountParserForKloud />}
+      Header={<TitleParser count={data?.count || 0} />}
       isLoading={isLoading}
       data={data}
       offset={offset}

@@ -26,9 +26,9 @@ const MobileNav = () => {
       href: '/link/all',
     },
     {
-      label: 'Go to Unread Link Page',
+      label: 'Go to Unchecked Link Page',
       icon: <BsEyeSlash size={20} />,
-      href: '/link/unread',
+      href: '/link/unchecked',
     },
     {
       label: 'Go to Search',
