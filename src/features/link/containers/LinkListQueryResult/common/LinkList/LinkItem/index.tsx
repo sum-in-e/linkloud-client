@@ -226,7 +226,9 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
             loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
-            className="aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125"
+            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125 ${
+              isChecked && 'opacity-50'
+            }`}
             onError={handleErrorImage}
           />
         </picture>
