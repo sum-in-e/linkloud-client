@@ -4,7 +4,7 @@ import { BsArrowRepeat } from 'react-icons/bs';
 import AllButton from '@/common/containers/MenuButton/All';
 import CollectionButton from '@/common/containers/MenuButton/Collection';
 import UncategorizedButton from '@/common/containers/MenuButton/Uncategorized';
-import UnreadButton from '@/common/containers/MenuButton/Unread';
+import UncheckedButton from '@/common/containers/MenuButton/Unchecked';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
 
 interface Props {
@@ -47,7 +47,10 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
     <>
       <AllButton onClick={onCloseDrawer} />
       <CollectionButton onClick={onCloseDrawer} />
-      <UnreadButton isShowMark={data.unread > 0} onClick={onCloseDrawer} />
+      <UncheckedButton
+        isShowMark={data.unchecked > 0}
+        onClick={onCloseDrawer}
+      />
       <UncategorizedButton
         isShowMark={data.uncategorized > 0}
         onClick={onCloseDrawer}

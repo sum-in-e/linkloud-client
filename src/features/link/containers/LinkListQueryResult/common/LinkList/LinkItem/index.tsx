@@ -46,7 +46,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
     title,
     description,
     isInMyCollection,
-    isRead,
+    isChecked,
     memo,
     kloud,
   } = link;
@@ -95,7 +95,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
   const isShowKloud =
     kloud !== null &&
     (pathname === '/link/all' ||
-      pathname === '/link/unread' ||
+      pathname === '/link/unchecked' ||
       pathname === '/link/collection'); // 저장된 클라우드가 있고, 전체 || 미확인 || 내 컬렉션 페이지인 경우 클라우드를 보여줘야합니다.
 
   const handleClickCollection = (event: MouseEvent<HTMLButtonElement>) => {
@@ -105,6 +105,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(queryKeys.link.getLinkList());
+          queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -225,9 +226,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
             loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
-            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover ${
-              isRead && 'opacity-50'
-            } md:group-hover/item:brightness-125`}
+            className="aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125"
             onError={handleErrorImage}
           />
         </picture>
@@ -315,13 +314,15 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </div>
       </div>
 
-      {/* absolute elements */}
+      {/* 클라우드명 UI */}
       {isShowKloud && (
         <div className="absolute left-2 top-2 w-fit max-w-[60%] select-none rounded-full bg-primary-alt px-3 py-1">
           <p className="truncate text-xs font-bold text-white">{kloud?.name}</p>
         </div>
       )}
-      {!isRead && pathname !== '/link/unread' && (
+
+      {/* 미확인 링크 노란 점 UI */}
+      {!isChecked && pathname !== '/link/unchecked' && (
         <div className="absolute left-1 top-1">
           <div className="absolute h-3 w-3 animate-ping rounded-full bg-secondary-lighter" />
           <div className="h-3 w-3 rounded-full bg-secondary-lighter" />

@@ -66,7 +66,7 @@ const LinkList = ({
     switch (pathname) {
       case '/link/search':
         return '검색어를 포함하는 링크가 없어요!';
-      case '/link/unread':
+      case '/link/unchecked':
         return '대단해요! 모든 링크를 확인했어요👍';
       case '/link/uncategorized':
         return '대단해요! 모든 링크가 분류되었어요👍';

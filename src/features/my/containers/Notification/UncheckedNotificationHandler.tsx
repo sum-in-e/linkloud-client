@@ -12,7 +12,7 @@ import { useSaveSubscriptionMutation } from '@/features/kloud/modules/apiHooks/s
 import { AlertStatus, Switch, useToast } from '@chakra-ui/react';
 import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 
-const NotReadNotificationHandler = () => {
+const UncheckedNotificationHandler = () => {
   const toast = useToast();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -489,4 +489,4 @@ const NotReadNotificationHandler = () => {
   );
 };
 
-export default NotReadNotificationHandler;
+export default UncheckedNotificationHandler;
