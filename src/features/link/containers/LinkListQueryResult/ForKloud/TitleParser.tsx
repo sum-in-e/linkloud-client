@@ -6,7 +6,11 @@ import TitleAndCountLoadingUI from '@/features/link/containers/LinkListQueryResu
 import { toNumber } from 'lodash';
 import { useParams } from 'next/navigation';
 
-const TitleAndCountParserForKloud = () => {
+interface Props {
+  count: number;
+}
+
+const TitleParser = ({ count }: Props) => {
   const { kloudId } = useParams();
 
   const { data, isLoading } = useGetKloudByIdQuery({
@@ -18,8 +22,7 @@ const TitleAndCountParserForKloud = () => {
   }
 
   const title = data?.name || '클라우드';
-  const count = data?.linkCount || 0;
 
   return <TitleAndCount title={title} count={count} />;
 };
-export default TitleAndCountParserForKloud;
+export default TitleParser;
