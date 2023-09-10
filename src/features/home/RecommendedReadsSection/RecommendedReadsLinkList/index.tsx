@@ -143,7 +143,7 @@ const RecommendedReadsLinkList = () => {
       <div
         ref={containerRef}
         onWheel={handleWheel}
-        className="flex w-full gap-5 overflow-x-scroll px-1 py-2 md:overflow-hidden"
+        className="scrollbar-hidden flex w-full gap-5 overflow-x-scroll px-1 py-2 md:overflow-hidden"
       >
         {links.map((link, index) => (
           <RecommendedReadsLinkItem key={index} link={link} />
