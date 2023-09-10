@@ -7,11 +7,12 @@ import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
 import linkle from '/public/images/linkle.png';
 import Image from 'next/image';
 import RecommendedReadsLinkItem from '@/features/home/RecommendedReadsSection/RecommendedReadsLinkList/RecommendedReadsLinkItem';
+import { BsArrowRepeat } from 'react-icons/bs';
 
 const scrollAmount = 600; // 스크롤 양
 
 const RecommendedReadsLinkList = () => {
-  const { data, isLoading } = useGetLinkListQuery(
+  const { data, isLoading, refetch } = useGetLinkListQuery(
     {
       offset: 0,
       limit: 10,
@@ -110,18 +111,23 @@ const RecommendedReadsLinkList = () => {
     );
   }
 
+  const handleRefetch = () => {
+    refetch();
+  };
+
   if (!data) {
     return (
       <div className="flex h-fit w-full flex-col items-center justify-center gap-3 rounded-lg py-6 shadow-md">
-        <Image
-          src={linkle}
-          alt="linkloud Logo"
-          className="h-auto w-24"
-          priority
-        />
-        <h4 className="text-md whitespace-pre-wrap text-center font-semibold text-zinc-700">
-          {`모든 링크를 확인했어요👍\n미확인 링크가 생기면 다시 추천해 드릴게요!`}
-        </h4>
+        <p className="text-center text-sm font-semibold text-zinc-700">
+          추천 링크를 불러오는데 실패했습니다.
+        </p>
+        <button
+          type="button"
+          className="rounded-full bg-black p-[6px] md:hover:bg-gray-700"
+          onClick={handleRefetch}
+        >
+          <BsArrowRepeat size={18} className="fill-white" />
+        </button>
       </div>
     );
   }
@@ -129,7 +135,7 @@ const RecommendedReadsLinkList = () => {
   const links = data.links;
   const count = data.count;
 
-  return (
+  return links.length > 0 ? (
     <div className="group relative">
       {!isMobile && canScrollLeft && (
         <button
@@ -158,6 +164,18 @@ const RecommendedReadsLinkList = () => {
           <BsChevronRight size={30} className="fill-white" />
         </button>
       )}
+    </div>
+  ) : (
+    <div className="flex h-fit w-full flex-col items-center justify-center gap-3 rounded-lg py-6 shadow-md">
+      <Image
+        src={linkle}
+        alt="linkloud Logo"
+        className="h-auto w-24"
+        priority
+      />
+      <h4 className="text-md whitespace-pre-wrap text-center font-semibold text-zinc-700">
+        {`모든 링크를 확인했어요👍\n미확인 링크가 생기면 다시 추천해 드릴게요!`}
+      </h4>
     </div>
   );
 };

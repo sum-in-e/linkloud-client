@@ -67,7 +67,7 @@ const KloudMenuList = ({ onCloseDrawer }: Props) => {
         </p>
         <button
           type="button"
-          className="rounded-full bg-black p-[6px] hover:bg-gray-700"
+          className="rounded-full bg-black p-[6px] md:hover:bg-gray-700"
           onClick={handleRefetch}
         >
           <BsArrowRepeat size={18} className="fill-white" />
