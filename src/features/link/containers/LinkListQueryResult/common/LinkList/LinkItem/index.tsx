@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams, usePathname } from 'next/navigation';
-import { ChangeEvent, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import {
   BsFileTextFill,
   BsJournalBookmarkFill,
@@ -29,7 +29,7 @@ import { useLinkSharing } from '@/features/kloud/modules/hooks/useLinkSharing';
 import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
-import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
+import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
 
 interface Props {
   link: LinkInfoType;
@@ -85,10 +85,6 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
 
   const { handleShare } = useLinkSharing({ title, url });
   const { openLinkInNewTap } = useOpenLink({ id, url });
-
-  const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
-    event.target.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
-  };
 
   const hasMemo = memo.length > 0;
 
@@ -229,7 +225,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
             className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125 ${
               isChecked && 'opacity-50'
             }`}
-            onError={handleErrorImage}
+            onError={handleErrorThumbnailImage}
           />
         </picture>
         {hasMemo && (

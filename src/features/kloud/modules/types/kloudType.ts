@@ -17,6 +17,7 @@ export const notKloudCategory = {
   collection: 'Collection',
   search: '검색',
   all: '전체',
+  home: '홈',
 } as const;
 
 export type NotKloudCategoryKeyType = keyof typeof notKloudCategory;

@@ -1,19 +1,28 @@
 'use client';
 
 import { MenuButton } from '@/common/containers/MenuButton';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { BsHouseDoor } from 'react-icons/bs';
 
-const HomeButton = () => {
-  const router = useRouter();
-  const homepath = '/link/all';
+interface Props {
+  onClick?: () => void;
+}
+
+const HomeButton = ({ onClick }: Props) => {
+  const pathname = usePathname();
+  const homepath = '/link/home';
+
+  const handleClick = () => {
+    onClick && onClick();
+  };
 
   return (
     <MenuButton
       title="홈"
       href={homepath}
       leftIcon={<BsHouseDoor size={20} className="text flex-shrink-0" />}
-      isActivating={false}
+      onClick={handleClick}
+      isActivating={pathname === homepath}
     />
   );
 };

@@ -7,6 +7,7 @@ import { SuccessResponseType } from '@/common/modules/types/responseType';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import LinkListQueryResultForKloud from '@/features/link/containers/LinkListQueryResult/ForKloud';
 import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 type Props = {
   params: { kloudId: string };
@@ -56,7 +57,8 @@ export default async function MyKloudPage() {
   const isLogin = await getSessionWithJwtInServer();
 
   const queryString = querystring.stringify({
-    return_to: '/link/all',
+    error: encodeURIComponent(NEED_LOGIN),
+    return_to: '/link/home',
   });
 
   if (!isLogin) {

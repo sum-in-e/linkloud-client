@@ -16,7 +16,7 @@ const SignUpCompleteModal = () => {
         </p>
 
         <Link
-          href="/link/all"
+          href="/link/home"
           className="reset-button flex w-full select-none items-center justify-center rounded-2xl bg-primary py-[0.6rem] font-bold text-white hover:bg-primary-darker"
         >
           시작하기

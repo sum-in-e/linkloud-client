@@ -30,7 +30,7 @@ const SidebarLayout = ({ children }: { children: ReactNode }) => {
           <HomeButton />
         </MenuSidebar>
       )}
-      <div className="flex h-[calc(100dvh-64px)] max-h-[calc(100dvh-64px)] w-full justify-center px-4 pb-[64px] md:h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] md:px-10 md:pb-6 md:pt-3">
+      <div className="flex h-[calc(100dvh-64px)] max-h-[calc(100dvh-64px)] w-full flex-grow justify-center px-4 pb-[64px] md:h-[calc(100dvh-80px)] md:max-h-[calc(100dvh-80px)] md:max-w-[calc(100vw-240px-200px)] md:px-10 md:pb-6 md:pt-3">
         {children}
       </div>
       <MobileNav />

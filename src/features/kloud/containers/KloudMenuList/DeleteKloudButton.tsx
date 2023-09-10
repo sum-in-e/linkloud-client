@@ -39,7 +39,7 @@ const DeleteKloudButton = ({ kloud }: Props) => {
 
           if (toNumber(kloudId) === kloud.id) {
             // 삭제한 클라우드 페이지에 유저가 있는 경우 전체 페이지로 이동
-            router.push('/link/all');
+            router.push('/link/home');
           }
 
           toast({

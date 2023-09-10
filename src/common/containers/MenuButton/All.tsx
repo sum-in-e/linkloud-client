@@ -1,12 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  BsListUl,
-  BsJournalBookmarkFill,
-  BsEyeSlash,
-  BsCloudSlash,
-} from 'react-icons/bs';
+import { BsListUl } from 'react-icons/bs';
 import { MenuButton } from '@/common/containers/MenuButton';
 
 interface Props {

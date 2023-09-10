@@ -10,7 +10,8 @@ import { AxiosError } from 'axios';
 
 export const useGetLinkListQuery = (
   params: GetLinkListParams,
-  enabledOption?: { enabled: boolean }
+  enabledOption?: { enabled: boolean },
+  refetchOnWindowFocusOption?: { refetchOnWindowFocus: boolean }
 ): UseQueryResult<GetLinkListData, AxiosError<ErrorResponseType>> => {
   return useQuery(
     queryKeys.link.getLinkList(params),
@@ -20,6 +21,7 @@ export const useGetLinkListQuery = (
         return data.data;
       },
       ...enabledOption,
+      ...refetchOnWindowFocusOption,
     }
   );
 };

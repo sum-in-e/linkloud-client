@@ -10,7 +10,7 @@ export default async function LoginPage() {
   const isLogin = await getSessionWithJwtInServer();
 
   if (isLogin) {
-    redirect('/link/all');
+    redirect('/link/home');
   }
 
   return <LogIn />;

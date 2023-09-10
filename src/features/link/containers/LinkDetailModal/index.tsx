@@ -8,14 +8,14 @@ import LinksKloud from '@/features/link/containers/LinkDetailModal/LinksKloud';
 import LinkMemo from '@/features/link/containers/LinkDetailModal/LinkMemo';
 import LinkTitle from '@/features/link/containers/LinkDetailModal/LinkTitle';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { BsX, BsArrowLeft, BsPencilSquare } from 'react-icons/bs';
 import Loader from '@/common/components/Loader';
 import { useToast } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { usePatchLinkByIdMutation } from '@/features/link/modules/apiHooks/usePatchLinkByIdMutation';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
-import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
+import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
 
 interface Props {
   link: LinkInfoType;
@@ -45,10 +45,6 @@ const LinkDetailModal = ({ link, onCloseModal }: Props) => {
 
   const handleChangeMemo = (newMemo: string) => {
     setMemo(newMemo);
-  };
-
-  const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
-    event.target.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
   };
 
   const handleCancelEdit = () => {
@@ -162,7 +158,7 @@ const LinkDetailModal = ({ link, onCloseModal }: Props) => {
                 alt="thumbnail"
                 src={link.thumbnailUrl}
                 className="aspect-square w-20 rounded-lg object-cover"
-                onError={handleErrorImage}
+                onError={handleErrorThumbnailImage}
               />
             </picture>
             <LinkTitle
