@@ -27,6 +27,29 @@ const RecommendedReadsLinkList = () => {
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true); // 초기에는 오른쪽으로 스크롤할 수 있다고 가정
+  const [startX, setStartX] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    // Touch 시작 위치 설정
+    setStartX(e.touches[0].clientX);
+  };
+
+  // Touch 이동 처리
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const touch = e.touches[0];
+    const diff = startX - touch.clientX;
+
+    container.scrollLeft += diff;
+    setStartX(touch.clientX);
+  };
+
+  // Touch 끝난 후 처리
+  const handleTouchEnd = () => {
+    checkScroll();
+  };
 
   const checkScroll = () => {
     const container = containerRef.current;
@@ -143,6 +166,9 @@ const RecommendedReadsLinkList = () => {
       <div
         ref={containerRef}
         onWheel={handleWheel}
+        onTouchStart={handleTouchStart} // touch 시작 이벤트
+        onTouchMove={handleTouchMove} // touch 이동 이벤트
+        onTouchEnd={handleTouchEnd} // touch 끝난 후 이벤트
         className="flex w-full gap-5 overflow-hidden px-1 py-2"
       >
         {links.map((link, index) => (
