@@ -18,7 +18,7 @@ const nextConfig = withPWA({
     return [
       {
         source: '/link',
-        destination: '/link/all',
+        destination: '/link/home',
         permanent: true,
       },
     ];

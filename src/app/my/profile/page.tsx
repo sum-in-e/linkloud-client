@@ -1,4 +1,5 @@
 import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import { NEED_LOGIN } from '@/common/modules/constants/auth';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import MyProfile from '@/features/my/containers';
 import { redirect } from 'next/navigation';
@@ -13,6 +14,7 @@ export default async function MyProfilePage() {
   const isLogin = await getSessionWithJwtInServer();
 
   const queryString = querystring.stringify({
+    error: encodeURIComponent(NEED_LOGIN),
     return_to: '/my/profile',
   });
 

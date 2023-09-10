@@ -22,7 +22,7 @@ const Header = () => {
 
   const handlePushToDefaultPage = () => {
     if (pageType === 'private') {
-      router.push('/link/all');
+      router.push('/link/home');
       return;
     }
 

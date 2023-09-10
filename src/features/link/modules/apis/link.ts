@@ -62,6 +62,9 @@ export type LinkInfoType = Pick<
   | 'isInMyCollection'
   | 'isChecked'
   | 'createdAt'
+  | 'clickCount'
+  | 'clickFrequency'
+  | 'lastClickedAt'
 > & {
   kloud: LinkInfoKloudType;
 };
@@ -74,8 +77,9 @@ export type GetLinkListData = {
 export type GetLinkListResponse = SuccessResponseType<GetLinkListData>;
 
 export type GetLinkListParams = {
-  offset: number; // (requiered)
-  limit: number; // (requiered)
+  offset: number;
+  limit: number;
+  orderBy?: 'createdAt' | 'random';
   sort?: 'ASC' | 'DESC';
   keyword?: string;
   isChecked?: boolean;

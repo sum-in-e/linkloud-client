@@ -1,11 +1,11 @@
 'use client';
 
-import { LINKLOUD_THUMBNAIL_IMAGE_URL } from '@/common/modules/constants/brand';
 import LinkInfoLabel from '@/features/link/components/LinkInfoLabel';
 import {
   useLinkState,
   useShowLinkEditorState,
 } from '@/features/link/modules/stores/createLinkStore';
+import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
 import { ChangeEvent } from 'react';
 import { BsArrowRepeat, BsChevronDown } from 'react-icons/bs';
 
@@ -29,14 +29,6 @@ const LinkInfoHanlder = ({ handleKloudSelectMode }: Props) => {
     setLink({ description: event.target.value });
   };
 
-  const changeImageSrcToDefault = (element: HTMLImageElement) => {
-    element.src = LINKLOUD_THUMBNAIL_IMAGE_URL;
-  };
-
-  const handleErrorImage = (event: ChangeEvent<HTMLImageElement>) => {
-    changeImageSrcToDefault(event.target as HTMLImageElement);
-  };
-
   const handleClickKloud = () => {
     handleKloudSelectMode(true);
   };
@@ -49,7 +41,7 @@ const LinkInfoHanlder = ({ handleKloudSelectMode }: Props) => {
             alt="thumbnail"
             src={link.thumbnailUrl}
             className="aspect-[1.91/1] w-full rounded-lg object-cover"
-            onError={handleErrorImage}
+            onError={handleErrorThumbnailImage}
             loading="eager"
           />
         </picture>

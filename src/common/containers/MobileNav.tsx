@@ -3,7 +3,6 @@
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import CreateLinkModal from '@/features/link/containers/CreateLink/CreateLinkModal';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { MouseEvent, ReactElement } from 'react';
 import { BsHouseDoor, BsSearch, BsEyeSlash, BsPlus } from 'react-icons/bs';
 
@@ -15,15 +14,13 @@ interface Tab {
 }
 
 const MobileNav = () => {
-  const router = useRouter();
-
   const { isOpen, onClose, onOpen } = useOpen();
 
   const tabs: Tab[] = [
     {
-      label: 'Go to All Link Page',
+      label: 'Go to Home Page',
       icon: <BsHouseDoor size={20} />,
-      href: '/link/all',
+      href: '/link/home',
     },
     {
       label: 'Go to Unchecked Link Page',
