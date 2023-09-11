@@ -42,7 +42,7 @@ const MobileProfileDrawer = ({ onClose }: Props) => {
             </div>
             <div className="border-t px-2 pt-5">
               <p className="text-xs font-semibold text-red-500">
-                DANGER ZONE⚠️
+                DANGER ZONE
               </p>
               <div className="mt-4">
                 <SignOutArea />

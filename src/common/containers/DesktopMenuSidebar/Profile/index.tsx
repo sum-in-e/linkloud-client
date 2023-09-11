@@ -90,7 +90,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 border-t pt-5">
-            <p className="text-xs font-semibold text-red-500">DANGER ZONE⚠️</p>
+            <p className="text-xs font-semibold text-red-500">DANGER ZONE</p>
             <SignOutArea />
           </div>
         </PopoverContent>
