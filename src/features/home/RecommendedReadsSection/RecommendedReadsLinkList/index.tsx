@@ -90,19 +90,19 @@ const RecommendedReadsLinkList = () => {
     };
   }, []);
 
+  const handleRefetch = () => {
+    refetch();
+  };
+
   if (isLoading) {
     return (
       <div className="flex w-full gap-5 overflow-hidden px-1 py-2">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 8 }).map((_, index) => (
           <RecommendedReadLinkItemSkeleton key={index} />
         ))}
       </div>
     );
   }
-
-  const handleRefetch = () => {
-    refetch();
-  };
 
   if (!data) {
     return (

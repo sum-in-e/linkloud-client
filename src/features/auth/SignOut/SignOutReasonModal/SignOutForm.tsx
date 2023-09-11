@@ -1,14 +1,16 @@
+'use client';
+
 import Loader from '@/common/components/Loader';
 import { useSignOutMutation } from '@/features/auth/common/modules/apiHooks/useSignOutMutation';
 import Checkbox from '@/features/auth/signup/components/Checkbox';
 import {
   SIGN_OUT_REASON_TYPE,
   SignOutReasonType,
-} from '@/features/my/modules/types/signoutType';
+} from '@/features/auth/SignOut/types/signoutType';
 import { useToast } from '@chakra-ui/react';
 import { debounce } from 'lodash';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const SignOutForm = ({ onClose }: { onClose: () => void }) => {
   const toast = useToast();

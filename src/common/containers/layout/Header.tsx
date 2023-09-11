@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BsList, BsFillPersonFill } from 'react-icons/bs';
+import { BsList } from 'react-icons/bs';
 import logo_v from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
@@ -11,6 +11,7 @@ import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchFor
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import MobileMenuDrawer from '@/common/containers/MobileMenuDrawer';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
+import MobileProfile from '@/common/containers/MobileProfile';
 
 const Header = () => {
   const router = useRouter();
@@ -75,11 +76,9 @@ const Header = () => {
             <div className="hidden w-80 md:block">
               <LinkSearchForm />
             </div>
-            <Link href="/my/profile" aria-label="Go to My Profile Page">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 p-1 md:h-10 md:w-10">
-                <BsFillPersonFill className="h-full w-full fill-white" />
-              </div>
-            </Link>
+            <div className="md:hidden">
+              <MobileProfile />
+            </div>
           </div>
         )}
       </div>

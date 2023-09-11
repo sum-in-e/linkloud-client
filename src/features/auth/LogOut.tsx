@@ -1,13 +1,11 @@
-import Loader from '@/common/components/Loader';
 import { useLogOutMutation } from '@/features/auth/common/modules/apiHooks/useLogOutMutation';
 import { useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
+import { BsDashCircle } from 'react-icons/bs';
 
-const LogOutButton = () => {
+const LogOutArea = () => {
   const toast = useToast();
-  const router = useRouter();
 
-  const { isLoading, mutate } = useLogOutMutation();
+  const { mutate } = useLogOutMutation();
 
   const handleClick = () => {
     mutate(
@@ -39,14 +37,17 @@ const LogOutButton = () => {
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className="w-fit min-w-[90px] rounded-xl bg-gray-600 px-4 py-2 text-sm font-bold text-white hover:bg-gray-500"
-    >
-      {isLoading ? <Loader /> : '로그아웃'}
-    </button>
+    <div className="md:mb-3 md:px-10">
+      <button
+        type="button"
+        onClick={handleClick}
+        className="color-duration flex w-full items-center gap-3 rounded-md border px-2 py-3 text-sm font-semibold text-zinc-700 md:w-fit md:rounded-full md:border-0 md:px-3 md:py-2 md:hover:bg-zinc-200"
+      >
+        <BsDashCircle size={15} className="fill-zinc-700" />
+        로그아웃
+      </button>
+    </div>
   );
 };
 
-export default LogOutButton;
+export default LogOutArea;

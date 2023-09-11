@@ -1,4 +1,4 @@
-import UncheckedNotificationHandler from '@/features/my/containers/Notification/UncheckedNotificationHandler';
+import UncheckedNotificationHandler from '@/features/Notification/UncheckedNotificationHandler';
 
 const NotificationArea = () => {
   return (
