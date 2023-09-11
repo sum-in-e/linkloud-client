@@ -1,6 +1,6 @@
 'use client';
 import CustomModal from '@/common/components/CustomModal';
-import SignOutForm from '@/features/my/containers/SignOut/SignOutReasonModal/SignOutForm';
+import SignOutForm from '@/features/auth/SignOut/SignOutReasonModal/SignOutForm';
 
 const SignOutReasonModal = ({ onClose }: { onClose: () => void }) => {
   return (

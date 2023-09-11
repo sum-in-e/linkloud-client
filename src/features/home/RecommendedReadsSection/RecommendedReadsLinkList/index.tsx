@@ -27,7 +27,7 @@ const RecommendedReadsLinkList = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true); // 초기에는 오른쪽으로 스크롤할 수 있다고 가정
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   const checkScroll = () => {
     const container = containerRef.current;
@@ -61,12 +61,7 @@ const RecommendedReadsLinkList = () => {
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      // 초기 스크롤 가능 여부를 설정
-      setCanScrollLeft(container.scrollLeft > 0);
-      setCanScrollRight(
-        container.scrollLeft < container.scrollWidth - container.clientWidth
-      );
-
+      checkScroll();
       const handleActualScroll = () => {
         setCanScrollLeft(container.scrollLeft > 0);
         setCanScrollRight(
@@ -80,21 +75,34 @@ const RecommendedReadsLinkList = () => {
         container.removeEventListener('scroll', handleActualScroll);
       };
     }
+  }, [data]);
+
+  useEffect(() => {
+    // 브라우저 크기가 변경되면 스크롤 가능 여부를 다시 확인
+    const handleResize = () => {
+      checkScroll();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
+
+  const handleRefetch = () => {
+    refetch();
+  };
 
   if (isLoading) {
     return (
       <div className="flex w-full gap-5 overflow-hidden px-1 py-2">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 8 }).map((_, index) => (
           <RecommendedReadLinkItemSkeleton key={index} />
         ))}
       </div>
     );
   }
-
-  const handleRefetch = () => {
-    refetch();
-  };
 
   if (!data) {
     return (

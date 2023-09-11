@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { BsEyeSlash } from 'react-icons/bs';
 import { MenuButton } from '@/common/containers/MenuButton';
 import YellowCircleMark from '@/common/components/YellowCircleMark';
