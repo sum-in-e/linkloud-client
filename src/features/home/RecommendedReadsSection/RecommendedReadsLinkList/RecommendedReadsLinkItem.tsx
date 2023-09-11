@@ -22,7 +22,7 @@ const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
 
   return (
     <div
-      className="relative w-[270px] flex-shrink-0 cursor-pointer rounded-lg p-2 shadow-md duration-300 md:hover:-translate-y-2"
+      className="group/item relative w-[270px] flex-shrink-0 cursor-pointer rounded-lg p-2 shadow-md "
       onClick={openLinkInNewTap}
     >
       <picture>
@@ -30,7 +30,7 @@ const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
           loading="lazy"
           alt="Link_thumbnail_image"
           src={thumbnailUrl}
-          className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125`}
+          className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover duration-300 md:group-hover/item:-translate-y-2 `}
           onError={handleErrorThumbnailImage}
         />
       </picture>

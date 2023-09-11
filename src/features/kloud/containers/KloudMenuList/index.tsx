@@ -48,14 +48,27 @@ const KloudMenuList = ({ onCloseDrawer }: Props) => {
 
   if (isLoading) {
     return (
-      <section className="flex flex-col gap-2 p-3 md:p-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div
-            key={index}
-            className="skeleton h-10 w-full rounded-full md:rounded-lg"
-          />
-        ))}
-      </section>
+      <div>
+        <div className="flex items-center justify-between p-3 md:p-4">
+          <p className="md:text-md text-sm font-bold text-gray-600 md:text-white">
+            클라우드
+          </p>
+          <button
+            type="button"
+            className="color-duration rounded-md bg-black md:border md:border-zinc-200 md:bg-primary-alt md:hover:bg-primary-alt-lighter"
+          >
+            <BsPlus size={20} className="fill-white" />
+          </button>
+        </div>
+        <div className="flex flex-col gap-2 md:px-4">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={index}
+              className="skeleton h-11 w-full rounded-full md:rounded-lg"
+            />
+          ))}
+        </div>
+      </div>
     );
   }
 
