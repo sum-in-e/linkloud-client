@@ -56,25 +56,6 @@ const RecommendedReadsLinkList = () => {
       left: newScrollPosition,
       behavior: 'smooth',
     });
-
-    // 스크롤 이벤트가 완료되는 것을 대기
-    setTimeout(() => {
-      checkScroll();
-    }, 300); // 300ms는 smooth 스크롤이 완료되는 대략적인 시간
-  };
-
-  const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    const container = containerRef.current;
-
-    if (!container) return;
-
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      container.scrollLeft += e.deltaX;
-    } else {
-      container.scrollLeft -= e.deltaY;
-    }
-
-    checkScroll();
   };
 
   useEffect(() => {
@@ -148,8 +129,7 @@ const RecommendedReadsLinkList = () => {
 
       <div
         ref={containerRef}
-        onWheel={handleWheel}
-        className="scrollbar-hidden flex w-full gap-5 overflow-x-scroll px-1 py-2 md:overflow-hidden"
+        className="scrollbar-hidden flex w-full gap-5 overflow-x-scroll px-1 py-2"
       >
         {links.map((link, index) => (
           <RecommendedReadsLinkItem key={index} link={link} />
