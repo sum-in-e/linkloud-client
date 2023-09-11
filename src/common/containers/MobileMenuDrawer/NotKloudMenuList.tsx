@@ -47,14 +47,14 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
   return (
     <>
       <HomeButton onClick={onCloseDrawer} />
-      <AllButton onClick={onCloseDrawer} />
       <CollectionButton onClick={onCloseDrawer} />
-      <UncheckedButton
-        isShowMark={data.unchecked > 0}
-        onClick={onCloseDrawer}
-      />
+      <AllButton onClick={onCloseDrawer} />
       <UncategorizedButton
         isShowMark={data.uncategorized > 0}
+        onClick={onCloseDrawer}
+      />
+      <UncheckedButton
+        isShowMark={data.unchecked > 0}
         onClick={onCloseDrawer}
       />
     </>

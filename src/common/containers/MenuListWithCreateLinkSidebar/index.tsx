@@ -24,10 +24,10 @@ const MenuListWithCreateLinkSidebar = () => {
   return (
     <div>
       <HomeButton />
-      <AllButton />
       <CollectionButton />
-      <UncheckedButton isShowMark={data.unchecked > 0} />
+      <AllButton />
       <UncategorizedButton isShowMark={data.uncategorized > 0} />
+      <UncheckedButton isShowMark={data.unchecked > 0} />
       <CreateLinkButton />
     </div>
   );
