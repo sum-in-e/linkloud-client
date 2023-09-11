@@ -48,7 +48,7 @@ const ProfileArea = () => {
       <div className="flex aspect-square h-auto w-[15%] flex-shrink-0 items-center justify-center rounded-full bg-zinc-400 p-1">
         <BsFillPersonFill className="h-full w-full fill-white" />
       </div>
-      <div className="w-[80%]">
+      <div className="w-[75%]">
         <p className="truncate text-sm font-semibold text-black">{name}</p>
         <div className="flex items-center gap-1 ">
           {method === 'kakao' && (
