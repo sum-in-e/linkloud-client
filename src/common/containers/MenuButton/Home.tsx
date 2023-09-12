@@ -20,7 +20,7 @@ const HomeButton = ({ onClick }: Props) => {
     <MenuButton
       title="홈"
       href={homepath}
-      leftIcon={<BsHouseDoor size={20} className="text flex-shrink-0" />}
+      leftIcon={<BsHouseDoor size={20} className="flex-shrink-0" />}
       onClick={handleClick}
       isActivating={pathname === homepath}
     />

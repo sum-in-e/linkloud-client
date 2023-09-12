@@ -4,7 +4,13 @@ import { useOpen } from '@/common/modules/hooks/useOpen';
 import CreateLinkModal from '@/features/link/containers/CreateLink/CreateLinkModal';
 import Link from 'next/link';
 import React, { MouseEvent, ReactElement } from 'react';
-import { BsHouseDoor, BsSearch, BsEyeSlash, BsPlus } from 'react-icons/bs';
+import {
+  BsHouseDoor,
+  BsSearch,
+  BsEyeSlash,
+  BsMagic,
+  BsPlus,
+} from 'react-icons/bs';
 
 interface Tab {
   label: string;
@@ -23,9 +29,9 @@ const MobileNav = () => {
       href: '/link/home',
     },
     {
-      label: 'Go to Unchecked Link Page',
-      icon: <BsEyeSlash size={20} />,
-      href: '/link/unchecked',
+      label: 'Go to Link Manager Page',
+      icon: <BsMagic size={20} />,
+      href: '/link/manager',
     },
     {
       label: 'Go to Search',

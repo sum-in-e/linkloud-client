@@ -9,6 +9,7 @@ import CollectionButton from '@/common/containers/MenuButton/Collection';
 import UncheckedButton from '@/common/containers/MenuButton/Unchecked';
 import UncategorizedButton from '@/common/containers/MenuButton/Uncategorized';
 import HomeButton from '@/common/containers/MenuButton/Home';
+import LinkManagerButton from '@/common/containers/MenuButton/LinkManager';
 
 const MenuList = () => {
   const { data, isLoading, refetch } = useGetGroupMenuListQuery();
@@ -36,6 +37,7 @@ const MenuList = () => {
       <AllButton />
       <UncategorizedButton isShowMark={data.uncategorized > 0} />
       <UncheckedButton isShowMark={data.unchecked > 0} />
+      <LinkManagerButton />
       <CreateLinkButton />
     </div>
   );

@@ -1,27 +1,22 @@
 'use client';
 
-import { useGetLinkListQuery } from '@/features/link/modules/apiHooks/useGetLinkListQuery';
-import { useEffect, useRef, useState } from 'react';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
-import linkle from '/public/images/linkle.png';
 import Image from 'next/image';
-import RecommendedReadsLinkItem from '@/features/home/RecommendedReadsSection/RecommendedReadsLinkList/RecommendedReadsLinkItem';
-import { BsArrowRepeat } from 'react-icons/bs';
+import LinkManagerLinkItem from '@/features/linkManager/containers/LinkManagerLinkItem';
+import { useGetLinkListForLinkManagerQuery } from '@/features/linkManager/modules/apiHooks/useGetLinkListForLinkManagerQuery';
+import { LinkManagerListType } from '@/features/linkManager/modules/types/linkManager';
+import linkle from '/public/images/linkle.png';
+import { useEffect, useRef, useState } from 'react';
+import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
+import { BsChevronLeft, BsChevronRight, BsArrowRepeat } from 'react-icons/bs';
+
+interface Props {
+  listType: LinkManagerListType;
+}
 
 const scrollAmount = 600; // 스크롤 양
 
-const RecommendedReadsLinkList = () => {
-  const { data, isLoading, refetch } = useGetLinkListQuery(
-    {
-      offset: 0,
-      limit: 10,
-      orderBy: 'random',
-      isChecked: false,
-    },
-    { enabled: true },
-    { refetchOnWindowFocus: false }
-  );
+const LinkManagerLinkList = ({ listType }: Props) => {
+  const { isLoading, data, refetch } = useGetLinkListForLinkManagerQuery();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -96,9 +91,12 @@ const RecommendedReadsLinkList = () => {
 
   if (isLoading) {
     return (
-      <div className="flex w-full gap-5 overflow-hidden px-1 py-2">
+      <div
+        ref={containerRef}
+        className="scrollbar-hidden flex w-full gap-5 overflow-x-scroll px-1 py-2"
+      >
         {Array.from({ length: 8 }).map((_, index) => (
-          <RecommendedReadLinkItemSkeleton key={index} />
+          <LoadingItem listType={listType} key={index} />
         ))}
       </div>
     );
@@ -108,7 +106,7 @@ const RecommendedReadsLinkList = () => {
     return (
       <div className="mt-2 flex h-fit w-full flex-col items-center justify-center gap-3 rounded-lg border py-6">
         <p className="text-center text-sm font-semibold text-zinc-700">
-          추천 링크를 불러오는데 실패했습니다.
+          링크를 불러오는데 실패했습니다.
         </p>
         <button
           type="button"
@@ -121,7 +119,11 @@ const RecommendedReadsLinkList = () => {
     );
   }
 
-  const links = data.links;
+  const links = data[listType];
+  const noLinkText =
+    listType === 'uncheckedOverTwoWeeks'
+      ? `링크 관리를 잘하고 계시네요!\n14일 이상 확인하지 않은 링크가 없어요👍`
+      : `확인한 링크들을 잘 정리하고 계시는군요!\n`;
 
   return links.length > 0 ? (
     <div className="group relative">
@@ -138,8 +140,8 @@ const RecommendedReadsLinkList = () => {
         ref={containerRef}
         className="scrollbar-hidden flex w-full gap-5 overflow-x-scroll px-1 py-2"
       >
-        {links.map((link, index) => (
-          <RecommendedReadsLinkItem key={index} link={link} />
+        {data[listType].map((link) => (
+          <LinkManagerLinkItem key={link.id} link={link} listType={listType} />
         ))}
       </div>
 
@@ -161,24 +163,30 @@ const RecommendedReadsLinkList = () => {
         priority
       />
       <h4 className="text-md whitespace-pre-wrap text-center font-semibold text-zinc-700">
-        {`모든 링크를 확인했어요👍\n미확인 링크가 생기면 다시 추천해 드릴게요!`}
+        {noLinkText}
       </h4>
     </div>
   );
 };
 
-export default RecommendedReadsLinkList;
+export default LinkManagerLinkList;
 
-const RecommendedReadLinkItemSkeleton = () => {
+const LoadingItem = ({ listType }: { listType: LinkManagerListType }) => {
   return (
-    <div className="relative h-fit w-[270px] flex-shrink-0 rounded-lg p-2 shadow-md ">
-      <div
-        className={`skeleton aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125`}
-      />
-      <div className="p-2 pt-4 ">
+    <div className="w-[270px] flex-shrink-0 rounded-lg p-2 shadow-md">
+      <div className={`skeleton aspect-[1.91/1] h-auto w-full rounded-lg`} />
+      <div className="px-2 py-4">
         <div className="skeleton mb-2 h-3 w-full rounded-lg" />
         <div className="skeleton mb-1 h-6 w-full rounded-lg" />
         <div className="skeleton h-4 w-full rounded-lg" />
+        {listType === 'recommendAddToCollection' && (
+          <div className="skeleton mt-2 h-5 w-10 rounded-md p-1" />
+        )}
+      </div>
+      <div className="flex justify-between gap-2 border-t border-zinc-200 pt-2 md:flex-col md:justify-normal md:gap-1">
+        <div className="skeleton h-7 w-full rounded-lg" />
+        <div className="skeleton h-7 w-full rounded-lg" />
+        <div className="skeleton h-7 w-full rounded-lg" />
       </div>
     </div>
   );

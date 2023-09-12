@@ -6,13 +6,12 @@ import CollectionButton from '@/common/containers/MenuButton/Collection';
 import UncategorizedButton from '@/common/containers/MenuButton/Uncategorized';
 import UncheckedButton from '@/common/containers/MenuButton/Unchecked';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
-import HomeButton from '@/common/containers/MenuButton/Home';
 
 interface Props {
   onCloseDrawer: () => void;
 }
 
-const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
+const MenuList = ({ onCloseDrawer }: Props) => {
   const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   if (isLoading) {
@@ -28,6 +27,7 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
     const handleRefetch = () => {
       refetch();
     };
+
     return (
       <section className="flex w-full flex-col items-center gap-2 py-5">
         <p className="whitespace-pre-wrap break-keep text-center text-sm font-semibold">
@@ -46,7 +46,6 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
 
   return (
     <>
-      <HomeButton onClick={onCloseDrawer} />
       <CollectionButton onClick={onCloseDrawer} />
       <AllButton onClick={onCloseDrawer} />
       <UncategorizedButton
@@ -60,4 +59,4 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
     </>
   );
 };
-export default NotKloudMenuList;
+export default MenuList;
