@@ -12,7 +12,7 @@ interface Props {
   onCloseDrawer: () => void;
 }
 
-const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
+const MenuList = ({ onCloseDrawer }: Props) => {
   const { data, isLoading, refetch } = useGetGroupMenuListQuery();
 
   if (isLoading) {
@@ -60,4 +60,4 @@ const NotKloudMenuList = ({ onCloseDrawer }: Props) => {
     </>
   );
 };
-export default NotKloudMenuList;
+export default MenuList;

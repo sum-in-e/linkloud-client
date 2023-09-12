@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { BsArrowBarLeft } from 'react-icons/bs';
 import KloudMenuList from '@/features/kloud/containers/KloudMenuList';
-import NotKloudMenuList from '@/common/containers/MobileMenuDrawer/NotKloudMenuList';
+import MenuList from '@/common/containers/MobileMenuDrawer/MenuList';
 
 interface Props {
   onClose: () => void;
@@ -31,7 +31,7 @@ const MobileMenuDrawer = ({ onClose }: Props) => {
         </DrawerHeader>
 
         <DrawerBody className="pb-8">
-          <NotKloudMenuList onCloseDrawer={onClose} />
+          <MenuList onCloseDrawer={onClose} />
           <KloudMenuList onCloseDrawer={onClose} />
         </DrawerBody>
       </DrawerContent>
