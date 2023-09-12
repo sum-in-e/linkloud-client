@@ -192,7 +192,7 @@ const LinkManagerLinkItem = ({ link, listType }: Props) => {
           >
             <BsBookmarkPlus className="fill-secondary" size={15} />
             <p className="hidden text-xs font-semibold text-zinc-700 md:block">
-              내 컬렉션에 추가하기
+              링크 소장하기 (내 컬렉션 추가)
             </p>
           </button>
           <button
