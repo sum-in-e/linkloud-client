@@ -154,23 +154,25 @@ const LinkManagerLinkItem = ({ link, listType }: Props) => {
 
   return (
     <>
-      <div className="relative w-[270px] flex-shrink-0 rounded-lg p-2 shadow-md ">
-        <picture>
-          <img
-            loading="lazy"
-            alt="Link_thumbnail_image"
-            src={thumbnailUrl}
-            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover duration-300`}
-            onError={handleErrorThumbnailImage}
-          />
-        </picture>
-        <div className="px-2 py-4">
-          <p className="mb-2 truncate text-xs text-zinc-400">{url}</p>
-          <p className="mb-1 truncate text-sm font-bold">{title}</p>
-          <p className="truncate text-xs text-zinc-600">{description}</p>
-          {listType === 'recommendAddToCollection' && (
-            <div className="mt-2 w-fit rounded-md bg-blue-200 p-1 text-xs">{`${clickCount}회 클릭`}</div>
-          )}
+      <div className="relative flex w-[270px] flex-shrink-0 flex-col justify-between rounded-lg p-2 shadow-md">
+        <div className="w-full">
+          <picture>
+            <img
+              loading="lazy"
+              alt="Link_thumbnail_image"
+              src={thumbnailUrl}
+              className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover duration-300`}
+              onError={handleErrorThumbnailImage}
+            />
+          </picture>
+          <div className="px-2 py-4">
+            <p className="mb-2 truncate text-xs text-zinc-400">{url}</p>
+            <p className="mb-1 truncate text-sm font-bold">{title}</p>
+            <p className="truncate text-xs text-zinc-600">{description}</p>
+            {listType === 'recommendAddToCollection' && (
+              <div className="mt-2 w-fit rounded-md bg-blue-200 p-1 text-xs">{`${clickCount}회 클릭`}</div>
+            )}
+          </div>
         </div>
         <div className="flex justify-between gap-2 border-t border-zinc-200 pt-2 md:flex-col md:justify-normal md:gap-0">
           <button
