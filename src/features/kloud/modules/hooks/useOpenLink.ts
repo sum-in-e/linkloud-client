@@ -1,3 +1,5 @@
+'use client';
+
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { usePatchLinkCountMutation } from '@/features/link/modules/apiHooks/usePatchLinkCountMutation';
 import { useQueryClient } from '@tanstack/react-query';
