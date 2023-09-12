@@ -88,11 +88,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
 
   const hasMemo = memo.length > 0;
 
-  const isShowKloud =
-    kloud !== null &&
-    (pathname === '/link/all' ||
-      pathname === '/link/unchecked' ||
-      pathname === '/link/collection'); // 저장된 클라우드가 있고, 전체 || 미확인 || 내 컬렉션 페이지인 경우 클라우드를 보여줘야합니다.
+  const isShowKloud = kloud !== null && kloudId === undefined; // 저장된 클라우드가 있고, 유저가 생성한 클라우드 페이지가 아닌 경우에만 보여준다.
 
   const handleClickCollection = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation(); // 링크 열리는 이벤트 막기 위함
