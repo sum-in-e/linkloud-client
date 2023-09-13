@@ -11,7 +11,10 @@ export const useIsShowLayout = () => {
 
   const isHeaderVisible = !pathname.includes('/chrome-extentions');
   const isFooterVisible =
-    !pathname.includes('/link') && !pathname.includes('/chrome-extentions');
+    !pathname.includes('/link') &&
+    !pathname.includes('/chrome-extentions') &&
+    !pathname.includes('/login') &&
+    !pathname.includes('/signup');
 
   return {
     isHeaderVisible,
