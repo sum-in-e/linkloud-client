@@ -1,13 +1,12 @@
 'use client';
 
-import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
-import { usePageType } from '@/common/modules/hooks/usePageType';
+import Link from 'next/link';
 import { useToast } from '@chakra-ui/toast';
+import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 
 const Footer = () => {
   const toast = useToast();
 
-  const pageType = usePageType();
   const { isFooterVisible } = useIsShowLayout();
 
   const handleClickCopyEmail = async () => {
@@ -31,87 +30,46 @@ const Footer = () => {
   };
 
   return isFooterVisible ? (
-    <footer className="flex w-full justify-center bg-stone-900 px-4 py-5 md:px-10">
-      <div
-        className={`flex w-full flex-col justify-center gap-10 ${
-          pageType === 'public' && 'max-w-screen-xl'
-        }`}
-      >
-        <div className="flex w-full flex-col gap-10 md:flex-row">
-          <div className="flex flex-col gap-4">
-            <Title text="서비스" />
-            <Menu
-              text="사용 가이드"
-              onClick={() =>
-                window.open('https://www.craft.me/s/AGjkOZUm2mFTDE')
-              }
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <Title text="피드백" />
-            <div className="flex flex-col gap-2">
-              <Menu
-                text="리뷰 작성하기"
-                onClick={() => window.open('https://tally.so/r/wkl2B6')}
-              />
-              <Menu
-                text="버그 제보하기"
-                onClick={() => window.open('https://tally.so/r/wAzEeB')}
-              />
-              <Menu
-                text="서비스 발전에 도움주기"
-                onClick={() => window.open('https://toss.me/linkloud')}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <Title text="문의 및 제안" />
-            <div className="flex flex-col gap-2">
-              <Menu
-                text="linkloud.official@gmail.com"
-                onClick={handleClickCopyEmail}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="flex w-full flex-col gap-4">
-          <Title text="Linkloud" />
-          <div className="flex flex-col gap-2">
-            <Menu
-              text="서비스 이용약관"
-              onClick={() =>
-                window.open('https://www.craft.me/s/u150oK9QGBnX4U')
-              }
-            />
-            <Menu
-              text="개인정보 처리방침"
-              onClick={() =>
-                window.open('https://www.craft.me/s/CJKMGCcnuC5YDf')
-              }
-            />
-          </div>
-        </div>
-        <p className="text-xs text-zinc-500">
-          copyright {new Date().getFullYear()}. Linkloud All rights reservesd.
-        </p>
-      </div>
+    <footer className="flex w-full flex-col items-center justify-between gap-5 px-4 py-10 md:flex-row md:px-10">
+      <ul className="flex flex-wrap items-center gap-6">
+        <LinkMenu
+          text="Terms of Use"
+          href="https://www.craft.me/s/u150oK9QGBnX4U"
+        />
+        <LinkMenu
+          text="Privacy Policy"
+          href="https://www.craft.me/s/CJKMGCcnuC5YDf"
+        />
+        <LinkMenu
+          text="Help & Info"
+          href="https://www.craft.me/s/AGjkOZUm2mFTDE"
+        />
+        <li
+          onClick={handleClickCopyEmail}
+          className="text-md cursor-pointer text-zinc-700 md:hover:text-primary-alt"
+        >
+          Contact
+        </li>
+      </ul>
+      <p className="text-md text-zinc-700">
+        © {new Date().getFullYear()} Linkloud
+      </p>
     </footer>
   ) : null;
 };
 
 export default Footer;
 
-const Title = ({ text }: { text: string }) => {
-  return <h2 className="text-[15px] font-bold text-slate-200">{text}</h2>;
-};
-
-const Menu = ({ text, onClick }: { text: string; onClick?: () => void }) => {
+const LinkMenu = ({ text, href }: { text: string; href: string }) => {
   return (
-    <p
-      className="cursor-pointer text-sm text-slate-300 hover:underline"
-      onClick={onClick}
-    >
-      {text}
-    </p>
+    <li>
+      <Link
+        href={href}
+        target="_blank"
+        className="text-md cursor-pointer whitespace-nowrap text-zinc-700 md:hover:text-primary-alt"
+      >
+        {text}
+      </Link>
+    </li>
   );
 };
