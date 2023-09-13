@@ -39,14 +39,14 @@ self.addEventListener('notificationclick', (event) => {
   // 버튼 클릭이 아닌 알림 자체 클릭시 실행할 동작
   if (!event.action) {
     event.waitUntil(
-      self.clients.openWindow('https://linkloud.co.kr/link/unchecked')
+      self.clients.openWindow('https://linkloud.xyz/link/unchecked')
     );
   }
 
   if (event.action === 'show-unchecked-action') {
     // 지금 확인하기 버튼 클릭 시 미확인 페이지로 이동
     event.waitUntil(
-      self.clients.openWindow('https://linkloud.co.kr/link/unchecked')
+      self.clients.openWindow('https://linkloud.xyz/link/unchecked')
     );
   }
 

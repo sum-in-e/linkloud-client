@@ -1,50 +1,101 @@
-// 서비스 워커 설치할 때
-self.addEventListener('install', (event) => {
-  // 제어중인 서비스 워커가 존재해도 대기 상태를 건너뛴다.
-  console.log('install');
-  self.skipWaiting();
-});
-
-// 서비스 워커 설치 중일 때
-// self.addEventListener('activate', (event) => {
-// });
-
 /**
- * @description 서비스워커에서 발생하는 푸시 이벤트를 수신한다.(서버에서 푸시 이벤트 보내도록 구현)
- * self는 서비스워커를 참조한다.
+ * Copyright 2018 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-self.addEventListener('push', (event) => {
-  const data = event.data.json();
-  console.log('push', data);
-  const title = data.title || '흥미로운 링크를 담아두셨네요?👀';
-  const options = {
-    body: data.description || '저장한 글을 읽고 더 성장한 나를 만나보세요!', // 푸시 알림 본문
-    icon: 'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg', // 푸시 알림에 표시될 아이콘
-    badge:
-      'https://res.cloudinary.com/dqcgvbbv7/image/upload/v1687269892/linkloud/emtygeehcgigfn9wlhw3.jpg', // 푸시 알림 배지 이미지 / android에서만 보인다.
-    actions: [
-      {
-        action: 'show-unread-action',
-        title: '지금 보러가기',
-      },
-    ],
-    requireInteraction: true, // chrome과 같이 충분히 큰 창에서 사용자가 직접 닫을 때까지 알림 사라지지 않음
+
+// If the loader is already loaded, just stop.
+if (!self.define) {
+  let registry = {};
+
+  // Used for `eval` and `importScripts` where we can't get script URL by other means.
+  // In both cases, it's safe to use a global var because those functions are synchronous.
+  let nextDefineUri;
+
+  const singleRequire = (uri, parentUri) => {
+    uri = new URL(uri + ".js", parentUri).href;
+    return registry[uri] || (
+      
+        new Promise(resolve => {
+          if ("document" in self) {
+            const script = document.createElement("script");
+            script.src = uri;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          } else {
+            nextDefineUri = uri;
+            importScripts(uri);
+            resolve();
+          }
+        })
+      
+      .then(() => {
+        let promise = registry[uri];
+        if (!promise) {
+          throw new Error(`Module ${uri} didn’t register its module`);
+        }
+        return promise;
+      })
+    );
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
-});
+  self.define = (depsNames, factory) => {
+    const uri = nextDefineUri || ("document" in self ? document.currentScript.src : "") || location.href;
+    if (registry[uri]) {
+      // Module is already loading or loaded.
+      return;
+    }
+    let exports = {};
+    const require = depUri => singleRequire(depUri, uri);
+    const specialDeps = {
+      module: { uri },
+      exports,
+      require
+    };
+    registry[uri] = Promise.all(depsNames.map(
+      depName => specialDeps[depName] || require(depName)
+    )).then(deps => {
+      factory(...deps);
+      return exports;
+    });
+  };
+}
+define(['./workbox-e34f44db'], (function (workbox) { 'use strict';
 
-/**
- * @description push notification 클릭 시 동작 정의
- */
-self.addEventListener('notificationclick', (event) => {
-  // 알림창 닫기
-  event.notification.close();
+  importScripts("worker-development.js");
+  self.skipWaiting();
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
+    "cacheName": "start-url",
+    plugins: [{
+      cacheWillUpdate: async ({
+        request,
+        response,
+        event,
+        state
+      }) => {
+        if (response && response.type === 'opaqueredirect') {
+          return new Response(response.body, {
+            status: 200,
+            statusText: 'OK',
+            headers: response.headers
+          });
+        }
+        return response;
+      }
+    }]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
+    "cacheName": "dev",
+    plugins: []
+  }), 'GET');
 
-  if (event.action === 'show-unread-action') {
-    // 지금 확인하기 버튼 클릭 시 미열람 페이지로 이동
-    event.waitUntil(clients.openWindow('https://linkloud.co.kr/kloud/unread'));
-  }
-
-  // 알림 클릭 시 발생할 기본 액션도 정의 가능
-});
+}));
+//# sourceMappingURL=sw.js.map

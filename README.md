@@ -1,3 +1,3 @@
 # Linkloud Client
 
-🔗linkloud.co.kr
+🔗linkloud.xyz

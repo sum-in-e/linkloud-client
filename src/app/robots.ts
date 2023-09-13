@@ -5,6 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
     },
-    sitemap: 'https://linkloud.co.kr/sitemap.xml',
+    sitemap: 'https://linkloud.xyz/sitemap.xml',
   };
 }

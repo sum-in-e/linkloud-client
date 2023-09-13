@@ -45,7 +45,7 @@ export const metadata = {
   title: 'Linkloud',
   description: LINKLOUD_DESCRIPTION,
   keywords: 'linkloud, 링클라우드, link, manage links',
-  metadataBase: new URL('https://linkloud.co.kr'),
+  metadataBase: new URL('https://linkloud.xyz'),
   alternates: {
     canonical: '/',
   },
@@ -58,7 +58,7 @@ export const metadata = {
   openGraph: {
     title: 'Linkloud',
     description: LINKLOUD_DESCRIPTION,
-    url: 'https://linkloud.co.kr',
+    url: 'https://linkloud.xyz',
     type: 'website',
     images: [
       {
@@ -80,7 +80,7 @@ export const metadata = {
   },
   // For PWA
   applicationName: 'Linkloud',
-  manifest: 'https://linkloud.co.kr/manifest.json',
+  manifest: 'https://linkloud.xyz/manifest.json',
   themeColor: 'white',
   appleWebApp: {
     title: 'Linkloud',
