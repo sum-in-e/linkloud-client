@@ -44,9 +44,9 @@ const ProfileArea = () => {
   return (
     <div className="justify-center-center flex w-full flex-col gap-4 px-2">
       <p className="text-xs font-semibold text-zinc-700">ACCOUNT</p>
-      <div className="w-full">
+      <div className="flex w-full flex-col gap-1 border-l-2 border-zinc-700 pl-2">
         <p className="truncate text-sm font-semibold text-black">{name}</p>
-        <div className="flex items-center gap-1 ">
+        <div className="flex items-center gap-1">
           {method === 'kakao' && (
             <div className="h-fit w-fit rounded-full bg-[#FAE100] p-1">
               <RiKakaoTalkFill size={10} />
