@@ -14,4 +14,3 @@ const GoogleAdsense = () => {
 };
 
 export default GoogleAdsense;
-s;
