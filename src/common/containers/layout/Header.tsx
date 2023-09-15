@@ -67,13 +67,13 @@ const Header = () => {
         {pageType === 'public' ? (
           <Link
             href="/login"
-            className="group/login flex items-center justify-center gap-3 rounded-full border-2 border-primary border-opacity-80 bg-transparent px-4 py-2 hover:border-primary-lighter hover:bg-primary-lighter"
+            className="group/login flex items-center justify-center gap-3 rounded-full border-2 border-primary-alt border-opacity-80 bg-transparent px-4 py-2 hover:border-primary-alt-lighter hover:bg-primary-alt-lighter"
           >
             <BsBoxArrowInRight
               size={17}
-              className="fill-primary group-hover/login:fill-white"
+              className="fill-primary-alt group-hover/login:fill-white"
             />
-            <p className="text-sm font-bold text-primary group-hover/login:text-white">
+            <p className="text-sm font-bold text-primary-alt group-hover/login:text-white">
               Log in
             </p>
           </Link>
