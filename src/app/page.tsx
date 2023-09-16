@@ -1,7 +1,8 @@
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
+import MoreFeatureSection from '@/features/landing/container/MoreFeatureSection';
+import PointSection from '@/features/landing/container/PointSection';
+import TopSection from '@/features/landing/container/TopSection';
 import { redirect } from 'next/navigation';
-import TopSection from '@/features/landing/TopSection';
-import PointSection from '@/features/landing/PointSection';
 
 export default async function HomePage() {
   const isLogin = await getSessionWithJwtInServer();
@@ -11,11 +12,10 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="flex w-full max-w-screen-xl flex-col items-center justify-center">
-        <TopSection />
-        <PointSection />
-      </div>
+    <div className="flex w-full flex-col justify-center">
+      <TopSection />
+      <PointSection />
+      <MoreFeatureSection />
     </div>
   );
 }

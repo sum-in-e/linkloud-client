@@ -30,7 +30,7 @@ const LinkSearchForm = () => {
       <input
         type="text"
         placeholder="제목이나 url로 저장한 링크를 검색해 보세요!"
-        className="reset-input bg-transparent text-sm"
+        className="reset-input bg-transparent pl-2 text-sm"
         onChange={handleChange}
         value={value}
       />

@@ -1,9 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BsList } from 'react-icons/bs';
+import { BsList, BsBoxArrowInRight } from 'react-icons/bs';
 import logo_v from '/public/images/logo_v.png';
 import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
@@ -15,6 +15,7 @@ import MobileProfile from '@/common/containers/MobileProfile';
 
 const Header = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const pageType = usePageType();
 
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -65,12 +66,20 @@ const Header = () => {
           priority
         />
         {pageType === 'public' ? (
-          <Link
-            href="/login"
-            className="rounded-2xl bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-lighter"
-          >
-            시작하기
-          </Link>
+          pathname === '/' && (
+            <Link
+              href="/login"
+              className="group/login flex items-center justify-center gap-3 rounded-full border-2 border-primary-alt border-opacity-80 bg-transparent px-4 py-2 hover:border-primary-alt-lighter hover:bg-primary-alt-lighter"
+            >
+              <BsBoxArrowInRight
+                size={17}
+                className="fill-primary-alt group-hover/login:fill-white"
+              />
+              <p className="text-sm font-bold text-primary-alt group-hover/login:text-white">
+                Log in
+              </p>
+            </Link>
+          )
         ) : (
           <div className="flex items-center gap-3">
             <div className="hidden w-80 md:block">
