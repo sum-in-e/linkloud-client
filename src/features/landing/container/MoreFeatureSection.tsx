@@ -13,8 +13,8 @@ const MoreFeatureSection = () => {
         </h2>
         <ul className="flex flex-col gap-14 md:flex-row md:justify-center">
           {items.map((item, index) => (
-            <li key={index}>
-              <div className="aspect-square h-auto w-14 rounded-lg border border-zinc-300 p-2">
+            <li key={index} className="flex flex-col">
+              <div className="h-14 w-14 flex-shrink-0 rounded-lg border border-zinc-300 p-2">
                 <Image
                   alt={item.alt}
                   src={item.src}
