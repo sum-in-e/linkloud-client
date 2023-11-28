@@ -1,3 +1,3 @@
 # Linkloud Client
 
-🔗linkloud.xyz
+[🔗Linkloud 바로가기](https://linkloud.xyz)
