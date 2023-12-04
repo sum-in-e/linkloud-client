@@ -30,6 +30,7 @@ import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
 import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
+import Image from 'next/image';
 
 interface Props {
   link: LinkInfoType;
@@ -213,17 +214,20 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
       onClick={openLinkInNewTap}
     >
       <div className="relative">
-        <picture>
-          <img
+        <div
+          className={`aspect-[1.91/1] h-auto w-full md:group-hover/item:brightness-125 ${
+            isChecked && 'opacity-50'
+          }`}
+        >
+          <Image
+            fill
             loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
-            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125 ${
-              isChecked && 'opacity-50'
-            }`}
+            className="rounded-lg object-cover"
             onError={handleErrorThumbnailImage}
           />
-        </picture>
+        </div>
         {hasMemo && (
           <div
             className={`absolute -bottom-7 right-2 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[5px] md:-bottom-10 md:p-[10px]`}
