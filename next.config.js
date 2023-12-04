@@ -23,6 +23,14 @@ const nextConfig = withPWA({
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
 });
 
 const sentryConfig = {

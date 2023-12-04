@@ -14,6 +14,7 @@ import { usePatchLinkCountMutation } from '@/features/link/modules/apiHooks/useP
 import { LinkInfoType } from '@/features/link/modules/apis/link';
 import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
 import { LinkManagerListType } from '@/features/linkManager/modules/types/linkManager';
+import Image from 'next/image';
 
 interface Props {
   link: LinkInfoType;
@@ -156,15 +157,16 @@ const LinkManagerLinkItem = ({ link, listType }: Props) => {
     <>
       <div className="relative flex w-[270px] flex-shrink-0 flex-col justify-between rounded-lg p-2 shadow-md">
         <div className="w-full">
-          <picture>
-            <img
+          <div className="relative aspect-[1.91/1] h-auto w-full">
+            <Image
+              fill
               loading="lazy"
               alt="Link_thumbnail_image"
               src={thumbnailUrl}
-              className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover duration-300`}
+              className="rounded-lg object-cover"
               onError={handleErrorThumbnailImage}
             />
-          </picture>
+          </div>
           <div className="px-2 py-4">
             <p className="mb-2 truncate text-xs text-zinc-400">{url}</p>
             <p className="mb-1 truncate text-sm font-bold">{title}</p>
