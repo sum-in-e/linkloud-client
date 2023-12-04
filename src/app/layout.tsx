@@ -9,7 +9,6 @@ import {
   LINKLOUD_OG_IMAGE_URL,
 } from '@/common/modules/constants/brand';
 import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
-import GoogleAdsense from '@/common/containers/GoogleAdsense';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,12 +21,7 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      {isProduction && (
-        <>
-          <GoogleAdsense />
-          <GoogleAnalytics />
-        </>
-      )}
+      {isProduction && <GoogleAnalytics />}
       <body className="box-border bg-zinc-50">
         <QueryProvider>
           <ChakraUiProvider>
