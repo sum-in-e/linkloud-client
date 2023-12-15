@@ -7,7 +7,6 @@ const queryKeys = {
   link: {
     getLinkList: (params?: GetLinkListParams) =>
       params ? (['getLinkList', params] as const) : (['getLinkList'] as const),
-    getLinkListForLinkManager: ['getLinkListForLinkManager'] as const,
   },
   kloud: {
     getKloudList: ['getKloudList'] as const,
