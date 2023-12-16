@@ -1,7 +1,7 @@
 import KakaoSignUp from '@/features/auth/signup/containers/KakaoSignUp';
 
 export const metadata = {
-  title: 'Linkloud | 회원가입',
+  title: '링클라우드 | 회원가입',
 };
 
 const KakaoSignUpOauthPage = () => {

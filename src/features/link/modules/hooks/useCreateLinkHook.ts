@@ -26,6 +26,7 @@ export const useCreateLinkHook = ({ onClose }: Props) => {
         description: link.description,
         thumbnailUrl: link.thumbnailUrl,
         kloudId: link.kloud === null ? null : link.kloud.id,
+        isFollowing: false,
       },
       {
         onSuccess: (data, variables) => {

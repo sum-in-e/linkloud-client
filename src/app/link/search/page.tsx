@@ -7,7 +7,7 @@ import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 검색',
+  title: '링클라우드 | 검색',
 };
 
 export default async function MyKloudSearchPage({

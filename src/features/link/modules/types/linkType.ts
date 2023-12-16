@@ -8,8 +8,7 @@ export interface LinkEntity {
   description: string;
   thumbnailUrl: string;
   memo: string;
-  isInMyCollection: boolean;
-  isChecked: boolean;
+  isFollowing: boolean;
   clickCount: number;
   clickFrequency: number | null;
   lastClickedAt: string | null;

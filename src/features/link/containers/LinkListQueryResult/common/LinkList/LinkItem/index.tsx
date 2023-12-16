@@ -4,7 +4,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { MouseEvent } from 'react';
 import {
   BsFileTextFill,
-  BsJournalBookmarkFill,
+  BsBookmarkPlusFill,
   BsCheckLg,
   BsThreeDotsVertical,
   BsShare,
@@ -30,6 +30,7 @@ import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
 import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
+import Image from 'next/image';
 
 interface Props {
   link: LinkInfoType;
@@ -45,8 +46,8 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
     thumbnailUrl,
     title,
     description,
-    isInMyCollection,
-    isChecked,
+    isFollowing,
+    clickCount,
     memo,
     kloud,
   } = link;
@@ -90,14 +91,23 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
 
   const isShowKloud = kloud !== null && kloudId === undefined; // 저장된 클라우드가 있고, 유저가 생성한 클라우드 페이지가 아닌 경우에만 보여준다.
 
-  const handleClickCollection = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); // 링크 열리는 이벤트 막기 위함
+  const handleClickFollow = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     patchLinkById(
-      { id, body: { isInMyCollection: !isInMyCollection } },
+      { id, body: { isFollowing: !isFollowing } },
       {
         onSuccess: () => {
           queryClient.invalidateQueries(queryKeys.link.getLinkList());
           queryClient.invalidateQueries(queryKeys.kloud.getGroupMenuList);
+          toast({
+            title:
+              !isFollowing === true
+                ? '나중에 볼 링크로 추가했어요.'
+                : '나중에 볼 링크에서 해제했어요.',
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+          });
         },
         onError: (error) => {
           const isNotServerError = error.response?.status !== 500;
@@ -213,17 +223,20 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
       onClick={openLinkInNewTap}
     >
       <div className="relative">
-        <picture>
-          <img
+        <div
+          className={`relative aspect-[1.91/1] h-auto w-full md:group-hover/item:brightness-125 ${
+            clickCount > 0 && 'opacity-50'
+          }`}
+        >
+          <Image
+            fill
             loading="lazy"
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
-            className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover md:group-hover/item:brightness-125 ${
-              isChecked && 'opacity-50'
-            }`}
+            className="rounded-lg object-cover"
             onError={handleErrorThumbnailImage}
           />
-        </picture>
+        </div>
         {hasMemo && (
           <div
             className={`absolute -bottom-7 right-2 flex h-fit w-fit -translate-y-1/2 transform rounded-full border-2 border-zinc-50 bg-zinc-800 p-[5px] md:-bottom-10 md:p-[10px]`}
@@ -240,19 +253,17 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </div>
         <div className="flex justify-end gap-[6px] py-4 md:opacity-0 md:group-hover/item:opacity-100">
           <button
-            aria-label={
-              isInMyCollection ? 'Remove from Collection' : 'Add to Collection'
-            }
+            aria-label={isFollowing ? 'remove to bookmark' : 'add to bookmark'}
             type="button"
-            className="group/collection"
-            onClick={handleClickCollection}
+            className="group/following"
+            onClick={handleClickFollow}
           >
-            <BsJournalBookmarkFill
+            <BsBookmarkPlusFill
               size={18}
               className={`color-duration ${
-                isInMyCollection
-                  ? 'fill-secondary-lighter md:group-hover/collection:fill-secondary'
-                  : 'fill-zinc-400 md:group-hover/collection:fill-zinc-600'
+                isFollowing
+                  ? 'fill-secondary-lighter md:group-hover/following:fill-secondary'
+                  : 'fill-zinc-400 md:group-hover/following:fill-zinc-600'
               }`}
             />
           </button>
@@ -308,15 +319,15 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         </div>
       </div>
 
-      {/* 클라우드명 UI */}
+      {/* 클라우드 UI */}
       {isShowKloud && (
         <div className="absolute left-2 top-2 w-fit max-w-[60%] select-none rounded-full bg-primary-alt px-3 py-1">
           <p className="truncate text-xs font-bold text-white">{kloud?.name}</p>
         </div>
       )}
 
-      {/* 미확인 링크 노란 점 UI */}
-      {!isChecked && pathname !== '/link/unchecked' && (
+      {/* 나중에 볼 링크 표시 */}
+      {isFollowing && pathname !== '/link/following' && (
         <div className="absolute left-1 top-1">
           <div className="absolute h-3 w-3 animate-ping rounded-full bg-secondary-lighter" />
           <div className="h-3 w-3 rounded-full bg-secondary-lighter" />

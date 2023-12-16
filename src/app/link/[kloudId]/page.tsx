@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const text = await getText();
 
   return {
-    title: `MyKloud | ${text}`,
+    title: `링클라우드 | ${text}`,
   };
 }
 

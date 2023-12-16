@@ -17,7 +17,7 @@ const RecommendedReadsLinkList = () => {
       offset: 0,
       limit: 10,
       orderBy: 'random',
-      isChecked: false,
+      isFollowing: true,
     },
     { enabled: true },
     { refetchOnWindowFocus: false }

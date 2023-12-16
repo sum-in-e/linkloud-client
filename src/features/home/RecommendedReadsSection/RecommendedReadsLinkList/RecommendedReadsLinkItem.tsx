@@ -3,6 +3,7 @@
 import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
 import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
+import Image from 'next/image';
 
 const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
   const {
@@ -13,8 +14,6 @@ const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
     description,
     memo,
     kloud,
-    isInMyCollection,
-    isChecked,
     createdAt,
   } = link;
 
@@ -25,15 +24,17 @@ const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
       className="group/item relative w-[270px] flex-shrink-0 cursor-pointer rounded-lg p-2 shadow-md "
       onClick={openLinkInNewTap}
     >
-      <picture>
-        <img
+      <div className="relative aspect-[1.91/1] h-auto w-full duration-300 md:group-hover/item:-translate-y-2">
+        <Image
+          fill
           loading="lazy"
           alt="Link_thumbnail_image"
           src={thumbnailUrl}
-          className={`aspect-[1.91/1] h-auto w-full rounded-lg object-cover duration-300 md:group-hover/item:-translate-y-2 `}
+          className="rounded-lg object-cover"
           onError={handleErrorThumbnailImage}
         />
-      </picture>
+      </div>
+
       <div className="p-2 pt-4">
         <p className="mb-2 truncate text-xs text-zinc-400">{url}</p>
         <p className="mb-1 truncate text-sm font-bold">{title}</p>
