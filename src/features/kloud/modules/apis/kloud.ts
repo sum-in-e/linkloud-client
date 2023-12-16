@@ -25,7 +25,6 @@ export type KloudListKloudType = Pick<
   'id' | 'name' | 'position'
 > & {
   linkCount: number;
-  uncheckedLinkCount: number;
 };
 
 export type GetKloudListData = {
@@ -122,8 +121,7 @@ export const deleteKloudById = async ({
 
 export type GetGroupMenuListData = {
   all: number;
-  myCollection: number;
-  unchecked: number;
+  following: number;
   uncategorized: number;
   klouds: KloudListKloudType[] | [];
 };

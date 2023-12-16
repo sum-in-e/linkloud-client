@@ -2,9 +2,8 @@
 
 import { BsArrowRepeat } from 'react-icons/bs';
 import AllButton from '@/common/containers/MenuButton/All';
-import CollectionButton from '@/common/containers/MenuButton/Collection';
+import FollowingButton from '@/common/containers/MenuButton/Following';
 import UncategorizedButton from '@/common/containers/MenuButton/Uncategorized';
-import UncheckedButton from '@/common/containers/MenuButton/Unchecked';
 import { useGetGroupMenuListQuery } from '@/features/kloud/modules/apiHooks/useGetGroupMenuListQuery';
 
 interface Props {
@@ -46,16 +45,12 @@ const MenuList = ({ onCloseDrawer }: Props) => {
 
   return (
     <>
-      <CollectionButton onClick={onCloseDrawer} />
       <AllButton onClick={onCloseDrawer} />
       <UncategorizedButton
         isShowMark={data.uncategorized > 0}
         onClick={onCloseDrawer}
       />
-      <UncheckedButton
-        isShowMark={data.unchecked > 0}
-        onClick={onCloseDrawer}
-      />
+      <FollowingButton onClick={onCloseDrawer} />
     </>
   );
 };

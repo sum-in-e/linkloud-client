@@ -55,9 +55,6 @@ const KloudMenuItem = ({ kloud, onCloseDrawer }: Props) => {
         {kloud.name}
       </p>
 
-      {kloud.uncheckedLinkCount > 0 && (
-        <div className="absolute left-[8px] top-[8px] h-[6px] w-[6px] rounded-full bg-secondary-lighter" />
-      )}
 
       <Popover
         isOpen={isOpenPopover}

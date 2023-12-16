@@ -14,8 +14,6 @@ const RecommendedReadsLinkItem = ({ link }: { link: LinkInfoType }) => {
     description,
     memo,
     kloud,
-    isInMyCollection,
-    isChecked,
     createdAt,
   } = link;
 

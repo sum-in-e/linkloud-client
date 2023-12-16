@@ -36,7 +36,7 @@ export default function RootLayout({
 }
 
 export const metadata = {
-  title: 'Linkloud',
+  title: '링클라우드 | Linkloud',
   description: LINKLOUD_DESCRIPTION,
   keywords: 'linkloud, 링클라우드, link, manage links',
   metadataBase: new URL('https://linkloud.xyz'),

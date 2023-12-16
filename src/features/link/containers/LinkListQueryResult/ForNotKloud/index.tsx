@@ -25,12 +25,10 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
 
   const getRestParams = () => {
     switch (category) {
-      case 'collection':
-        return { myCollection: true };
+      case 'following':
+        return { isFollowing: true };
       case 'uncategorized':
         return { kloudId: 0 };
-      case 'unchecked':
-        return { isChecked: false };
       case 'search':
         return keyword !== null ? { keyword } : { keyword: '' };
       default:
@@ -63,11 +61,7 @@ const LinkListQueryResultForNotKloud = ({ category }: Props) => {
       Header={
         <div>
           {category === 'search' && isMobile && <SearchLinks />}
-          {isLoading ? (
-            <TitleAndCountLoadingUI />
-          ) : (
-            <TitleAndCount title={getTitle()} count={count} />
-          )}
+          <TitleAndCount title={getTitle()} count={count} />
         </div>
       }
       isLoading={isLoading}

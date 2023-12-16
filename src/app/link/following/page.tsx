@@ -6,15 +6,15 @@ import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 내 컬렉션',
+  title: '링클라우드 | 나중에 볼 것',
 };
 
-export default async function MyKloudCollectionPage() {
+export default async function MyKloudFollowingPage() {
   const isLogin = await getSessionWithJwtInServer();
 
   const queryString = querystring.stringify({
     error: encodeURIComponent(NEED_LOGIN),
-    return_to: '/link/collection',
+    return_to: '/link/following',
   });
 
   if (!isLogin) {
@@ -23,7 +23,7 @@ export default async function MyKloudCollectionPage() {
 
   return (
     <SidebarLayout>
-      <LinkListQueryResultForNotKloud category="collection" />
+      <LinkListQueryResultForNotKloud category="following" />
     </SidebarLayout>
   );
 }
