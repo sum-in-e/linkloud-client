@@ -6,7 +6,7 @@ import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 미분류',
+  title: '링클라우드 | 미분류',
 };
 
 export default async function MyKloudUncategorizedPage() {

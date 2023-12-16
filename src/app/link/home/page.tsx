@@ -6,7 +6,7 @@ import LinkHome from '@/features/home';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 홈',
+  title: '링클라우드 | 홈',
 };
 
 export default async function MyKloudHomePage() {

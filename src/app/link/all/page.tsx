@@ -6,7 +6,7 @@ import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 전체',
+  title: '링클라우드 | 전체',
 };
 
 export default async function MyKloudAllPage() {

@@ -6,7 +6,7 @@ import SidebarLayout from '@/common/containers/layout/SidebarLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
-  title: 'MyKloud | 미확인',
+  title: '링클라우드 | 미확인',
 };
 
 export default async function MyKloudUncheckedPage() {

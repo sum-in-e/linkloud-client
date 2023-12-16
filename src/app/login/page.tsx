@@ -3,7 +3,7 @@ import LogIn from '@/features/auth/login/containers';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: 'Linkloud | 로그인',
+  title: '링클라우드 | 로그인',
 };
 
 export default async function LoginPage() {
