@@ -6,7 +6,7 @@ import * as querystring from 'querystring';
 import { SuccessResponseType } from '@/common/modules/types/responseType';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import LinkListQueryResultForKloud from '@/features/link/containers/LinkListQueryResult/ForKloud';
-import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import LinkPageLayout from '@/common/containers/layout/LinkPageLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 type Props = {
@@ -66,8 +66,8 @@ export default async function MyKloudPage() {
   }
 
   return (
-    <SidebarLayout>
+    <LinkPageLayout>
       <LinkListQueryResultForKloud />
-    </SidebarLayout>
+    </LinkPageLayout>
   );
 }

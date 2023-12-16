@@ -4,7 +4,7 @@ import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useG
 import { BsArrowRepeat } from 'react-icons/bs';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 
-const ProfileArea = () => {
+const UserInfoContainer = () => {
   const { data, isLoading, refetch } = useGetSessionQuery();
 
   const handleRefetch = () => {
@@ -36,15 +36,12 @@ const ProfileArea = () => {
     );
   }
 
-  const info = data.data;
-  const method = info.method;
-  const name = info.name || '유저';
-  const email = info.email || '';
+  const { method, name = '유저', email = '' } = data.data;
 
   return (
     <div className="justify-center-center flex w-full flex-col gap-4 px-2">
       <p className="text-xs font-semibold text-zinc-700">ACCOUNT</p>
-      <div className="flex w-full flex-col gap-1 border-l-2 border-zinc-700 pl-2">
+      <div className="flex w-full flex-col gap-1">
         <p className="truncate text-sm font-semibold text-black">{name}</p>
         <div className="flex items-center gap-1">
           {method === 'kakao' && (
@@ -59,4 +56,4 @@ const ProfileArea = () => {
   );
 };
 
-export default ProfileArea;
+export default UserInfoContainer;

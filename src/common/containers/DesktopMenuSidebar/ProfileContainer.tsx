@@ -1,7 +1,7 @@
 'use client';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { useGetSessionQuery } from '@/features/auth/common/modules/apiHooks/useGetSessionQuery';
-import SignOutArea from '@/features/auth/SignOut';
+import SignOutButton from '@/features/auth/SignOut/SignOutButton';
 import { Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/popover';
 import {
   BsFillPersonFill,
@@ -43,20 +43,14 @@ const Profile = () => {
     );
   }
 
-  const info = data.data;
-  const method = info.method;
-  const name = info.name || '유저';
-  const email = info.email || '';
-
-  const handleOpenMore = () => {
-    onOpen();
-  };
+  const { method, name = '유저', email = '' } = data.data;
 
   return (
     <div className="flex w-full max-w-full items-center justify-between gap-2 border-t border-zinc-200 px-10 py-5 pb-5">
       <div className="flex aspect-square h-auto w-[20%] flex-shrink-0 items-center justify-center rounded-full bg-zinc-400 p-1 ">
         <BsFillPersonFill className="h-full w-full fill-white" />
       </div>
+
       <div className="w-[60%]">
         <p className="truncate text-sm font-semibold text-black">{name}</p>
       </div>
@@ -67,7 +61,7 @@ const Profile = () => {
             aria-label="Show More Options"
             type="button"
             className="group/more w-[10%]"
-            onClick={handleOpenMore}
+            onClick={onOpen}
           >
             <BsThreeDotsVertical
               size={15}
@@ -76,10 +70,8 @@ const Profile = () => {
           </button>
         </PopoverTrigger>
         <PopoverContent className="flex w-fit flex-col gap-5 p-4">
-          <div className="flex flex-col gap-2">
-            <div className="">
-              <p className="text-xs font-semibold text-zinc-700">ACCOUNT</p>
-            </div>
+          <section className="flex flex-col gap-2">
+            <h6 className="text-xs font-semibold text-zinc-700">ACCOUNT</h6>
             <div className="flex items-center gap-1">
               {method === 'kakao' && (
                 <div className="h-fit w-fit rounded-full bg-[#FAE100] p-1">
@@ -88,11 +80,11 @@ const Profile = () => {
               )}
               <p className="truncate text-sm text-gray-500">{email}</p>
             </div>
-          </div>
-          <div className="flex flex-col gap-2 border-t pt-5">
-            <p className="text-xs font-semibold text-red-500">DANGER ZONE</p>
-            <SignOutArea />
-          </div>
+          </section>
+          <section className="flex flex-col gap-2 border-t pt-5">
+            <h6 className="text-xs font-semibold text-red-500">DANGER ZONE</h6>
+            <SignOutButton />
+          </section>
         </PopoverContent>
       </Popover>
     </div>

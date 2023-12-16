@@ -2,7 +2,7 @@ import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
 import { redirect } from 'next/navigation';
 import * as querystring from 'querystring';
 import LinkListQueryResultForNotKloud from '@/features/link/containers/LinkListQueryResult/ForNotKloud';
-import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import LinkPageLayout from '@/common/containers/layout/LinkPageLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
@@ -22,8 +22,8 @@ export default async function MyKloudFollowingPage() {
   }
 
   return (
-    <SidebarLayout>
+    <LinkPageLayout>
       <LinkListQueryResultForNotKloud category="following" />
-    </SidebarLayout>
+    </LinkPageLayout>
   );
 }

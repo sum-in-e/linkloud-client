@@ -1,14 +1,14 @@
 import './globals.css';
-import QueryProvider from '@/common/containers/QueryProvider';
 import Header from '@/common/containers/layout/Header';
 import MainContent from '@/common/containers/layout/MainContent';
 import Footer from '@/common/containers/layout/Footer';
-import ChakraUiProvider from '@/common/containers/ChakraUiProvider';
+import QueryProvider from '@/common/containers/provider/QueryProvider';
+import ChakraUiProvider from '@/common/containers/provider/ChakraUiProvider';
+import GoogleAnalytics from '@/common/containers/provider/GoogleAnalyticsProvider';
 import {
   LINKLOUD_DESCRIPTION,
   LINKLOUD_OG_IMAGE_URL,
 } from '@/common/modules/constants/brand';
-import GoogleAnalytics from '@/common/containers/GoogleAnalytics';
 
 export const dynamic = 'force-dynamic';
 

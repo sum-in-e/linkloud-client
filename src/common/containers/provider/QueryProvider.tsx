@@ -7,6 +7,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: true, // 동기화 이슈 때문에 켬
+      // suspense: true,
     },
   },
 });

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import * as querystring from 'querystring';
 import LinkListQueryResultForNotKloud from '@/features/link/containers/LinkListQueryResult/ForNotKloud';
 import SearchLinks from '@/features/link/containers/SearchLinks';
-import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import LinkPageLayout from '@/common/containers/layout/LinkPageLayout';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
 export const metadata = {
@@ -29,12 +29,12 @@ export default async function MyKloudSearchPage({
   const keyword = searchParams.keyword;
   // undefined이면 검색 초기 화면
   return (
-    <SidebarLayout>
+    <LinkPageLayout>
       {keyword === undefined ? (
         <SearchLinks />
       ) : (
         <LinkListQueryResultForNotKloud category="search" />
       )}
-    </SidebarLayout>
+    </LinkPageLayout>
   );
 }
