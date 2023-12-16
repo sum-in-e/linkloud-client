@@ -7,9 +7,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from '@chakra-ui/react';
-import { BsArrowBarLeft } from 'react-icons/bs';
+import { BsXLg } from 'react-icons/bs';
 import KloudMenuList from '@/features/kloud/containers/KloudMenuList';
-import MenuList from '@/common/containers/MobileMenuDrawer/MenuList';
+import MenuList from '@/common/containers/Mobile/MenuDrawer/MenuList';
 
 interface Props {
   onClose: () => void;
@@ -21,12 +21,8 @@ const MobileMenuDrawer = ({ onClose }: Props) => {
       <DrawerOverlay className="vh-full" />
       <DrawerContent className="vh-full">
         <DrawerHeader className="flex items-center justify-end">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-lg border p-1"
-          >
-            <BsArrowBarLeft size={18} />
+          <button type="button" onClick={onClose}>
+            <BsXLg size={18} />
           </button>
         </DrawerHeader>
 

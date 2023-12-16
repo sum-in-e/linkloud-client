@@ -1,11 +1,11 @@
 'use client';
 
 import { BsFillPersonFill } from 'react-icons/bs';
-import MobileProfileDrawer from '@/common/containers/MobileProfile/MobileProfileDrawer';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
+import MobileProfileDrawer from '@/common/containers/Mobile/ProfileDrawer';
 
-const MobileProfile = () => {
+const MobileProfileIcon = () => {
   const { isOpen, onClose, onOpen } = useOpen();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -22,4 +22,4 @@ const MobileProfile = () => {
   );
 };
 
-export default MobileProfile;
+export default MobileProfileIcon;

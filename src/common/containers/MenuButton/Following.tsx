@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { BsBookmarkPlusFill } from 'react-icons/bs';
-import { MenuButton } from '@/common/containers/MenuButton';
+import { MenuButton } from '@/common/containers/MenuButton/CommonMenuButton';
 
 interface Props {
   onClick?: () => void;

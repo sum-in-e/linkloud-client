@@ -161,7 +161,7 @@ const RecommendedReadsLinkList = () => {
         priority
       />
       <h4 className="text-md whitespace-pre-wrap text-center font-semibold text-zinc-700">
-        {`모든 링크를 확인했어요👍\n미확인 링크가 생기면 다시 추천해 드릴게요!`}
+        {`나중에 보려고 추가한 링크가 없어요.\n미루지 않고 확인하는 좋은 습관을 가지셨군요👍`}
       </h4>
     </div>
   );
