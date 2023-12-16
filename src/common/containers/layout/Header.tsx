@@ -9,9 +9,9 @@ import { usePageType } from '@/common/modules/hooks/usePageType';
 import { useIsShowLayout } from '@/common/modules/hooks/useIsShowLayout';
 import LinkSearchForm from '@/features/link/containers/SearchLinks/LinkSearchForm';
 import { useOpen } from '@/common/modules/hooks/useOpen';
-import MobileMenuDrawer from '@/common/containers/MobileMenuDrawer';
+import MobileMenuDrawer from '@/common/containers/Mobile/MenuDrawer';
 import useMediaQuery from '@/common/modules/hooks/useMediaQuery';
-import MobileProfile from '@/common/containers/MobileProfile';
+import MobileProfileIcon from '@/common/containers/Mobile/ProfileDrawer/MobileProfileIcon';
 
 const Header = () => {
   const router = useRouter();
@@ -86,7 +86,7 @@ const Header = () => {
               <LinkSearchForm />
             </div>
             <div className="md:hidden">
-              <MobileProfile />
+              <MobileProfileIcon />
             </div>
           </div>
         )}

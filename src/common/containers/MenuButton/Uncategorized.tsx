@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { BsFillInboxFill } from 'react-icons/bs';
-import { MenuButton } from '@/common/containers/MenuButton';
+import { MenuButton } from '@/common/containers/MenuButton/CommonMenuButton';
 import YellowCircleMark from '@/common/components/YellowCircleMark';
 
 interface Props {

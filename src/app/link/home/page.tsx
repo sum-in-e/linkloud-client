@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import * as querystring from 'querystring';
 import { getSessionWithJwtInServer } from '@/common/modules/utils/session';
-import SidebarLayout from '@/common/containers/layout/SidebarLayout';
+import LinkPageLayout from '@/common/containers/layout/LinkPageLayout';
 import LinkHome from '@/features/home';
 import { NEED_LOGIN } from '@/common/modules/constants/auth';
 
@@ -22,8 +22,8 @@ export default async function MyKloudHomePage() {
   }
 
   return (
-    <SidebarLayout>
+    <LinkPageLayout>
       <LinkHome />
-    </SidebarLayout>
+    </LinkPageLayout>
   );
 }
