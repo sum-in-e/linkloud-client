@@ -31,6 +31,7 @@ export const linkAnalyze = async ({
 
 export interface createLinkBody extends LinkAnalyzeData {
   kloudId: number | null;
+  isFollowing: boolean;
 }
 
 export type CreateLinkResponse = SuccessResponseType<{
@@ -59,8 +60,7 @@ export type LinkInfoType = Pick<
   | 'title'
   | 'description'
   | 'memo'
-  | 'isInMyCollection'
-  | 'isChecked'
+  | 'isFollowing'
   | 'createdAt'
   | 'clickCount'
   | 'clickFrequency'
@@ -83,7 +83,7 @@ export type GetLinkListParams = {
   sort?: 'ASC' | 'DESC';
   keyword?: string;
   isChecked?: boolean;
-  myCollection?: boolean;
+  isFollowing?: boolean;
   kloudId?: number; // 클라우드 미지정의 경우 0 | 찾고싶은 클라우드 id
 };
 
@@ -161,7 +161,7 @@ export type PatchLinkByIdParam = {
     title?: string;
     description?: string;
     memo?: string;
-    isInMyCollection?: boolean;
+    isFollowing?: boolean;
     kloudId?: number | null;
   };
 };

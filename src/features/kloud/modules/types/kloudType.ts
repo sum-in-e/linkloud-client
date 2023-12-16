@@ -12,9 +12,8 @@ export interface KloudEntity {
 }
 
 export const notKloudCategory = {
-  unchecked: '미확인',
   uncategorized: '미분류',
-  collection: 'Collection',
+  following: '나중에 볼 것',
   search: '검색',
   all: '전체',
   home: '홈',

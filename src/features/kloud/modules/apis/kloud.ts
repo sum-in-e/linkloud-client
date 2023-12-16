@@ -121,7 +121,7 @@ export const deleteKloudById = async ({
 
 export type GetGroupMenuListData = {
   all: number;
-  myCollection: number;
+  following: number;
   uncategorized: number;
   klouds: KloudListKloudType[] | [];
 };
