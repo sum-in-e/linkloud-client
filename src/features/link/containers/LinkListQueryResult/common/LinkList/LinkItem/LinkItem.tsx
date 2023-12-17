@@ -37,9 +37,16 @@ interface Props {
   isEditMode: boolean;
   onSelectItem: (id: number) => void;
   isSelected: boolean;
+  priority: boolean;
 }
 
-const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
+const LinkItem = ({
+  link,
+  isEditMode,
+  isSelected,
+  onSelectItem,
+  priority,
+}: Props) => {
   const {
     id,
     url,
@@ -230,7 +237,7 @@ const LinkItem = ({ link, isEditMode, isSelected, onSelectItem }: Props) => {
         >
           <Image
             fill
-            loading="lazy"
+            priority={priority}
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
             className="rounded-lg object-cover"
