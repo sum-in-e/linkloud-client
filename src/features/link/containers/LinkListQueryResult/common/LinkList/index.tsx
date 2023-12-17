@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { linkListLimit } from '@/features/link/containers/LinkListQueryResult/ForNotKloud';
-import LinkItem from '@/features/link/containers/LinkListQueryResult/common/LinkList/LinkItem';
 import { GetLinkListData } from '@/features/link/modules/apis/link';
 import Pagination from '@/common/components/Pagination';
 import linkle from '/public/images/linkle.png';
@@ -12,6 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import queryKeys from '@/common/modules/apiHooks/queryKeys';
 import { useParams, usePathname } from 'next/navigation';
 import { toNumber } from 'lodash';
+import LinkItem from '@/features/link/containers/LinkListQueryResult/common/LinkList/LinkItem/LinkItemPriorityProvider';
 
 interface Props {
   data?: GetLinkListData;
