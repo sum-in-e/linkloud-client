@@ -29,7 +29,6 @@ import { useLinkSharing } from '@/features/kloud/modules/hooks/useLinkSharing';
 import { useOpenLink } from '@/features/kloud/modules/hooks/useOpenLink';
 import { useOpen } from '@/common/modules/hooks/useOpen';
 import { LinkInfoType } from '@/features/link/modules/apis/link';
-import { handleErrorThumbnailImage } from '@/features/link/modules/utils/link';
 import Image from 'next/image';
 
 interface Props {
@@ -241,7 +240,6 @@ const LinkItem = ({
             alt="Link_thumbnail_image"
             src={thumbnailUrl}
             className="rounded-lg object-cover"
-            onError={handleErrorThumbnailImage}
           />
         </div>
         {hasMemo && (
