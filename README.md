@@ -4,6 +4,8 @@
 
 ![링클라우드 랜딩페이지 이미지](./public/images/landing/landing_top.webp)
 
+<img src="https://github.com/sum-in-e/linkloud-client/assets/83824304/5e7c8e94-aa27-4e8b-be46-6011940315d2" width="200" height="400"/>
+
 > Explore https://linkloud.xyz
 #
 
