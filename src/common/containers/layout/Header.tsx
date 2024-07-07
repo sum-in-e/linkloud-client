@@ -65,7 +65,7 @@ const Header = () => {
           onClick={handlePushToDefaultPage}
           priority
         />
-        {pageType === 'public' ? (
+{/*         {pageType === 'public' ? (
           pathname === '/' && (
             <Link
               href="/login"
@@ -89,7 +89,7 @@ const Header = () => {
               <MobileProfileIcon />
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </header>
   ) : null;
